@@ -10,6 +10,8 @@
         padding: 0;
         background: black;
         overflow: hidden;
+        width: 100%;
+        height: 100%;
     }
     canvas {
         display: block;
@@ -44,22 +46,21 @@ function init() {
   loaded = true;
 
   const mobile = window.isDevice;
-  const koef = mobile ? 0.5 : 1;
 
   const canvas = document.getElementById("heart");
   const ctx = canvas.getContext("2d");
 
-  let width = canvas.width = koef * innerWidth;
-  let height = canvas.height = koef * innerHeight;
+  let width = canvas.width = innerWidth;
+  let height = canvas.height = innerHeight;
 
   ctx.fillStyle = "black";
   ctx.fillRect(0, 0, width, height);
 
   function drawText() {
-    ctx.font = "60px Arial";
+    ctx.font = mobile ? "50px Arial" : "60px Arial";
     ctx.fillStyle = "lightblue";
     ctx.textAlign = "center";
-    ctx.fillText("I love you sayang ❤️", width / 2, height / 2.2 + 300);
+    ctx.fillText("I love you sayang ❤️", width / 2, height / 1.15);
   }
 
   function heartPosition(rad) {
@@ -79,8 +80,8 @@ function init() {
   }
 
   window.addEventListener("resize", () => {
-    width = canvas.width = koef * innerWidth;
-    height = canvas.height = koef * innerHeight;
+    width = canvas.width = innerWidth;
+    height = canvas.height = innerHeight;
     ctx.fillStyle = "black";
     ctx.fillRect(0, 0, width, height);
   });
@@ -89,12 +90,16 @@ function init() {
   const pointsOrigin = [];
   const dr = mobile ? 0.3 : 0.1;
 
+  const heartScale = mobile ? 380 : 310;
+  const heartScale2 = mobile ? 300 : 250;
+  const heartScale3 = mobile ? 230 : 190;
+
   for (let i = 0; i < Math.PI * 2; i += dr)
-    pointsOrigin.push(scaleAndTranslate(heartPosition(i), 310, 19, 0, 0));
+    pointsOrigin.push(scaleAndTranslate(heartPosition(i), heartScale, 19, 0, 0));
   for (let i = 0; i < Math.PI * 2; i += dr)
-    pointsOrigin.push(scaleAndTranslate(heartPosition(i), 250, 15, 0, 0));
+    pointsOrigin.push(scaleAndTranslate(heartPosition(i), heartScale2, 15, 0, 0));
   for (let i = 0; i < Math.PI * 2; i += dr)
-    pointsOrigin.push(scaleAndTranslate(heartPosition(i), 190, 11, 0, 0));
+    pointsOrigin.push(scaleAndTranslate(heartPosition(i), heartScale3, 11, 0, 0));
 
   const heartPointsCount = pointsOrigin.length;
   let targetPoints = [];
@@ -103,7 +108,7 @@ function init() {
     for (let i = 0; i < pointsOrigin.length; i++) {
       targetPoints[i] = [
         kx * pointsOrigin[i][0] + width / 2,
-        ky * pointsOrigin[i][1] + height / 2.2,
+        ky * pointsOrigin[i][1] + height / 2,
       ];
     }
   }
