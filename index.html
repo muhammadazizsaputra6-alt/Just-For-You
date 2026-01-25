@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Just For You ❤️</title>
+
+<style>
+    html, body {
+        margin: 0;
+        padding: 0;
+        background: black;
+        overflow: hidden;
+    }
+    canvas {
+        display: block;
+    }
+</style>
+</head>
+
+<body>
+
+<canvas id="heart"></canvas>
+
+<audio id="backgroundMusic" src="music.mp3" loop></audio>
+
+<script>
+/* ================== REQUEST ANIMATION FRAME ================== */
+window.requestAnimationFrame =
+  window.requestAnimationFrame ||
+  window.webkitRequestAnimationFrame ||
+  window.mozRequestAnimationFrame ||
+  function (callback) {
+    setTimeout(callback, 1000 / 60);
+  };
+
+window.isDevice = /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(
+  (navigator.userAgent || navigator.vendor || window.opera).toLowerCase()
+);
+
+let loaded = false;
+
+function init() {
+  if (loaded) return;
+  loaded = true;
+
+  const mobile = window.isDevice;
+  const koef = mobile ? 0.5 : 1;
+
+  const canvas = document.getElementById("heart");
+  const ctx = canvas.getContext("2d");
+
+  let width = canvas.width = koef * innerWidth;
+  let height = canvas.height = koef * innerHeight;
+
+  ctx.fillStyle = "black";
+  ctx.fillRect(0, 0, width, height);
+
+  function drawText() {
+    ctx.font = "60px Arial";
+    ctx.fillStyle = "lightblue";
+    ctx.textAlign = "center";
+    ctx.fillText("I love you sayang ❤️", width / 2, height / 2.2 + 300);
+  }
+
+  function heartPosition(rad) {
+    return [
+      Math.pow(Math.sin(rad), 3),
+      -(
+        15 * Math.cos(rad) -
+        5 * Math.cos(2 * rad) -
+        2 * Math.cos(3 * rad) -
+        Math.cos(4 * rad)
+      ),
+    ];
+  }
+
+  function scaleAndTranslate(pos, sx, sy, dx, dy) {
+    return [dx + pos[0] * sx, dy + pos[1] * sy];
+  }
+
+  window.addEventListener("resize", () => {
+    width = canvas.width = koef * innerWidth;
+    height = canvas.height = koef * innerHeight;
+    ctx.fillStyle = "black";
+    ctx.fillRect(0, 0, width, height);
+  });
+
+  const traceCount = mobile ? 20 : 50;
+  const pointsOrigin = [];
+  const dr = mobile ? 0.3 : 0.1;
+
+  for (let i = 0; i < Math.PI * 2; i += dr)
+    pointsOrigin.push(scaleAndTranslate(heartPosition(i), 310, 19, 0, 0));
+  for (let i = 0; i < Math.PI * 2; i += dr)
+    pointsOrigin.push(scaleAndTranslate(heartPosition(i), 250, 15, 0, 0));
+  for (let i = 0; i < Math.PI * 2; i += dr)
+    pointsOrigin.push(scaleAndTranslate(heartPosition(i), 190, 11, 0, 0));
+
+  const heartPointsCount = pointsOrigin.length;
+  let targetPoints = [];
+
+  function pulse(kx, ky) {
+    for (let i = 0; i < pointsOrigin.length; i++) {
+      targetPoints[i] = [
+        kx * pointsOrigin[i][0] + width / 2,
+        ky * pointsOrigin[i][1] + height / 2.2,
+      ];
+    }
+  }
+
+  let particles = [];
+  for (let i = 0; i < heartPointsCount; i++) {
+    const x = Math.random() * width;
+    const y = Math.random() * height;
+    particles[i] = {
+      vx: 0,
+      vy: 0,
+      speed: Math.random() + 5,
+      q: ~~(Math.random() * heartPointsCount),
+      D: 2 * (i % 2) - 1,
+      force: 0.2 * Math.random() + 0.7,
+      trace: Array.from({ length: traceCount }, () => ({ x, y })),
+    };
+  }
+
+  const config = { traceK: 0.4, timeDelta: 0.6 };
+  let time = 0;
+
+  function loop() {
+    const n = -Math.cos(time);
+    pulse((1 + n) * 0.5, (1 + n) * 0.5);
+    time += (Math.sin(time) < 0 ? 9 : n > 0.8 ? 0.2 : 1) * config.timeDelta;
+
+    ctx.fillStyle = "rgba(0,0,0,0.1)";
+    ctx.fillRect(0, 0, width, height);
+
+    for (let i = particles.length; i--;) {
+      const u = particles[i];
+      const q = targetPoints[u.q];
+      let dx = u.trace[0].x - q[0];
+      let dy = u.trace[0].y - q[1];
+      let length = Math.sqrt(dx * dx + dy * dy);
+
+      if (length < 10) {
+        u.q = ~~(Math.random() * heartPointsCount);
+      }
+
+      u.vx += (-dx / length) * u.speed;
+      u.vy += (-dy / length) * u.speed;
+      u.trace[0].x += u.vx;
+      u.trace[0].y += u.vy;
+      u.vx *= u.force;
+      u.vy *= u.force;
+
+      for (let k = 0; k < u.trace.length - 1; k++) {
+        u.trace[k + 1].x -= config.traceK * (u.trace[k + 1].x - u.trace[k].x);
+        u.trace[k + 1].y -= config.traceK * (u.trace[k + 1].y - u.trace[k].y);
+      }
+
+      ctx.fillStyle = "rgba(51,204,255,0.7)";
+      u.trace.forEach(t => ctx.fillRect(t.x, t.y, 1, 1));
+    }
+
+    drawText();
+    requestAnimationFrame(loop);
+  }
+
+  loop();
+}
+
+/* ================== MUSIC ================== */
+function setupMusic() {
+  const music = document.getElementById("backgroundMusic");
+
+  document.addEventListener("click", function startMusic() {
+    music.play().catch(() => {});
+    document.removeEventListener("click", startMusic);
+  });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  init();
+  setupMusic();
+});
+</script>
+
+</body>
+</html>
