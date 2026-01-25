@@ -1,18 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>❤️</title>
-  <link rel="stylesheet" href="styles/love.css">
+  <meta charset="UTF-8" />
+  <title>Heart Animation</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background: black;
+    }
+    canvas {
+      display: block;
+    }
+  </style>
 </head>
 <body>
-  <canvas id="heart"></canvas>
-  <audio id="backgroundMusic" loop>
-    <source src="assets/blue.mp3" type="audio/mpeg">
-    Your browser does not support the audio element.
-  </audio>
-  <script src="script/love.js"></script>
+
+<canvas id="heart"></canvas>
+
+<script>
+  window.requestAnimationFrame =
+    window.requestAnimationFrame ||
+    window.webkitRequestAnimationFrame ||
+    window.mozRequestAnimationFrame ||
+    function (cb) {
+      return setTimeout(cb, 33);
+    };
+
+  window.isDevice = /android|iphone|ipad|ipod/i.test(
+    navigator.userAgent.toLowerCase()
+  );
+
+  var loaded = false;
+
+  function init() {
+    if (loaded) return;
+    loaded = true;
+
+    var mobile = window.isDevice;
+    var koef = mobile ? 0.5 : 1;
+    var canvas = document.getElementById("heart");
+    var ctx = canvas.getContext("2d");
+    var width = (canvas.width = koef * innerWidth);
+    var height = (canvas.height = koef * innerHeight);
+
+    function drawText() {
+      ctx.font = "60px Arial";
+      ctx.fillStyle = "lightblue";
+      ctx.textAlign = "center";
+      ctx.fillText("I love you sayang", width / 2, height / 2);
+    }
+
+    window.addEventListener("resize", function () {
+      width = canvas.width = koef * innerWidth;
+      height = canvas.height = koef * innerHeight;
+    });
+
+    function loop() {
+      ctx.fillStyle = "rgba(0,0,0,0.15)";
+      ctx.fillRect(0, 0, width, height);
+      drawText();
+      requestAnimationFrame(loop);
+    }
+
+    loop();
+  }
+
+  document.addEventListener("DOMContentLoaded", init);
+</script>
+
 </body>
 </html>
