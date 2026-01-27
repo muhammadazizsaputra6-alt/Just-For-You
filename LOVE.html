@@ -1,75 +1,40 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <title>Heart Animation</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <title>Test Love</title>
+
   <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      overflow: hidden;
-      background: black;
+    :root {
+      --letter-love: 200px;
+      --letter: pink;
     }
-    canvas {
-      display: block;
+
+    body {
+      position: relative;
+      min-height: 100vh;
+      margin: 0;
+    }
+
+    .Love_You {
+      position: absolute;
+      left: 50%;
+      top: 50px;
+      transform: translateX(-50%);
+      width: 90%;
+      height: var(--letter-love);
+      font-size: 2rem;
+      background: var(--letter);
+      text-align: center;
+      padding: 20px;
     }
   </style>
 </head>
 <body>
 
-<canvas id="heart"></canvas>
-
-<script>
-  window.requestAnimationFrame =
-    window.requestAnimationFrame ||
-    window.webkitRequestAnimationFrame ||
-    window.mozRequestAnimationFrame ||
-    function (cb) {
-      return setTimeout(cb, 33);
-    };
-
-  window.isDevice = /android|iphone|ipad|ipod/i.test(
-    navigator.userAgent.toLowerCase()
-  );
-
-  var loaded = false;
-
-  function init() {
-    if (loaded) return;
-    loaded = true;
-
-    var mobile = window.isDevice;
-    var koef = mobile ? 0.5 : 1;
-    var canvas = document.getElementById("heart");
-    var ctx = canvas.getContext("2d");
-    var width = (canvas.width = koef * innerWidth);
-    var height = (canvas.height = koef * innerHeight);
-
-    function drawText() {
-      ctx.font = "60px Arial";
-      ctx.fillStyle = "lightblue";
-      ctx.textAlign = "center";
-      ctx.fillText("I love you sayang", width / 2, height / 2);
-    }
-
-    window.addEventListener("resize", function () {
-      width = canvas.width = koef * innerWidth;
-      height = canvas.height = koef * innerHeight;
-    });
-
-    function loop() {
-      ctx.fillStyle = "rgba(0,0,0,0.15)";
-      ctx.fillRect(0, 0, width, height);
-      drawText();
-      requestAnimationFrame(loop);
-    }
-
-    loop();
-  }
-
-  document.addEventListener("DOMContentLoaded", init);
-</script>
+  <div class="Love_You">
+    Love You ❤️
+  </div>
 
 </body>
 </html>
