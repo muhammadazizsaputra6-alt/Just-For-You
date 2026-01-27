@@ -1,164 +1,40 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<title>For You ❤️</title>
+  <meta charset="UTF-8">
+  <title>Test Love</title>
 
-<!-- jQuery -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <style>
+    :root {
+      --letter-love: 200px;
+      --letter: pink;
+    }
 
-<style>
     body {
-        margin: 0;
-        overflow: hidden;
-        background: #000;
-        color: white;
-        font-family: Arial, sans-serif;
+      position: relative;
+      min-height: 100vh;
+      margin: 0;
     }
 
-    .bg_heart {
-        width: 100vw;
-        height: 100vh;
-        position: relative;
-        text-align: center;
-        cursor: pointer;
+    .Love_You {
+      position: absolute;
+      left: 50%;
+      top: 50px;
+      transform: translateX(-50%);
+      width: 90%;
+      height: var(--letter-love);
+      font-size: 2rem;
+      background: var(--letter);
+      text-align: center;
+      padding: 20px;
     }
-
-    .message {
-        position: absolute;
-        top: 40%;
-        width: 100%;
-        font-size: 24px;
-        z-index: 10;
-    }
-
-    .next-button {
-        position: absolute;
-        top: 55%;
-        left: 50%;
-        transform: translateX(-50%);
-        padding: 10px 20px;
-        font-size: 18px;
-        border: none;
-        border-radius: 10px;
-        background: pink;
-        cursor: pointer;
-        display: none;
-        z-index: 10;
-    }
-
-    .heart {
-        position: absolute;
-        bottom: -50px;
-        background: pink;
-        transform: rotate(45deg);
-        opacity: 0.8;
-    }
-
-    @keyframes love {
-        0% {
-            bottom: -50px;
-            opacity: 1;
-        }
-        100% {
-            bottom: 110%;
-            opacity: 0;
-        }
-    }
-</style>
+  </style>
 </head>
-
 <body>
 
-<audio id="backgroundMusic" src="music.mp3" loop></audio>
-
-<div class="bg_heart">
-    <div class="message"></div>
-    <button class="next-button">Next 💝</button>
-</div>
-
-<script>
-document.addEventListener('contextmenu', e => e.preventDefault());
-
-document.addEventListener('keydown', e => {
-    if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'c') {
-        e.preventDefault();
-    }
-});
-
-const messages = [
-    "Tap dimana aja yaaa",
-    "hey kamu ❤️",
-    "aku mau ngomong sesuatu nih",
-    "coba pencet",
-    "pencet lagi",
-    "ayo semangat mencetnya",
-    "janji ini terakhir",
-    "serius",
-    "ini",
-    "terakhir",
-    "tapi bohong hehe yahaha hayyuk",
-    "aku tau pasti kamu kesal",
-    "hmm",
-    "yaudah deh",
-    "padahal",
-    "aku cuma mau bilang",
-    "kepasar beli terasi pulangnya makan kadal",
-    "i love you❤️",
-    "bjiirlah",
-    "coba pencet tombol dibawah ini 💝"
-];
-
-let currentPage = 0;
-let isLastPage = false;
-
-function showMessage() {
-    $('.message').text(messages[currentPage]);
-    isLastPage = currentPage === messages.length - 1;
-
-    $('.next-button').toggle(isLastPage);
-    $('.bg_heart').css('cursor', isLastPage ? 'default' : 'pointer');
-}
-
-$('.bg_heart').on('click', function (e) {
-    if ($(e.target).hasClass('next-button')) return;
-
-    if (!isLastPage) {
-        currentPage++;
-        showMessage();
-    }
-});
-
-setInterval(() => {
-    const size = Math.floor(Math.random() * 60) + 10;
-    const left = Math.floor(Math.random() * 100);
-    const time = Math.floor(Math.random() * 5) + 5;
-
-    $('.bg_heart').append(`
-        <div class="heart" style="
-            width:${size}px;
-            height:${size}px;
-            left:${left}%;
-            animation:love ${time}s linear;
-        "></div>
-    `);
-
-    $('.heart').each(function () {
-        if (parseFloat($(this).css("bottom")) > window.innerHeight) {
-            $(this).remove();
-        }
-    });
-}, 500);
-
-showMessage();
-
-// MUSIC AUTOPLAY SETELAH KLIK
-document.addEventListener('click', function startMusic() {
-    const music = document.getElementById('backgroundMusic');
-    music.play().catch(() => {});
-    document.removeEventListener('click', startMusic);
-});
-</script>
+  <div class="Love_You">
+    Love You ❤️
+  </div>
 
 </body>
 </html>
