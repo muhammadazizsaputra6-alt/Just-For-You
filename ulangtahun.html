@@ -1,113 +1,122 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <title>Selamat Ulang Tahun</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', sans-serif;
-            background: linear-gradient(120deg, #fbc2eb, #a6c1ee);
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #333;
-        }
+<meta charset="UTF-8">
+<title>Untuk Kamu</title>
+<style>
+    body {
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: 'Segoe UI', sans-serif;
+        background: linear-gradient(120deg, #fbc2eb, #a6c1ee);
+    }
 
-        .card {
-            background: rgba(255, 255, 255, 0.9);
-            width: 90%;
-            max-width: 500px;
-            padding: 30px;
-            border-radius: 20px;
-            text-align: center;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-            animation: fadeIn 2s ease;
-        }
+    .box {
+        background: rgba(255,255,255,0.9);
+        width: 90%;
+        max-width: 500px;
+        padding: 30px;
+        border-radius: 20px;
+        text-align: center;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        animation: fadeIn 1.5s;
+    }
 
-        h1 {
-            color: #d6336c;
-            margin-bottom: 10px;
-        }
+    p {
+        font-size: 16px;
+        line-height: 1.7;
+        margin-bottom: 20px;
+    }
 
-        p {
-            font-size: 16px;
-            line-height: 1.7;
-            margin: 12px 0;
-        }
+    button {
+        background: #d6336c;
+        color: white;
+        border: none;
+        padding: 10px 22px;
+        border-radius: 30px;
+        font-size: 14px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
 
-        .highlight {
-            font-style: italic;
-            color: #555;
-        }
+    button:hover {
+        background: #b02a55;
+    }
 
-        .heart {
-            font-size: 30px;
-            animation: heartbeat 1.5s infinite;
-            margin: 15px 0;
-        }
+    .hidden {
+        display: none;
+    }
 
-        .footer {
-            margin-top: 20px;
-            font-size: 14px;
-            color: #777;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes heartbeat {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.2); }
-            100% { transform: scale(1); }
-        }
-    </style>
+    @keyframes fadeIn {
+        from {opacity: 0; transform: translateY(15px);}
+        to {opacity: 1; transform: translateY(0);}
+    }
+</style>
 </head>
 <body>
 
-<div class="card">
-    <h1>Selamat Ulang Tahun 🤍</h1>
-
-    <p>
-        Di hari spesial kamu ini,  
-        aku cuma mau bilang satu hal sederhana  
-        tapi jujur dari hati.
+<div class="box">
+    <p id="text">
+        Hai.  
+        Sebelum lanjut…  
+        semoga kamu lagi baik-baik aja hari ini.
     </p>
-
-    <p class="highlight">
-        Kamu masih jadi orang baik yang sama,  
-        yang pernah aku doakan diam-diam  
-        bahkan saat kita sudah bukan “kita”.
-    </p>
-
-    <div class="heart">❤️</div>
-
-    <p>
-        Semoga di umur yang baru ini,  
-        kamu selalu dikelilingi hal-hal yang bikin kamu tenang,  
-        bahagia, dan merasa cukup.
-    </p>
-
-    <p>
-        Terima kasih ya…  
-        pernah jadi bagian dari cerita hidupku.  
-        Itu tetap berarti, sampai sekarang.
-    </p>
-
-    <div class="footer">
-        — dari seseorang yang masih peduli
-    </div>
+    <button onclick="nextText()">lanjut</button>
 </div>
+
+<script>
+let step = 0;
+const text = document.getElementById("text");
+
+function nextText() {
+    step++;
+
+    if (step === 1) {
+        text.innerHTML = `
+        Hari ini bukan hari biasa.  
+        Ada seseorang yang lahir,  
+        dan tanpa sadar pernah jadi bagian penting di hidupku.
+        `;
+    }
+
+    else if (step === 2) {
+        text.innerHTML = `
+        Kita memang sudah tidak seperti dulu.  
+        Tapi entah kenapa,  
+        rasa hormat dan doaku ke kamu masih sama.
+        `;
+    }
+
+    else if (step === 3) {
+        text.innerHTML = `
+        Di ulang tahun kamu ini,  
+        aku cuma berharap satu hal:  
+        semoga hidup kamu terasa lebih ringan dari kemarin.
+        `;
+    }
+
+    else if (step === 4) {
+        text.innerHTML = `
+        Terima kasih ya…  
+        pernah jadi rumah,  
+        walaupun sekarang cuma jadi kenangan yang aku simpan baik-baik.
+        `;
+    }
+
+    else {
+        text.innerHTML = `
+        Selamat ulang tahun 🤍  
+        dari seseorang  
+        yang mungkin bukan siapa-siapa lagi,  
+        tapi masih tulus mendoakan kamu.
+        `;
+        document.querySelector("button").style.display = "none";
+    }
+}
+</script>
 
 </body>
 </html>
