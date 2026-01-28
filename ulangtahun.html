@@ -16,7 +16,6 @@
         overflow: hidden;
     }
 
-    /* floating background circles */
     .circle {
         position: absolute;
         border-radius: 50%;
@@ -100,7 +99,6 @@
         transform: scale(1.08);
     }
 
-    /* pulse ring */
     .pulse {
         position: absolute;
         width: 140px;
@@ -120,6 +118,11 @@
 </style>
 </head>
 <body>
+
+<!-- AUDIO -->
+<audio id="bgMusic" loop>
+    <source src="romantis.mp3" type="audio/mpeg">
+</audio>
 
 <div class="circle one"></div>
 <div class="circle two"></div>
@@ -172,8 +175,16 @@ let step = 0;
 const text = document.getElementById("text");
 const visual = document.getElementById("visual");
 const button = document.querySelector("button");
+const music = document.getElementById("bgMusic");
+
+music.volume = 0.3; // pelan & romantis
 
 function next() {
+    // nyalain musik pas klik pertama
+    if (step === 0) {
+        music.play().catch(() => {});
+    }
+
     if (step >= scenes.length) return;
 
     text.style.animation = "none";
