@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Untuk Kamu</title>
+
 <style>
     body {
         margin: 0;
@@ -12,6 +13,8 @@
         align-items: center;
         font-family: 'Segoe UI', sans-serif;
         background: linear-gradient(120deg, #fbc2eb, #a6c1ee);
+        transition: background 1.5s ease;
+        overflow: hidden;
     }
 
     .box {
@@ -22,100 +25,144 @@
         border-radius: 20px;
         text-align: center;
         box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-        animation: fadeIn 1.5s;
     }
 
-    p {
+    #text {
         font-size: 16px;
         line-height: 1.7;
-        margin-bottom: 20px;
+        min-height: 120px;
     }
 
     button {
+        margin-top: 20px;
         background: #d6336c;
         color: white;
         border: none;
-        padding: 10px 22px;
+        padding: 10px 25px;
         border-radius: 30px;
-        font-size: 14px;
         cursor: pointer;
-        transition: 0.3s;
+        font-size: 14px;
     }
 
     button:hover {
         background: #b02a55;
     }
 
-    .hidden {
-        display: none;
+    /* Typing cursor */
+    .cursor::after {
+        content: "|";
+        animation: blink 1s infinite;
     }
 
-    @keyframes fadeIn {
-        from {opacity: 0; transform: translateY(15px);}
-        to {opacity: 1; transform: translateY(0);}
+    @keyframes blink {
+        0%, 50%, 100% {opacity: 1;}
+        25%, 75% {opacity: 0;}
+    }
+
+    /* Floating hearts */
+    .heart {
+        position: absolute;
+        color: rgba(255,0,100,0.6);
+        animation: float 6s linear infinite;
+        font-size: 20px;
+    }
+
+    @keyframes float {
+        from {
+            transform: translateY(100vh);
+            opacity: 1;
+        }
+        to {
+            transform: translateY(-10vh);
+            opacity: 0;
+        }
     }
 </style>
 </head>
 <body>
 
 <div class="box">
-    <p id="text">
-        Hai.  
-        Sebelum lanjut…  
-        semoga kamu lagi baik-baik aja hari ini.
-    </p>
-    <button onclick="nextText()">lanjut</button>
+    <div id="text" class="cursor"></div>
+    <button onclick="nextStep()">lanjut</button>
 </div>
 
 <script>
+const messages = [
+`Hai…
+sebentar aja ya.
+Aku cuma mau kamu baca ini pelan-pelan.`,
+
+`Hari ini bukan hari biasa.
+Ada seseorang yang lahir,
+dan tanpa sadar pernah berarti banget.`,
+
+`Walaupun sekarang kita udah beda cerita,
+aku harap kamu selalu
+nemu alasan buat senyum.`,
+
+`Terima kasih…
+pernah jadi tempat pulang,
+meski sekarang cuma jadi kenangan yang tenang.`,
+
+`Selamat ulang tahun 🤍
+aku mungkin bukan siapa-siapa lagi,
+tapi doaku buat kamu masih nyata.`
+];
+
 let step = 0;
-const text = document.getElementById("text");
+let index = 0;
+const textEl = document.getElementById("text");
+const btn = document.querySelector("button");
 
-function nextText() {
-    step++;
-
-    if (step === 1) {
-        text.innerHTML = `
-        Hari ini bukan hari biasa.  
-        Ada seseorang yang lahir,  
-        dan tanpa sadar pernah jadi bagian penting di hidupku.
-        `;
-    }
-
-    else if (step === 2) {
-        text.innerHTML = `
-        Kita memang sudah tidak seperti dulu.  
-        Tapi entah kenapa,  
-        rasa hormat dan doaku ke kamu masih sama.
-        `;
-    }
-
-    else if (step === 3) {
-        text.innerHTML = `
-        Di ulang tahun kamu ini,  
-        aku cuma berharap satu hal:  
-        semoga hidup kamu terasa lebih ringan dari kemarin.
-        `;
-    }
-
-    else if (step === 4) {
-        text.innerHTML = `
-        Terima kasih ya…  
-        pernah jadi rumah,  
-        walaupun sekarang cuma jadi kenangan yang aku simpan baik-baik.
-        `;
-    }
-
-    else {
-        text.innerHTML = `
-        Selamat ulang tahun 🤍  
-        dari seseorang  
-        yang mungkin bukan siapa-siapa lagi,  
-        tapi masih tulus mendoakan kamu.
-        `;
-        document.querySelector("button").style.display = "none";
+function typeEffect(message) {
+    if (index < message.length) {
+        textEl.innerHTML += message.charAt(index);
+        index++;
+        setTimeout(() => typeEffect(message), 40);
     }
 }
+
+function nextStep() {
+    if (step >= messages.length) return;
+
+    textEl.innerHTML = "";
+    index = 0;
+    typeEffect(messages[step]);
+    changeBackground();
+    spawnHeart();
+
+    step++;
+    if (step === messages.length) {
+        btn.style.display = "none";
+    }
+}
+
+function changeBackground() {
+    const colors = [
+        "linear-gradient(120deg, #fbc2eb, #a6c1ee)",
+        "linear-gradient(120deg, #fad0c4, #ffd1ff)",
+        "linear-gradient(120deg, #ffecd2, #fcb69f)",
+        "linear-gradient(120deg, #a1c4fd, #c2e9fb)",
+        "linear-gradient(120deg, #fda085, #f6d365)"
+    ];
+    document.body.style.background = colors[step % colors.length];
+}
+
+function spawnHeart() {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "❤";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = (15 + Math.random() * 20) + "px";
+    document.body.appendChild(heart);
+
+    setTimeout(() => {
+        heart.remove();
+    }, 6000);
+}
+
+// start first text
+nextStep();
 </script>
 
 </body>
