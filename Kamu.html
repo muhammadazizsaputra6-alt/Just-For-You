@@ -15,17 +15,29 @@
         }
 
         img {
-            width: 300px;
+            width: 450px; /* gambar dibesarkan */
+        }
+
+        .btn-container {
+            position: relative;
+            height: 200px;
+            margin-top: 30px;
         }
 
         button {
             font-size: 24px;
             padding: 15px 30px;
-            margin: 20px;
+            margin: 0 20px;
+        }
+
+        #btn_mau {
+            position: relative;
         }
 
         #btn_gamau {
             position: absolute;
+            left: 50%;
+            transform: translateX(100px);
         }
     </style>
 </head>
@@ -37,18 +49,20 @@
 
     <h1>Maukah kamu menjadi pacarku?</h1>
 
-    <button id="btn_mau" onclick="alert('I LOVE YOU ❤️')">
-        Mau
-    </button>
+    <div class="btn-container">
+        <button id="btn_mau" onclick="alert('I LOVE YOU ❤️')">
+            Mau
+        </button>
 
-    <button id="btn_gamau" onmouseover="gamau(this)">
-        Gamau
-    </button>
+        <button id="btn_gamau" onmouseover="gamau(this)">
+            Gamau
+        </button>
+    </div>
 
     <script>
         function gamau(id) {
-            var i = Math.floor(Math.random() * 300) + 1;
-            var j = Math.floor(Math.random() * 300) + 1;
+            var i = Math.floor(Math.random() * 300);
+            var j = Math.floor(Math.random() * 150);
 
             id.style.left = i + "px";
             id.style.top = j + "px";
