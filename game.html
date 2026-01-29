@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pong Game</title>
+
+  <style>
+    body{
+      background-color: gray;
+    }
+    canvas{
+      background: #323232;
+      box-shadow: 0 0 10px black;
+    }
+    button{
+      margin: auto;
+      width: 30%;
+      font-size: 1.5em;
+      box-shadow: 0 0 10px black;
+      margin-top: 5px;
+      outline: none;
+    }
+  </style>
+</head>
+
+<body>
+  <center>
+    <canvas id="cnv"></canvas><br>
+    <button id="left">Left</button>
+    <button id="right">Right</button>
+  </center>
+
+  <script>
+    window.onload = () => {
+      var canvas = document.getElementById('cnv');
+      var ctx = canvas.getContext('2d');
+
+      canvas.width = innerWidth - 15;
+      canvas.height = innerHeight - 200;
+
+      let x = 50, y = 50, dx = 4, dy = 4;
+      let r = 20, s = 0;
+      let rx = 200;
+      let ry = canvas.height - 10;
+
+      let rightMove = document.getElementById('right');
+      let leftMove  = document.getElementById('left');
+
+      function animate(){
+        requestAnimationFrame(animate);
+        ctx.clearRect(0, 0, innerWidth, innerHeight);
+
+        // bola
+        ctx.beginPath();
+        ctx.arc(x, y, r, 0, 2 * Math.PI);
+        ctx.fillStyle = 'white';
+        ctx.fill();
+
+        // paddle
+        ctx.fillRect(rx, ry, 110, 10);
+
+        // score
+        ctx.font = '20px arial';
+        ctx.fillText('Score : ' + s, canvas.width - 150, 30);
+
+        // pantulan dinding
+        if(x + r > innerWidth - 50 || x - r < 0){
+          dx = -dx;
+        }
+
+        if(y - r < 0){
+          dy = -dy;
+        }
+
+        x += dx;
+        y += dy;
+
+        // tombol kanan
+        rightMove.onclick = () => {
+          if(rx > canvas.width){
+            rx = -50;
+          }
+          rx += 50;
+        }
+
+        // tombol kiri
+        leftMove.onclick = () => {
+          if(rx < 0){
+            rx = innerWidth;
+          }
+          rx -= 50;
+        }
+
+        // kena paddle
+        if(y + dy > canvas.height - r){
+          if(x > rx && x < rx + 110){
+            dy = -dy;
+            s += 10;
+          }
+        }
+
+        // game over
+        if(y + r > canvas.height){
+          alert('Game Over!\n\nYour Score = ' + s);
+          x = 50;
+          y = 50;
+          s = 0;
+        }
+      }
+
+      animate();
+    }
+  </script>
+</body>
+</html>
