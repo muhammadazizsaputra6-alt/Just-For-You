@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Hai Cantik</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            margin-top: 50px;
+        }
+
+        #btn_gamau {
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Hai Cantik! 💖</h1>
+
+    <img src="https://c.tenor.com/Z8ezUHZzcLoAAAAC/love.gif" alt="Love">
+
+    <h1>Maukah kamu menjadi pacarku?</h1>
+
+    <button id="btn_mau" onclick="alert('I LOVE YOU ❤️')">
+        Mau
+    </button>
+
+    <button id="btn_gamau" onmouseover="gamau(this)">
+        Gamau
+    </button>
+
+    <script>
+        function gamau(id) {
+            var i = Math.floor(Math.random() * 300) + 1;
+            var j = Math.floor(Math.random() * 300) + 1;
+
+            id.style.left = i + "px";
+            id.style.top = j + "px";
+        }
+    </script>
+
+</body>
+</html>
