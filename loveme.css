@@ -1,0 +1,36 @@
+body {
+height: 100vh;
+display: flex;
+justify-content: center;
+align-items: center;
+background: #111;
+color: #fff;
+font-family: Arial, sans-serif;
+}
+main {
+text-align: center;
+position: relative;
+}
+.btn-container {
+margin-top: 20px;
+position: relative;
+height: 200px;
+}
+button {
+padding: 10px 25px;
+font-size: 18px;
+border: none;
+border-radius: 8px;
+cursor: pointer;
+position: absolute;
+}
+.yes {
+background: #ff4d6d;
+color: white;
+left: 60px;
+}
+.no {
+background: #555;
+color: white;
+left: 160px;
+}
