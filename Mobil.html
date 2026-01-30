@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Game Mobil Balap</title>
+<style>
+  body { margin:0; background:#222; overflow:hidden; }
+  canvas { display:block; margin:auto; background:#555; }
+
+  .controls{
+    position:fixed;
+    bottom:10px;
+    width:100%;
+    display:flex;
+    justify-content:space-around;
+  }
+  button{
+    width:70px;
+    height:70px;
+    font-size:24px;
+    border:none;
+    border-radius:50%;
+    background:#fff;
+    opacity:.8;
+  }
+</style>
+</head>
+<body>
+
+<canvas id="game"></canvas>
+
+<div class="controls">
+  <button id="left">⬅️</button>
+  <button id="up">⬆️</button>
+  <button id="down">⬇️</button>
+  <button id="right">➡️</button>
+</div>
+
+<script>
+const canvas = document.getElementById("game");
+const ctx = canvas.getContext("2d");
+canvas.width = innerWidth;
+canvas.height = innerHeight;
+
+let keys = {};
+let car = {
+  x: canvas.width/2,
+  y: canvas.height/2,
+  w: 40,
+  h: 70,
+  angle: 0,
+  speed: 0,
+  maxSpeed: 8,
+  acc: 0.2,
+  friction: 0.05
+};
+
+let roadY = 0;
+
+function drawRoad(){
+  ctx.fillStyle="#333";
+  ctx.fillRect(0,0,canvas.width,canvas.height);
+
+  ctx.strokeStyle="white";
+  ctx.lineWidth=5;
+  ctx.setLineDash([40,40]);
+  ctx.beginPath();
+  ctx.moveTo(canvas.width/2, roadY);
+  ctx.lineTo(canvas.width/2, canvas.height);
+  ctx.stroke();
+  ctx.setLineDash([]);
+
+  roadY += car.speed;
+  if(roadY > 80) roadY = 0;
+}
+
+function drawCar(){
+  ctx.save();
+  ctx.translate(car.x, car.y);
+  ctx.rotate(car.angle);
+  ctx.fillStyle="red";
+  ctx.fillRect(-car.w/2, -car.h/2, car.w, car.h);
+  ctx.restore();
+}
+
+function update(){
+  // gas & rem
+  if(keys["up"]) car.speed += car.acc;
+  if(keys["down"]) car.speed -= car.acc;
+
+  // batas speed
+  car.speed = Math.max(-4, Math.min(car.speed, car.maxSpeed));
+
+  // belok
+  if(keys["left"]) car.angle -= 0.05 * (car.speed/5);
+  if(keys["right"]) car.angle += 0.05 * (car.speed/5);
+
+  // gesek
+  if(!keys["up"] && !keys["down"]){
+    if(car.speed > 0) car.speed -= car.friction;
+    if(car.speed < 0) car.speed += car.friction;
+  }
+
+  // gerak mobil
+  car.x += Math.sin(car.angle) * car.speed;
+  car.y -= Math.cos(car.angle) * car.speed;
+
+  // batas layar
+  car.x = Math.max(0, Math.min(canvas.width, car.x));
+  car.y = Math.max(0, Math.min(canvas.height, car.y));
+}
+
+function loop(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  drawRoad();
+  update();
+  drawCar();
+  requestAnimationFrame(loop);
+}
+
+loop();
+
+// keyboard
+document.addEventListener("keydown", e=>{
+  if(e.key=="w") keys["up"]=true;
+  if(e.key=="s") keys["down"]=true;
+  if(e.key=="a") keys["left"]=true;
+  if(e.key=="d") keys["right"]=true;
+});
+document.addEventListener("keyup", e=>{
+  if(e.key=="w") keys["up"]=false;
+  if(e.key=="s") keys["down"]=false;
+  if(e.key=="a") keys["left"]=false;
+  if(e.key=="d") keys["right"]=false;
+});
+
+// tombol HP
+function hold(btn,key){
+  btn.ontouchstart = ()=> keys[key]=true;
+  btn.ontouchend = ()=> keys[key]=false;
+}
+hold(left,"left");
+hold(right,"right");
+hold(up,"up");
+hold(down,"down");
+</script>
+
+</body>
+</html>
