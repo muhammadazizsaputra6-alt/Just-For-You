@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DONT LOOK BACK</title>
+<title>PS HORROR GAME</title>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
@@ -13,7 +13,7 @@
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:Arial, sans-serif;
+    font-family:Arial;
 }
 
 body{
@@ -31,29 +31,22 @@ body{
     background:black;
 }
 
-/* MAP */
+/* WORLD */
 
-#map{
+#world{
     position:absolute;
-    width:2200px;
-    height:2200px;
+    width:3000px;
+    height:3000px;
     background:
-    radial-gradient(circle at center,#111 0%,#000 90%);
+    radial-gradient(circle,#111 0%,#000 90%);
 }
 
 /* FLOOR */
 
 .floor{
     position:absolute;
-    background:#151515;
+    background:#1a1a1a;
     border:2px solid #222;
-}
-
-/* WALL */
-
-.wall{
-    position:absolute;
-    background:#000;
 }
 
 /* PLAYER */
@@ -61,8 +54,8 @@ body{
 #player{
     width:40px;
     height:40px;
-    background:white;
     border-radius:50%;
+    background:white;
     position:absolute;
     z-index:5;
     box-shadow:0 0 20px white;
@@ -72,55 +65,55 @@ body{
 
 #flashlight{
     position:fixed;
-    width:320px;
-    height:320px;
+    width:350px;
+    height:350px;
     border-radius:50%;
     pointer-events:none;
+    z-index:50;
     background:
     radial-gradient(circle,
     rgba(255,255,255,0.3) 0%,
-    rgba(255,255,255,0.1) 30%,
-    rgba(0,0,0,0.95) 75%);
+    rgba(255,255,255,0.08) 35%,
+    rgba(0,0,0,0.96) 75%);
     mix-blend-mode:screen;
-    z-index:20;
 }
 
 /* GHOST */
 
 #ghost{
-    width:120px;
+    width:180px;
     position:absolute;
     z-index:4;
-    transition:0.15s linear;
-    filter:brightness(0.5);
+    transition:0.1s linear;
+    filter:brightness(0.7);
 }
 
 /* KEY */
 
 .key{
-    width:35px;
-    height:35px;
+    width:40px;
+    height:40px;
     background:gold;
     border-radius:50%;
     position:absolute;
-    box-shadow:0 0 15px gold;
+    box-shadow:0 0 20px gold;
 }
 
 /* UI */
 
 #ui{
     position:fixed;
-    top:15px;
-    left:15px;
+    top:20px;
+    left:20px;
     color:red;
     z-index:100;
-    font-size:22px;
+    font-size:24px;
     text-shadow:0 0 10px red;
 }
 
 /* START */
 
-#startScreen{
+#start{
     position:fixed;
     inset:0;
     background:black;
@@ -133,23 +126,22 @@ body{
 
 #title{
     color:red;
-    font-size:65px;
+    font-size:70px;
+    text-shadow:0 0 25px red;
     margin-bottom:20px;
-    text-shadow:0 0 20px red;
-    animation:flicker 1s infinite;
 }
 
-#startBtn{
+#play{
     padding:15px 40px;
-    font-size:22px;
     border:none;
-    border-radius:12px;
     background:red;
     color:white;
+    font-size:22px;
+    border-radius:12px;
     cursor:pointer;
 }
 
-#warning{
+#info{
     margin-top:20px;
     color:#666;
 }
@@ -169,7 +161,7 @@ body{
     width:100%;
     height:100%;
     object-fit:cover;
-    animation:shake .08s infinite;
+    animation:shake .07s infinite;
 }
 
 /* BLOOD */
@@ -179,23 +171,17 @@ body{
     inset:0;
     background:red;
     opacity:0;
-    z-index:999;
     pointer-events:none;
+    z-index:999;
 }
 
-/* EFFECT */
-
-@keyframes flicker{
-    0%{opacity:1;}
-    50%{opacity:0.5;}
-    100%{opacity:1;}
-}
+/* SHAKE */
 
 @keyframes shake{
     0%{transform:translate(2px,2px);}
     25%{transform:translate(-2px,-2px);}
-    50%{transform:translate(3px,-1px);}
-    75%{transform:translate(-3px,2px);}
+    50%{transform:translate(4px,-1px);}
+    75%{transform:translate(-4px,2px);}
     100%{transform:translate(1px,-2px);}
 }
 
@@ -206,18 +192,18 @@ body{
 
 <!-- START -->
 
-<div id="startScreen">
+<div id="start">
 
     <div id="title">
         DONT LOOK BACK
     </div>
 
-    <button id="startBtn">
+    <button id="play">
         START GAME
     </button>
 
-    <div id="warning">
-        cari 3 kunci dan hindari hantu
+    <div id="info">
+        cari 3 kunci lalu keluar hidup-hidup
     </div>
 
 </div>
@@ -225,18 +211,17 @@ body{
 <!-- UI -->
 
 <div id="ui">
-    Kunci : <span id="keyCount">0</span>/3
+    Kunci : <span id="count">0</span>/3
 </div>
 
 <!-- GAME -->
 
 <div id="game">
 
-    <div id="map">
+    <div id="world">
 
-        <!-- ROOM -->
-
-        <div class="floor" style="left:0;top:0;width:2200px;height:2200px;"></div>
+        <div class="floor"
+        style="left:0;top:0;width:3000px;height:3000px;"></div>
 
         <!-- PLAYER -->
 
@@ -245,13 +230,18 @@ body{
         <!-- GHOST -->
 
         <img id="ghost"
-        src="https://i.imgur.com/6RLbK0X.png">
+        src="https://i.imgur.com/Q6aZ3Xl.png">
 
         <!-- KEYS -->
 
-        <div class="key" style="left:400px;top:500px;"></div>
-        <div class="key" style="left:1500px;top:700px;"></div>
-        <div class="key" style="left:1800px;top:1600px;"></div>
+        <div class="key"
+        style="left:600px;top:900px;"></div>
+
+        <div class="key"
+        style="left:1900px;top:1300px;"></div>
+
+        <div class="key"
+        style="left:2400px;top:2400px;"></div>
 
     </div>
 
@@ -266,7 +256,9 @@ body{
 <div id="blood"></div>
 
 <div id="jumpscare">
-    <img src="https://i.imgur.com/Q6aZ3Xl.jpg">
+
+<img src="https://i.imgur.com/Q6aZ3Xl.jpg">
+
 </div>
 
 <!-- AUDIO -->
@@ -275,7 +267,7 @@ body{
 <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_b4cfa7f6fd.mp3?filename=dark-ambient-113997.mp3">
 </audio>
 
-<audio id="scary">
+<audio id="scream">
 <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_4aeb6f7f1e.mp3?filename=horror-scream-113219.mp3">
 </audio>
 
@@ -285,50 +277,59 @@ body{
 
 const player = $("#player");
 const ghost = $("#ghost");
-const map = $("#map");
+const world = $("#world");
 const flashlight = $("#flashlight");
-const scary = $("#scary")[0];
+
 const ambient = $("#ambient")[0];
-const jumpscare = $("#jumpscare");
-const blood = $("#blood");
+const scream = $("#scream")[0];
 
-let px = 1100;
-let py = 1100;
+let px = 1500;
+let py = 1500;
 
-let gx = 900;
-let gy = 900;
+let gx = 1000;
+let gy = 1000;
 
-let speed = 7;
-
-let keys = {};
+let speed = 8;
 
 let collected = 0;
 
 /* START */
 
-$("#startBtn").click(function(){
+$("#play").click(function(){
 
-    $("#startScreen").fadeOut(500);
+    $("#start").fadeOut(500);
 
     ambient.volume = 0.5;
     ambient.play();
 
 });
 
-/* MOVE */
+/* MOVE PLAYER */
+
+const keys = {};
 
 $(document).keydown(function(e){
 
-    if(e.key=="w") py-=speed;
-    if(e.key=="s") py+=speed;
-    if(e.key=="a") px-=speed;
-    if(e.key=="d") px+=speed;
+    keys[e.key.toLowerCase()] = true;
+
+});
+
+$(document).keyup(function(e){
+
+    keys[e.key.toLowerCase()] = false;
 
 });
 
 /* LOOP */
 
 setInterval(()=>{
+
+    /* PLAYER MOVEMENT */
+
+    if(keys["w"]) py -= speed;
+    if(keys["s"]) py += speed;
+    if(keys["a"]) px -= speed;
+    if(keys["d"]) px += speed;
 
     /* PLAYER */
 
@@ -339,50 +340,68 @@ setInterval(()=>{
 
     /* CAMERA */
 
-    $("#map").css({
-        transform:`translate(${-px+window.innerWidth/2}px,${-py+window.innerHeight/2}px)`
+    world.css({
+        transform:`translate(${-px + window.innerWidth/2}px,${-py + window.innerHeight/2}px)`
     });
 
     /* FLASHLIGHT */
 
     flashlight.css({
-        left:window.innerWidth/2+"px",
-        top:window.innerHeight/2+"px"
+        left:window.innerWidth/2 - 175 + "px",
+        top:window.innerHeight/2 - 175 + "px"
     });
 
     /* GHOST AI */
 
-    let dx = px-gx;
-    let dy = py-gy;
+    let dx = px - gx;
+    let dy = py - gy;
 
-    let dist = Math.sqrt(dx*dx+dy*dy);
+    let dist = Math.sqrt(dx*dx + dy*dy);
 
-    gx += dx/dist*2;
-    gy += dy/dist*2;
+    /* HANTU NGELIAT */
+
+    if(dist < 700){
+
+        gx += dx / dist * 3;
+        gy += dy / dist * 3;
+
+    }
+
+    /* HANTU JALAN */
 
     ghost.css({
         left:gx+"px",
         top:gy+"px"
     });
 
-    /* DETECT */
+    /* KALAU KETAHUAN */
 
-    if(dist < 120){
+    if(dist < 250){
 
-        jumpscare.css({
+        speed = 4;
+
+        $("#ui").text("LARI... DIA MELIHATMU");
+
+    }
+
+    /* JUMPSCARE */
+
+    if(dist < 100){
+
+        scream.play();
+
+        $("#blood").css("opacity","0.5");
+
+        $("#jumpscare").css({
             opacity:"1",
             pointerEvents:"all"
         });
-
-        blood.css("opacity","0.5");
-
-        scary.play();
 
         navigator.vibrate([300,100,300]);
 
         setTimeout(()=>{
 
-            alert("KAMU DITANGKAP HANTU");
+            alert("KAMU MATI");
 
             location.reload();
 
@@ -397,7 +416,7 @@ setInterval(()=>{
         let kx = parseInt($(this).css("left"));
         let ky = parseInt($(this).css("top"));
 
-        let kdist = Math.sqrt((px-kx)**2+(py-ky)**2);
+        let kdist = Math.sqrt((px-kx)**2 + (py-ky)**2);
 
         if(kdist < 80){
 
@@ -405,7 +424,7 @@ setInterval(()=>{
 
             collected++;
 
-            $("#keyCount").text(collected);
+            $("#count").text(collected);
 
             if(collected >= 3){
 
@@ -421,13 +440,13 @@ setInterval(()=>{
 
     });
 
-},30);
+},20);
 
-/* RANDOM FLICKER */
+/* RANDOM LIGHT FLICKER */
 
 setInterval(()=>{
 
-    $("body").css("filter","brightness(1.2)");
+    $("body").css("filter","brightness(1.3)");
 
     setTimeout(()=>{
 
