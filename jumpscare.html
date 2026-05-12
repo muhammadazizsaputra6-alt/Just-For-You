@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DONT LOOK BACK</title>
+
+<!-- JQUERY -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    overflow:hidden;
+    background:black;
+    color:white;
+}
+
+/* BACKGROUND */
+
+#game{
+    width:100vw;
+    height:100vh;
+    position:relative;
+    overflow:hidden;
+    background:black;
+}
+
+/* ROOM */
+
+#room{
+    position:absolute;
+    width:100%;
+    height:100%;
+    background:url('https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?q=80&w=1974&auto=format&fit=crop') center/cover;
+    filter:brightness(0.15);
+}
+
+/* FLASHLIGHT */
+
+#flashlight{
+    position:absolute;
+    width:320px;
+    height:320px;
+    border-radius:50%;
+    pointer-events:none;
+    background:
+    radial-gradient(circle,
+    rgba(255,255,255,0.35) 0%,
+    rgba(255,255,255,0.08) 35%,
+    rgba(0,0,0,0.96) 70%);
+    mix-blend-mode:screen;
+    transform:translate(-50%,-50%);
+    z-index:5;
+}
+
+/* TITLE */
+
+#message{
+    position:absolute;
+    top:25px;
+    width:100%;
+    text-align:center;
+    font-size:22px;
+    letter-spacing:4px;
+    color:red;
+    text-shadow:0 0 15px red;
+    animation:flicker 1s infinite;
+    z-index:10;
+}
+
+/* TIMER */
+
+#timer{
+    position:absolute;
+    top:20px;
+    right:20px;
+    color:red;
+    font-size:25px;
+    z-index:10;
+}
+
+/* MONSTER */
+
+#monster{
+    position:absolute;
+    width:240px;
+    opacity:0;
+    bottom:20px;
+    left:50%;
+    transform:translateX(-50%);
+    transition:0.2s;
+    z-index:4;
+    filter:brightness(0.4);
+}
+
+/* JUMPSCARE */
+
+#jumpscare{
+    position:fixed;
+    inset:0;
+    background:black;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    opacity:0;
+    pointer-events:none;
+    z-index:999;
+    transition:0.1s;
+}
+
+#jumpscare img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    animation:shake 0.08s infinite;
+}
+
+/* BLOOD */
+
+#blood{
+    position:fixed;
+    inset:0;
+    background:red;
+    opacity:0;
+    pointer-events:none;
+    z-index:998;
+}
+
+/* START SCREEN */
+
+#startScreen{
+    position:fixed;
+    inset:0;
+    background:black;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    z-index:1000;
+}
+
+#title{
+    font-size:60px;
+    color:red;
+    text-shadow:0 0 20px red;
+    margin-bottom:20px;
+    animation:flicker 1s infinite;
+}
+
+#startBtn{
+    padding:15px 40px;
+    border:none;
+    border-radius:12px;
+    background:red;
+    color:white;
+    font-size:22px;
+    cursor:pointer;
+    transition:0.2s;
+}
+
+#startBtn:hover{
+    transform:scale(1.1);
+}
+
+#warning{
+    margin-top:20px;
+    color:#777;
+}
+
+/* STATIC */
+
+.static{
+    position:absolute;
+    width:100%;
+    height:100%;
+    background:url('https://i.imgur.com/8fK4h6K.png');
+    opacity:0.04;
+    z-index:2;
+    animation:noise 0.2s infinite;
+}
+
+@keyframes noise{
+    0%{transform:translate(0);}
+    25%{transform:translate(-2px,2px);}
+    50%{transform:translate(2px,-2px);}
+    75%{transform:translate(-1px,1px);}
+    100%{transform:translate(1px,-1px);}
+}
+
+/* SHAKE */
+
+@keyframes shake{
+    0%{transform:translate(2px,2px);}
+    25%{transform:translate(-2px,-2px);}
+    50%{transform:translate(3px,-1px);}
+    75%{transform:translate(-3px,2px);}
+    100%{transform:translate(1px,-2px);}
+}
+
+/* FLICKER */
+
+@keyframes flicker{
+    0%{opacity:1;}
+    50%{opacity:0.5;}
+    100%{opacity:1;}
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- START -->
+
+<div id="startScreen">
+
+    <div id="title">
+        DONT LOOK BACK
+    </div>
+
+    <button id="startBtn">
+        START GAME
+    </button>
+
+    <div id="warning">
+        pakai headset untuk pengalaman maksimal
+    </div>
+
+</div>
+
+<!-- GAME -->
+
+<div id="game">
+
+    <div id="room"></div>
+
+    <div class="static"></div>
+
+    <img id="monster"
+    src="https://i.imgur.com/6RLbK0X.png">
+
+    <div id="flashlight"></div>
+
+    <div id="message">
+        TAP MONSTER SEBELUM MENDEKAT...
+    </div>
+
+    <div id="timer">
+        60
+    </div>
+
+</div>
+
+<!-- EFFECT -->
+
+<div id="blood"></div>
+
+<div id="jumpscare">
+    <img src="https://i.imgur.com/Q6aZ3Xl.jpg">
+</div>
+
+<!-- AUDIO -->
+
+<audio id="ambient" loop>
+<source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_b4cfa7f6fd.mp3?filename=dark-ambient-113997.mp3">
+</audio>
+
+<audio id="scary">
+<source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_4aeb6f7f1e.mp3?filename=horror-scream-113219.mp3">
+</audio>
+
+<script>
+
+/* DISABLE RIGHT CLICK */
+
+document.addEventListener('contextmenu',e=>e.preventDefault());
+
+/* ELEMENT */
+
+const flashlight = $("#flashlight");
+const monster = $("#monster");
+const jumpscare = $("#jumpscare");
+const scary = $("#scary")[0];
+const ambient = $("#ambient")[0];
+const blood = $("#blood");
+const timerText = $("#timer");
+const room = $("#room");
+const startBtn = $("#startBtn");
+const startScreen = $("#startScreen");
+
+let gameStarted = false;
+let time = 60;
+let monsterVisible = false;
+
+/* FLASHLIGHT */
+
+$(document).on("mousemove touchmove", function(e){
+
+    let x = e.pageX || e.originalEvent.touches[0].pageX;
+    let y = e.pageY || e.originalEvent.touches[0].pageY;
+
+    flashlight.css({
+        left:x + "px",
+        top:y + "px"
+    });
+
+});
+
+/* START */
+
+startBtn.on("click",function(){
+
+    startScreen.fadeOut(500);
+
+    ambient.volume = 0.5;
+    ambient.play();
+
+    gameStarted = true;
+
+    startGame();
+
+});
+
+/* GAME */
+
+function startGame(){
+
+    const countdown = setInterval(()=>{
+
+        time--;
+
+        timerText.text(time);
+
+        if(time <= 0){
+
+            clearInterval(countdown);
+
+            winGame();
+
+        }
+
+    },1000);
+
+    setInterval(()=>{
+
+        if(!monsterVisible){
+
+            showMonster();
+
+        }
+
+    },2500);
+
+}
+
+/* MONSTER */
+
+function showMonster(){
+
+    monsterVisible = true;
+
+    const randomX = Math.random()*70+10;
+    const randomScale = Math.random()*0.6+0.7;
+
+    monster.css({
+        left:randomX + "%",
+        transform:`scale(${randomScale})`,
+        opacity:"0.85"
+    });
+
+    room.css("filter","brightness(0.1)");
+
+    setTimeout(()=>{
+
+        if(monsterVisible){
+
+            triggerJumpscare();
+
+        }
+
+    },1500);
+
+}
+
+/* CLICK MONSTER */
+
+monster.on("click touchstart",function(){
+
+    monsterVisible = false;
+
+    monster.css("opacity","0");
+
+    room.css("filter","brightness(0.15)");
+
+});
+
+/* JUMPSCARE */
+
+function triggerJumpscare(){
+
+    scary.volume = 1;
+    scary.play();
+
+    jumpscare.css({
+        opacity:"1",
+        pointerEvents:"all"
+    });
+
+    blood.css("opacity","0.5");
+
+    navigator.vibrate([300,100,300]);
+
+    $("body").css("background","red");
+
+    setTimeout(()=>{
+
+        alert("KAMU DITANGKAP...");
+
+        location.reload();
+
+    },1800);
+
+}
+
+/* WIN */
+
+function winGame(){
+
+    ambient.pause();
+
+    alert("KAMU BERHASIL SELAMAT.");
+
+    location.reload();
+
+}
+
+/* RANDOM FLICKER */
+
+setInterval(()=>{
+
+    if(gameStarted){
+
+        const random = Math.random();
+
+        if(random > 0.7){
+
+            $("body").css("filter","brightness(1.2)");
+
+            setTimeout(()=>{
+
+                $("body").css("filter","brightness(1)");
+
+            },100);
+
+        }
+
+    }
+
+},2000);
+
+</script>
+
+</body>
+</html>
