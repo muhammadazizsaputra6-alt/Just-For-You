@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>DONT LOOK BACK</title>
 
-<!-- JQUERY -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <style>
@@ -20,10 +19,9 @@
 body{
     overflow:hidden;
     background:black;
-    color:white;
 }
 
-/* BACKGROUND */
+/* GAME */
 
 #game{
     width:100vw;
@@ -33,72 +31,127 @@ body{
     background:black;
 }
 
-/* ROOM */
+/* MAP */
 
-#room{
+#map{
     position:absolute;
-    width:100%;
-    height:100%;
-    background:url('https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?q=80&w=1974&auto=format&fit=crop') center/cover;
-    filter:brightness(0.15);
+    width:2200px;
+    height:2200px;
+    background:
+    radial-gradient(circle at center,#111 0%,#000 90%);
+}
+
+/* FLOOR */
+
+.floor{
+    position:absolute;
+    background:#151515;
+    border:2px solid #222;
+}
+
+/* WALL */
+
+.wall{
+    position:absolute;
+    background:#000;
+}
+
+/* PLAYER */
+
+#player{
+    width:40px;
+    height:40px;
+    background:white;
+    border-radius:50%;
+    position:absolute;
+    z-index:5;
+    box-shadow:0 0 20px white;
 }
 
 /* FLASHLIGHT */
 
 #flashlight{
-    position:absolute;
+    position:fixed;
     width:320px;
     height:320px;
     border-radius:50%;
     pointer-events:none;
     background:
     radial-gradient(circle,
-    rgba(255,255,255,0.35) 0%,
-    rgba(255,255,255,0.08) 35%,
-    rgba(0,0,0,0.96) 70%);
+    rgba(255,255,255,0.3) 0%,
+    rgba(255,255,255,0.1) 30%,
+    rgba(0,0,0,0.95) 75%);
     mix-blend-mode:screen;
-    transform:translate(-50%,-50%);
-    z-index:5;
+    z-index:20;
 }
 
-/* TITLE */
+/* GHOST */
 
-#message{
+#ghost{
+    width:120px;
     position:absolute;
-    top:25px;
-    width:100%;
-    text-align:center;
-    font-size:22px;
-    letter-spacing:4px;
-    color:red;
-    text-shadow:0 0 15px red;
-    animation:flicker 1s infinite;
-    z-index:10;
-}
-
-/* TIMER */
-
-#timer{
-    position:absolute;
-    top:20px;
-    right:20px;
-    color:red;
-    font-size:25px;
-    z-index:10;
-}
-
-/* MONSTER */
-
-#monster{
-    position:absolute;
-    width:240px;
-    opacity:0;
-    bottom:20px;
-    left:50%;
-    transform:translateX(-50%);
-    transition:0.2s;
     z-index:4;
-    filter:brightness(0.4);
+    transition:0.15s linear;
+    filter:brightness(0.5);
+}
+
+/* KEY */
+
+.key{
+    width:35px;
+    height:35px;
+    background:gold;
+    border-radius:50%;
+    position:absolute;
+    box-shadow:0 0 15px gold;
+}
+
+/* UI */
+
+#ui{
+    position:fixed;
+    top:15px;
+    left:15px;
+    color:red;
+    z-index:100;
+    font-size:22px;
+    text-shadow:0 0 10px red;
+}
+
+/* START */
+
+#startScreen{
+    position:fixed;
+    inset:0;
+    background:black;
+    z-index:999;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+}
+
+#title{
+    color:red;
+    font-size:65px;
+    margin-bottom:20px;
+    text-shadow:0 0 20px red;
+    animation:flicker 1s infinite;
+}
+
+#startBtn{
+    padding:15px 40px;
+    font-size:22px;
+    border:none;
+    border-radius:12px;
+    background:red;
+    color:white;
+    cursor:pointer;
+}
+
+#warning{
+    margin-top:20px;
+    color:#666;
 }
 
 /* JUMPSCARE */
@@ -106,13 +159,9 @@ body{
 #jumpscare{
     position:fixed;
     inset:0;
-    background:black;
-    display:flex;
-    justify-content:center;
-    align-items:center;
+    z-index:1000;
     opacity:0;
     pointer-events:none;
-    z-index:999;
     transition:0.1s;
 }
 
@@ -120,7 +169,7 @@ body{
     width:100%;
     height:100%;
     object-fit:cover;
-    animation:shake 0.08s infinite;
+    animation:shake .08s infinite;
 }
 
 /* BLOOD */
@@ -130,72 +179,17 @@ body{
     inset:0;
     background:red;
     opacity:0;
+    z-index:999;
     pointer-events:none;
-    z-index:998;
 }
 
-/* START SCREEN */
+/* EFFECT */
 
-#startScreen{
-    position:fixed;
-    inset:0;
-    background:black;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    flex-direction:column;
-    z-index:1000;
+@keyframes flicker{
+    0%{opacity:1;}
+    50%{opacity:0.5;}
+    100%{opacity:1;}
 }
-
-#title{
-    font-size:60px;
-    color:red;
-    text-shadow:0 0 20px red;
-    margin-bottom:20px;
-    animation:flicker 1s infinite;
-}
-
-#startBtn{
-    padding:15px 40px;
-    border:none;
-    border-radius:12px;
-    background:red;
-    color:white;
-    font-size:22px;
-    cursor:pointer;
-    transition:0.2s;
-}
-
-#startBtn:hover{
-    transform:scale(1.1);
-}
-
-#warning{
-    margin-top:20px;
-    color:#777;
-}
-
-/* STATIC */
-
-.static{
-    position:absolute;
-    width:100%;
-    height:100%;
-    background:url('https://i.imgur.com/8fK4h6K.png');
-    opacity:0.04;
-    z-index:2;
-    animation:noise 0.2s infinite;
-}
-
-@keyframes noise{
-    0%{transform:translate(0);}
-    25%{transform:translate(-2px,2px);}
-    50%{transform:translate(2px,-2px);}
-    75%{transform:translate(-1px,1px);}
-    100%{transform:translate(1px,-1px);}
-}
-
-/* SHAKE */
 
 @keyframes shake{
     0%{transform:translate(2px,2px);}
@@ -203,14 +197,6 @@ body{
     50%{transform:translate(3px,-1px);}
     75%{transform:translate(-3px,2px);}
     100%{transform:translate(1px,-2px);}
-}
-
-/* FLICKER */
-
-@keyframes flicker{
-    0%{opacity:1;}
-    50%{opacity:0.5;}
-    100%{opacity:1;}
 }
 
 </style>
@@ -231,33 +217,49 @@ body{
     </button>
 
     <div id="warning">
-        pakai headset untuk pengalaman maksimal
+        cari 3 kunci dan hindari hantu
     </div>
 
+</div>
+
+<!-- UI -->
+
+<div id="ui">
+    Kunci : <span id="keyCount">0</span>/3
 </div>
 
 <!-- GAME -->
 
 <div id="game">
 
-    <div id="room"></div>
+    <div id="map">
 
-    <div class="static"></div>
+        <!-- ROOM -->
 
-    <img id="monster"
-    src="https://i.imgur.com/6RLbK0X.png">
+        <div class="floor" style="left:0;top:0;width:2200px;height:2200px;"></div>
 
-    <div id="flashlight"></div>
+        <!-- PLAYER -->
 
-    <div id="message">
-        TAP MONSTER SEBELUM MENDEKAT...
-    </div>
+        <div id="player"></div>
 
-    <div id="timer">
-        60
+        <!-- GHOST -->
+
+        <img id="ghost"
+        src="https://i.imgur.com/6RLbK0X.png">
+
+        <!-- KEYS -->
+
+        <div class="key" style="left:400px;top:500px;"></div>
+        <div class="key" style="left:1500px;top:700px;"></div>
+        <div class="key" style="left:1800px;top:1600px;"></div>
+
     </div>
 
 </div>
+
+<!-- FLASHLIGHT -->
+
+<div id="flashlight"></div>
 
 <!-- EFFECT -->
 
@@ -279,192 +281,161 @@ body{
 
 <script>
 
-/* DISABLE RIGHT CLICK */
-
-document.addEventListener('contextmenu',e=>e.preventDefault());
-
 /* ELEMENT */
 
+const player = $("#player");
+const ghost = $("#ghost");
+const map = $("#map");
 const flashlight = $("#flashlight");
-const monster = $("#monster");
-const jumpscare = $("#jumpscare");
 const scary = $("#scary")[0];
 const ambient = $("#ambient")[0];
+const jumpscare = $("#jumpscare");
 const blood = $("#blood");
-const timerText = $("#timer");
-const room = $("#room");
-const startBtn = $("#startBtn");
-const startScreen = $("#startScreen");
 
-let gameStarted = false;
-let time = 60;
-let monsterVisible = false;
+let px = 1100;
+let py = 1100;
 
-/* FLASHLIGHT */
+let gx = 900;
+let gy = 900;
 
-$(document).on("mousemove touchmove", function(e){
+let speed = 7;
 
-    let x = e.pageX || e.originalEvent.touches[0].pageX;
-    let y = e.pageY || e.originalEvent.touches[0].pageY;
+let keys = {};
 
-    flashlight.css({
-        left:x + "px",
-        top:y + "px"
-    });
-
-});
+let collected = 0;
 
 /* START */
 
-startBtn.on("click",function(){
+$("#startBtn").click(function(){
 
-    startScreen.fadeOut(500);
+    $("#startScreen").fadeOut(500);
 
     ambient.volume = 0.5;
     ambient.play();
 
-    gameStarted = true;
+});
 
-    startGame();
+/* MOVE */
+
+$(document).keydown(function(e){
+
+    if(e.key=="w") py-=speed;
+    if(e.key=="s") py+=speed;
+    if(e.key=="a") px-=speed;
+    if(e.key=="d") px+=speed;
 
 });
 
-/* GAME */
+/* LOOP */
 
-function startGame(){
+setInterval(()=>{
 
-    const countdown = setInterval(()=>{
+    /* PLAYER */
 
-        time--;
-
-        timerText.text(time);
-
-        if(time <= 0){
-
-            clearInterval(countdown);
-
-            winGame();
-
-        }
-
-    },1000);
-
-    setInterval(()=>{
-
-        if(!monsterVisible){
-
-            showMonster();
-
-        }
-
-    },2500);
-
-}
-
-/* MONSTER */
-
-function showMonster(){
-
-    monsterVisible = true;
-
-    const randomX = Math.random()*70+10;
-    const randomScale = Math.random()*0.6+0.7;
-
-    monster.css({
-        left:randomX + "%",
-        transform:`scale(${randomScale})`,
-        opacity:"0.85"
+    player.css({
+        left:px+"px",
+        top:py+"px"
     });
 
-    room.css("filter","brightness(0.1)");
+    /* CAMERA */
 
-    setTimeout(()=>{
+    $("#map").css({
+        transform:`translate(${-px+window.innerWidth/2}px,${-py+window.innerHeight/2}px)`
+    });
 
-        if(monsterVisible){
+    /* FLASHLIGHT */
 
-            triggerJumpscare();
+    flashlight.css({
+        left:window.innerWidth/2+"px",
+        top:window.innerHeight/2+"px"
+    });
+
+    /* GHOST AI */
+
+    let dx = px-gx;
+    let dy = py-gy;
+
+    let dist = Math.sqrt(dx*dx+dy*dy);
+
+    gx += dx/dist*2;
+    gy += dy/dist*2;
+
+    ghost.css({
+        left:gx+"px",
+        top:gy+"px"
+    });
+
+    /* DETECT */
+
+    if(dist < 120){
+
+        jumpscare.css({
+            opacity:"1",
+            pointerEvents:"all"
+        });
+
+        blood.css("opacity","0.5");
+
+        scary.play();
+
+        navigator.vibrate([300,100,300]);
+
+        setTimeout(()=>{
+
+            alert("KAMU DITANGKAP HANTU");
+
+            location.reload();
+
+        },1800);
+
+    }
+
+    /* KEY */
+
+    $(".key").each(function(){
+
+        let kx = parseInt($(this).css("left"));
+        let ky = parseInt($(this).css("top"));
+
+        let kdist = Math.sqrt((px-kx)**2+(py-ky)**2);
+
+        if(kdist < 80){
+
+            $(this).remove();
+
+            collected++;
+
+            $("#keyCount").text(collected);
+
+            if(collected >= 3){
+
+                ambient.pause();
+
+                alert("KAMU BERHASIL KELUAR");
+
+                location.reload();
+
+            }
 
         }
 
-    },1500);
-
-}
-
-/* CLICK MONSTER */
-
-monster.on("click touchstart",function(){
-
-    monsterVisible = false;
-
-    monster.css("opacity","0");
-
-    room.css("filter","brightness(0.15)");
-
-});
-
-/* JUMPSCARE */
-
-function triggerJumpscare(){
-
-    scary.volume = 1;
-    scary.play();
-
-    jumpscare.css({
-        opacity:"1",
-        pointerEvents:"all"
     });
 
-    blood.css("opacity","0.5");
-
-    navigator.vibrate([300,100,300]);
-
-    $("body").css("background","red");
-
-    setTimeout(()=>{
-
-        alert("KAMU DITANGKAP...");
-
-        location.reload();
-
-    },1800);
-
-}
-
-/* WIN */
-
-function winGame(){
-
-    ambient.pause();
-
-    alert("KAMU BERHASIL SELAMAT.");
-
-    location.reload();
-
-}
+},30);
 
 /* RANDOM FLICKER */
 
 setInterval(()=>{
 
-    if(gameStarted){
+    $("body").css("filter","brightness(1.2)");
 
-        const random = Math.random();
+    setTimeout(()=>{
 
-        if(random > 0.7){
+        $("body").css("filter","brightness(1)");
 
-            $("body").css("filter","brightness(1.2)");
+    },100);
 
-            setTimeout(()=>{
-
-                $("body").css("filter","brightness(1)");
-
-            },100);
-
-        }
-
-    }
-
-},2000);
+},3000);
 
 </script>
 
