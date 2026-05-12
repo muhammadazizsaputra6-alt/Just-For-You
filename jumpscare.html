@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PS HORROR GAME</title>
+<title>DONT LOOK BACK</title>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
@@ -26,27 +26,19 @@ body{
 #game{
     width:100vw;
     height:100vh;
-    position:relative;
     overflow:hidden;
+    position:relative;
     background:black;
 }
 
 /* WORLD */
 
 #world{
+    width:3500px;
+    height:3500px;
     position:absolute;
-    width:3000px;
-    height:3000px;
     background:
     radial-gradient(circle,#111 0%,#000 90%);
-}
-
-/* FLOOR */
-
-.floor{
-    position:absolute;
-    background:#1a1a1a;
-    border:2px solid #222;
 }
 
 /* PLAYER */
@@ -69,22 +61,38 @@ body{
     height:350px;
     border-radius:50%;
     pointer-events:none;
-    z-index:50;
+    z-index:100;
     background:
     radial-gradient(circle,
     rgba(255,255,255,0.3) 0%,
     rgba(255,255,255,0.08) 35%,
-    rgba(0,0,0,0.96) 75%);
+    rgba(0,0,0,0.97) 75%);
     mix-blend-mode:screen;
+}
+
+/* FOG */
+
+#fog{
+    position:fixed;
+    inset:0;
+    background:url('https://i.imgur.com/fZURsgE.png');
+    opacity:0.08;
+    pointer-events:none;
+    z-index:90;
+    animation:fogMove 20s linear infinite;
+}
+
+@keyframes fogMove{
+    from{background-position:0 0;}
+    to{background-position:1000px 0;}
 }
 
 /* GHOST */
 
-#ghost{
+.ghost{
     width:180px;
     position:absolute;
     z-index:4;
-    transition:0.1s linear;
     filter:brightness(0.7);
 }
 
@@ -99,16 +107,40 @@ body{
     box-shadow:0 0 20px gold;
 }
 
+/* DOOR */
+
+.door{
+    width:120px;
+    height:180px;
+    background:#2b1200;
+    border:5px solid #111;
+    position:absolute;
+}
+
 /* UI */
 
 #ui{
     position:fixed;
     top:20px;
     left:20px;
+    z-index:200;
     color:red;
-    z-index:100;
-    font-size:24px;
+    font-size:22px;
     text-shadow:0 0 10px red;
+}
+
+/* INVENTORY */
+
+#inventory{
+    position:fixed;
+    top:20px;
+    right:20px;
+    z-index:200;
+    color:white;
+    background:rgba(0,0,0,0.5);
+    padding:15px;
+    border:1px solid #555;
+    font-size:20px;
 }
 
 /* START */
@@ -127,8 +159,8 @@ body{
 #title{
     color:red;
     font-size:70px;
-    text-shadow:0 0 25px red;
     margin-bottom:20px;
+    text-shadow:0 0 25px red;
 }
 
 #play{
@@ -146,22 +178,46 @@ body{
     color:#666;
 }
 
-/* JUMPSCARE */
+/* JOYSTICK */
 
-#jumpscare{
+#joystick{
+    width:120px;
+    height:120px;
+    border-radius:50%;
+    background:rgba(255,255,255,0.1);
     position:fixed;
-    inset:0;
-    z-index:1000;
-    opacity:0;
-    pointer-events:none;
-    transition:0.1s;
+    left:30px;
+    bottom:30px;
+    z-index:300;
+    touch-action:none;
 }
 
-#jumpscare img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    animation:shake .07s infinite;
+#stick{
+    width:60px;
+    height:60px;
+    border-radius:50%;
+    background:white;
+    position:absolute;
+    left:30px;
+    top:30px;
+}
+
+/* CCTV */
+
+#cctv{
+    width:220px;
+    height:140px;
+    background:#111;
+    border:3px solid #555;
+    position:fixed;
+    right:20px;
+    bottom:20px;
+    z-index:300;
+    opacity:0.7;
+    color:white;
+    display:flex;
+    justify-content:center;
+    align-items:center;
 }
 
 /* BLOOD */
@@ -172,7 +228,24 @@ body{
     background:red;
     opacity:0;
     pointer-events:none;
+    z-index:998;
+}
+
+/* JUMPSCARE */
+
+#jumpscare{
+    position:fixed;
+    inset:0;
+    opacity:0;
+    pointer-events:none;
     z-index:999;
+}
+
+#jumpscare img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    animation:shake .08s infinite;
 }
 
 /* SHAKE */
@@ -203,7 +276,7 @@ body{
     </button>
 
     <div id="info">
-        cari 3 kunci lalu keluar hidup-hidup
+        cari 3 kunci dan keluar hidup-hidup
     </div>
 
 </div>
@@ -211,7 +284,17 @@ body{
 <!-- UI -->
 
 <div id="ui">
-    Kunci : <span id="count">0</span>/3
+    HORROR MODE
+</div>
+
+<!-- INVENTORY -->
+
+<div id="inventory">
+    🔑 <span id="keyCount">0</span>/3
+    <br>
+    🔋 <span id="battery">100</span>%
+    <br>
+    ⚡ <span id="stamina">100</span>
 </div>
 
 <!-- GAME -->
@@ -220,38 +303,49 @@ body{
 
     <div id="world">
 
-        <div class="floor"
-        style="left:0;top:0;width:3000px;height:3000px;"></div>
-
         <!-- PLAYER -->
 
         <div id="player"></div>
 
         <!-- GHOST -->
 
-        <img id="ghost"
-        src="https://i.imgur.com/Q6aZ3Xl.png">
+        <img class="ghost"
+        src="https://i.imgur.com/Q6aZ3Xl.png"
+        style="left:800px;top:700px;">
+
+        <img class="ghost"
+        src="https://i.imgur.com/Q6aZ3Xl.png"
+        style="left:2500px;top:1000px;">
+
+        <img class="ghost"
+        src="https://i.imgur.com/Q6aZ3Xl.png"
+        style="left:3000px;top:2500px;">
 
         <!-- KEYS -->
 
         <div class="key"
-        style="left:600px;top:900px;"></div>
+        style="left:500px;top:900px;"></div>
 
         <div class="key"
-        style="left:1900px;top:1300px;"></div>
+        style="left:2100px;top:1200px;"></div>
 
         <div class="key"
-        style="left:2400px;top:2400px;"></div>
+        style="left:2900px;top:3000px;"></div>
+
+        <!-- DOOR -->
+
+        <div class="door"
+        style="left:3300px;top:3300px;"></div>
 
     </div>
 
 </div>
 
-<!-- FLASHLIGHT -->
+<!-- EFFECT -->
+
+<div id="fog"></div>
 
 <div id="flashlight"></div>
-
-<!-- EFFECT -->
 
 <div id="blood"></div>
 
@@ -259,6 +353,20 @@ body{
 
 <img src="https://i.imgur.com/Q6aZ3Xl.jpg">
 
+</div>
+
+<!-- JOYSTICK -->
+
+<div id="joystick">
+
+    <div id="stick"></div>
+
+</div>
+
+<!-- CCTV -->
+
+<div id="cctv">
+    CCTV CAMERA
 </div>
 
 <!-- AUDIO -->
@@ -276,22 +384,33 @@ body{
 /* ELEMENT */
 
 const player = $("#player");
-const ghost = $("#ghost");
 const world = $("#world");
 const flashlight = $("#flashlight");
 
 const ambient = $("#ambient")[0];
 const scream = $("#scream")[0];
 
-let px = 1500;
-let py = 1500;
+let px = 1700;
+let py = 1700;
 
-let gx = 1000;
-let gy = 1000;
-
-let speed = 8;
+let speed = 7;
 
 let collected = 0;
+
+let stamina = 100;
+
+let battery = 100;
+
+let running = false;
+
+/* SAVE */
+
+if(localStorage.getItem("saveX")){
+
+    px = parseInt(localStorage.getItem("saveX"));
+    py = parseInt(localStorage.getItem("saveY"));
+
+}
 
 /* START */
 
@@ -300,11 +419,12 @@ $("#play").click(function(){
     $("#start").fadeOut(500);
 
     ambient.volume = 0.5;
+
     ambient.play();
 
 });
 
-/* MOVE PLAYER */
+/* MOVE */
 
 const keys = {};
 
@@ -312,19 +432,55 @@ $(document).keydown(function(e){
 
     keys[e.key.toLowerCase()] = true;
 
+    if(e.shiftKey){
+
+        running = true;
+
+    }
+
 });
 
 $(document).keyup(function(e){
 
     keys[e.key.toLowerCase()] = false;
 
+    running = false;
+
 });
 
-/* LOOP */
+/* FOOTSTEP */
+
+const footstep = new Audio(
+"https://cdn.pixabay.com/download/audio/2022/03/15/audio_8d8b1b4c7b.mp3?filename=footsteps-wood-floor-14785.mp3"
+);
+
+/* GAME LOOP */
 
 setInterval(()=>{
 
-    /* PLAYER MOVEMENT */
+    /* STAMINA */
+
+    if(running && stamina > 0){
+
+        speed = 14;
+
+        stamina -= 0.4;
+
+    }else{
+
+        speed = 7;
+
+        stamina += 0.2;
+
+    }
+
+    if(stamina > 100) stamina = 100;
+
+    if(stamina < 0) stamina = 0;
+
+    $("#stamina").text(Math.floor(stamina));
+
+    /* MOVE */
 
     if(keys["w"]) py -= speed;
     if(keys["s"]) py += speed;
@@ -341,7 +497,9 @@ setInterval(()=>{
     /* CAMERA */
 
     world.css({
-        transform:`translate(${-px + window.innerWidth/2}px,${-py + window.innerHeight/2}px)`
+        transform:
+        `translate(${-px + window.innerWidth/2}px,
+        ${-py + window.innerHeight/2}px)`
     });
 
     /* FLASHLIGHT */
@@ -351,63 +509,104 @@ setInterval(()=>{
         top:window.innerHeight/2 - 175 + "px"
     });
 
+    /* BATTERY */
+
+    battery -= 0.01;
+
+    $("#battery").text(Math.floor(battery));
+
+    if(battery < 20){
+
+        flashlight.css("opacity","0.4");
+
+    }
+
+    if(battery <= 0){
+
+        flashlight.hide();
+
+    }
+
+    /* FOOTSTEP */
+
+    if(keys["w"] || keys["a"] || keys["s"] || keys["d"]){
+
+        if(footstep.paused){
+
+            footstep.volume = 0.2;
+
+            footstep.play();
+
+        }
+
+    }else{
+
+        footstep.pause();
+
+    }
+
     /* GHOST AI */
 
-    let dx = px - gx;
-    let dy = py - gy;
+    $(".ghost").each(function(){
 
-    let dist = Math.sqrt(dx*dx + dy*dy);
+        let gx = parseInt($(this).css("left"));
+        let gy = parseInt($(this).css("top"));
 
-    /* HANTU NGELIAT */
+        let dx = px - gx;
+        let dy = py - gy;
 
-    if(dist < 700){
+        let dist = Math.sqrt(dx*dx + dy*dy);
 
-        gx += dx / dist * 3;
-        gy += dy / dist * 3;
+        /* DETECT */
 
-    }
+        if(dist < 700){
 
-    /* HANTU JALAN */
+            gx += dx/dist * 2.5;
+            gy += dy/dist * 2.5;
 
-    ghost.css({
-        left:gx+"px",
-        top:gy+"px"
+            $(this).css({
+                left:gx+"px",
+                top:gy+"px"
+            });
+
+        }
+
+        /* CHASE */
+
+        if(dist < 250){
+
+            $("#ui").text("LARI... HANTU MELIHATMU");
+
+            $("body").css("filter","brightness(1.2)");
+
+        }
+
+        /* DEAD */
+
+        if(dist < 100){
+
+            scream.play();
+
+            $("#blood").css("opacity","0.5");
+
+            $("#jumpscare").css({
+                opacity:"1",
+                pointerEvents:"all"
+            });
+
+            navigator.vibrate([300,100,300]);
+
+            setTimeout(()=>{
+
+                alert("ENDING BURUK - KAMU MATI");
+
+                location.reload();
+
+            },1500);
+
+        }
+
     });
-
-    /* KALAU KETAHUAN */
-
-    if(dist < 250){
-
-        speed = 4;
-
-        $("#ui").text("LARI... DIA MELIHATMU");
-
-    }
-
-    /* JUMPSCARE */
-
-    if(dist < 100){
-
-        scream.play();
-
-        $("#blood").css("opacity","0.5");
-
-        $("#jumpscare").css({
-            opacity:"1",
-            pointerEvents:"all"
-        });
-
-        navigator.vibrate([300,100,300]);
-
-        setTimeout(()=>{
-
-            alert("KAMU MATI");
-
-            location.reload();
-
-        },1800);
-
-    }
 
     /* KEY */
 
@@ -416,25 +615,36 @@ setInterval(()=>{
         let kx = parseInt($(this).css("left"));
         let ky = parseInt($(this).css("top"));
 
-        let kdist = Math.sqrt((px-kx)**2 + (py-ky)**2);
+        let dist = Math.sqrt(
+        (px-kx)**2 + (py-ky)**2
+        );
 
-        if(kdist < 80){
+        if(dist < 80){
 
             $(this).remove();
 
             collected++;
 
-            $("#count").text(collected);
+            $("#keyCount").text(collected);
 
-            if(collected >= 3){
+        }
 
-                ambient.pause();
+    });
 
-                alert("KAMU BERHASIL KELUAR");
+    /* DOOR */
 
-                location.reload();
+    $(".door").each(function(){
 
-            }
+        let dx = parseInt($(this).css("left"));
+        let dy = parseInt($(this).css("top"));
+
+        let dist = Math.sqrt(
+        (px-dx)**2 + (py-dy)**2
+        );
+
+        if(dist < 150){
+
+            $("#ui").text("TEKAN E UNTUK BUKA PINTU");
 
         }
 
@@ -442,17 +652,96 @@ setInterval(()=>{
 
 },20);
 
-/* RANDOM LIGHT FLICKER */
+/* OPEN DOOR */
+
+$(document).keydown(function(e){
+
+    if(e.key.toLowerCase()=="e"){
+
+        if(collected >= 3){
+
+            alert("ENDING BAIK - KAMU BERHASIL KELUAR");
+
+            localStorage.clear();
+
+            location.reload();
+
+        }else{
+
+            alert("PINTU TERKUNCI");
+
+        }
+
+    }
+
+});
+
+/* SAVE */
 
 setInterval(()=>{
 
-    $("body").css("filter","brightness(1.3)");
+    localStorage.setItem("saveX",px);
+    localStorage.setItem("saveY",py);
 
-    setTimeout(()=>{
+},2000);
 
-        $("body").css("filter","brightness(1)");
+/* RANDOM HORROR SOUND */
 
-    },100);
+setInterval(()=>{
+
+    if(Math.random() > 0.7){
+
+        let ghostSound = new Audio(
+        "https://cdn.pixabay.com/download/audio/2022/03/10/audio_7994d92c1d.mp3?filename=horror-ambience-110397.mp3"
+        );
+
+        ghostSound.volume = 0.3;
+
+        ghostSound.play();
+
+    }
+
+},8000);
+
+/* JOYSTICK */
+
+let joy = document.getElementById("joystick");
+
+joy.addEventListener("touchmove",(e)=>{
+
+    let touch = e.touches[0];
+
+    let rect = joy.getBoundingClientRect();
+
+    let x = touch.clientX - rect.left - 60;
+
+    let y = touch.clientY - rect.top - 60;
+
+    $("#stick").css({
+        left:x+"px",
+        top:y+"px"
+    });
+
+    px += x * 0.05;
+    py += y * 0.05;
+
+});
+
+/* SCREEN SHAKE */
+
+setInterval(()=>{
+
+    if(Math.random() > 0.95){
+
+        $("body").css("transform","rotate(1deg)");
+
+        setTimeout(()=>{
+
+            $("body").css("transform","rotate(0deg)");
+
+        },100);
+
+    }
 
 },3000);
 
