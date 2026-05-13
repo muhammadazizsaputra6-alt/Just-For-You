@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>3D AI OLED FACE</title>
+<title>AI OLED FACE</title>
 
 <style>
 
@@ -14,17 +14,18 @@
 }
 
 body{
-    overflow:hidden;
     background:black;
+    overflow:hidden;
     height:100vh;
     display:flex;
     justify-content:center;
     align-items:center;
-    perspective:1200px;
+    flex-direction:column;
     font-family:Arial;
+    perspective:1200px;
 }
 
-/* animated background */
+/* background */
 
 .bg{
     position:absolute;
@@ -32,306 +33,50 @@ body{
     height:100%;
     background:
     radial-gradient(circle at center,
-    rgba(0,255,255,0.15),
+    rgba(0,255,255,0.1),
     transparent 60%);
-    animation:bgPulse 5s infinite;
 }
 
-@keyframes bgPulse{
-    0%,100%{transform:scale(1);}
-    50%{transform:scale(1.1);}
-}
-
-/* face container */
+/* face */
 
 .head{
+
     position:relative;
-    width:420px;
-    height:520px;
+
+    width:400px;
+    height:500px;
+
     border-radius:50%;
+
     background:
     linear-gradient(
-        145deg,
-        rgba(0,255,255,0.08),
-        rgba(255,255,255,0.02)
-    );
-
-    backdrop-filter:blur(10px);
+    145deg,
+    rgba(0,255,255,0.08),
+    rgba(255,255,255,0.02));
 
     border:1px solid rgba(0,255,255,0.2);
 
-    transform-style:preserve-3d;
-
     box-shadow:
-    0 0 30px rgba(0,255,255,0.4),
+    0 0 30px rgba(0,255,255,0.3),
     inset 0 0 50px rgba(0,255,255,0.08);
 
-    animation:headFloat 4s ease-in-out infinite;
-}
+    backdrop-filter:blur(10px);
 
-@keyframes headFloat{
-    0%,100%{
-        transform:
-        rotateX(0deg)
-        rotateY(0deg)
-        translateY(0px);
-    }
+    transform-style:preserve-3d;
 
-    50%{
-        transform:
-        rotateX(5deg)
-        rotateY(-5deg)
-        translateY(-15px);
-    }
-}
-
-/* hologram grid */
-
-.grid{
-    position:absolute;
-    inset:0;
-    border-radius:50%;
-    overflow:hidden;
-}
-
-.grid::before{
-    content:"";
-    position:absolute;
-    inset:0;
-
-    background:
-    repeating-linear-gradient(
-        to bottom,
-        rgba(0,255,255,0.06),
-        rgba(0,255,255,0.06) 2px,
-        transparent 2px,
-        transparent 6px
-    );
-
-    animation:gridMove 8s linear infinite;
-}
-
-@keyframes gridMove{
-    from{
-        transform:translateY(0);
-    }
-    to{
-        transform:translateY(100px);
-    }
-}
-
-/* eyes */
-
-.eyes{
-    position:absolute;
-    width:100%;
-    top:170px;
-
-    display:flex;
-    justify-content:space-evenly;
-}
-
-.eye{
-    position:relative;
-    width:110px;
-    height:110px;
-
-    background:#00ffff;
-
-    border-radius:50%;
-
-    box-shadow:
-    0 0 20px #00ffff,
-    0 0 50px #00ffff;
-
-    overflow:hidden;
-
-    animation:eyeFloat 3s infinite ease-in-out;
-}
-
-.eye.right{
-    animation-delay:0.2s;
-}
-
-@keyframes eyeFloat{
-    0%,100%{
-        transform:translateY(0px);
-    }
-
-    50%{
-        transform:translateY(-8px);
-    }
-}
-
-.pupil{
-    position:absolute;
-    width:35px;
-    height:35px;
-    background:black;
-    border-radius:50%;
-
-    top:50%;
-    left:50%;
-
-    transform:translate(-50%,-50%);
-
-    animation:look 5s infinite;
-}
-
-@keyframes look{
-
-    0%{
-        transform:translate(-50%,-50%);
-    }
-
-    20%{
-        transform:translate(-80%,-50%);
-    }
-
-    40%{
-        transform:translate(-20%,-50%);
-    }
-
-    60%{
-        transform:translate(-50%,-80%);
-    }
-
-    80%{
-        transform:translate(-50%,-20%);
-    }
-
-    100%{
-        transform:translate(-50%,-50%);
-    }
-
-}
-
-/* blinking */
-
-.eye::after{
-    content:"";
-    position:absolute;
-    inset:0;
-    background:black;
-    animation:blink 6s infinite;
-}
-
-@keyframes blink{
-
-    0%,47%,49%,100%{
-        height:0%;
-    }
-
-    48%{
-        height:100%;
-    }
-
-}
-
-/* mouth */
-
-.mouth{
-    position:absolute;
-    bottom:120px;
-    left:50%;
-
-    transform:translateX(-50%);
-
-    width:120px;
-    height:50px;
-
-    border-bottom:8px solid #00ffff;
-
-    border-radius:0 0 100px 100px;
-
-    box-shadow:
-    0 0 20px #00ffff;
-
-    animation:talk 2s infinite;
-}
-
-@keyframes talk{
-
-    0%,100%{
-        width:120px;
-        height:40px;
-    }
-
-    50%{
-        width:150px;
-        height:60px;
-    }
-
-}
-
-/* face light particles */
-
-.particle{
-    position:absolute;
-    width:5px;
-    height:5px;
-    background:#00ffff;
-    border-radius:50%;
-
-    box-shadow:0 0 10px #00ffff;
-
-    animation:particleMove linear infinite;
-}
-
-@keyframes particleMove{
-
-    from{
-        transform:translateY(520px);
-        opacity:0;
-    }
-
-    20%{
-        opacity:1;
-    }
-
-    to{
-        transform:translateY(-100px);
-        opacity:0;
-    }
-
-}
-
-/* AI text */
-
-.aiText{
-    position:absolute;
-    bottom:40px;
-    color:#00ffff;
-    font-size:20px;
-    letter-spacing:6px;
-
-    text-shadow:
-    0 0 10px #00ffff,
-    0 0 30px #00ffff;
-
-    animation:textGlow 2s infinite alternate;
-}
-
-@keyframes textGlow{
-
-    from{
-        opacity:0.5;
-    }
-
-    to{
-        opacity:1;
-    }
-
+    transition:0.5s;
 }
 
 /* scanlines */
 
-.scan{
-    position:absolute;
-    width:100%;
-    height:100%;
+.head::before{
 
-    pointer-events:none;
+    content:"";
+
+    position:absolute;
+    inset:0;
+
+    border-radius:50%;
 
     background:
     repeating-linear-gradient(
@@ -339,8 +84,225 @@ body{
         rgba(255,255,255,0.03),
         rgba(255,255,255,0.03) 2px,
         transparent 2px,
-        transparent 5px
+        transparent 6px
     );
+
+    pointer-events:none;
+}
+
+/* eyes */
+
+.eyes{
+    position:absolute;
+    width:100%;
+    top:150px;
+
+    display:flex;
+    justify-content:space-evenly;
+}
+
+.eye{
+
+    position:relative;
+
+    width:100px;
+    height:100px;
+
+    background:#00ffff;
+
+    border-radius:50%;
+
+    overflow:hidden;
+
+    transition:0.4s;
+
+    box-shadow:
+    0 0 20px #00ffff,
+    0 0 50px #00ffff;
+}
+
+.pupil{
+
+    position:absolute;
+
+    width:30px;
+    height:30px;
+
+    background:black;
+
+    border-radius:50%;
+
+    top:50%;
+    left:50%;
+
+    transform:translate(-50%,-50%);
+}
+
+/* mouth */
+
+.mouth{
+
+    position:absolute;
+
+    bottom:120px;
+    left:50%;
+
+    transform:translateX(-50%);
+
+    width:120px;
+    height:40px;
+
+    border-bottom:8px solid #00ffff;
+
+    border-radius:0 0 100px 100px;
+
+    transition:0.4s;
+
+    box-shadow:
+    0 0 15px #00ffff;
+}
+
+/* tears */
+
+.tear{
+
+    position:absolute;
+
+    width:15px;
+    height:40px;
+
+    background:#4cc9ff;
+
+    border-radius:20px;
+
+    top:240px;
+
+    opacity:0;
+
+    animation:tearDrop 1s infinite;
+}
+
+.tear.left{
+    left:105px;
+}
+
+.tear.right{
+    right:105px;
+}
+
+@keyframes tearDrop{
+
+    0%{
+        transform:translateY(0);
+        opacity:1;
+    }
+
+    100%{
+        transform:translateY(40px);
+        opacity:0;
+    }
+
+}
+
+/* sleep bubble */
+
+.bubble{
+
+    position:absolute;
+
+    width:30px;
+    height:30px;
+
+    border:4px solid #00ffff;
+
+    border-radius:50%;
+
+    right:110px;
+    bottom:120px;
+
+    opacity:0;
+
+    animation:bubbleSleep 2s infinite;
+}
+
+@keyframes bubbleSleep{
+
+    0%{
+        transform:scale(0.5);
+        opacity:0;
+    }
+
+    50%{
+        transform:scale(1);
+        opacity:1;
+    }
+
+    100%{
+        transform:scale(1.5);
+        opacity:0;
+    }
+
+}
+
+/* buttons */
+
+.controls{
+
+    position:absolute;
+    bottom:30px;
+
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+    justify-content:center;
+}
+
+button{
+
+    padding:12px 20px;
+
+    border:none;
+    border-radius:14px;
+
+    background:#041d24;
+
+    color:#00ffff;
+
+    font-size:15px;
+
+    cursor:pointer;
+
+    transition:0.25s;
+
+    box-shadow:
+    0 0 10px rgba(0,255,255,0.2);
+}
+
+button:hover{
+
+    transform:scale(1.08);
+
+    background:#063844;
+
+    box-shadow:
+    0 0 20px #00ffff;
+}
+
+/* text */
+
+.label{
+
+    position:absolute;
+    top:40px;
+
+    color:#00ffff;
+
+    font-size:22px;
+
+    letter-spacing:5px;
+
+    text-shadow:
+    0 0 10px #00ffff;
 }
 
 /* mobile */
@@ -348,13 +310,25 @@ body{
 @media(max-width:600px){
 
     .head{
-        width:320px;
-        height:420px;
+        width:300px;
+        height:400px;
     }
 
     .eye{
-        width:80px;
-        height:80px;
+        width:70px;
+        height:70px;
+    }
+
+    .mouth{
+        bottom:90px;
+    }
+
+    .tear.left{
+        left:70px;
+    }
+
+    .tear.right{
+        right:70px;
     }
 
 }
@@ -366,134 +340,152 @@ body{
 
 <div class="bg"></div>
 
-<div class="head" id="head">
+<div class="label">
+    AI FACE SYSTEM
+</div>
 
-    <div class="grid"></div>
+<div class="head" id="head">
 
     <div class="eyes">
 
-        <div class="eye">
+        <div class="eye" id="leftEye">
             <div class="pupil"></div>
         </div>
 
-        <div class="eye right">
+        <div class="eye" id="rightEye">
             <div class="pupil"></div>
         </div>
 
     </div>
 
-    <div class="mouth"></div>
+    <div class="mouth" id="mouth"></div>
+
+    <div class="tear left" id="tearL"></div>
+    <div class="tear right" id="tearR"></div>
+
+    <div class="bubble" id="bubble"></div>
 
 </div>
 
-<div class="scan"></div>
+<div class="controls">
 
-<div class="aiText">
-    AI HOLOGRAM SYSTEM
+    <button onclick="happy()">😊 Senang</button>
+
+    <button onclick="angry()">😠 Marah</button>
+
+    <button onclick="sad()">😭 Nangis</button>
+
+    <button onclick="sleep()">😴 Tidur</button>
+
+    <button onclick="normal()">🤖 Normal</button>
+
 </div>
 
 <script>
 
-/* particles */
+const leftEye = document.getElementById("leftEye");
+const rightEye = document.getElementById("rightEye");
+const mouth = document.getElementById("mouth");
 
-const head = document.getElementById("head");
+const tearL = document.getElementById("tearL");
+const tearR = document.getElementById("tearR");
 
-for(let i=0;i<40;i++){
+const bubble = document.getElementById("bubble");
 
-    const p = document.createElement("div");
+/* reset */
 
-    p.classList.add("particle");
+function resetAll(){
 
-    p.style.left = Math.random()*100 + "%";
+    tearL.style.opacity="0";
+    tearR.style.opacity="0";
 
-    p.style.animationDuration =
-    (Math.random()*4+3)+"s";
+    bubble.style.opacity="0";
 
-    p.style.animationDelay =
-    Math.random()*5+"s";
+    leftEye.style.height="100px";
+    rightEye.style.height="100px";
 
-    head.appendChild(p);
+    leftEye.style.background="#00ffff";
+    rightEye.style.background="#00ffff";
+
+    leftEye.style.borderRadius="50%";
+    rightEye.style.borderRadius="50%";
+
+    mouth.style.width="120px";
+    mouth.style.height="40px";
+
+    mouth.style.borderBottom="8px solid #00ffff";
 }
 
-/* mouse 3D follow */
+/* happy */
 
-document.addEventListener("mousemove",(e)=>{
+function happy(){
 
-    let x = (window.innerWidth / 2 - e.clientX)/25;
-    let y = (window.innerHeight / 2 - e.clientY)/25;
+    resetAll();
 
-    head.style.transform =
-    `
-    rotateY(${-x}deg)
-    rotateX(${y}deg)
-    `;
-});
+    mouth.style.width="180px";
 
-/* random AI expressions */
-
-const eyes = document.querySelectorAll(".eye");
-const mouth = document.querySelector(".mouth");
-
-function randomMood(){
-
-    let mode = Math.floor(Math.random()*4);
-
-    if(mode===0){
-
-        /* angry */
-
-        eyes.forEach(e=>{
-            e.style.background="#ff004c";
-            e.style.transform="scaleY(0.6)";
-        });
-
-        mouth.style.borderBottom="8px solid red";
-
-    }
-
-    else if(mode===1){
-
-        /* happy */
-
-        eyes.forEach(e=>{
-            e.style.background="#00ffff";
-            e.style.borderRadius="40%";
-        });
-
-        mouth.style.width="180px";
-
-    }
-
-    else if(mode===2){
-
-        /* sleepy */
-
-        eyes.forEach(e=>{
-            e.style.height="40px";
-        });
-
-        mouth.style.width="80px";
-
-    }
-
-    else{
-
-        /* normal */
-
-        eyes.forEach(e=>{
-            e.style.height="110px";
-            e.style.background="#00ffff";
-            e.style.transform="";
-            e.style.borderRadius="50%";
-        });
-
-        mouth.style.width="120px";
-        mouth.style.borderBottom="8px solid #00ffff";
-    }
-
+    leftEye.style.transform="scaleY(0.8)";
+    rightEye.style.transform="scaleY(0.8)";
 }
 
-setInterval(randomMood,3500);
+/* angry */
+
+function angry(){
+
+    resetAll();
+
+    leftEye.style.background="#ff003c";
+    rightEye.style.background="#ff003c";
+
+    leftEye.style.transform="rotate(-10deg)";
+    rightEye.style.transform="rotate(10deg)";
+
+    mouth.style.borderBottom="8px solid red";
+}
+
+/* crying */
+
+function sad(){
+
+    resetAll();
+
+    tearL.style.opacity="1";
+    tearR.style.opacity="1";
+
+    mouth.style.width="90px";
+    mouth.style.height="20px";
+
+    mouth.style.borderRadius="100px 100px 0 0";
+    mouth.style.borderTop="8px solid #00ffff";
+    mouth.style.borderBottom="none";
+}
+
+/* sleep */
+
+function sleep(){
+
+    resetAll();
+
+    leftEye.style.height="20px";
+    rightEye.style.height="20px";
+
+    bubble.style.opacity="1";
+
+    mouth.style.width="70px";
+}
+
+/* normal */
+
+function normal(){
+
+    resetAll();
+
+    mouth.style.borderTop="none";
+    mouth.style.borderBottom="8px solid #00ffff";
+
+    leftEye.style.transform="";
+    rightEye.style.transform="";
+}
 
 </script>
 
