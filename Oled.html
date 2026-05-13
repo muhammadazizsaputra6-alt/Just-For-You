@@ -333,6 +333,31 @@ button:hover{
 
 }
 
+/* semua CSS atas */
+
+button:hover{
+
+    transform:scale(1.08);
+
+    background:#063844;
+
+    box-shadow:
+    0 0 20px #00ffff;
+}
+
+
+/* TAMBAHIN DI SINI */
+
+@keyframes blinkAnim{
+
+    0%,45%,47%,100%{
+        transform:scaleY(1);
+    }
+
+    46%{
+        transform:scaleY(0.05);
+    }
+}
 </style>
 </head>
 
@@ -480,12 +505,24 @@ function normal(){
 
     resetAll();
 
+    /* balikin mulut */
+
     mouth.style.borderTop="none";
     mouth.style.borderBottom="8px solid #00ffff";
 
+    /* balikin mata */
+
     leftEye.style.transform="";
     rightEye.style.transform="";
-}
+
+    leftEye.style.height="100px";
+    rightEye.style.height="100px";
+
+    /* hidupin animasi kedip */
+
+    leftEye.style.animation = "blinkAnim 4s infinite";
+    rightEye.style.animation = "blinkAnim 4s infinite";
+    }
 
 </script>
 
