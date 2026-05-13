@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>3D AI OLED FACE</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    overflow:hidden;
+    background:black;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    perspective:1200px;
+    font-family:Arial;
+}
+
+/* animated background */
+
+.bg{
+    position:absolute;
+    width:100%;
+    height:100%;
+    background:
+    radial-gradient(circle at center,
+    rgba(0,255,255,0.15),
+    transparent 60%);
+    animation:bgPulse 5s infinite;
+}
+
+@keyframes bgPulse{
+    0%,100%{transform:scale(1);}
+    50%{transform:scale(1.1);}
+}
+
+/* face container */
+
+.head{
+    position:relative;
+    width:420px;
+    height:520px;
+    border-radius:50%;
+    background:
+    linear-gradient(
+        145deg,
+        rgba(0,255,255,0.08),
+        rgba(255,255,255,0.02)
+    );
+
+    backdrop-filter:blur(10px);
+
+    border:1px solid rgba(0,255,255,0.2);
+
+    transform-style:preserve-3d;
+
+    box-shadow:
+    0 0 30px rgba(0,255,255,0.4),
+    inset 0 0 50px rgba(0,255,255,0.08);
+
+    animation:headFloat 4s ease-in-out infinite;
+}
+
+@keyframes headFloat{
+    0%,100%{
+        transform:
+        rotateX(0deg)
+        rotateY(0deg)
+        translateY(0px);
+    }
+
+    50%{
+        transform:
+        rotateX(5deg)
+        rotateY(-5deg)
+        translateY(-15px);
+    }
+}
+
+/* hologram grid */
+
+.grid{
+    position:absolute;
+    inset:0;
+    border-radius:50%;
+    overflow:hidden;
+}
+
+.grid::before{
+    content:"";
+    position:absolute;
+    inset:0;
+
+    background:
+    repeating-linear-gradient(
+        to bottom,
+        rgba(0,255,255,0.06),
+        rgba(0,255,255,0.06) 2px,
+        transparent 2px,
+        transparent 6px
+    );
+
+    animation:gridMove 8s linear infinite;
+}
+
+@keyframes gridMove{
+    from{
+        transform:translateY(0);
+    }
+    to{
+        transform:translateY(100px);
+    }
+}
+
+/* eyes */
+
+.eyes{
+    position:absolute;
+    width:100%;
+    top:170px;
+
+    display:flex;
+    justify-content:space-evenly;
+}
+
+.eye{
+    position:relative;
+    width:110px;
+    height:110px;
+
+    background:#00ffff;
+
+    border-radius:50%;
+
+    box-shadow:
+    0 0 20px #00ffff,
+    0 0 50px #00ffff;
+
+    overflow:hidden;
+
+    animation:eyeFloat 3s infinite ease-in-out;
+}
+
+.eye.right{
+    animation-delay:0.2s;
+}
+
+@keyframes eyeFloat{
+    0%,100%{
+        transform:translateY(0px);
+    }
+
+    50%{
+        transform:translateY(-8px);
+    }
+}
+
+.pupil{
+    position:absolute;
+    width:35px;
+    height:35px;
+    background:black;
+    border-radius:50%;
+
+    top:50%;
+    left:50%;
+
+    transform:translate(-50%,-50%);
+
+    animation:look 5s infinite;
+}
+
+@keyframes look{
+
+    0%{
+        transform:translate(-50%,-50%);
+    }
+
+    20%{
+        transform:translate(-80%,-50%);
+    }
+
+    40%{
+        transform:translate(-20%,-50%);
+    }
+
+    60%{
+        transform:translate(-50%,-80%);
+    }
+
+    80%{
+        transform:translate(-50%,-20%);
+    }
+
+    100%{
+        transform:translate(-50%,-50%);
+    }
+
+}
+
+/* blinking */
+
+.eye::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:black;
+    animation:blink 6s infinite;
+}
+
+@keyframes blink{
+
+    0%,47%,49%,100%{
+        height:0%;
+    }
+
+    48%{
+        height:100%;
+    }
+
+}
+
+/* mouth */
+
+.mouth{
+    position:absolute;
+    bottom:120px;
+    left:50%;
+
+    transform:translateX(-50%);
+
+    width:120px;
+    height:50px;
+
+    border-bottom:8px solid #00ffff;
+
+    border-radius:0 0 100px 100px;
+
+    box-shadow:
+    0 0 20px #00ffff;
+
+    animation:talk 2s infinite;
+}
+
+@keyframes talk{
+
+    0%,100%{
+        width:120px;
+        height:40px;
+    }
+
+    50%{
+        width:150px;
+        height:60px;
+    }
+
+}
+
+/* face light particles */
+
+.particle{
+    position:absolute;
+    width:5px;
+    height:5px;
+    background:#00ffff;
+    border-radius:50%;
+
+    box-shadow:0 0 10px #00ffff;
+
+    animation:particleMove linear infinite;
+}
+
+@keyframes particleMove{
+
+    from{
+        transform:translateY(520px);
+        opacity:0;
+    }
+
+    20%{
+        opacity:1;
+    }
+
+    to{
+        transform:translateY(-100px);
+        opacity:0;
+    }
+
+}
+
+/* AI text */
+
+.aiText{
+    position:absolute;
+    bottom:40px;
+    color:#00ffff;
+    font-size:20px;
+    letter-spacing:6px;
+
+    text-shadow:
+    0 0 10px #00ffff,
+    0 0 30px #00ffff;
+
+    animation:textGlow 2s infinite alternate;
+}
+
+@keyframes textGlow{
+
+    from{
+        opacity:0.5;
+    }
+
+    to{
+        opacity:1;
+    }
+
+}
+
+/* scanlines */
+
+.scan{
+    position:absolute;
+    width:100%;
+    height:100%;
+
+    pointer-events:none;
+
+    background:
+    repeating-linear-gradient(
+        to bottom,
+        rgba(255,255,255,0.03),
+        rgba(255,255,255,0.03) 2px,
+        transparent 2px,
+        transparent 5px
+    );
+}
+
+/* mobile */
+
+@media(max-width:600px){
+
+    .head{
+        width:320px;
+        height:420px;
+    }
+
+    .eye{
+        width:80px;
+        height:80px;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="bg"></div>
+
+<div class="head" id="head">
+
+    <div class="grid"></div>
+
+    <div class="eyes">
+
+        <div class="eye">
+            <div class="pupil"></div>
+        </div>
+
+        <div class="eye right">
+            <div class="pupil"></div>
+        </div>
+
+    </div>
+
+    <div class="mouth"></div>
+
+</div>
+
+<div class="scan"></div>
+
+<div class="aiText">
+    AI HOLOGRAM SYSTEM
+</div>
+
+<script>
+
+/* particles */
+
+const head = document.getElementById("head");
+
+for(let i=0;i<40;i++){
+
+    const p = document.createElement("div");
+
+    p.classList.add("particle");
+
+    p.style.left = Math.random()*100 + "%";
+
+    p.style.animationDuration =
+    (Math.random()*4+3)+"s";
+
+    p.style.animationDelay =
+    Math.random()*5+"s";
+
+    head.appendChild(p);
+}
+
+/* mouse 3D follow */
+
+document.addEventListener("mousemove",(e)=>{
+
+    let x = (window.innerWidth / 2 - e.clientX)/25;
+    let y = (window.innerHeight / 2 - e.clientY)/25;
+
+    head.style.transform =
+    `
+    rotateY(${-x}deg)
+    rotateX(${y}deg)
+    `;
+});
+
+/* random AI expressions */
+
+const eyes = document.querySelectorAll(".eye");
+const mouth = document.querySelector(".mouth");
+
+function randomMood(){
+
+    let mode = Math.floor(Math.random()*4);
+
+    if(mode===0){
+
+        /* angry */
+
+        eyes.forEach(e=>{
+            e.style.background="#ff004c";
+            e.style.transform="scaleY(0.6)";
+        });
+
+        mouth.style.borderBottom="8px solid red";
+
+    }
+
+    else if(mode===1){
+
+        /* happy */
+
+        eyes.forEach(e=>{
+            e.style.background="#00ffff";
+            e.style.borderRadius="40%";
+        });
+
+        mouth.style.width="180px";
+
+    }
+
+    else if(mode===2){
+
+        /* sleepy */
+
+        eyes.forEach(e=>{
+            e.style.height="40px";
+        });
+
+        mouth.style.width="80px";
+
+    }
+
+    else{
+
+        /* normal */
+
+        eyes.forEach(e=>{
+            e.style.height="110px";
+            e.style.background="#00ffff";
+            e.style.transform="";
+            e.style.borderRadius="50%";
+        });
+
+        mouth.style.width="120px";
+        mouth.style.borderBottom="8px solid #00ffff";
+    }
+
+}
+
+setInterval(randomMood,3500);
+
+</script>
+
+</body>
+</html>
