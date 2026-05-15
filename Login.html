@@ -210,12 +210,13 @@ body::after{
     border-bottom:1px solid rgba(255,255,255,0.1);
 }
 
-/* MENU BUTTON */
+/* GARIS 3 */
 
 .menuBtn{
-    font-size:35px;
+    font-size:38px;
     color:white;
     cursor:pointer;
+    user-select:none;
 }
 
 /* SIDEBAR */
@@ -227,8 +228,8 @@ body::after{
     width:100%;
     height:100%;
     background:#111827;
-    z-index:2000;
     transition:0.4s;
+    z-index:2000;
     padding-top:80px;
 }
 
@@ -240,9 +241,9 @@ body::after{
 
 .closeBtn{
     position:absolute;
-    top:12px;
+    top:10px;
     right:20px;
-    font-size:40px;
+    font-size:45px;
     color:white;
     cursor:pointer;
 }
@@ -251,13 +252,13 @@ body::after{
 
 .menu button{
     width:100%;
+    padding:22px;
     background:none;
     border:none;
-    color:#00e5ff;
-    text-align:left;
-    padding:22px;
-    font-size:20px;
     border-bottom:1px solid rgba(255,255,255,0.1);
+    color:#00e5ff;
+    font-size:20px;
+    text-align:left;
     cursor:pointer;
 }
 
@@ -288,7 +289,7 @@ body::after{
     border-radius:20px;
     padding:25px;
     color:white;
-    box-shadow:0 0 20px rgba(0,0,0,0.4);
+    box-shadow:0 0 20px rgba(0,0,0,0.5);
 }
 
 .card h2{
@@ -474,51 +475,69 @@ body::after{
     <div class="content">
 
         <!-- DASHBOARD -->
+
         <div class="page" id="dashboard">
+
             <div class="card">
                 <h2>Dashboard</h2>
                 <p>Halaman dashboard.</p>
             </div>
+
         </div>
 
         <!-- PROFIL -->
+
         <div class="page" id="profil">
+
             <div class="card">
                 <h2>Profil Akun</h2>
                 <p id="profileEmail"></p>
             </div>
+
         </div>
 
         <!-- ABSENSI -->
+
         <div class="page" id="absensi">
+
             <div class="card">
                 <h2>Absensi</h2>
-                <p>Data absensi.</p>
+                <p>Data absensi karyawan.</p>
             </div>
+
         </div>
 
         <!-- PENGUMUMAN -->
+
         <div class="page" id="pengumuman">
+
             <div class="card">
                 <h2>Pengumuman</h2>
-                <p>Isi pengumuman.</p>
+                <p>Isi pengumuman perusahaan.</p>
             </div>
+
         </div>
 
         <!-- JADWAL -->
+
         <div class="page" id="jadwal">
+
             <div class="card">
                 <h2>Jadwal Kerja</h2>
-                <p>Isi jadwal kerja.</p>
+                <p>Senin - Jumat : 08.00 - 17.00</p>
             </div>
+
         </div>
 
         <!-- SETTING -->
+
         <div class="page" id="setting">
+
             <div class="card">
                 <h2>Setting</h2>
-                <p>Pengaturan akun.</p>
+                <p>Pengaturan akun pengguna.</p>
             </div>
+
         </div>
 
     </div>
@@ -533,7 +552,7 @@ const loginForm = document.getElementById("loginForm");
 const registerForm = document.getElementById("registerForm");
 const forgotForm = document.getElementById("forgotForm");
 
-/* LOGIN REGISTER FORGOT */
+/* SHOW LOGIN */
 
 function showLogin(){
 
@@ -545,6 +564,8 @@ function showLogin(){
 
 }
 
+/* SHOW REGISTER */
+
 function showRegister(){
 
     registerForm.classList.add("active");
@@ -554,6 +575,8 @@ function showRegister(){
     forgotForm.classList.remove("active");
 
 }
+
+/* SHOW FORGOT */
 
 function showForgot(){
 
@@ -592,7 +615,15 @@ registerForm.addEventListener("submit", function(e){
 
     localStorage.setItem("userPassword", password);
 
+    message.classList.remove("error");
+
     message.innerHTML = "Akun berhasil dibuat!";
+
+    setTimeout(() => {
+
+        showLogin();
+
+    },1000);
 
 });
 
@@ -613,6 +644,8 @@ loginForm.addEventListener("submit", function(e){
     const message = document.getElementById("loginMessage");
 
     if(email === savedEmail && password === savedPassword){
+
+        message.classList.remove("error");
 
         message.innerHTML = "Login berhasil!";
 
@@ -650,6 +683,8 @@ forgotForm.addEventListener("submit", function(e){
 
     if(email === savedEmail){
 
+        message.classList.remove("error");
+
         message.innerHTML = "Reset password berhasil!";
 
     }else{
@@ -661,7 +696,7 @@ forgotForm.addEventListener("submit", function(e){
 
 });
 
-/* SIDEBAR */
+/* OPEN SIDEBAR */
 
 function openSidebar(){
 
@@ -669,13 +704,15 @@ function openSidebar(){
 
 }
 
+/* CLOSE SIDEBAR */
+
 function closeSidebar(){
 
     document.getElementById("sidebar").classList.remove("active");
 
 }
 
-/* PAGE */
+/* SHOW PAGE */
 
 function showPage(pageId){
 
