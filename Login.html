@@ -662,16 +662,30 @@ forgotForm.addEventListener("submit", function(e){
 
     localStorage.removeItem("userPassword");
 
+    /* KOSONGKAN INPUT */
+
+    document.getElementById("loginEmail").value = "";
+
+    document.getElementById("loginPassword").value = "";
+
+    document.getElementById("forgotEmail").value = "";
+
     message.classList.remove("error");
 
     message.innerHTML = "Reset password berhasil!";
 
+    setTimeout(() => {
+
+        showLogin();
+
+    },1500);
+
 }else{
 
-        message.innerHTML = "Email tidak ditemukan!";
-        message.classList.add("error");
+message.innerHTML = "Email tidak ditemukan!";  
+    message.classList.add("error");  
 
-    }
+     }
 
 });
 
@@ -717,11 +731,17 @@ function logout(){
 
     document.getElementById("loginContainer").style.display = "flex";
 
+    /* KOSONGKAN INPUT LOGIN */
+
+    document.getElementById("loginEmail").value = "";
+
     document.getElementById("loginPassword").value = "";
+
+    document.getElementById("forgotEmail").value = "";
 
     showLogin();
 
-}
+    }
 
 </script>
 
