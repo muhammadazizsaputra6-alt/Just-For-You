@@ -660,11 +660,13 @@ forgotForm.addEventListener("submit", function(e){
 
     if(email === savedEmail){
 
-        message.classList.remove("error");
+    localStorage.removeItem("userPassword");
 
-        message.innerHTML = "Reset password berhasil!";
+    message.classList.remove("error");
 
-    }else{
+    message.innerHTML = "Reset password berhasil!";
+
+}else{
 
         message.innerHTML = "Email tidak ditemukan!";
         message.classList.add("error");
