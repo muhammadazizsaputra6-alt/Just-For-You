@@ -17,9 +17,6 @@
 body{
     width:100%;
     min-height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
     background:#0f172a;
     overflow:hidden;
     position:relative;
@@ -192,33 +189,33 @@ body::after{
     display:none;
     width:100%;
     min-height:100vh;
-    background:#f1f5f9;
     position:relative;
+    z-index:2;
 }
 
 /* TOPBAR */
 
 .topbar{
     width:100%;
-    height:70px;
-    background:white;
+    height:65px;
+    background:#111827;
     display:flex;
     justify-content:flex-end;
     align-items:center;
     padding:0 20px;
-    box-shadow:0 2px 10px rgba(0,0,0,0.1);
     position:fixed;
     top:0;
     left:0;
     z-index:1000;
+    border-bottom:1px solid rgba(255,255,255,0.1);
 }
 
 /* MENU BUTTON */
 
 .menuBtn{
     font-size:35px;
+    color:white;
     cursor:pointer;
-    color:#111827;
 }
 
 /* SIDEBAR */
@@ -226,52 +223,52 @@ body::after{
 .sidebar{
     position:fixed;
     top:0;
-    right:-300px;
-    width:280px;
+    right:-100%;
+    width:100%;
     height:100%;
-    background:white;
+    background:#111827;
     z-index:2000;
     transition:0.4s;
-    box-shadow:-5px 0 20px rgba(0,0,0,0.2);
-    padding-top:70px;
+    padding-top:80px;
 }
 
 .sidebar.active{
     right:0;
 }
 
-/* CLOSE BUTTON */
+/* CLOSE */
 
 .closeBtn{
     position:absolute;
-    top:15px;
+    top:12px;
     right:20px;
-    font-size:35px;
+    font-size:40px;
+    color:white;
     cursor:pointer;
-    color:black;
 }
 
 /* MENU */
 
 .menu button{
     width:100%;
-    border:none;
     background:none;
+    border:none;
+    color:#00e5ff;
     text-align:left;
-    padding:20px;
-    font-size:17px;
+    padding:22px;
+    font-size:20px;
+    border-bottom:1px solid rgba(255,255,255,0.1);
     cursor:pointer;
-    border-bottom:1px solid #ddd;
 }
 
 .menu button:hover{
-    background:#f3f4f6;
+    background:#1e293b;
 }
 
 /* CONTENT */
 
 .content{
-    padding:100px 20px 20px;
+    padding:90px 20px 20px;
 }
 
 /* PAGE */
@@ -287,20 +284,21 @@ body::after{
 /* CARD */
 
 .card{
-    background:white;
+    background:#111827;
+    border-radius:20px;
     padding:25px;
-    border-radius:18px;
-    box-shadow:0 5px 15px rgba(0,0,0,0.08);
+    color:white;
+    box-shadow:0 0 20px rgba(0,0,0,0.4);
 }
 
-/* MOBILE */
+.card h2{
+    color:#00e5ff;
+    margin-bottom:10px;
+}
 
-@media(max-width:768px){
-
-    .sidebar{
-        width:100%;
-    }
-
+.card p{
+    color:#d1d5db;
+    line-height:1.6;
 }
 
 </style>
@@ -476,64 +474,51 @@ body::after{
     <div class="content">
 
         <!-- DASHBOARD -->
-
         <div class="page" id="dashboard">
-
             <div class="card">
                 <h2>Dashboard</h2>
+                <p>Halaman dashboard.</p>
             </div>
-
         </div>
 
         <!-- PROFIL -->
-
         <div class="page" id="profil">
-
             <div class="card">
                 <h2>Profil Akun</h2>
                 <p id="profileEmail"></p>
             </div>
-
         </div>
 
         <!-- ABSENSI -->
-
         <div class="page" id="absensi">
-
             <div class="card">
                 <h2>Absensi</h2>
+                <p>Data absensi.</p>
             </div>
-
         </div>
 
         <!-- PENGUMUMAN -->
-
         <div class="page" id="pengumuman">
-
             <div class="card">
                 <h2>Pengumuman</h2>
+                <p>Isi pengumuman.</p>
             </div>
-
         </div>
 
         <!-- JADWAL -->
-
         <div class="page" id="jadwal">
-
             <div class="card">
                 <h2>Jadwal Kerja</h2>
+                <p>Isi jadwal kerja.</p>
             </div>
-
         </div>
 
         <!-- SETTING -->
-
         <div class="page" id="setting">
-
             <div class="card">
                 <h2>Setting</h2>
+                <p>Pengaturan akun.</p>
             </div>
-
         </div>
 
     </div>
@@ -548,7 +533,7 @@ const loginForm = document.getElementById("loginForm");
 const registerForm = document.getElementById("registerForm");
 const forgotForm = document.getElementById("forgotForm");
 
-/* SHOW LOGIN */
+/* LOGIN REGISTER FORGOT */
 
 function showLogin(){
 
@@ -560,8 +545,6 @@ function showLogin(){
 
 }
 
-/* SHOW REGISTER */
-
 function showRegister(){
 
     registerForm.classList.add("active");
@@ -571,8 +554,6 @@ function showRegister(){
     forgotForm.classList.remove("active");
 
 }
-
-/* SHOW FORGOT */
 
 function showForgot(){
 
@@ -611,15 +592,7 @@ registerForm.addEventListener("submit", function(e){
 
     localStorage.setItem("userPassword", password);
 
-    message.classList.remove("error");
-
     message.innerHTML = "Akun berhasil dibuat!";
-
-    setTimeout(() => {
-
-        showLogin();
-
-    },1000);
 
 });
 
@@ -641,8 +614,6 @@ loginForm.addEventListener("submit", function(e){
 
     if(email === savedEmail && password === savedPassword){
 
-        message.classList.remove("error");
-
         message.innerHTML = "Login berhasil!";
 
         setTimeout(() => {
@@ -650,8 +621,6 @@ loginForm.addEventListener("submit", function(e){
             document.getElementById("loginContainer").style.display = "none";
 
             document.getElementById("dashboardPage").style.display = "block";
-
-            document.body.style.background = "#f1f5f9";
 
             document.getElementById("profileEmail").innerHTML =
             "Email : " + savedEmail;
@@ -681,15 +650,7 @@ forgotForm.addEventListener("submit", function(e){
 
     if(email === savedEmail){
 
-        message.classList.remove("error");
-
         message.innerHTML = "Reset password berhasil!";
-
-        setTimeout(() => {
-
-            showLogin();
-
-        },1500);
 
     }else{
 
@@ -714,7 +675,7 @@ function closeSidebar(){
 
 }
 
-/* SHOW PAGE */
+/* PAGE */
 
 function showPage(pageId){
 
@@ -739,8 +700,6 @@ function logout(){
     document.getElementById("dashboardPage").style.display = "none";
 
     document.getElementById("loginContainer").style.display = "flex";
-
-    document.body.style.background = "#0f172a";
 
     document.getElementById("loginPassword").value = "";
 
