@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Company Login</title>
+<title>Cyber Dashboard</title>
 
 <style>
 
@@ -17,7 +17,7 @@
 
 body{
     background:#0f172a;
-    overflow:hidden;
+    overflow-x:hidden;
     color:white;
 }
 
@@ -25,26 +25,28 @@ body{
 
 body::before{
     content:'';
-    position:absolute;
-    width:350px;
-    height:350px;
+    position:fixed;
+    width:400px;
+    height:400px;
     background:#00e5ff;
     border-radius:50%;
-    filter:blur(150px);
+    filter:blur(180px);
     top:-100px;
     left:-100px;
+    z-index:-1;
 }
 
 body::after{
     content:'';
-    position:absolute;
-    width:350px;
-    height:350px;
-    background:#ff0077;
+    position:fixed;
+    width:400px;
+    height:400px;
+    background:#ff006a;
     border-radius:50%;
-    filter:blur(150px);
+    filter:blur(180px);
     bottom:-100px;
     right:-100px;
+    z-index:-1;
 }
 
 /* LOGIN */
@@ -56,8 +58,6 @@ body::after{
     justify-content:center;
     align-items:center;
     padding:20px;
-    position:relative;
-    z-index:2;
 }
 
 .box{
@@ -80,7 +80,7 @@ body::after{
     background:linear-gradient(
         45deg,
         #00e5ff,
-        #ff0077,
+        #ff006a,
         #00e5ff
     );
     animation:borderAnim 5s linear infinite;
@@ -97,17 +97,11 @@ body::after{
 }
 
 @keyframes borderAnim{
+
     100%{
         filter:hue-rotate(360deg);
     }
-}
 
-.company{
-    text-align:center;
-    color:#00e5ff;
-    margin-bottom:25px;
-    font-size:13px;
-    letter-spacing:2px;
 }
 
 .form{
@@ -121,8 +115,9 @@ body::after{
 
 .title{
     text-align:center;
+    font-size:35px;
     margin-bottom:30px;
-    font-size:32px;
+    color:#00e5ff;
 }
 
 .inputBox{
@@ -131,10 +126,10 @@ body::after{
 
 .inputBox input{
     width:100%;
-    padding:15px;
+    padding:16px;
     border:none;
     outline:none;
-    border-radius:12px;
+    border-radius:14px;
     background:#1e293b;
     color:white;
     font-size:15px;
@@ -146,9 +141,9 @@ body::after{
 
 .btn{
     width:100%;
-    padding:15px;
+    padding:16px;
     border:none;
-    border-radius:12px;
+    border-radius:14px;
     background:linear-gradient(45deg,#00e5ff,#00bcd4);
     color:black;
     font-size:16px;
@@ -172,10 +167,7 @@ body::after{
     border:none;
     color:#ff2d92;
     cursor:pointer;
-}
-
-.linkBtn:hover{
-    color:#00e5ff;
+    font-size:14px;
 }
 
 .message{
@@ -192,44 +184,41 @@ body::after{
 
 .dashboard{
     width:100%;
-    height:100vh;
+    min-height:100vh;
     display:flex;
 }
+
+/* SIDEBAR */
 
 .sidebar{
-    width:260px;
+    width:280px;
+    height:100vh;
     background:#111827;
     padding:25px;
-    display:flex;
-    flex-direction:column;
-    border-right:2px solid #00e5ff;
-}
-
-.logo{
-    text-align:center;
-    font-size:28px;
-    font-weight:bold;
-    color:#00e5ff;
-    margin-bottom:40px;
+    position:fixed;
+    left:0;
+    top:0;
+    border-right:2px solid rgba(0,229,255,0.2);
 }
 
 .menu{
     display:flex;
     flex-direction:column;
-    gap:15px;
+    gap:18px;
+    margin-top:20px;
 }
 
 .menu button{
     width:100%;
-    padding:16px;
+    padding:18px;
     border:none;
-    border-radius:14px;
+    border-radius:18px;
     background:#1e293b;
     color:white;
     text-align:left;
+    font-size:16px;
     cursor:pointer;
     transition:0.3s;
-    font-size:15px;
 }
 
 .menu button:hover{
@@ -240,77 +229,69 @@ body::after{
 }
 
 .logout{
-    margin-top:auto;
-    background:#ff2d55 !important;
+    background:#ff1e56 !important;
     color:white !important;
 }
 
+/* MAIN */
+
 .main{
-    flex:1;
+    margin-left:280px;
+    width:calc(100% - 280px);
     padding:25px;
-    overflow:auto;
 }
+
+/* TOPBAR */
 
 .topbar{
     background:#111827;
-    padding:20px;
+    padding:25px;
     border-radius:20px;
-    margin-bottom:25px;
     display:flex;
     justify-content:space-between;
     align-items:center;
+    margin-bottom:25px;
     border:1px solid rgba(0,229,255,0.2);
 }
 
 .topbar h1{
     color:#00e5ff;
+    font-size:38px;
 }
 
 .user{
     background:#1e293b;
-    padding:12px 18px;
-    border-radius:12px;
+    padding:14px 24px;
+    border-radius:14px;
+    font-size:18px;
 }
+
+/* CONTENT */
 
 .contentBox{
     background:#111827;
     padding:30px;
     border-radius:20px;
     border:1px solid rgba(0,229,255,0.2);
-    min-height:400px;
 }
 
 .contentBox h2{
     color:#00e5ff;
     margin-bottom:20px;
+    font-size:35px;
 }
 
 .card{
     background:#1e293b;
-    padding:20px;
+    padding:22px;
     border-radius:15px;
     margin-top:15px;
+    font-size:20px;
 }
 
-.clock{
-    margin-top:25px;
-    background:#111827;
-    padding:20px;
-    border-radius:20px;
-    text-align:center;
-}
+/* MOBILE */
 
-.clock h2{
-    color:#00e5ff;
-    margin-bottom:10px;
-}
-
-#time{
-    font-size:40px;
-    font-weight:bold;
-}
-
-@media(max-width:800px){
+@media(max-width:900px){
 
     .dashboard{
         flex-direction:column;
@@ -318,6 +299,25 @@ body::after{
 
     .sidebar{
         width:100%;
+        height:auto;
+        position:relative;
+        border-right:none;
+        border-bottom:2px solid rgba(0,229,255,0.2);
+    }
+
+    .main{
+        margin-left:0;
+        width:100%;
+    }
+
+    .topbar{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:15px;
+    }
+
+    .topbar h1{
+        font-size:28px;
     }
 
 }
@@ -330,15 +330,13 @@ body::after{
 
     <div class="box">
 
-        <div class="company">
-            INNOVATE IN CODE, FORTIFY IN SECURITY
-        </div>
-
         <!-- LOGIN -->
 
         <form class="form active" id="loginForm">
 
-            <h2 class="title">LOGIN</h2>
+            <h2 class="title">
+                LOGIN
+            </h2>
 
             <div class="inputBox">
                 <input type="email" id="loginEmail" placeholder="Masukkan Email" required>
@@ -372,7 +370,9 @@ body::after{
 
         <form class="form" id="registerForm">
 
-            <h2 class="title">REGISTER</h2>
+            <h2 class="title">
+                REGISTER
+            </h2>
 
             <div class="inputBox">
                 <input type="email" id="registerEmail" placeholder="Masukkan Email" required>
@@ -406,7 +406,9 @@ body::after{
 
         <form class="form" id="forgotForm">
 
-            <h2 class="title">RESET</h2>
+            <h2 class="title">
+                RESET
+            </h2>
 
             <div class="inputBox">
                 <input type="email" id="forgotEmail" placeholder="Masukkan Email" required>
@@ -521,6 +523,14 @@ loginForm.addEventListener("submit",function(e){
 
     const message = document.getElementById("loginMessage");
 
+    if(password === ""){
+
+        message.innerHTML = "Password sudah di reset!";
+        message.classList.add("error");
+        return;
+
+    }
+
     if(email === savedEmail && password === savedPassword){
 
         message.classList.remove("error");
@@ -555,13 +565,11 @@ forgotForm.addEventListener("submit",function(e){
 
     if(email === savedEmail){
 
-        /* RESET ACCOUNT */
-
         localStorage.setItem("userPassword","");
 
         message.classList.remove("error");
         message.innerHTML =
-        "Password berhasil direset!";
+        "Password berhasil di reset!";
 
         setTimeout(()=>{
 
@@ -588,10 +596,6 @@ function openDashboard(){
 
         <div class="sidebar">
 
-            <div class="logo">
-                CYBER TECH
-            </div>
-
             <div class="menu">
 
                 <button onclick="showPage('dashboard')">
@@ -611,7 +615,7 @@ function openDashboard(){
                 </button>
 
                 <button onclick="showPage('setting')">
-                    ⚙ Setting Akun
+                    ⚙️ Setting Akun
                 </button>
 
                 <button class="logout" onclick="logout()">
@@ -654,25 +658,11 @@ function openDashboard(){
 
             </div>
 
-            <div class="clock">
-
-                <h2>Realtime Clock</h2>
-
-                <div id="time">
-                    00:00:00
-                </div>
-
-            </div>
-
         </div>
 
     </div>
 
     `;
-
-    updateClock();
-
-    setInterval(updateClock,1000);
 
 }
 
@@ -730,10 +720,10 @@ function showPage(page){
 
         content.innerHTML = `
 
-        <h2>Pengumuman Perusahaan</h2>
+        <h2>Pengumuman</h2>
 
         <div class="card">
-            Meeting jam 09:00 WIB
+            Meeting dimulai jam 09:00 WIB
         </div>
 
         <div class="card">
@@ -769,10 +759,6 @@ function showPage(page){
         <h2>Setting Akun</h2>
 
         <div class="card">
-            Ganti Password
-        </div>
-
-        <div class="card">
             Dark Mode
         </div>
 
@@ -780,24 +766,13 @@ function showPage(page){
             Security Account
         </div>
 
+        <div class="card">
+            Notification Setting
+        </div>
+
         `;
 
     }
-
-}
-
-/* CLOCK */
-
-function updateClock(){
-
-    const now = new Date();
-
-    let h = now.getHours().toString().padStart(2,'0');
-    let m = now.getMinutes().toString().padStart(2,'0');
-    let s = now.getSeconds().toString().padStart(2,'0');
-
-    document.getElementById("time").innerHTML =
-    h + ":" + m + ":" + s;
 
 }
 
