@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Company Login</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+    background:#0f172a;
+    overflow:hidden;
+    color:white;
+}
+
+/* BACKGROUND */
+
+body::before{
+    content:'';
+    position:absolute;
+    width:350px;
+    height:350px;
+    background:#00e5ff;
+    border-radius:50%;
+    filter:blur(150px);
+    top:-100px;
+    left:-100px;
+}
+
+body::after{
+    content:'';
+    position:absolute;
+    width:350px;
+    height:350px;
+    background:#ff0077;
+    border-radius:50%;
+    filter:blur(150px);
+    bottom:-100px;
+    right:-100px;
+}
+
+/* LOGIN */
+
+.container{
+    width:100%;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+    position:relative;
+    z-index:2;
+}
+
+.box{
+    width:100%;
+    max-width:400px;
+    background:#111827;
+    border-radius:25px;
+    padding:40px;
+    position:relative;
+    overflow:hidden;
+    box-shadow:
+    0 0 25px rgba(0,0,0,0.5),
+    0 0 60px rgba(0,0,0,0.3);
+}
+
+.box::before{
+    content:'';
+    position:absolute;
+    inset:-3px;
+    background:linear-gradient(
+        45deg,
+        #00e5ff,
+        #ff0077,
+        #00e5ff
+    );
+    animation:borderAnim 5s linear infinite;
+    z-index:-2;
+}
+
+.box::after{
+    content:'';
+    position:absolute;
+    inset:4px;
+    background:#111827;
+    border-radius:22px;
+    z-index:-1;
+}
+
+@keyframes borderAnim{
+    100%{
+        filter:hue-rotate(360deg);
+    }
+}
+
+.company{
+    text-align:center;
+    color:#00e5ff;
+    margin-bottom:25px;
+    font-size:13px;
+    letter-spacing:2px;
+}
+
+.form{
+    display:none;
+    flex-direction:column;
+}
+
+.form.active{
+    display:flex;
+}
+
+.title{
+    text-align:center;
+    margin-bottom:30px;
+    font-size:32px;
+}
+
+.inputBox{
+    margin-bottom:18px;
+}
+
+.inputBox input{
+    width:100%;
+    padding:15px;
+    border:none;
+    outline:none;
+    border-radius:12px;
+    background:#1e293b;
+    color:white;
+    font-size:15px;
+}
+
+.inputBox input:focus{
+    box-shadow:0 0 15px #00e5ff;
+}
+
+.btn{
+    width:100%;
+    padding:15px;
+    border:none;
+    border-radius:12px;
+    background:linear-gradient(45deg,#00e5ff,#00bcd4);
+    color:black;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.btn:hover{
+    transform:scale(1.03);
+}
+
+.links{
+    margin-top:20px;
+    display:flex;
+    justify-content:space-between;
+}
+
+.linkBtn{
+    background:none;
+    border:none;
+    color:#ff2d92;
+    cursor:pointer;
+}
+
+.linkBtn:hover{
+    color:#00e5ff;
+}
+
+.message{
+    margin-top:15px;
+    text-align:center;
+    color:#00ff88;
+}
+
+.error{
+    color:#ff4d4d;
+}
+
+/* DASHBOARD */
+
+.dashboard{
+    width:100%;
+    height:100vh;
+    display:flex;
+}
+
+.sidebar{
+    width:260px;
+    background:#111827;
+    padding:25px;
+    display:flex;
+    flex-direction:column;
+    border-right:2px solid #00e5ff;
+}
+
+.logo{
+    text-align:center;
+    font-size:28px;
+    font-weight:bold;
+    color:#00e5ff;
+    margin-bottom:40px;
+}
+
+.menu{
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+}
+
+.menu button{
+    width:100%;
+    padding:16px;
+    border:none;
+    border-radius:14px;
+    background:#1e293b;
+    color:white;
+    text-align:left;
+    cursor:pointer;
+    transition:0.3s;
+    font-size:15px;
+}
+
+.menu button:hover{
+    background:#00e5ff;
+    color:black;
+    transform:translateX(5px);
+    box-shadow:0 0 15px #00e5ff;
+}
+
+.logout{
+    margin-top:auto;
+    background:#ff2d55 !important;
+    color:white !important;
+}
+
+.main{
+    flex:1;
+    padding:25px;
+    overflow:auto;
+}
+
+.topbar{
+    background:#111827;
+    padding:20px;
+    border-radius:20px;
+    margin-bottom:25px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    border:1px solid rgba(0,229,255,0.2);
+}
+
+.topbar h1{
+    color:#00e5ff;
+}
+
+.user{
+    background:#1e293b;
+    padding:12px 18px;
+    border-radius:12px;
+}
+
+.contentBox{
+    background:#111827;
+    padding:30px;
+    border-radius:20px;
+    border:1px solid rgba(0,229,255,0.2);
+    min-height:400px;
+}
+
+.contentBox h2{
+    color:#00e5ff;
+    margin-bottom:20px;
+}
+
+.card{
+    background:#1e293b;
+    padding:20px;
+    border-radius:15px;
+    margin-top:15px;
+}
+
+.clock{
+    margin-top:25px;
+    background:#111827;
+    padding:20px;
+    border-radius:20px;
+    text-align:center;
+}
+
+.clock h2{
+    color:#00e5ff;
+    margin-bottom:10px;
+}
+
+#time{
+    font-size:40px;
+    font-weight:bold;
+}
+
+@media(max-width:800px){
+
+    .dashboard{
+        flex-direction:column;
+    }
+
+    .sidebar{
+        width:100%;
+    }
+
+}
+
+</style>
+</head>
+<body>
+
+<div class="container">
+
+    <div class="box">
+
+        <div class="company">
+            INNOVATE IN CODE, FORTIFY IN SECURITY
+        </div>
+
+        <!-- LOGIN -->
+
+        <form class="form active" id="loginForm">
+
+            <h2 class="title">LOGIN</h2>
+
+            <div class="inputBox">
+                <input type="email" id="loginEmail" placeholder="Masukkan Email" required>
+            </div>
+
+            <div class="inputBox">
+                <input type="password" id="loginPassword" placeholder="Masukkan Password" required>
+            </div>
+
+            <button type="submit" class="btn">
+                Sign In
+            </button>
+
+            <div class="links">
+
+                <button type="button" class="linkBtn" onclick="showForgot()">
+                    Forgot Password?
+                </button>
+
+                <button type="button" class="linkBtn" onclick="showRegister()">
+                    Sign Up
+                </button>
+
+            </div>
+
+            <div class="message" id="loginMessage"></div>
+
+        </form>
+
+        <!-- REGISTER -->
+
+        <form class="form" id="registerForm">
+
+            <h2 class="title">REGISTER</h2>
+
+            <div class="inputBox">
+                <input type="email" id="registerEmail" placeholder="Masukkan Email" required>
+            </div>
+
+            <div class="inputBox">
+                <input type="password" id="registerPassword" placeholder="Masukkan Password" required>
+            </div>
+
+            <div class="inputBox">
+                <input type="password" id="registerConfirm" placeholder="Konfirmasi Password" required>
+            </div>
+
+            <button type="submit" class="btn">
+                Create Account
+            </button>
+
+            <div class="links">
+
+                <button type="button" class="linkBtn" onclick="showLogin()">
+                    Sudah punya akun?
+                </button>
+
+            </div>
+
+            <div class="message" id="registerMessage"></div>
+
+        </form>
+
+        <!-- FORGOT -->
+
+        <form class="form" id="forgotForm">
+
+            <h2 class="title">RESET</h2>
+
+            <div class="inputBox">
+                <input type="email" id="forgotEmail" placeholder="Masukkan Email" required>
+            </div>
+
+            <button type="submit" class="btn">
+                Reset Password
+            </button>
+
+            <div class="links">
+
+                <button type="button" class="linkBtn" onclick="showLogin()">
+                    Kembali Login
+                </button>
+
+            </div>
+
+            <div class="message" id="forgotMessage"></div>
+
+        </form>
+
+    </div>
+
+</div>
+
+<script>
+
+/* DEFAULT ACCOUNT */
+
+if(localStorage.getItem("userEmail") === null){
+
+    localStorage.setItem("userEmail","admin@gmail.com");
+    localStorage.setItem("userPassword","admin123");
+
+}
+
+/* FORM */
+
+const loginForm = document.getElementById("loginForm");
+const registerForm = document.getElementById("registerForm");
+const forgotForm = document.getElementById("forgotForm");
+
+function showLogin(){
+
+    loginForm.classList.add("active");
+    registerForm.classList.remove("active");
+    forgotForm.classList.remove("active");
+
+}
+
+function showRegister(){
+
+    registerForm.classList.add("active");
+    loginForm.classList.remove("active");
+    forgotForm.classList.remove("active");
+
+}
+
+function showForgot(){
+
+    forgotForm.classList.add("active");
+    loginForm.classList.remove("active");
+    registerForm.classList.remove("active");
+
+}
+
+/* REGISTER */
+
+registerForm.addEventListener("submit",function(e){
+
+    e.preventDefault();
+
+    const email = document.getElementById("registerEmail").value;
+    const password = document.getElementById("registerPassword").value;
+    const confirm = document.getElementById("registerConfirm").value;
+
+    const message = document.getElementById("registerMessage");
+
+    if(password !== confirm){
+
+        message.innerHTML = "Password tidak sama!";
+        message.classList.add("error");
+        return;
+
+    }
+
+    localStorage.setItem("userEmail",email);
+    localStorage.setItem("userPassword",password);
+
+    message.classList.remove("error");
+    message.innerHTML = "Akun berhasil dibuat!";
+
+    setTimeout(()=>{
+
+        showLogin();
+
+    },1000);
+
+});
+
+/* LOGIN */
+
+loginForm.addEventListener("submit",function(e){
+
+    e.preventDefault();
+
+    const email = document.getElementById("loginEmail").value;
+    const password = document.getElementById("loginPassword").value;
+
+    const savedEmail = localStorage.getItem("userEmail");
+    const savedPassword = localStorage.getItem("userPassword");
+
+    const message = document.getElementById("loginMessage");
+
+    if(email === savedEmail && password === savedPassword){
+
+        message.classList.remove("error");
+        message.innerHTML = "Login berhasil!";
+
+        setTimeout(()=>{
+
+            openDashboard();
+
+        },1000);
+
+    }else{
+
+        message.innerHTML = "Email atau password salah!";
+        message.classList.add("error");
+
+    }
+
+});
+
+/* FORGOT */
+
+forgotForm.addEventListener("submit",function(e){
+
+    e.preventDefault();
+
+    const email = document.getElementById("forgotEmail").value;
+
+    const savedEmail = localStorage.getItem("userEmail");
+
+    const message = document.getElementById("forgotMessage");
+
+    if(email === savedEmail){
+
+        /* RESET ACCOUNT */
+
+        localStorage.setItem("userPassword","");
+
+        message.classList.remove("error");
+        message.innerHTML =
+        "Password berhasil direset!";
+
+        setTimeout(()=>{
+
+            showLogin();
+
+        },1500);
+
+    }else{
+
+        message.innerHTML = "Email tidak ditemukan!";
+        message.classList.add("error");
+
+    }
+
+});
+
+/* DASHBOARD */
+
+function openDashboard(){
+
+    document.body.innerHTML = `
+
+    <div class="dashboard">
+
+        <div class="sidebar">
+
+            <div class="logo">
+                CYBER TECH
+            </div>
+
+            <div class="menu">
+
+                <button onclick="showPage('dashboard')">
+                    🏠 Dashboard
+                </button>
+
+                <button onclick="showPage('profil')">
+                    👤 Profil Akun
+                </button>
+
+                <button onclick="showPage('pengumuman')">
+                    📢 Pengumuman
+                </button>
+
+                <button onclick="showPage('jadwal')">
+                    📅 Jadwal Kerja
+                </button>
+
+                <button onclick="showPage('setting')">
+                    ⚙ Setting Akun
+                </button>
+
+                <button class="logout" onclick="logout()">
+                    🚪 Logout
+                </button>
+
+            </div>
+
+        </div>
+
+        <div class="main">
+
+            <div class="topbar">
+
+                <h1>
+                    Welcome Back, Aziz
+                </h1>
+
+                <div class="user">
+                    Administrator
+                </div>
+
+            </div>
+
+            <div class="contentBox" id="content">
+
+                <h2>Dashboard</h2>
+
+                <div class="card">
+                    Total Employee : 124
+                </div>
+
+                <div class="card">
+                    Attendance Today : 98%
+                </div>
+
+                <div class="card">
+                    Server Status : ONLINE
+                </div>
+
+            </div>
+
+            <div class="clock">
+
+                <h2>Realtime Clock</h2>
+
+                <div id="time">
+                    00:00:00
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    `;
+
+    updateClock();
+
+    setInterval(updateClock,1000);
+
+}
+
+/* MENU */
+
+function showPage(page){
+
+    const content = document.getElementById("content");
+
+    if(page === "dashboard"){
+
+        content.innerHTML = `
+
+        <h2>Dashboard</h2>
+
+        <div class="card">
+            Total Employee : 124
+        </div>
+
+        <div class="card">
+            Attendance Today : 98%
+        </div>
+
+        <div class="card">
+            Server Status : ONLINE
+        </div>
+
+        `;
+
+    }
+
+    if(page === "profil"){
+
+        content.innerHTML = `
+
+        <h2>Profil Akun</h2>
+
+        <div class="card">
+            Nama : Aziz
+        </div>
+
+        <div class="card">
+            Jabatan : Administrator
+        </div>
+
+        <div class="card">
+            Email : admin@gmail.com
+        </div>
+
+        `;
+
+    }
+
+    if(page === "pengumuman"){
+
+        content.innerHTML = `
+
+        <h2>Pengumuman Perusahaan</h2>
+
+        <div class="card">
+            Meeting jam 09:00 WIB
+        </div>
+
+        <div class="card">
+            Maintenance server hari Jumat
+        </div>
+
+        `;
+
+    }
+
+    if(page === "jadwal"){
+
+        content.innerHTML = `
+
+        <h2>Jadwal Kerja</h2>
+
+        <div class="card">
+            Senin - Jumat : 08:00 - 17:00
+        </div>
+
+        <div class="card">
+            Sabtu dan Minggu : Libur
+        </div>
+
+        `;
+
+    }
+
+    if(page === "setting"){
+
+        content.innerHTML = `
+
+        <h2>Setting Akun</h2>
+
+        <div class="card">
+            Ganti Password
+        </div>
+
+        <div class="card">
+            Dark Mode
+        </div>
+
+        <div class="card">
+            Security Account
+        </div>
+
+        `;
+
+    }
+
+}
+
+/* CLOCK */
+
+function updateClock(){
+
+    const now = new Date();
+
+    let h = now.getHours().toString().padStart(2,'0');
+    let m = now.getMinutes().toString().padStart(2,'0');
+    let s = now.getSeconds().toString().padStart(2,'0');
+
+    document.getElementById("time").innerHTML =
+    h + ":" + m + ":" + s;
+
+}
+
+/* LOGOUT */
+
+function logout(){
+
+    location.reload();
+
+}
+
+</script>
+
+</body>
+</html>
