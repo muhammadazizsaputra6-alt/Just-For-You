@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Company Login</title>
 
@@ -17,23 +17,25 @@
 
 body{
     width:100%;
-    height:100vh;
+    min-height:100vh;
     display:flex;
     justify-content:center;
     align-items:center;
     background:#0f172a;
     overflow:hidden;
+    position:relative;
 }
 
-/* BACKGROUND GLOW */
+/* BACKGROUND EFFECT */
 
 body::before{
     content:'';
     position:absolute;
-    width:300px;
-    height:300px;
+    width:350px;
+    height:350px;
     background:#00e5ff;
-    filter:blur(140px);
+    border-radius:50%;
+    filter:blur(150px);
     top:-100px;
     left:-100px;
 }
@@ -41,10 +43,11 @@ body::before{
 body::after{
     content:'';
     position:absolute;
-    width:300px;
-    height:300px;
+    width:350px;
+    height:350px;
     background:#ff0077;
-    filter:blur(140px);
+    border-radius:50%;
+    filter:blur(150px);
     bottom:-100px;
     right:-100px;
 }
@@ -52,12 +55,14 @@ body::after{
 /* CONTAINER */
 
 .container{
-    position:relative;
-    width:400px;
-    min-height:520px;
+    width:100%;
+    min-height:100vh;
     display:flex;
     justify-content:center;
     align-items:center;
+    padding:20px;
+    position:relative;
+    z-index:2;
 }
 
 /* BOX */
@@ -65,16 +70,17 @@ body::after{
 .box{
     position:relative;
     width:100%;
+    max-width:400px;
     background:#111827;
     border-radius:25px;
     padding:40px;
+    overflow:hidden;
     box-shadow:
     0 0 25px rgba(0,0,0,0.5),
-    0 0 50px rgba(0,0,0,0.2);
-    overflow:hidden;
+    0 0 60px rgba(0,0,0,0.3);
 }
 
-/* BORDER ANIMATION */
+/* ANIMATED BORDER */
 
 .box::before{
     content:'';
@@ -86,20 +92,22 @@ body::after{
         #ff0077,
         #00e5ff
     );
+    animation:borderAnim 5s linear infinite;
     z-index:-2;
-    animation:animate 5s linear infinite;
+    pointer-events:none;
 }
 
 .box::after{
     content:'';
     position:absolute;
-    inset:3px;
+    inset:4px;
     background:#111827;
     border-radius:22px;
     z-index:-1;
+    pointer-events:none;
 }
 
-@keyframes animate{
+@keyframes borderAnim{
     0%{
         filter:hue-rotate(0deg);
     }
@@ -109,14 +117,14 @@ body::after{
     }
 }
 
-/* TITLE */
+/* COMPANY */
 
-.title{
+.company{
     text-align:center;
-    color:white;
-    font-size:30px;
-    margin-bottom:25px;
+    color:#00e5ff;
+    font-size:13px;
     letter-spacing:2px;
+    margin-bottom:25px;
 }
 
 /* FORM */
@@ -124,22 +132,33 @@ body::after{
 .form{
     display:none;
     flex-direction:column;
+    position:relative;
+    z-index:10;
 }
 
 .form.active{
     display:flex;
 }
 
+/* TITLE */
+
+.title{
+    color:white;
+    text-align:center;
+    font-size:32px;
+    margin-bottom:30px;
+    letter-spacing:2px;
+}
+
 /* INPUT */
 
 .inputBox{
-    width:100%;
     margin-bottom:18px;
 }
 
 .inputBox input{
     width:100%;
-    padding:14px;
+    padding:15px;
     border:none;
     outline:none;
     border-radius:12px;
@@ -157,16 +176,15 @@ body::after{
 
 .btn{
     width:100%;
-    padding:14px;
+    padding:15px;
     border:none;
     border-radius:12px;
     background:linear-gradient(45deg,#00e5ff,#00bcd4);
     color:black;
-    font-weight:bold;
     font-size:16px;
+    font-weight:bold;
     cursor:pointer;
     transition:0.3s;
-    margin-top:10px;
 }
 
 .btn:hover{
@@ -176,31 +194,24 @@ body::after{
 /* LINKS */
 
 .links{
-    margin-top:18px;
+    margin-top:20px;
     display:flex;
     justify-content:space-between;
-    font-size:14px;
+    align-items:center;
 }
 
 .links a{
     color:#ff2d92;
     text-decoration:none;
+    font-size:14px;
     cursor:pointer;
     transition:0.3s;
+    position:relative;
+    z-index:100;
 }
 
 .links a:hover{
     color:#00e5ff;
-}
-
-/* COMPANY TEXT */
-
-.company{
-    text-align:center;
-    color:#00e5ff;
-    margin-bottom:25px;
-    font-size:14px;
-    letter-spacing:2px;
 }
 
 /* MESSAGE */
@@ -208,12 +219,50 @@ body::after{
 .message{
     margin-top:15px;
     text-align:center;
-    color:#00ff95;
     font-size:14px;
+    color:#00ff88;
 }
 
 .error{
     color:#ff4d4d;
+}
+
+/* SUCCESS PAGE */
+
+.successPage{
+    width:100%;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    color:white;
+    text-align:center;
+}
+
+.successPage h1{
+    color:#00e5ff;
+    font-size:40px;
+    margin-bottom:15px;
+}
+
+.successPage p{
+    color:#ccc;
+    font-size:18px;
+}
+
+/* MOBILE */
+
+@media(max-width:500px){
+
+    .box{
+        padding:30px 20px;
+    }
+
+    .title{
+        font-size:28px;
+    }
+
 }
 
 </style>
@@ -229,6 +278,7 @@ body::after{
         </div>
 
         <!-- LOGIN -->
+
         <form class="form active" id="loginForm">
 
             <h2 class="title">LOGIN</h2>
@@ -260,6 +310,7 @@ body::after{
         </form>
 
         <!-- REGISTER -->
+
         <form class="form" id="registerForm">
 
             <h2 class="title">DAFTAR</h2>
@@ -291,6 +342,7 @@ body::after{
         </form>
 
         <!-- FORGOT PASSWORD -->
+
         <form class="form" id="forgotForm">
 
             <h2 class="title">FORGOT</h2>
@@ -325,24 +377,40 @@ const loginForm = document.getElementById("loginForm");
 const registerForm = document.getElementById("registerForm");
 const forgotForm = document.getElementById("forgotForm");
 
-/* SHOW FORM */
+/* SHOW LOGIN */
 
 function showLogin(){
+
     loginForm.classList.add("active");
+
     registerForm.classList.remove("active");
+
     forgotForm.classList.remove("active");
+
 }
+
+/* SHOW REGISTER */
 
 function showRegister(){
+
     registerForm.classList.add("active");
+
     loginForm.classList.remove("active");
+
     forgotForm.classList.remove("active");
+
 }
 
+/* SHOW FORGOT */
+
 function showForgot(){
+
     forgotForm.classList.add("active");
+
     loginForm.classList.remove("active");
+
     registerForm.classList.remove("active");
+
 }
 
 /* REGISTER */
@@ -351,11 +419,13 @@ registerForm.addEventListener("submit", function(e){
 
     e.preventDefault();
 
-    let email = document.getElementById("registerEmail").value;
-    let password = document.getElementById("registerPassword").value;
-    let confirmPassword = document.getElementById("registerConfirmPassword").value;
+    const email = document.getElementById("registerEmail").value;
 
-    let message = document.getElementById("registerMessage");
+    const password = document.getElementById("registerPassword").value;
+
+    const confirmPassword = document.getElementById("registerConfirmPassword").value;
+
+    const message = document.getElementById("registerMessage");
 
     if(password !== confirmPassword){
 
@@ -365,12 +435,12 @@ registerForm.addEventListener("submit", function(e){
         return;
     }
 
-    /* SIMPAN KE LOCAL STORAGE */
-
     localStorage.setItem("userEmail", email);
+
     localStorage.setItem("userPassword", password);
 
     message.classList.remove("error");
+
     message.innerHTML = "Akun berhasil dibuat!";
 
     setTimeout(() => {
@@ -389,65 +459,38 @@ loginForm.addEventListener("submit", function(e){
 
     e.preventDefault();
 
-    let email = document.getElementById("loginEmail").value;
-    let password = document.getElementById("loginPassword").value;
+    const email = document.getElementById("loginEmail").value;
 
-    let savedEmail = localStorage.getItem("userEmail");
-    let savedPassword = localStorage.getItem("userPassword");
+    const password = document.getElementById("loginPassword").value;
 
-    let message = document.getElementById("loginMessage");
+    const savedEmail = localStorage.getItem("userEmail");
+
+    const savedPassword = localStorage.getItem("userPassword");
+
+    const message = document.getElementById("loginMessage");
 
     if(email === savedEmail && password === savedPassword){
 
         message.classList.remove("error");
+
         message.innerHTML = "Login berhasil!";
 
         setTimeout(() => {
 
-            /* HALAMAN SETELAH LOGIN */
-
             document.body.innerHTML = `
-            
-            <div style="
-            width:100%;
-            height:100vh;
-            display:flex;
-            justify-content:center;
-            align-items:center;
-            background:#0f172a;
-            color:white;
-            flex-direction:column;
-            ">
 
-                <h1 style="
-                font-size:45px;
-                margin-bottom:20px;
-                color:#00e5ff;
-                ">
-                Selamat Datang
-                </h1>
+            <div class="successPage">
 
-                <p style="
-                font-size:18px;
-                color:#ccc;
-                ">
-                Anda berhasil login ke sistem perusahaan
-                </p>
+                <h1>Selamat Datang</h1>
 
-                <button onclick="logout()" style="
-                margin-top:30px;
-                padding:15px 30px;
-                border:none;
-                border-radius:12px;
-                background:#00e5ff;
-                cursor:pointer;
-                font-weight:bold;
-                ">
-                Logout
+                <p>Anda berhasil login ke sistem perusahaan</p>
+
+                <button onclick="logout()" class="btn" style="margin-top:30px; width:200px;">
+                    Logout
                 </button>
 
             </div>
-            
+
             `;
 
         },1000);
@@ -455,32 +498,35 @@ loginForm.addEventListener("submit", function(e){
     }else{
 
         message.innerHTML = "Email atau password salah!";
+
         message.classList.add("error");
 
     }
 
 });
 
-/* FORGOT PASSWORD */
+/* FORGOT */
 
 forgotForm.addEventListener("submit", function(e){
 
     e.preventDefault();
 
-    let email = document.getElementById("forgotEmail").value;
+    const email = document.getElementById("forgotEmail").value;
 
-    let savedEmail = localStorage.getItem("userEmail");
+    const savedEmail = localStorage.getItem("userEmail");
 
-    let message = document.getElementById("forgotMessage");
+    const message = document.getElementById("forgotMessage");
 
     if(email === savedEmail){
 
         message.classList.remove("error");
-        message.innerHTML = "Link reset password dikirim!";
+
+        message.innerHTML = "Link reset password berhasil dikirim!";
 
     }else{
 
         message.innerHTML = "Email tidak ditemukan!";
+
         message.classList.add("error");
 
     }
