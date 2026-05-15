@@ -200,19 +200,20 @@ body::after{
     align-items:center;
 }
 
-.links a{
+/* TAMBAH / GANTI CSS INI */
+
+.linkBtn{
+    background:none;
+    border:none;
     color:#ff2d92;
-    text-decoration:none;
     font-size:14px;
     cursor:pointer;
     transition:0.3s;
-    position:relative;
-    z-index:100;
 }
 
-.links a:hover{
+.linkBtn:hover{
     color:#00e5ff;
-}
+    }
 
 /* MESSAGE */
 
@@ -295,15 +296,19 @@ body::after{
                 Sign In
             </button>
 
-            <div class="links">
-                <a onclick="showForgot()">
-                    Forgot Password?
-                </a>
+            <!-- GANTI BAGIAN HTML LINKS LOGIN YANG LAMA -->
 
-                <a onclick="showRegister()">
-                    Sign Up
-                </a>
-            </div>
+<div class="links">
+
+    <button type="button" class="linkBtn" onclick="showForgot()">
+        Forgot Password?
+    </button>
+
+    <button type="button" class="linkBtn" onclick="showRegister()">
+        Sign Up
+    </button>
+
+</div>
 
             <div class="message" id="loginMessage"></div>
 
