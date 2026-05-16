@@ -323,38 +323,44 @@ body::after{
 
 .dashboardTitle h1{
     color:#00e5ff;
-    font-size:35px;
-    margin-bottom:5px;
+    font-size:50px;
+    margin-bottom:10px;
 }
 
 .dashboardTitle p{
     color:#d1d5db;
+    font-size:20px;
 }
 
 .dashboardGrid{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
-    gap:15px;
+    grid-template-columns:repeat(2,1fr);
+    gap:18px;
     margin-bottom:25px;
+    width:100%;
 }
 
 .aiCard{
     background:#111827;
-    border-radius:18px;
-    padding:20px;
+    border-radius:22px;
+    padding:28px;
     color:white;
     box-shadow:0 0 15px rgba(0,0,0,0.4);
     border:1px solid rgba(255,255,255,0.05);
+    min-height:150px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
 }
 
 .aiCard h2{
-    font-size:14px;
+    font-size:18px;
     color:#00e5ff;
-    margin-bottom:10px;
+    margin-bottom:15px;
 }
 
 .aiCard p{
-    font-size:22px;
+    font-size:38px;
     font-weight:bold;
 }
 
