@@ -314,6 +314,116 @@ body::after{
     }
 
 }
+
+    /* AI DASHBOARD */
+
+.dashboardTitle{
+    margin-bottom:25px;
+}
+
+.dashboardTitle h1{
+    color:#00e5ff;
+    font-size:35px;
+    margin-bottom:5px;
+}
+
+.dashboardTitle p{
+    color:#d1d5db;
+}
+
+.dashboardGrid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+    gap:15px;
+    margin-bottom:25px;
+}
+
+.aiCard{
+    background:#111827;
+    border-radius:18px;
+    padding:20px;
+    color:white;
+    box-shadow:0 0 15px rgba(0,0,0,0.4);
+    border:1px solid rgba(255,255,255,0.05);
+}
+
+.aiCard h2{
+    font-size:14px;
+    color:#00e5ff;
+    margin-bottom:10px;
+}
+
+.aiCard p{
+    font-size:22px;
+    font-weight:bold;
+}
+
+.online{
+    width:10px;
+    height:10px;
+    background:#00ff88;
+    border-radius:50%;
+    display:inline-block;
+    margin-bottom:10px;
+    box-shadow:0 0 10px #00ff88;
+}
+
+.mainAiBox{
+    background:#111827;
+    border-radius:22px;
+    padding:20px;
+    box-shadow:0 0 20px rgba(0,0,0,0.4);
+}
+
+.mainAiBox h2{
+    color:#00e5ff;
+    margin-bottom:20px;
+}
+
+.chatBox{
+    width:100%;
+    height:300px;
+    background:#0f172a;
+    border-radius:15px;
+    padding:15px;
+    overflow-y:auto;
+    margin-bottom:15px;
+}
+
+.aiMessage{
+    background:#1e293b;
+    color:white;
+    padding:15px;
+    border-radius:15px;
+    width:fit-content;
+    max-width:90%;
+    line-height:1.5;
+}
+
+.inputAi{
+    display:flex;
+    gap:10px;
+}
+
+.inputAi input{
+    flex:1;
+    padding:15px;
+    border:none;
+    outline:none;
+    border-radius:12px;
+    background:#1e293b;
+    color:white;
+}
+
+.inputAi button{
+    padding:15px 25px;
+    border:none;
+    border-radius:12px;
+    background:linear-gradient(45deg,#00e5ff,#00bcd4);
+    color:black;
+    font-weight:bold;
+    cursor:pointer;
+}
     
 </style>
 </head>
@@ -367,7 +477,7 @@ body::after{
 
         <form class="form" id="registerForm">
 
-            <h2 class="title">DAFTAR</h2>
+            <h2 class="title">REGISTER</h2>
 
             <div class="inputBox">
                 <input type="email" id="registerEmail" placeholder="Masukkan Email" required>
@@ -489,8 +599,65 @@ body::after{
 
         <!-- DASHBOARD -->
 
-        <div class="page" id="dashboard">
+        <!-- DASHBOARD -->
+
+<div class="page" id="dashboard">
+
+    <div class="dashboardTitle">
+        <h1>NOVA AI</h1>
+        <p>Artificial Intelligence Assistant System</p>
+    </div>
+
+    <div class="dashboardGrid">
+
+        <div class="aiCard">
+            <h2>AI STATUS</h2>
+            <span class="online"></span>
+            <p>ONLINE</p>
         </div>
+
+        <div class="aiCard">
+            <h2>TOTAL CHAT</h2>
+            <p>1,245</p>
+        </div>
+
+        <div class="aiCard">
+            <h2>AI RESPONSE</h2>
+            <p>0.2s</p>
+        </div>
+
+        <div class="aiCard">
+            <h2>SERVER</h2>
+            <p>ACTIVE</p>
+        </div>
+
+    </div>
+
+    <div class="mainAiBox">
+
+        <h2>AI Assistant</h2>
+
+        <div class="chatBox">
+
+            <div class="aiMessage">
+                Halo, saya NOVA AI. Ada yang bisa saya bantu?
+            </div>
+
+        </div>
+
+        <div class="inputAi">
+
+            <input type="text" placeholder="Tanyakan sesuatu ke AI...">
+
+            <button>
+                SEND
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
 
         <!-- PROFIL -->
 
