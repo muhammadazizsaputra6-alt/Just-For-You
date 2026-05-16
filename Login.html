@@ -599,9 +599,7 @@ body::after{
 
         <!-- DASHBOARD -->
 
-        <!-- DASHBOARD -->
-
-<div class="page" id="dashboard">
+        <div class="page active" id="dashboard">
 
     <div class="dashboardTitle">
         <h1>NOVA AI</h1>
@@ -635,27 +633,29 @@ body::after{
 
     <div class="mainAiBox">
 
-    <h2>AI Assistant</h2>
+        <h2>AI Assistant</h2>
 
-    <!-- TEMPAT CHAT -->
+        <!-- CHAT -->
 
-    <div class="chatBox">
+        <div class="chatBox">
 
-        <div class="aiMessage">
-            Halo, saya NOVA AI. Ada yang bisa saya bantu?
+            <div class="aiMessage">
+                Halo, saya NOVA AI. Ada yang bisa saya bantu?
+            </div>
+
         </div>
 
-    </div>
+        <!-- INPUT -->
 
-    <!-- INPUT PERTANYAAN -->
+        <div class="inputAi">
 
-    <div class="inputAi">
+            <input type="text" placeholder="Tanyakan sesuatu ke AI...">
 
-        <input type="text" placeholder="Tanyakan sesuatu ke AI...">
+            <button>
+                SEND
+            </button>
 
-        <button>
-            SEND
-        </button>
+        </div>
 
     </div>
 
@@ -892,7 +892,7 @@ function showPage(pageId){
 
 }
 
-    /* AI CHAT */
+/* AI CHAT */
 
 const aiInput = document.querySelector(".inputAi input");
 
@@ -1006,14 +1006,24 @@ async function sendMessage(){
 
         const data = await response.json();
 
+        console.log(data);
+
         loading.remove();
 
         const aiMessage = document.createElement("div");
 
         aiMessage.classList.add("aiMessage");
 
-        aiMessage.innerHTML =
-        data.candidates[0].content.parts[0].text;
+        if(data.candidates){
+
+            aiMessage.innerHTML =
+            data.candidates[0].content.parts[0].text;
+
+        }else{
+
+            aiMessage.innerHTML = "API ERROR";
+
+        }
 
         chatBox.appendChild(aiMessage);
 
@@ -1023,11 +1033,14 @@ async function sendMessage(){
 
     catch(error){
 
+        console.log(error);
+
         loading.innerHTML = "Error mengambil respon AI.";
 
     }
 
 }
+
 
 /* LOGOUT */
 
