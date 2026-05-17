@@ -1075,21 +1075,21 @@ async function sendMessage(){
 
 function logout(){
 
+    // HAPUS STATUS LOGIN
+    localStorage.removeItem("isLoggedIn");
+
     document.getElementById("dashboardPage").style.display = "none";
 
     document.getElementById("loginContainer").style.display = "flex";
 
-    /* KOSONGKAN INPUT LOGIN */
-
+    // kosongkan input
     document.getElementById("loginEmail").value = "";
-
     document.getElementById("loginPassword").value = "";
-
     document.getElementById("forgotEmail").value = "";
 
     showLogin();
 
-    }
+}
 
     /* ANTI SCAM DETECTOR */
 
@@ -1187,14 +1187,21 @@ function checkScam(){
 
 window.addEventListener("load", function(){
 
-    const isLoggedIn = localStorage.getItem("isLoggedIn");
+    const isLoggedIn =
+    localStorage.getItem("isLoggedIn");
 
     if(isLoggedIn === "true"){
 
+        document.getElementById("loginContainer").style.display = "flex";
         document.getElementById("loginContainer").style.display = "none";
-
         document.getElementById("dashboardPage").style.display = "block";
+
         loadChat();
+
+    }else{
+
+        document.getElementById("dashboardPage").style.display = "none";
+        document.getElementById("loginContainer").style.display = "flex";
 
     }
 
