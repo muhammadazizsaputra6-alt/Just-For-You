@@ -809,6 +809,7 @@ loginForm.addEventListener("submit", function(e){
 
         document.getElementById("loginContainer").style.display="none";
         document.getElementById("dashboardPage").style.display="block";
+        loadChat();
 
     },1000);
 
@@ -907,6 +908,36 @@ const aiButton = document.querySelector(".inputAi button");
 
 const chatBox = document.querySelector(".chatBox");
 
+    /* SAVE CHAT */
+
+function saveChat(){
+
+    const currentUser = localStorage.getItem("userEmail");
+
+    localStorage.setItem(
+        "chat_" + currentUser,
+        chatBox.innerHTML
+    );
+
+}
+
+/* LOAD CHAT */
+
+function loadChat(){
+
+    const currentUser = localStorage.getItem("userEmail");
+
+    const savedChat =
+    localStorage.getItem("chat_" + currentUser);
+
+    if(savedChat){
+
+        chatBox.innerHTML = savedChat;
+
+    }
+
+}
+
 /* API KEY */
 
 const API_KEY = "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";
@@ -958,6 +989,7 @@ async function sendMessage(){
     userMessage.innerHTML = text;
 
     chatBox.appendChild(userMessage);
+    saveChat();
 
     aiInput.value = "";
 
@@ -1032,6 +1064,7 @@ async function sendMessage(){
         }
 
         chatBox.appendChild(aiMessage);
+        saveChat();
 
         chatBox.scrollTop = chatBox.scrollHeight;
 
@@ -1079,6 +1112,7 @@ window.addEventListener("load", function(){
         document.getElementById("loginContainer").style.display = "none";
 
         document.getElementById("dashboardPage").style.display = "block";
+        loadChat();
 
     }
 
