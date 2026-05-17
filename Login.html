@@ -799,20 +799,18 @@ loginForm.addEventListener("submit", function(e){
 
     if(email === savedEmail && password === savedPassword){
 
-        message.classList.remove("error");
+    localStorage.setItem("isLoggedIn","true");
 
-        message.innerHTML = "Login berhasil!";
+    message.classList.remove("error");
 
-        setTimeout(() => {
+    message.innerHTML = "Login berhasil!";
 
-            document.getElementById("loginContainer").style.display = "none";
+    setTimeout(() => {
 
-            document.getElementById("dashboardPage").style.display = "block";
+        document.getElementById("loginContainer").style.display="none";
+        document.getElementById("dashboardPage").style.display="block";
 
-            document.getElementById("profileEmail").innerHTML =
-            "Email : " + savedEmail;
-
-        },1000);
+    },1000);
 
     }else{
 
@@ -1070,6 +1068,22 @@ function logout(){
 
     }
 
+    /* AUTO LOGIN SAAT REFRESH */
+
+window.addEventListener("load", function(){
+
+    const isLoggedIn = localStorage.getItem("isLoggedIn");
+
+    if(isLoggedIn === "true"){
+
+        document.getElementById("loginContainer").style.display = "none";
+
+        document.getElementById("dashboardPage").style.display = "block";
+
+    }
+
+});
+    
 </script>
 
 </body>
