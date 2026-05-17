@@ -653,8 +653,36 @@ body::after{
 
 </div>
 
-        <div class="page" id="detector">  
+        <div class="page" id="detector">
+
+    <div class="mainAiBox">
+
+        <h2>ANTI SCAM DETECTOR</h2>
+
+        <div class="chatBox" id="scamResult">
+
+            <div class="aiMessage">
+                Tempel pesan / link / nomor mencurigakan.
+            </div>
+
         </div>
+
+        <div class="inputAi">
+
+            <input
+            type="text"
+            id="scamInput"
+            placeholder="Masukkan pesan scam...">
+
+            <button onclick="checkScam()">
+                CHECK
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
 
     </div>
 
@@ -1062,6 +1090,98 @@ function logout(){
     showLogin();
 
     }
+
+    /* ANTI SCAM DETECTOR */
+
+function checkScam(){
+
+    const input =
+    document.getElementById("scamInput").value.toLowerCase();
+
+    const result =
+    document.getElementById("scamResult");
+
+    let score = 0;
+
+    const keywords = [
+
+        "transfer",
+        "otp",
+        "hadiah",
+        "menang",
+        "klik link",
+        "rekening",
+        "whatsapp",
+        "pinjaman",
+        "urgent",
+        "verifikasi",
+        "bank",
+        "password"
+
+    ];
+
+    keywords.forEach(word=>{
+
+        if(input.includes(word)){
+
+            score++;
+
+        }
+
+    });
+
+    if(score >= 3){
+
+        result.innerHTML = `
+        <div class="aiMessage"
+        style="background:#ff2d55;color:white;">
+
+        ⚠️ HIGH RISK SCAM<br><br>
+
+        Pesan ini terindikasi penipuan.
+
+        Jangan transfer uang,
+        jangan klik link,
+        jangan kasih OTP/password.
+
+        </div>
+        `;
+
+    }
+
+    else if(score >= 1){
+
+        result.innerHTML = `
+        <div class="aiMessage"
+        style="background:#ff9800;color:black;">
+
+        ⚠️ WARNING<br><br>
+
+        Ada indikasi scam.
+
+        Cek ulang pengirim.
+
+        </div>
+        `;
+
+    }
+
+    else{
+
+        result.innerHTML = `
+        <div class="aiMessage"
+        style="background:#00c853;color:white;">
+
+        ✅ SAFE DETECTED
+
+        Tidak ditemukan pola scam besar.
+
+        </div>
+        `;
+
+    }
+
+}
 
     /* AUTO LOGIN SAAT REFRESH */
 
