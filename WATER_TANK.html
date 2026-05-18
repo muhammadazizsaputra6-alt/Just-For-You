@@ -12,407 +12,415 @@
 <style>
 
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial;
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial;
 }
 
 body{
-    background:#06111f;
-    color:white;
-    overflow:hidden;
+background:#06111f;
+color:white;
+overflow:hidden;
 }
 
 /* LOGIN */
 
 .container{
-    width:100%;
-    height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    padding:20px;
-    background:radial-gradient(circle at top,#0b4d91,#06111f 50%);
+width:100%;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+padding:20px;
+background:radial-gradient(circle at top,#0b4d91,#06111f 50%);
 }
 
 .box{
-    width:100%;
-    max-width:400px;
-    background:#081423;
-    padding:30px;
-    border-radius:20px;
-    border:1px solid #16314f;
+width:100%;
+max-width:400px;
+background:#081423;
+padding:30px;
+border-radius:20px;
+border:1px solid #16314f;
 }
 
 .box h1{
-    text-align:center;
-    margin-bottom:10px;
-    color:#00b7ff;
+text-align:center;
+margin-bottom:10px;
+color:#00b7ff;
 }
 
 .box p{
-    text-align:center;
-    margin-bottom:20px;
-    color:#8fbfe6;
+text-align:center;
+margin-bottom:20px;
+color:#8fbfe6;
 }
 
 input{
-    width:100%;
-    padding:14px;
-    margin-top:12px;
-    background:#0c1d30;
-    border:1px solid #16314f;
-    border-radius:12px;
-    color:white;
+width:100%;
+padding:14px;
+margin-top:12px;
+background:#0c1d30;
+border:1px solid #16314f;
+border-radius:12px;
+color:white;
 }
 
 button{
-    width:100%;
-    padding:14px;
-    margin-top:12px;
-    border:none;
-    border-radius:12px;
-    font-weight:bold;
-    cursor:pointer;
-    color:white;
+width:100%;
+padding:14px;
+margin-top:12px;
+border:none;
+border-radius:12px;
+font-weight:bold;
+cursor:pointer;
+color:white;
 }
 
 .loginBtn{
-    background:linear-gradient(90deg,#0077ff,#00b7ff);
+background:linear-gradient(90deg,#0077ff,#00b7ff);
+}
+
+.registerBtn{
+background:linear-gradient(90deg,#00b894,#00cec9);
 }
 
 .linkBtn{
-    background:none;
-    color:#00b7ff;
+background:none;
+color:#00b7ff;
 }
 
 .form{
-    display:none;
+display:none;
 }
 
 .form.active{
-    display:block;
+display:block;
 }
 
 .message{
-    text-align:center;
-    margin-top:15px;
-    color:#00ff88;
+margin-top:15px;
+text-align:center;
+font-size:14px;
 }
 
 .error{
-    color:#ff5c5c;
+color:#ff7675;
+}
+
+.success{
+color:#55efc4;
 }
 
 /* SCADA */
 
 .scada{
-    display:none;
-    width:100%;
-    height:100vh;
+display:none;
+width:100%;
+height:100vh;
 }
 
 /* SIDEBAR */
 
 .sidebar{
-    width:220px;
-    background:#081423;
-    border-right:1px solid #16314f;
-    padding:20px;
-    overflow:auto;
+width:220px;
+background:#081423;
+border-right:1px solid #16314f;
+padding:20px;
+overflow:auto;
 }
 
 .logo h1{
-    font-size:42px;
-    color:#00b7ff;
+font-size:42px;
+color:#00b7ff;
 }
 
 .logo p{
-    margin-bottom:35px;
-    letter-spacing:2px;
+margin-bottom:35px;
+letter-spacing:2px;
 }
 
 .sidebar ul{
-    list-style:none;
+list-style:none;
 }
 
 .sidebar li{
-    padding:15px;
-    margin-bottom:12px;
-    background:#0c1d30;
-    border-radius:12px;
-    border:1px solid #16314f;
-    cursor:pointer;
+padding:15px;
+margin-bottom:12px;
+background:#0c1d30;
+border-radius:12px;
+border:1px solid #16314f;
+cursor:pointer;
 }
 
 .sidebar .active{
-    background:linear-gradient(90deg,#0077ff,#00b7ff);
+background:linear-gradient(90deg,#0077ff,#00b7ff);
 }
 
 /* MAIN */
 
 .main{
-    flex:1;
-    padding:15px;
-    overflow:auto;
+flex:1;
+padding:15px;
+overflow:auto;
 }
 
 /* TOPBAR */
 
 .topbar{
-    background:#081423;
-    padding:18px;
-    border-radius:18px;
-    border:1px solid #16314f;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:18px;
+background:#081423;
+padding:18px;
+border-radius:18px;
+border:1px solid #16314f;
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:18px;
 }
 
 .topbar h2{
-    font-size:22px;
+font-size:22px;
 }
 
 .topbar p{
-    color:#00b7ff;
+color:#00b7ff;
 }
 
 .user{
-    text-align:right;
+text-align:right;
 }
 
 .user a{
-    color:#ff5f5f;
-    cursor:pointer;
-    text-decoration:none;
+color:#ff5f5f;
+cursor:pointer;
+text-decoration:none;
 }
 
 /* PAGE */
 
 .dashboardPage{
-    display:block;
+display:block;
 }
 
 .historyPage{
-    display:none;
+display:none;
 }
 
 /* CONTENT */
 
 .content{
-    display:grid;
-    grid-template-columns:2fr 1fr;
-    gap:18px;
+display:grid;
+grid-template-columns:2fr 1fr;
+gap:18px;
 }
 
 /* TANK */
 
 .tankCard{
-    background:#081423;
-    padding:20px;
-    border-radius:20px;
-    border:1px solid #16314f;
-    height:500px;
+background:#081423;
+padding:20px;
+border-radius:20px;
+border:1px solid #16314f;
+height:500px;
 }
 
 .tankBox{
-    width:300px;
-    height:340px;
-    margin:auto;
-    margin-top:20px;
-    border:8px solid #dce9ff;
-    border-radius:30px;
-    overflow:hidden;
-    position:relative;
-    background:#0f172a;
+width:300px;
+height:340px;
+margin:auto;
+margin-top:20px;
+border:8px solid #dce9ff;
+border-radius:30px;
+overflow:hidden;
+position:relative;
+background:#0f172a;
 }
 
 .water{
-    position:absolute;
-    bottom:0;
-    width:100%;
-    height:0%;
-    background:linear-gradient(#75f0ff,#008cff);
-    transition:3s linear;
+position:absolute;
+bottom:0;
+width:100%;
+height:0%;
+background:linear-gradient(#75f0ff,#008cff);
+transition:1s linear;
 }
 
 .water::before{
-    content:'';
-    position:absolute;
-    top:-20px;
-    left:0;
-    width:200%;
-    height:40px;
-    background:rgba(255,255,255,0.25);
-    border-radius:45%;
-    animation:wave 5s linear infinite;
+content:'';
+position:absolute;
+top:-20px;
+left:0;
+width:200%;
+height:40px;
+background:rgba(255,255,255,0.25);
+border-radius:45%;
+animation:wave 5s linear infinite;
 }
 
 @keyframes wave{
 
 0%{
-    transform:translateX(0);
+transform:translateX(0);
 }
 
 100%{
-    transform:translateX(-50%);
+transform:translateX(-50%);
 }
 
 }
 
 .levelText{
-    position:absolute;
-    top:50%;
-    left:50%;
-    transform:translate(-50%,-50%);
-    z-index:10;
-    text-align:center;
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+z-index:10;
+text-align:center;
 }
 
 .levelText h1{
-    font-size:64px;
+font-size:64px;
 }
 
 .levelText p{
-    font-size:26px;
-    margin-top:10px;
+font-size:26px;
+margin-top:10px;
 }
 
 /* RIGHT */
 
 .right{
-    display:flex;
-    flex-direction:column;
-    gap:18px;
+display:flex;
+flex-direction:column;
+gap:18px;
 }
 
 .panel{
-    background:#081423;
-    padding:20px;
-    border-radius:20px;
-    border:1px solid #16314f;
+background:#081423;
+padding:20px;
+border-radius:20px;
+border:1px solid #16314f;
 }
 
 .status{
-    font-size:22px;
-    color:#8fff88;
-    margin:20px 0;
+font-size:22px;
+color:#8fff88;
+margin:20px 0;
 }
 
 .green{
-    background:linear-gradient(90deg,#29b94d,#8eff91);
+background:linear-gradient(90deg,#29b94d,#8eff91);
 }
 
 .red{
-    background:linear-gradient(90deg,#ff2d55,#ff7696);
+background:linear-gradient(90deg,#ff2d55,#ff7696);
 }
 
 .gray{
-    background:#4f5d80;
+background:#4f5d80;
 }
 
 .data{
-    display:flex;
-    justify-content:space-between;
-    padding:12px 0;
-    border-bottom:1px solid #16314f;
+display:flex;
+justify-content:space-between;
+padding:12px 0;
+border-bottom:1px solid #16314f;
 }
 
 /* BOTTOM */
 
 .bottom{
-    margin-top:18px;
-    display:grid;
-    grid-template-columns:1.5fr 1fr;
-    gap:18px;
+margin-top:18px;
+display:grid;
+grid-template-columns:1.5fr 1fr;
+gap:18px;
 }
 
 .graphCard,
 .tableCard{
-    background:#081423;
-    padding:20px;
-    border-radius:20px;
-    border:1px solid #16314f;
+background:#081423;
+padding:20px;
+border-radius:20px;
+border:1px solid #16314f;
 }
 
 .graph{
-    width:100%;
-    height:220px;
-    background:#06111f;
-    border-radius:15px;
-    margin-top:20px;
+width:100%;
+height:220px;
+background:#06111f;
+border-radius:15px;
+margin-top:20px;
 }
 
 .graph svg{
-    width:100%;
-    height:100%;
+width:100%;
+height:100%;
 }
 
 .graph path{
-    fill:none;
-    stroke:#00b7ff;
-    stroke-width:4;
+fill:none;
+stroke:#00b7ff;
+stroke-width:4;
 }
 
 table{
-    width:100%;
-    border-collapse:collapse;
-    margin-top:20px;
+width:100%;
+border-collapse:collapse;
+margin-top:20px;
 }
 
 table th{
-    background:#0c1d30;
+background:#0c1d30;
 }
 
 table th,
 table td{
-    padding:12px;
-    border-bottom:1px solid #16314f;
-    text-align:left;
+padding:12px;
+border-bottom:1px solid #16314f;
+text-align:left;
 }
 
 /* FOOTER */
 
 .footer{
-    margin-top:18px;
-    background:#081423;
-    padding:15px;
-    border-radius:15px;
-    border:1px solid #16314f;
-    display:flex;
-    justify-content:space-around;
-    color:#8fbfe6;
+margin-top:18px;
+background:#081423;
+padding:15px;
+border-radius:15px;
+border:1px solid #16314f;
+display:flex;
+justify-content:space-around;
+color:#8fbfe6;
 }
 
 /* HISTORY */
 
 .historyBox{
-    background:#081423;
-    padding:25px;
-    border-radius:20px;
-    border:1px solid #16314f;
+background:#081423;
+padding:25px;
+border-radius:20px;
+border:1px solid #16314f;
 }
 
 .timeFilter{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:15px;
-    margin-top:20px;
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:15px;
+margin-top:20px;
 }
 
 .generateBtn{
-    background:linear-gradient(90deg,#0077ff,#00b7ff);
+background:linear-gradient(90deg,#0077ff,#00b7ff);
 }
 
 .exportBtn{
-    background:linear-gradient(90deg,#00a65a,#00d96f);
+background:linear-gradient(90deg,#00a65a,#00d96f);
 }
 
 .reportArea{
-    display:none;
-    margin-top:30px;
+display:none;
+margin-top:30px;
 }
 
 /* MOBILE */
@@ -420,56 +428,56 @@ table td{
 @media(max-width:900px){
 
 body{
-    overflow:auto;
+overflow:auto;
 }
 
 .scada{
-    flex-direction:column;
-    height:auto;
+flex-direction:column;
+height:auto;
 }
 
 .sidebar{
-    width:100%;
-    display:flex;
-    overflow:auto;
+width:100%;
+display:flex;
+overflow:auto;
 }
 
 .sidebar ul{
-    display:flex;
-    gap:10px;
+display:flex;
+gap:10px;
 }
 
 .sidebar li{
-    min-width:140px;
+min-width:140px;
 }
 
 .content{
-    grid-template-columns:1fr;
+grid-template-columns:1fr;
 }
 
 .bottom{
-    grid-template-columns:1fr;
+grid-template-columns:1fr;
 }
 
 .topbar{
-    flex-direction:column;
-    gap:10px;
-    text-align:center;
+flex-direction:column;
+gap:10px;
+text-align:center;
 }
 
 .footer{
-    flex-direction:column;
-    gap:10px;
-    text-align:center;
+flex-direction:column;
+gap:10px;
+text-align:center;
 }
 
 .tankBox{
-    width:240px;
-    height:280px;
+width:240px;
+height:280px;
 }
 
 .levelText h1{
-    font-size:50px;
+font-size:50px;
 }
 
 }
@@ -477,6 +485,7 @@ body{
 </style>
 
 </head>
+
 <body>
 
 <!-- LOGIN -->
@@ -502,11 +511,11 @@ LOGIN
 </button>
 
 <button type="button" class="linkBtn" onclick="showRegister()">
-SIGN UP
+Belum punya akun?
 </button>
 
 <button type="button" class="linkBtn" onclick="showForgot()">
-FORGOT PASSWORD
+Forgot Password
 </button>
 
 <div class="message" id="loginMessage"></div>
@@ -521,12 +530,14 @@ FORGOT PASSWORD
 
 <input type="password" id="registerPassword" placeholder="Password" required>
 
-<button type="submit" class="loginBtn">
-CREATE ACCOUNT
+<input type="password" id="confirmPassword" placeholder="Konfirmasi Password" required>
+
+<button type="submit" class="registerBtn">
+REGISTER
 </button>
 
 <button type="button" class="linkBtn" onclick="showLogin()">
-BACK TO LOGIN
+Sudah punya akun?
 </button>
 
 <div class="message" id="registerMessage"></div>
@@ -544,7 +555,7 @@ RESET PASSWORD
 </button>
 
 <button type="button" class="linkBtn" onclick="showLogin()">
-BACK TO LOGIN
+Kembali Login
 </button>
 
 <div class="message" id="forgotMessage"></div>
@@ -552,6 +563,7 @@ BACK TO LOGIN
 </form>
 
 </div>
+
 </div>
 
 <!-- SCADA -->
@@ -563,8 +575,10 @@ BACK TO LOGIN
 <div class="sidebar">
 
 <div class="logo">
+
 <h1>WATER</h1>
 <p>TANK SCADA</p>
+
 </div>
 
 <ul>
@@ -598,13 +612,19 @@ History
 <div class="topbar">
 
 <div>
+
 <h2>WATER TANK MONITORING & CONTROL SYSTEM</h2>
+
 <p>REAL TIME MONITORING</p>
+
 </div>
 
 <div class="user">
+
 <div id="userEmail"></div>
+
 <a onclick="logout()">Logout</a>
+
 </div>
 
 </div>
@@ -624,11 +644,15 @@ History
 <div class="water" id="water"></div>
 
 <div class="levelText">
+
 <h1 id="levelText">0%</h1>
+
 <p id="cmText">0 cm</p>
+
 </div>
 
 </div>
+
 </div>
 
 <div class="right">
@@ -682,6 +706,7 @@ RESET ALARM
 </div>
 
 </div>
+
 </div>
 
 <div class="bottom">
@@ -693,10 +718,13 @@ RESET ALARM
 <div class="graph">
 
 <svg viewBox="0 0 1000 250">
+
 <path id="graphPath" d="M0 240"></path>
+
 </svg>
 
 </div>
+
 </div>
 
 <div class="tableCard">
@@ -716,13 +744,17 @@ RESET ALARM
 </table>
 
 </div>
+
 </div>
 
 <div class="footer">
 
 <div>COM3</div>
+
 <div>BAUDRATE : 9600</div>
+
 <div>STATUS : ONLINE</div>
+
 <div id="clock"></div>
 
 </div>
@@ -744,13 +776,19 @@ Masukkan rentang waktu monitoring
 <div class="timeFilter">
 
 <div>
+
 <label>FROM TIME</label>
+
 <input type="time" id="fromTime">
+
 </div>
 
 <div>
+
 <label>TO TIME</label>
+
 <input type="time" id="toTime">
+
 </div>
 
 </div>
@@ -761,7 +799,9 @@ GENERATE HISTORY
 
 <div class="reportArea" id="reportArea">
 
-<h3 style="margin-top:30px">SUMMARY</h3>
+<h3 style="margin-top:30px">
+SUMMARY
+</h3>
 
 <table>
 
@@ -774,7 +814,9 @@ GENERATE HISTORY
 
 </table>
 
-<h3 style="margin-top:30px">HISTORY DATA</h3>
+<h3 style="margin-top:30px">
+HISTORY DATA
+</h3>
 
 <table>
 
@@ -788,12 +830,16 @@ GENERATE HISTORY
 
 </table>
 
-<h3 style="margin-top:30px">TREND GRAPH</h3>
+<h3 style="margin-top:30px">
+TREND GRAPH
+</h3>
 
 <div class="graph">
 
 <svg viewBox="0 0 1000 250">
+
 <path id="historyGraph" d="M0 240"></path>
+
 </svg>
 
 </div>
@@ -809,40 +855,46 @@ EXPORT PDF
 </div>
 
 </div>
+
 </div>
 
 <script>
 
 /* FORM */
 
+const loginForm = document.getElementById("loginForm");
+const registerForm = document.getElementById("registerForm");
+const forgotForm = document.getElementById("forgotForm");
+
+/* SHOW FORM */
+
 function showLogin(){
 
-document.getElementById("loginForm").classList.add("active");
-document.getElementById("registerForm").classList.remove("active");
-document.getElementById("forgotForm").classList.remove("active");
+loginForm.classList.add("active");
+registerForm.classList.remove("active");
+forgotForm.classList.remove("active");
 
 }
 
 function showRegister(){
 
-document.getElementById("registerForm").classList.add("active");
-document.getElementById("loginForm").classList.remove("active");
-document.getElementById("forgotForm").classList.remove("active");
+registerForm.classList.add("active");
+loginForm.classList.remove("active");
+forgotForm.classList.remove("active");
 
 }
 
 function showForgot(){
 
-document.getElementById("forgotForm").classList.add("active");
-document.getElementById("loginForm").classList.remove("active");
-document.getElementById("registerForm").classList.remove("active");
+forgotForm.classList.add("active");
+loginForm.classList.remove("active");
+registerForm.classList.remove("active");
 
 }
 
 /* REGISTER */
 
-document.getElementById("registerForm")
-.addEventListener("submit",function(e){
+registerForm.addEventListener("submit",function(e){
 
 e.preventDefault();
 
@@ -852,11 +904,25 @@ document.getElementById("registerEmail").value;
 let password =
 document.getElementById("registerPassword").value;
 
-localStorage.setItem("userEmail",email);
-localStorage.setItem("userPassword",password);
+let confirm =
+document.getElementById("confirmPassword").value;
 
-document.getElementById("registerMessage")
-.innerHTML = "Akun berhasil dibuat!";
+let msg =
+document.getElementById("registerMessage");
+
+if(password !== confirm){
+
+msg.innerHTML = "Password tidak sama";
+msg.className = "message error";
+return;
+
+}
+
+localStorage.setItem("scadaEmail",email);
+localStorage.setItem("scadaPassword",password);
+
+msg.innerHTML = "Register berhasil";
+msg.className = "message success";
 
 setTimeout(()=>{
 
@@ -868,8 +934,7 @@ showLogin();
 
 /* LOGIN */
 
-document.getElementById("loginForm")
-.addEventListener("submit",function(e){
+loginForm.addEventListener("submit",function(e){
 
 e.preventDefault();
 
@@ -880,15 +945,18 @@ let password =
 document.getElementById("loginPassword").value;
 
 let savedEmail =
-localStorage.getItem("userEmail");
+localStorage.getItem("scadaEmail");
 
 let savedPassword =
-localStorage.getItem("userPassword");
+localStorage.getItem("scadaPassword");
 
-if(email === savedEmail &&
-password === savedPassword){
+let msg =
+document.getElementById("loginMessage");
 
-localStorage.setItem("isLoggedIn","true");
+if(email === savedEmail && password === savedPassword){
+
+localStorage.setItem("isLogin","true");
+localStorage.setItem("activeUser",email);
 
 document.getElementById("userEmail")
 .innerHTML = email;
@@ -901,20 +969,16 @@ document.getElementById("scadaPage")
 
 }else{
 
-document.getElementById("loginMessage")
-.innerHTML = "Email atau password salah!";
-
-document.getElementById("loginMessage")
-.classList.add("error");
+msg.innerHTML = "Email atau password salah";
+msg.className = "message error";
 
 }
 
 });
 
-/* FORGOT */
+/* FORGOT PASSWORD */
 
-document.getElementById("forgotForm")
-.addEventListener("submit",function(e){
+forgotForm.addEventListener("submit",function(e){
 
 e.preventDefault();
 
@@ -922,22 +986,22 @@ let email =
 document.getElementById("forgotEmail").value;
 
 let savedEmail =
-localStorage.getItem("userEmail");
+localStorage.getItem("scadaEmail");
+
+let msg =
+document.getElementById("forgotMessage");
 
 if(email === savedEmail){
 
-localStorage.setItem("userPassword","1234");
+localStorage.removeItem("scadaPassword");
 
-document.getElementById("forgotMessage")
-.innerHTML = "Password direset jadi 1234";
+msg.innerHTML = "Password berhasil direset";
+msg.className = "message success";
 
 }else{
 
-document.getElementById("forgotMessage")
-.innerHTML = "Email tidak ditemukan";
-
-document.getElementById("forgotMessage")
-.classList.add("error");
+msg.innerHTML = "Email tidak ditemukan";
+msg.className = "message error";
 
 }
 
@@ -947,10 +1011,10 @@ document.getElementById("forgotMessage")
 
 window.addEventListener("load",function(){
 
-let isLoggedIn =
-localStorage.getItem("isLoggedIn");
+let isLogin =
+localStorage.getItem("isLogin");
 
-if(isLoggedIn === "true"){
+if(isLogin === "true"){
 
 document.getElementById("loginPage")
 .style.display = "none";
@@ -960,21 +1024,11 @@ document.getElementById("scadaPage")
 
 document.getElementById("userEmail")
 .innerHTML =
-localStorage.getItem("userEmail");
+localStorage.getItem("activeUser");
 
 }
 
 });
-
-/* LOGOUT */
-
-function logout(){
-
-localStorage.removeItem("isLoggedIn");
-
-location.reload();
-
-}
 
 /* CLOCK */
 
@@ -1026,11 +1080,11 @@ return;
 
 }
 
-level += 1;
+level++;
 
 updateTank();
 
-},3000);
+},1000);
 
 }
 
@@ -1059,11 +1113,8 @@ clearInterval(interval);
 running = false;
 
 level = 0;
-
 points = [];
-
 xPos = 0;
-
 historyData = [];
 
 document.getElementById("graphPath")
@@ -1098,8 +1149,6 @@ document.getElementById("cmText")
 document.getElementById("dataLevel")
 .innerHTML = level + "%";
 
-/* GRAPH */
-
 xPos += 8;
 
 let randomCurve =
@@ -1115,8 +1164,6 @@ let path =
 
 document.getElementById("graphPath")
 .setAttribute("d",path);
-
-/* LOG */
 
 let now = new Date();
 
@@ -1136,12 +1183,12 @@ document.getElementById("logTable")
 row +
 document.getElementById("logTable").innerHTML;
 
-/* HISTORY */
-
 historyData.push({
+
 time:time,
 level:level,
 pump:running ? 'ON' : 'OFF'
+
 });
 
 }
@@ -1181,7 +1228,6 @@ document.getElementById("toTime").value;
 if(from === "" || to === ""){
 
 alert("Masukkan waktu");
-
 return;
 
 }
@@ -1244,175 +1290,28 @@ document.getElementById("graphPath")
 
 function exportPDF(){
 
-let lastData =
-historyData[historyData.length - 1];
-
-if(!lastData){
-
-alert("Data kosong");
-
-return;
-
-}
-
-let now = new Date();
-
-let dateNow =
-now.toLocaleDateString();
-
-let timeNow =
-now.toLocaleTimeString();
-
-let graphSVG =
-document.querySelector("#historyGraph")
-.outerHTML;
-
-let pdfHTML = `
-
-<div style="
-padding:30px;
-font-family:Arial;
-color:black;
-">
-
-<h1 style="
-text-align:center;
-margin-bottom:40px;
-">
-WATER TANK SCADA
-</h1>
-
-<div style="
-margin-bottom:10px;
-font-size:16px;
-">
-<b>Date Export :</b>
-${dateNow}
-</div>
-
-<div style="
-margin-bottom:30px;
-font-size:16px;
-">
-<b>Time Export :</b>
-${timeNow}
-</div>
-
-<h2 style="margin-bottom:15px">
-SUMMARY
-</h2>
-
-<table border="1"
-style="
-width:100%;
-border-collapse:collapse;
-margin-bottom:35px;
-">
-
-<tr>
-<th style="padding:12px">
-PARAMETER
-</th>
-
-<th style="padding:12px">
-VALUE
-</th>
-</tr>
-
-<tr>
-<td style="padding:12px">
-MAX LEVEL
-</td>
-
-<td style="padding:12px">
-${level}%
-</td>
-</tr>
-
-<tr>
-<td style="padding:12px">
-TOTAL DATA
-</td>
-
-<td style="padding:12px">
-${historyData.length}
-</td>
-</tr>
-
-</table>
-
-<h2 style="margin-bottom:15px">
-HISTORY DATA
-</h2>
-
-<table border="1"
-style="
-width:100%;
-border-collapse:collapse;
-margin-bottom:40px;
-">
-
-<tr>
-
-<th style="padding:12px">
-TIME
-</th>
-
-<th style="padding:12px">
-LEVEL
-</th>
-
-<th style="padding:12px">
-PUMP
-</th>
-
-</tr>
-
-<tr>
-
-<td style="padding:12px">
-${lastData.time}
-</td>
-
-<td style="padding:12px">
-${lastData.level}%
-</td>
-
-<td style="padding:12px">
-${lastData.pump}
-</td>
-
-</tr>
-
-</table>
-
-<h2 style="margin-bottom:20px">
-TREND GRAPH
-</h2>
-
-<div style="
-width:100%;
-height:250px;
-border:1px solid black;
-padding:10px;
-">
-
-${graphSVG}
-
-</div>
-
-</div>
-
-`;
-
 let element =
-document.createElement("div");
-
-element.innerHTML = pdfHTML;
+document.getElementById("reportArea");
 
 html2pdf()
 .from(element)
 .save("WATER_TANK.pdf");
+
+}
+
+/* LOGOUT */
+
+function logout(){
+
+localStorage.removeItem("isLogin");
+
+document.getElementById("scadaPage")
+.style.display = "none";
+
+document.getElementById("loginPage")
+.style.display = "flex";
+
+showLogin();
 
 }
 
