@@ -12,497 +12,487 @@
 <style>
 
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial;
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial;
 }
 
 body{
-    background:#06111f;
-    color:white;
-    overflow:hidden;
+background:#06111f;
+color:white;
+overflow:hidden;
 }
 
-/* ================= LOGIN ================= */
+/* LOGIN */
 
 .container{
-    width:100%;
-    height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    background:radial-gradient(circle at top,#0b4d91,#06111f 50%);
+width:100%;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+padding:20px;
+background:radial-gradient(circle at top,#0b4d91,#06111f 50%);
 }
 
 .box{
-    width:400px;
-    background:#081423;
-    padding:35px;
-    border-radius:20px;
-    border:1px solid #16314f;
+width:100%;
+max-width:400px;
+background:#081423;
+padding:30px;
+border-radius:20px;
+border:1px solid #16314f;
 }
 
 .box h1{
-    color:#00b7ff;
-    text-align:center;
-    margin-bottom:10px;
+text-align:center;
+margin-bottom:10px;
+color:#00b7ff;
 }
 
 .box p{
-    text-align:center;
-    color:#8fbfe6;
-    margin-bottom:20px;
+text-align:center;
+margin-bottom:20px;
+color:#8fbfe6;
 }
 
 input{
-    width:100%;
-    padding:14px;
-    margin:10px 0;
-    border:none;
-    border-radius:12px;
-    background:#0c1d30;
-    color:white;
-    border:1px solid #16314f;
+width:100%;
+padding:14px;
+margin-top:12px;
+background:#0c1d30;
+border:1px solid #16314f;
+border-radius:12px;
+color:white;
 }
 
 button{
-    width:100%;
-    padding:14px;
-    margin-top:10px;
-    border:none;
-    border-radius:12px;
-    font-weight:bold;
-    cursor:pointer;
-    color:white;
+width:100%;
+padding:14px;
+margin-top:12px;
+border:none;
+border-radius:12px;
+font-weight:bold;
+cursor:pointer;
+color:white;
 }
 
 .loginBtn{
-    background:linear-gradient(90deg,#0077ff,#00b7ff);
+background:linear-gradient(90deg,#0077ff,#00b7ff);
 }
 
 .linkBtn{
-    background:none;
-    color:#00b7ff;
+background:none;
+color:#00b7ff;
 }
 
 .form{
-    display:none;
+display:none;
 }
 
 .form.active{
-    display:block;
+display:block;
 }
 
-.error{
-    color:#ff6565;
-    text-align:center;
-    margin-bottom:10px;
-}
-
-.success{
-    color:#71ff71;
-    text-align:center;
-    margin-bottom:10px;
-}
-
-/* ================= SCADA ================= */
+/* SCADA */
 
 .scada{
-    display:none;
-    width:100%;
-    height:100vh;
+display:none;
+width:100%;
+height:100vh;
 }
 
 /* SIDEBAR */
 
 .sidebar{
-    width:240px;
-    background:#081423;
-    border-right:1px solid #16314f;
-    padding:20px;
+width:220px;
+background:#081423;
+border-right:1px solid #16314f;
+padding:20px;
+overflow:auto;
 }
 
 .logo h1{
-    color:#00b7ff;
-    font-size:48px;
+font-size:42px;
+color:#00b7ff;
 }
 
 .logo p{
-    letter-spacing:3px;
-    margin-bottom:40px;
+margin-bottom:35px;
+letter-spacing:2px;
 }
 
 .sidebar ul{
-    list-style:none;
+list-style:none;
 }
 
 .sidebar li{
-    padding:15px;
-    margin-bottom:12px;
-    background:#0c1d30;
-    border-radius:12px;
-    border:1px solid #16314f;
-    cursor:pointer;
+padding:15px;
+margin-bottom:12px;
+background:#0c1d30;
+border-radius:12px;
+border:1px solid #16314f;
+cursor:pointer;
 }
 
 .sidebar .active{
-    background:linear-gradient(90deg,#0077ff,#00b7ff);
+background:linear-gradient(90deg,#0077ff,#00b7ff);
 }
 
 /* MAIN */
 
 .main{
-    flex:1;
-    padding:20px;
-    overflow:auto;
+flex:1;
+padding:15px;
+overflow:auto;
 }
 
 /* TOPBAR */
 
 .topbar{
-    background:#081423;
-    border:1px solid #16314f;
-    border-radius:20px;
-    padding:20px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:20px;
+background:#081423;
+padding:18px;
+border-radius:18px;
+border:1px solid #16314f;
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:18px;
 }
 
 .topbar h2{
-    font-size:24px;
+font-size:22px;
 }
 
 .topbar p{
-    color:#00b7ff;
+color:#00b7ff;
 }
 
 .user{
-    text-align:right;
+text-align:right;
 }
 
 .user a{
-    color:#ff5c5c;
-    text-decoration:none;
-    cursor:pointer;
+color:#ff5f5f;
+cursor:pointer;
+text-decoration:none;
 }
 
-/* DASHBOARD */
+/* PAGE */
 
 .dashboardPage{
-    display:block;
+display:block;
 }
 
 .historyPage{
-    display:none;
+display:none;
 }
 
+/* CONTENT */
+
 .content{
-    display:grid;
-    grid-template-columns:2fr 1fr;
-    gap:20px;
+display:grid;
+grid-template-columns:2fr 1fr;
+gap:18px;
 }
 
 /* TANK */
 
 .tankCard{
-    background:#081423;
-    border-radius:20px;
-    border:1px solid #16314f;
-    padding:20px;
-    height:500px;
+background:#081423;
+padding:20px;
+border-radius:20px;
+border:1px solid #16314f;
+height:500px;
 }
 
 .tankBox{
-    width:340px;
-    height:360px;
-    margin:auto;
-    margin-top:20px;
-    border:8px solid #dce9ff;
-    border-radius:35px;
-    overflow:hidden;
-    position:relative;
-    background:#0f172a;
+width:300px;
+height:340px;
+margin:auto;
+margin-top:20px;
+border:8px solid #dce9ff;
+border-radius:30px;
+overflow:hidden;
+position:relative;
+background:#0f172a;
 }
 
 .water{
-    position:absolute;
-    bottom:0;
-    width:100%;
-    height:0%;
-    background:linear-gradient(#75f0ff,#008cff);
-    transition:3s linear;
+position:absolute;
+bottom:0;
+width:100%;
+height:0%;
+background:linear-gradient(#75f0ff,#008cff);
+transition:3s linear;
 }
 
 .water::before{
-    content:'';
-    position:absolute;
-    top:-20px;
-    left:0;
-    width:200%;
-    height:40px;
-    background:rgba(255,255,255,0.25);
-    border-radius:45%;
-    animation:wave 5s linear infinite;
+content:'';
+position:absolute;
+top:-20px;
+left:0;
+width:200%;
+height:40px;
+background:rgba(255,255,255,0.25);
+border-radius:45%;
+animation:wave 5s linear infinite;
 }
 
 @keyframes wave{
 
-    0%{
-        transform:translateX(0);
-    }
+0%{
+transform:translateX(0);
+}
 
-    100%{
-        transform:translateX(-50%);
-    }
+100%{
+transform:translateX(-50%);
+}
+
 }
 
 .levelText{
-    position:absolute;
-    top:50%;
-    left:50%;
-    transform:translate(-50%,-50%);
-    z-index:10;
-    text-align:center;
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+z-index:10;
+text-align:center;
 }
 
 .levelText h1{
-    font-size:72px;
+font-size:64px;
 }
 
 .levelText p{
-    margin-top:10px;
-    font-size:28px;
+font-size:26px;
+margin-top:10px;
 }
 
 /* RIGHT */
 
 .right{
-    display:flex;
-    flex-direction:column;
-    gap:20px;
+display:flex;
+flex-direction:column;
+gap:18px;
 }
 
 .panel{
-    background:#081423;
-    border-radius:20px;
-    border:1px solid #16314f;
-    padding:20px;
+background:#081423;
+padding:20px;
+border-radius:20px;
+border:1px solid #16314f;
 }
 
 .status{
-    color:#8fff88;
-    font-size:22px;
-    margin:20px 0;
-}
-
-.btn{
-    width:100%;
-    padding:15px;
-    margin-top:12px;
-    border:none;
-    border-radius:12px;
-    font-weight:bold;
-    color:white;
-    cursor:pointer;
+font-size:22px;
+color:#8fff88;
+margin:20px 0;
 }
 
 .green{
-    background:linear-gradient(90deg,#37c85b,#90ff92);
+background:linear-gradient(90deg,#29b94d,#8eff91);
 }
 
 .red{
-    background:linear-gradient(90deg,#ff2d55,#ff7094);
+background:linear-gradient(90deg,#ff2d55,#ff7696);
 }
 
 .gray{
-    background:#49567a;
+background:#4f5d80;
 }
 
 .data{
-    display:flex;
-    justify-content:space-between;
-    padding:12px 0;
-    border-bottom:1px solid #16314f;
+display:flex;
+justify-content:space-between;
+padding:12px 0;
+border-bottom:1px solid #16314f;
 }
 
 /* BOTTOM */
 
 .bottom{
-    margin-top:20px;
-    display:grid;
-    grid-template-columns:1.5fr 1fr;
-    gap:20px;
+margin-top:18px;
+display:grid;
+grid-template-columns:1.5fr 1fr;
+gap:18px;
 }
 
 .graphCard,
 .tableCard{
-    background:#081423;
-    border-radius:20px;
-    border:1px solid #16314f;
-    padding:20px;
+background:#081423;
+padding:20px;
+border-radius:20px;
+border:1px solid #16314f;
 }
 
 .graph{
-    width:100%;
-    height:220px;
-    margin-top:20px;
-    background:#06111f;
-    border-radius:15px;
+width:100%;
+height:220px;
+background:#06111f;
+border-radius:15px;
+margin-top:20px;
 }
 
 .graph svg{
-    width:100%;
-    height:100%;
+width:100%;
+height:100%;
 }
 
 .graph path{
-    fill:none;
-    stroke:#00b7ff;
-    stroke-width:4;
+fill:none;
+stroke:#00b7ff;
+stroke-width:4;
 }
 
 table{
-    width:100%;
-    border-collapse:collapse;
-    margin-top:20px;
+width:100%;
+border-collapse:collapse;
+margin-top:20px;
 }
 
 table th{
-    background:#0c1d30;
+background:#0c1d30;
 }
 
 table th,
 table td{
-    padding:12px;
-    border-bottom:1px solid #16314f;
-    text-align:left;
+padding:12px;
+border-bottom:1px solid #16314f;
+text-align:left;
 }
 
 /* FOOTER */
 
 .footer{
-    margin-top:20px;
-    background:#081423;
-    border:1px solid #16314f;
-    border-radius:15px;
-    padding:15px;
-    display:flex;
-    justify-content:space-around;
-    color:#8fbfe6;
+margin-top:18px;
+background:#081423;
+padding:15px;
+border-radius:15px;
+border:1px solid #16314f;
+display:flex;
+justify-content:space-around;
+color:#8fbfe6;
 }
 
 /* HISTORY */
 
 .historyBox{
-    background:#081423;
-    border:1px solid #16314f;
-    border-radius:20px;
-    padding:25px;
+background:#081423;
+padding:25px;
+border-radius:20px;
+border:1px solid #16314f;
 }
 
 .timeFilter{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:20px;
-    margin-top:20px;
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:15px;
+margin-top:20px;
 }
 
 .generateBtn{
-    background:linear-gradient(90deg,#0077ff,#00b7ff);
+background:linear-gradient(90deg,#0077ff,#00b7ff);
 }
 
 .exportBtn{
-    background:linear-gradient(90deg,#00a65a,#00d96f);
+background:linear-gradient(90deg,#00a65a,#00d96f);
 }
 
 .reportArea{
-    margin-top:30px;
-    display:none;
+display:none;
+margin-top:30px;
 }
 
-.reportTitle{
-    text-align:center;
-    margin-bottom:20px;
+/* MOBILE */
+
+@media(max-width:900px){
+
+body{
+overflow:auto;
+}
+
+.scada{
+flex-direction:column;
+height:auto;
+}
+
+.sidebar{
+width:100%;
+display:flex;
+overflow:auto;
+}
+
+.sidebar ul{
+display:flex;
+gap:10px;
+}
+
+.sidebar li{
+min-width:140px;
+}
+
+.content{
+grid-template-columns:1fr;
+}
+
+.bottom{
+grid-template-columns:1fr;
+}
+
+.topbar{
+flex-direction:column;
+gap:10px;
+text-align:center;
+}
+
+.footer{
+flex-direction:column;
+gap:10px;
+text-align:center;
+}
+
+.tankBox{
+width:240px;
+height:280px;
+}
+
+.levelText h1{
+font-size:50px;
+}
+
 }
 
 </style>
 
 </head>
+
 <body>
 
 <!-- LOGIN -->
 
 <div class="container" id="loginPage">
 
-    <div class="box">
+<div class="box">
 
-        <h1>SCADA SYSTEM</h1>
+<h1>SCADA SYSTEM</h1>
 
-        <p>Water Tank Monitoring</p>
+<p>Water Tank Monitoring</p>
 
-        <div class="error" id="error"></div>
-        <div class="success" id="success"></div>
+<form class="form active" id="loginForm">
 
-        <!-- LOGIN -->
+<input type="email" id="email" placeholder="Email" required>
 
-        <form class="form active" id="loginForm">
+<input type="password" id="password" placeholder="Password" required>
 
-            <input type="email" id="loginEmail" placeholder="Email" required>
+<button type="submit" class="loginBtn">
+LOGIN
+</button>
 
-            <input type="password" id="loginPassword" placeholder="Password" required>
+</form>
 
-            <button type="submit" class="loginBtn">
-                LOGIN
-            </button>
-
-            <button type="button" class="linkBtn" onclick="showForm('signup')">
-                SIGN UP
-            </button>
-
-            <button type="button" class="linkBtn" onclick="showForm('forgot')">
-                FORGOT PASSWORD
-            </button>
-
-        </form>
-
-        <!-- SIGNUP -->
-
-        <form class="form" id="signupForm">
-
-            <input type="email" id="signupEmail" placeholder="Email" required>
-
-            <input type="password" id="signupPassword" placeholder="Password" required>
-
-            <button type="submit" class="loginBtn">
-                CREATE ACCOUNT
-            </button>
-
-            <button type="button" class="linkBtn" onclick="showForm('login')">
-                BACK TO LOGIN
-            </button>
-
-        </form>
-
-        <!-- FORGOT -->
-
-        <form class="form" id="forgotForm">
-
-            <input type="email" id="forgotEmail" placeholder="Email" required>
-
-            <button type="submit" class="loginBtn">
-                RESET PASSWORD
-            </button>
-
-            <button type="button" class="linkBtn" onclick="showForm('login')">
-                BACK TO LOGIN
-            </button>
-
-        </form>
-
-    </div>
+</div>
 
 </div>
 
@@ -510,303 +500,783 @@ table td{
 
 <div class="scada" id="scadaPage">
 
-    <div class="sidebar">
+<!-- SIDEBAR -->
 
-        <div class="logo">
+<div class="sidebar">
 
-            <h1>WATER</h1>
-            <p>TANK SCADA</p>
+<div class="logo">
 
-        </div>
+<h1>WATER</h1>
+<p>TANK SCADA</p>
 
-        <ul>
+</div>
 
-            <li class="active" onclick="showDashboard()">Dashboard</li>
-            <li>Monitoring</li>
-            <li>Control</li>
-            <li>Alarm</li>
-            <li>Trend Graph</li>
-            <li onclick="showHistory()">History</li>
-            <li>Setting</li>
+<ul>
 
-        </ul>
+<li class="active" onclick="showDashboard()">
+Dashboard
+</li>
 
-    </div>
+<li>Monitoring</li>
 
-    <div class="main">
+<li>Control</li>
 
-        <div class="topbar">
+<li>Alarm</li>
 
-            <div>
+<li>Trend Graph</li>
 
-                <h2>WATER TANK MONITORING & CONTROL SYSTEM</h2>
-                <p>REAL TIME MONITORING</p>
+<li onclick="showHistory()">
+History
+</li>
 
-            </div>
+<li>Setting</li>
 
-            <div class="user">
+</ul>
 
-                <div id="userEmail"></div>
+</div>
 
-                <a onclick="logout()">Logout</a>
+<!-- MAIN -->
 
-            </div>
+<div class="main">
 
-        </div>
+<!-- TOPBAR -->
 
-        <!-- DASHBOARD -->
+<div class="topbar">
 
-        <div class="dashboardPage" id="dashboardPage">
+<div>
 
-            <div class="content">
+<h2>WATER TANK MONITORING & CONTROL SYSTEM</h2>
 
-                <div class="tankCard">
+<p>REAL TIME MONITORING</p>
 
-                    <h3>TANK OVERVIEW</h3>
+</div>
 
-                    <div class="tankBox">
+<div class="user">
 
-                        <div class="water" id="water"></div>
+<div id="userEmail"></div>
 
-                        <div class="levelText">
+<a onclick="logout()">Logout</a>
 
-                            <h1 id="levelText">0%</h1>
-                            <p id="cmText">0 cm</p>
+</div>
 
-                        </div>
+</div>
 
-                    </div>
+<!-- DASHBOARD -->
 
-                </div>
+<div class="dashboardPage" id="dashboardPage">
 
-                <div class="right">
+<div class="content">
 
-                    <div class="panel">
+<!-- TANK -->
 
-                        <h3>PUMP CONTROL</h3>
+<div class="tankCard">
 
-                        <div class="status" id="statusText">
-                            ● STANDBY
-                        </div>
+<h3>TANK OVERVIEW</h3>
 
-                        <button class="btn green" onclick="startPump()">
-                            START PUMP
-                        </button>
+<div class="tankBox">
 
-                        <button class="btn red" onclick="stopPump()">
-                            STOP PUMP
-                        </button>
+<div class="water" id="water"></div>
 
-                        <button class="btn gray" onclick="resetTank()">
-                            RESET ALARM
-                        </button>
+<div class="levelText">
 
-                    </div>
+<h1 id="levelText">0%</h1>
 
-                    <div class="panel">
+<p id="cmText">0 cm</p>
 
-                        <h3>REAL TIME DATA</h3>
+</div>
 
-                        <div class="data">
-                            <span>Tank Level</span>
-                            <b id="dataLevel">0%</b>
-                        </div>
+</div>
 
-                        <div class="data">
-                            <span>Temperature</span>
-                            <b>28.4°C</b>
-                        </div>
+</div>
 
-                        <div class="data">
-                            <span>Pressure</span>
-                            <b>2.35 Bar</b>
-                        </div>
+<!-- RIGHT -->
 
-                        <div class="data">
-                            <span>Status</span>
-                            <b id="dataStatus">OFF</b>
-                        </div>
+<div class="right">
 
-                    </div>
+<div class="panel">
 
-                </div>
+<h3>PUMP CONTROL</h3>
 
-            </div>
+<div class="status" id="statusText">
+● STANDBY
+</div>
 
-            <div class="bottom">
+<button class="green" onclick="startPump()">
+START PUMP
+</button>
 
-                <div class="graphCard">
+<button class="red" onclick="stopPump()">
+STOP PUMP
+</button>
 
-                    <h3>TREND GRAPH</h3>
+<button class="gray" onclick="resetTank()">
+RESET ALARM
+</button>
 
-                    <div class="graph">
+</div>
 
-                        <svg viewBox="0 0 1000 250">
+<div class="panel">
 
-                            <path id="graphPath" d="M0 240"></path>
+<h3>REAL TIME DATA</h3>
 
-                        </svg>
+<div class="data">
+<span>Tank Level</span>
+<b id="dataLevel">0%</b>
+</div>
 
-                    </div>
+<div class="data">
+<span>Temperature</span>
+<b>28.4°C</b>
+</div>
 
-                </div>
+<div class="data">
+<span>Pressure</span>
+<b>2.35 Bar</b>
+</div>
 
-                <div class="tableCard">
+<div class="data">
+<span>Status</span>
+<b id="dataStatus">OFF</b>
+</div>
 
-                    <h3>DATA LOG</h3>
+</div>
 
-                    <table>
+</div>
 
-                        <tr>
-                            <th>TIME</th>
-                            <th>LEVEL</th>
-                            <th>PUMP</th>
-                        </tr>
+</div>
 
-                        <tbody id="logTable"></tbody>
+<!-- BOTTOM -->
 
-                    </table>
+<div class="bottom">
 
-                </div>
+<!-- GRAPH -->
 
-            </div>
+<div class="graphCard">
 
-            <div class="footer">
+<h3>TREND GRAPH</h3>
 
-                <div>COM3</div>
-                <div>BAUDRATE : 9600</div>
-                <div>STATUS : ONLINE</div>
-                <div id="clock"></div>
+<div class="graph">
 
-            </div>
+<svg viewBox="0 0 1000 250">
 
-        </div>
+<path id="graphPath" d="M0 240"></path>
 
-    </div>
+</svg>
+
+</div>
+
+</div>
+
+<!-- TABLE -->
+
+<div class="tableCard">
+
+<h3>DATA LOG</h3>
+
+<table>
+
+<tr>
+<th>TIME</th>
+<th>LEVEL</th>
+<th>PUMP</th>
+</tr>
+
+<tbody id="logTable"></tbody>
+
+</table>
+
+</div>
+
+</div>
+
+<!-- FOOTER -->
+
+<div class="footer">
+
+<div>COM3</div>
+
+<div>BAUDRATE : 9600</div>
+
+<div>STATUS : ONLINE</div>
+
+<div id="clock"></div>
+
+</div>
+
+</div>
+
+<!-- HISTORY -->
+
+<div class="historyPage" id="historyPage">
+
+<div class="historyBox">
+
+<h2>HISTORY</h2>
+
+<p style="margin-top:10px;color:#8fbfe6">
+Masukkan rentang waktu monitoring
+</p>
+
+<div class="timeFilter">
+
+<div>
+
+<label>FROM TIME</label>
+
+<input type="time" id="fromTime">
+
+</div>
+
+<div>
+
+<label>TO TIME</label>
+
+<input type="time" id="toTime">
+
+</div>
+
+</div>
+
+<button class="generateBtn" onclick="generateHistory()">
+GENERATE HISTORY
+</button>
+
+<div class="reportArea" id="reportArea">
+
+<h3 style="margin-top:30px">
+SUMMARY
+</h3>
+
+<table>
+
+<tr>
+<th>PARAMETER</th>
+<th>VALUE</th>
+</tr>
+
+<tbody id="summaryTable"></tbody>
+
+</table>
+
+<h3 style="margin-top:30px">
+HISTORY DATA
+</h3>
+
+<table>
+
+<tr>
+<th>TIME</th>
+<th>LEVEL</th>
+<th>PUMP</th>
+</tr>
+
+<tbody id="historyTable"></tbody>
+
+</table>
+
+<h3 style="margin-top:30px">
+TREND GRAPH
+</h3>
+
+<div class="graph">
+
+<svg viewBox="0 0 1000 250">
+
+<path id="historyGraph" d="M0 240"></path>
+
+</svg>
+
+</div>
+
+<button class="exportBtn" onclick="exportPDF()">
+EXPORT PDF
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
 
 </div>
 
 <script>
-
-/* USERS */
-
-let users = [];
-
-/* FORM */
-
-function showForm(type){
-
-    document.querySelectorAll(".form")
-    .forEach(f=>f.classList.remove("active"));
-
-    if(type==="login"){
-        document.getElementById("loginForm")
-        .classList.add("active");
-    }
-
-    if(type==="signup"){
-        document.getElementById("signupForm")
-        .classList.add("active");
-    }
-
-    if(type==="forgot"){
-        document.getElementById("forgotForm")
-        .classList.add("active");
-    }
-
-}
-
-/* SIGNUP */
-
-document.getElementById("signupForm")
-.addEventListener("submit",function(e){
-
-    e.preventDefault();
-
-    let email =
-    document.getElementById("signupEmail").value;
-
-    let password =
-    document.getElementById("signupPassword").value;
-
-    users.push({
-        email,
-        password
-    });
-
-    document.getElementById("success").innerHTML =
-    "Akun berhasil dibuat";
-
-});
 
 /* LOGIN */
 
 document.getElementById("loginForm")
 .addEventListener("submit",function(e){
 
-    e.preventDefault();
+e.preventDefault();
 
-    let email =
-    document.getElementById("loginEmail").value;
+let email =
+document.getElementById("email").value;
 
-    let password =
-    document.getElementById("loginPassword").value;
+document.getElementById("userEmail")
+.innerHTML = email;
 
-    let found =
-    users.find(u =>
-    u.email===email &&
-    u.password===password);
+document.getElementById("loginPage")
+.style.display = "none";
 
-    if(found){
-
-        document.getElementById("loginPage")
-        .style.display="none";
-
-        document.getElementById("scadaPage")
-        .style.display="flex";
-
-        document.getElementById("userEmail")
-        .innerHTML=email;
-
-    }else{
-
-        document.getElementById("error").innerHTML =
-        "Login gagal";
-
-    }
+document.getElementById("scadaPage")
+.style.display = "flex";
 
 });
 
-/* FORGOT */
+/* CLOCK */
 
-document.getElementById("forgotForm")
-.addEventListener("submit",function(e){
+setInterval(()=>{
 
-    e.preventDefault();
+document.getElementById("clock").innerHTML =
+new Date().toLocaleTimeString();
 
-    let email =
-    document.getElementById("forgotEmail").value;
+},1000);
 
-    users.forEach(u=>{
+/* SCADA */
 
-        if(u.email===email){
+let level = 0;
+let running = false;
+let interval;
+let points = [];
+let xPos = 0;
+let historyData = [];
 
-            u.password="1234";
+/* START */
 
-            document.getElementById("success").innerHTML =
-            "Password direset jadi 1234";
+function startPump(){
 
-        }
+if(running) return;
 
-    });
+running = true;
+
+document.getElementById("statusText")
+.innerHTML = "● RUNNING";
+
+document.getElementById("dataStatus")
+.innerHTML = "RUNNING";
+
+interval = setInterval(()=>{
+
+if(level >= 100){
+
+clearInterval(interval);
+
+running = false;
+
+document.getElementById("statusText")
+.innerHTML = "● FULL";
+
+document.getElementById("dataStatus")
+.innerHTML = "FULL";
+
+return;
+
+}
+
+level += 1;
+
+updateTank();
+
+},3000);
+
+}
+
+/* STOP */
+
+function stopPump(){
+
+clearInterval(interval);
+
+running = false;
+
+document.getElementById("statusText")
+.innerHTML = "● STOPPED";
+
+document.getElementById("dataStatus")
+.innerHTML = "STOPPED";
+
+}
+
+/* RESET */
+
+function resetTank(){
+
+clearInterval(interval);
+
+running = false;
+
+level = 0;
+
+points = [];
+
+xPos = 0;
+
+historyData = [];
+
+document.getElementById("graphPath")
+.setAttribute("d","M0 240");
+
+document.getElementById("logTable")
+.innerHTML = "";
+
+document.getElementById("statusText")
+.innerHTML = "● RESET";
+
+document.getElementById("dataStatus")
+.innerHTML = "OFF";
+
+updateTank();
+
+}
+
+/* UPDATE */
+
+function updateTank(){
+
+document.getElementById("water")
+.style.height = level + "%";
+
+document.getElementById("levelText")
+.innerHTML = level + "%";
+
+document.getElementById("cmText")
+.innerHTML = level + " cm";
+
+document.getElementById("dataLevel")
+.innerHTML = level + "%";
+
+/* GRAPH */
+
+xPos += 8;
+
+let randomCurve =
+Math.random() * 8 - 4;
+
+let y =
+240 - (level * 1.8) + randomCurve;
+
+points.push(`${xPos} ${y}`);
+
+let path = "M0 240 L" + points.join(" L");
+
+document.getElementById("graphPath")
+.setAttribute("d",path);
+
+/* LOG */
+
+let now = new Date();
+
+let time =
+now.toLocaleTimeString();
+
+let row = `
+<tr>
+<td>${time}</td>
+<td>${level}%</td>
+<td>${running ? 'ON' : 'OFF'}</td>
+</tr>
+`;
+
+document.getElementById("logTable")
+.innerHTML =
+row +
+document.getElementById("logTable").innerHTML;
+
+/* HISTORY */
+
+historyData.push({
+
+time:time,
+level:level,
+pump:running ? 'ON' : 'OFF'
 
 });
+
+}
+
+/* MENU */
+
+function showDashboard(){
+
+document.getElementById("dashboardPage")
+.style.display = "block";
+
+document.getElementById("historyPage")
+.style.display = "none";
+
+}
+
+function showHistory(){
+
+document.getElementById("dashboardPage")
+.style.display = "none";
+
+document.getElementById("historyPage")
+.style.display = "block";
+
+}
+
+/* HISTORY */
+
+function generateHistory(){
+
+let from =
+document.getElementById("fromTime").value;
+
+let to =
+document.getElementById("toTime").value;
+
+if(from === "" || to === ""){
+
+alert("Masukkan waktu");
+
+return;
+
+}
+
+document.getElementById("reportArea")
+.style.display = "block";
+
+document.getElementById("summaryTable")
+.innerHTML = `
+
+<tr>
+<td>FROM TIME</td>
+<td>${from}</td>
+</tr>
+
+<tr>
+<td>TO TIME</td>
+<td>${to}</td>
+</tr>
+
+<tr>
+<td>MAX LEVEL</td>
+<td>${level}%</td>
+</tr>
+
+<tr>
+<td>TOTAL DATA</td>
+<td>${historyData.length}</td>
+</tr>
+
+`;
+
+let rows = "";
+
+historyData.forEach(data=>{
+
+rows += `
+
+<tr>
+<td>${data.time}</td>
+<td>${data.level}%</td>
+<td>${data.pump}</td>
+</tr>
+
+`;
+
+});
+
+document.getElementById("historyTable")
+.innerHTML = rows;
+
+document.getElementById("historyGraph")
+.setAttribute(
+"d",
+document.getElementById("graphPath")
+.getAttribute("d")
+);
+
+}
+
+/* EXPORT PDF */
+
+function exportPDF(){
+
+let lastData =
+historyData[historyData.length - 1];
+
+if(!lastData){
+
+alert("Data kosong");
+
+return;
+
+}
+
+let now = new Date();
+
+let dateNow =
+now.toLocaleDateString();
+
+let timeNow =
+now.toLocaleTimeString();
+
+let graphSVG =
+document.querySelector("#historyGraph")
+.outerHTML;
+
+let pdfHTML = `
+
+<div style="
+padding:30px;
+font-family:Arial;
+color:black;
+">
+
+<h1 style="
+text-align:center;
+margin-bottom:40px;
+">
+WATER TANK SCADA
+</h1>
+
+<div style="
+margin-bottom:10px;
+font-size:16px;
+">
+<b>Date Export :</b>
+${dateNow}
+</div>
+
+<div style="
+margin-bottom:30px;
+font-size:16px;
+">
+<b>Time Export :</b>
+${timeNow}
+</div>
+
+<h2 style="margin-bottom:15px">
+SUMMARY
+</h2>
+
+<table border="1"
+style="
+width:100%;
+border-collapse:collapse;
+margin-bottom:35px;
+">
+
+<tr>
+<th style="padding:12px">
+PARAMETER
+</th>
+
+<th style="padding:12px">
+VALUE
+</th>
+</tr>
+
+<tr>
+<td style="padding:12px">
+MAX LEVEL
+</td>
+
+<td style="padding:12px">
+${level}%
+</td>
+</tr>
+
+<tr>
+<td style="padding:12px">
+TOTAL DATA
+</td>
+
+<td style="padding:12px">
+${historyData.length}
+</td>
+</tr>
+
+</table>
+
+<h2 style="
+margin-bottom:15px;
+">
+HISTORY DATA
+</h2>
+
+<table border="1"
+style="
+width:100%;
+border-collapse:collapse;
+margin-bottom:40px;
+">
+
+<tr>
+
+<th style="padding:12px">
+TIME
+</th>
+
+<th style="padding:12px">
+LEVEL
+</th>
+
+<th style="padding:12px">
+PUMP
+</th>
+
+</tr>
+
+<tr>
+
+<td style="padding:12px">
+${lastData.time}
+</td>
+
+<td style="padding:12px">
+${lastData.level}%
+</td>
+
+<td style="padding:12px">
+${lastData.pump}
+</td>
+
+</tr>
+
+</table>
+
+<h2 style="
+margin-bottom:20px;
+">
+TREND GRAPH
+</h2>
+
+<div style="
+width:100%;
+height:250px;
+border:1px solid black;
+padding:10px;
+">
+
+${graphSVG}
+
+</div>
+
+</div>
+
+`;
+
+let element =
+document.createElement("div");
+
+element.innerHTML = pdfHTML;
+
+html2pdf()
+.from(element)
+.save("water_tank_scada.pdf");
+
+}
 
 /* LOGOUT */
 
 function logout(){
 
-    location.reload();
+location.reload();
 
 }
 
