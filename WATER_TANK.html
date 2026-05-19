@@ -1298,7 +1298,6 @@ document.getElementById("graphPath")
 
 }
 
-
 async function exportPDF(e){
 
 if(e){
@@ -1333,12 +1332,14 @@ now.toLocaleDateString();
 let timeNow =
 now.toLocaleTimeString();
 
-/* SVG */
+/* AMBIL GRAPH LANGSUNG */
 
-let svg =
-document.querySelector("#historyGraph");
+let graphElement =
+document.querySelector(
+"#historyPage .graph"
+);
 
-if(!svg){
+if(!graphElement){
 
 alert("Graph tidak ditemukan");
 
@@ -1349,120 +1350,22 @@ return;
 
 }
 
-/* CLONE SVG */
+/* SCREENSHOT GRAPH */
 
-let cloneSVG =
-svg.cloneNode(true);
-
-/* FIX SVG */
-
-cloneSVG.setAttribute(
-"xmlns",
-"http://www.w3.org/2000/svg"
-);
-
-cloneSVG.setAttribute(
-"width",
-"1000"
-);
-
-cloneSVG.setAttribute(
-"height",
-"250"
-);
-
-/* FIX PATH */
-
-let path =
-cloneSVG.querySelector("path");
-
-if(path){
-
-path.setAttribute(
-"stroke",
-"#00b7ff"
-);
-
-path.setAttribute(
-"stroke-width",
-"4"
-);
-
-path.setAttribute(
-"fill",
-"none"
-);
-
+let graphCanvas =
+await html2canvas(
+graphElement,
+{
+backgroundColor:"#06111f",
+scale:2,
+useCORS:true
 }
-
-/* SVG TO STRING */
-
-let svgData =
-new XMLSerializer()
-.serializeToString(cloneSVG);
-
-/* CANVAS */
-
-let canvas =
-document.createElement("canvas");
-
-canvas.width = 1000;
-canvas.height = 250;
-
-let ctx =
-canvas.getContext("2d");
-
-/* BG */
-
-ctx.fillStyle = "#ffffff";
-
-ctx.fillRect(
-0,
-0,
-canvas.width,
-canvas.height
 );
 
 /* IMAGE */
 
-let img =
-new Image();
-
-img.crossOrigin = "anonymous";
-
-/* BLOB */
-
-let svgBlob =
-new Blob(
-[svgData],
-{
-type:"image/svg+xml;charset=utf-8"
-}
-);
-
-let url =
-URL.createObjectURL(svgBlob);
-
-/* LOAD IMAGE */
-
-img.onload = async function(){
-
-try{
-
-ctx.drawImage(
-img,
-0,
-0,
-1000,
-250
-);
-
-URL.revokeObjectURL(url);
-
-/* PNG GRAPH */
-
 let graphImage =
-canvas.toDataURL(
+graphCanvas.toDataURL(
 "image/png"
 );
 
@@ -1597,7 +1500,6 @@ TREND GRAPH
 src="${graphImage}"
 style="
 width:100%;
-height:auto;
 border:1px solid #ccc;
 "
 />
@@ -1626,7 +1528,7 @@ await html2pdf()
 margin:0.3,
 
 filename:
-"WATER_PUMP.pdf",
+`SCADA_${dateNow.replace(/\//g,'-')}_${timeNow.replace(/:/g,'-')}.pdf`,
 
 image:{
 type:"jpeg",
@@ -1649,63 +1551,23 @@ orientation:"portrait"
 .from(element)
 .save();
 
-/* CLEAN */
+/* HAPUS */
 
 document.body.removeChild(
 element
 );
 
 btn.disabled = false;
-
-btn.innerHTML =
-"EXPORT PDF";
+btn.innerHTML = "EXPORT PDF";
 
 }catch(err){
 
 console.log(err);
 
-alert(
-"Gagal render graph"
-);
+alert("Export PDF gagal");
 
 btn.disabled = false;
-
-btn.innerHTML =
-"EXPORT PDF";
-
-}
-
-};
-
-/* ERROR IMAGE */
-
-img.onerror = function(){
-
-alert(
-"Graph gagal diproses"
-);
-
-btn.disabled = false;
-
-btn.innerHTML =
-"EXPORT PDF";
-
-};
-
-img.src = url;
-
-}catch(err){
-
-console.log(err);
-
-alert(
-"Export PDF gagal"
-);
-
-btn.disabled = false;
-
-btn.innerHTML =
-"EXPORT PDF";
+btn.innerHTML = "EXPORT PDF";
 
 }
 
