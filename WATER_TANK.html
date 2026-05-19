@@ -1310,12 +1310,47 @@ now.toLocaleTimeString();
 /* AMBIL SVG GRAPH */
 
 let svg =
-document.querySelector("#historyGraph");
+document.querySelector("#historyGraph")
+.cloneNode(true);
 
-/* CONVERT SVG KE IMAGE */
+/* FIX SVG */
+
+svg.setAttribute(
+"xmlns",
+"http://www.w3.org/2000/svg"
+);
+
+svg.setAttribute("width","1000");
+
+svg.setAttribute("height","250");
+
+/* FIX PATH */
+
+let path =
+svg.querySelector("path");
+
+path.setAttribute(
+"stroke",
+"#00b7ff"
+);
+
+path.setAttribute(
+"stroke-width",
+"4"
+);
+
+path.setAttribute(
+"fill",
+"none"
+);
+
+/* SVG TO STRING */
 
 let svgData =
-new XMLSerializer().serializeToString(svg);
+new XMLSerializer()
+.serializeToString(svg);
+
+/* CANVAS */
 
 let canvas =
 document.createElement("canvas");
@@ -1326,30 +1361,60 @@ canvas.height = 250;
 let ctx =
 canvas.getContext("2d");
 
+/* IMAGE */
+
 let img =
 new Image();
 
+/* BLOB */
+
 let svgBlob =
-new Blob([svgData],{
-type:"image/svg+xml;charset=utf-8"
-});
+new Blob(
+[svgData],
+{
+type:
+"image/svg+xml;charset=utf-8"
+}
+);
 
 let url =
 URL.createObjectURL(svgBlob);
 
+img.crossOrigin =
+"anonymous";
+
+/* LOAD IMAGE */
+
 img.onload = function(){
 
-ctx.fillStyle = "#ffffff";
-ctx.fillRect(0,0,canvas.width,canvas.height);
+ctx.fillStyle =
+"#ffffff";
 
-ctx.drawImage(img,0,0);
+ctx.fillRect(
+0,
+0,
+canvas.width,
+canvas.height
+);
+
+/* DRAW GRAPH */
+
+ctx.drawImage(
+img,
+0,
+0,
+1000,
+250
+);
 
 URL.revokeObjectURL(url);
+
+/* PNG GRAPH */
 
 let graphImage =
 canvas.toDataURL("image/png");
 
-/* HTML PDF */
+/* PDF HTML */
 
 let pdfHTML = `
 
@@ -1597,14 +1662,15 @@ document.createElement("div");
 element.innerHTML =
 pdfHTML;
 
-/* EXPORT */
+/* EXPORT PDF */
 
 html2pdf()
 .set({
 
 margin:0.3,
 
-filename:"WATER_PUMP.pdf",
+filename:
+"WATER_PUMP.pdf",
 
 image:{
 type:"jpeg",
@@ -1627,6 +1693,8 @@ orientation:"portrait"
 .save();
 
 };
+
+/* LOAD SVG */
 
 img.src = url;
 
