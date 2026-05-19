@@ -482,6 +482,65 @@ font-size:50px;
 
 }
 
+  /* FIX PDF MOBILE */
+
+#reportArea{
+background:#ffffff;
+color:#000000;
+padding:20px;
+border-radius:10px;
+}
+
+#reportArea table{
+background:#ffffff;
+color:#000000;
+}
+
+#reportArea th{
+background:#0c1d30;
+color:#ffffff;
+}
+
+#reportArea td{
+color:#000000;
+}
+
+#reportArea .graph{
+background:#ffffff;
+border:1px solid #ccc;
+page-break-inside: avoid;
+}
+
+#reportArea svg{
+width:100%;
+height:220px;
+display:block;
+}
+
+#reportArea path{
+stroke:#0077ff;
+stroke-width:4;
+fill:none;
+}
+
+/* BIAR TABEL + GRAPH GA KE POTONG */
+
+table,
+.graph,
+h3{
+page-break-inside: avoid;
+}
+
+/* FIX HP */
+
+@media print{
+
+body{
+background:#ffffff;
+}
+
+}
+
 </style>
 
 </head>
@@ -1286,16 +1345,82 @@ document.getElementById("graphPath")
 
 }
 
-/* EXPORT PDF */
+/* EXPORT PDF FIX ANDROID */
 
-function exportPDF(){
+async function exportPDF(){
 
-let element =
+const element =
 document.getElementById("reportArea");
 
-html2pdf()
+/* BIKIN STYLE PDF */
+
+const oldBg = document.body.style.background;
+document.body.style.background = "#ffffff";
+
+element.style.background = "#ffffff";
+element.style.color = "#000000";
+element.style.padding = "20px";
+
+/* FIX SVG GRAPH */
+
+const svg =
+document.querySelector("#reportArea svg");
+
+const cloneSvg =
+svg.cloneNode(true);
+
+cloneSvg.setAttribute("xmlns","http://www.w3.org/2000/svg");
+
+svg.parentNode.replaceChild(cloneSvg,svg);
+
+/* OPTIONS */
+
+const opt = {
+
+margin: 0.3,
+
+filename: 'WATER_TANK_SCADA.pdf',
+
+image: {
+type: 'jpeg',
+quality: 1
+},
+
+html2canvas: {
+
+scale: 3,
+useCORS: true,
+scrollY: 0,
+backgroundColor: "#ffffff"
+
+},
+
+jsPDF: {
+
+unit: 'in',
+format: 'a4',
+orientation: 'portrait'
+
+},
+
+pagebreak: {
+
+mode: ['avoid-all','css','legacy']
+
+}
+
+};
+
+/* EXPORT */
+
+await html2pdf()
+.set(opt)
 .from(element)
-.save("WATER_TANK.pdf");
+.save();
+
+/* BALIKIN STYLE */
+
+document.body.style.background = oldBg;
 
 }
 
