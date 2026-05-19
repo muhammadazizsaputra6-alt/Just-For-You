@@ -1283,8 +1283,6 @@ document.getElementById("graphPath")
 
 }
 
-/* ================= EXPORT PDF FINAL FIX ================= */
-
 function exportPDF(){
 
 if(historyData.length === 0){
@@ -1299,10 +1297,9 @@ return;
 let lastData =
 historyData[historyData.length - 1];
 
-/* TANGGAL */
+/* DATE TIME */
 
-let now =
-new Date();
+let now = new Date();
 
 let dateNow =
 now.toLocaleDateString();
@@ -1312,9 +1309,45 @@ now.toLocaleTimeString();
 
 /* AMBIL SVG GRAPH */
 
-let graphSVG =
-document.querySelector("#historyGraph")
-.outerHTML;
+let svg =
+document.querySelector("#historyGraph");
+
+/* CONVERT SVG KE IMAGE */
+
+let svgData =
+new XMLSerializer().serializeToString(svg);
+
+let canvas =
+document.createElement("canvas");
+
+canvas.width = 1000;
+canvas.height = 250;
+
+let ctx =
+canvas.getContext("2d");
+
+let img =
+new Image();
+
+let svgBlob =
+new Blob([svgData],{
+type:"image/svg+xml;charset=utf-8"
+});
+
+let url =
+URL.createObjectURL(svgBlob);
+
+img.onload = function(){
+
+ctx.fillStyle = "#ffffff";
+ctx.fillRect(0,0,canvas.width,canvas.height);
+
+ctx.drawImage(img,0,0);
+
+URL.revokeObjectURL(url);
+
+let graphImage =
+canvas.toDataURL("image/png");
 
 /* HTML PDF */
 
@@ -1323,8 +1356,8 @@ let pdfHTML = `
 <div style="
 padding:30px;
 font-family:Arial;
-color:black;
 background:white;
+color:black;
 width:100%;
 ">
 
@@ -1332,8 +1365,9 @@ width:100%;
 
 <h1 style="
 text-align:center;
-margin-bottom:40px;
 font-size:32px;
+margin-bottom:40px;
+color:#0c1d30;
 ">
 WATER TANK SCADA
 </h1>
@@ -1341,7 +1375,7 @@ WATER TANK SCADA
 <!-- DATE -->
 
 <div style="
-margin-bottom:10px;
+margin-bottom:8px;
 font-size:16px;
 ">
 
@@ -1374,7 +1408,7 @@ SUMMARY
 width:100%;
 border-collapse:collapse;
 margin-bottom:35px;
-" border="1">
+">
 
 <tr>
 
@@ -1382,6 +1416,7 @@ margin-bottom:35px;
 padding:12px;
 background:#0c1d30;
 color:white;
+border:1px solid #ccc;
 ">
 PARAMETER
 </th>
@@ -1390,6 +1425,7 @@ PARAMETER
 padding:12px;
 background:#0c1d30;
 color:white;
+border:1px solid #ccc;
 ">
 VALUE
 </th>
@@ -1398,11 +1434,17 @@ VALUE
 
 <tr>
 
-<td style="padding:12px">
+<td style="
+padding:12px;
+border:1px solid #ccc;
+">
 MAX LEVEL
 </td>
 
-<td style="padding:12px">
+<td style="
+padding:12px;
+border:1px solid #ccc;
+">
 ${level}%
 </td>
 
@@ -1410,11 +1452,17 @@ ${level}%
 
 <tr>
 
-<td style="padding:12px">
+<td style="
+padding:12px;
+border:1px solid #ccc;
+">
 FINAL STATUS
 </td>
 
-<td style="padding:12px">
+<td style="
+padding:12px;
+border:1px solid #ccc;
+">
 ${running ? 'RUNNING' : 'STOPPED/FULL'}
 </td>
 
@@ -1422,11 +1470,17 @@ ${running ? 'RUNNING' : 'STOPPED/FULL'}
 
 <tr>
 
-<td style="padding:12px">
+<td style="
+padding:12px;
+border:1px solid #ccc;
+">
 TOTAL DATA
 </td>
 
-<td style="padding:12px">
+<td style="
+padding:12px;
+border:1px solid #ccc;
+">
 ${historyData.length}
 </td>
 
@@ -1446,7 +1500,7 @@ HISTORY DATA
 width:100%;
 border-collapse:collapse;
 margin-bottom:40px;
-" border="1">
+">
 
 <tr>
 
@@ -1454,6 +1508,7 @@ margin-bottom:40px;
 padding:12px;
 background:#0c1d30;
 color:white;
+border:1px solid #ccc;
 ">
 TIME
 </th>
@@ -1462,6 +1517,7 @@ TIME
 padding:12px;
 background:#0c1d30;
 color:white;
+border:1px solid #ccc;
 ">
 LEVEL
 </th>
@@ -1470,6 +1526,7 @@ LEVEL
 padding:12px;
 background:#0c1d30;
 color:white;
+border:1px solid #ccc;
 ">
 PUMP
 </th>
@@ -1478,15 +1535,24 @@ PUMP
 
 <tr>
 
-<td style="padding:12px">
+<td style="
+padding:12px;
+border:1px solid #ccc;
+">
 ${lastData.time}
 </td>
 
-<td style="padding:12px">
+<td style="
+padding:12px;
+border:1px solid #ccc;
+">
 ${lastData.level}%
 </td>
 
-<td style="padding:12px">
+<td style="
+padding:12px;
+border:1px solid #ccc;
+">
 ${lastData.pump}
 </td>
 
@@ -1504,12 +1570,18 @@ TREND GRAPH
 
 <div style="
 width:100%;
-height:250px;
-border:1px solid #000;
+border:1px solid #ccc;
 padding:10px;
 ">
 
-${graphSVG}
+<img
+src="${graphImage}"
+style="
+width:100%;
+height:250px;
+object-fit:contain;
+"
+/>
 
 </div>
 
@@ -1532,7 +1604,7 @@ html2pdf()
 
 margin:0.3,
 
-filename:"WATER_TANK.pdf",
+filename:"WATER_PUMP.pdf",
 
 image:{
 type:"jpeg",
@@ -1541,7 +1613,6 @@ quality:1
 
 html2canvas:{
 scale:2,
-useCORS:true,
 backgroundColor:"#ffffff"
 },
 
@@ -1554,6 +1625,10 @@ orientation:"portrait"
 })
 .from(element)
 .save();
+
+};
+
+img.src = url;
 
 }
 
