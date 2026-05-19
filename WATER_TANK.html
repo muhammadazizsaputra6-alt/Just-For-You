@@ -1307,6 +1307,7 @@ now.toLocaleDateString();
 let timeNow =
 now.toLocaleTimeString();
 
+
 /* AMBIL SVG GRAPH */
 
 let svg =
@@ -1355,7 +1356,8 @@ path.setAttribute(
 /* CONVERT SVG KE IMAGE */
 
 let svgData =
-new XMLSerializer().serializeToString(svg);
+new XMLSerializer()
+.serializeToString(svg);
 
 let canvas =
 document.createElement("canvas");
@@ -1380,7 +1382,13 @@ URL.createObjectURL(svgBlob);
 img.onload = function(){
 
 ctx.fillStyle = "#ffffff";
-ctx.fillRect(0,0,canvas.width,canvas.height);
+
+ctx.fillRect(
+0,
+0,
+canvas.width,
+canvas.height
+);
 
 ctx.drawImage(
 img,
