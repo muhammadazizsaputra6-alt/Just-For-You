@@ -403,6 +403,17 @@ border-radius:20px;
 border:1px solid #16314f;
 }
 
+.reportArea{
+display:none;
+margin-top:20px;
+}
+
+.exportBtn{
+margin-top:25px;
+position:relative;
+z-index:999;
+}
+
 .timeFilter{
 display:grid;
 grid-template-columns:1fr 1fr;
@@ -841,7 +852,11 @@ TREND GRAPH
 
 </div>
 
-<button class="exportBtn" onclick="exportPDF()">
+<button
+class="exportBtn"
+id="exportBtn"
+type="button"
+onclick="exportPDF(event)">
 EXPORT PDF
 </button>
 
@@ -1284,21 +1299,34 @@ document.getElementById("graphPath")
 }
 
 
-function exportPDF(){
+async function exportPDF(e){
+
+if(e){
+e.preventDefault();
+e.stopPropagation();
+}
+
+let btn =
+document.getElementById("exportBtn");
+
+btn.disabled = true;
+btn.innerHTML = "GENERATING PDF...";
+
+try{
 
 if(historyData.length === 0){
 
 alert("Data history kosong");
+
+btn.disabled = false;
+btn.innerHTML = "EXPORT PDF";
+
 return;
 
 }
 
-/* DATA TERAKHIR */
-
 let lastData =
 historyData[historyData.length - 1];
-
-/* DATE TIME */
 
 let now = new Date();
 
@@ -1308,15 +1336,67 @@ now.toLocaleDateString();
 let timeNow =
 now.toLocaleTimeString();
 
-/* AMBIL SVG GRAPH */
+/* SVG */
 
 let svg =
 document.querySelector("#historyGraph");
 
-/* CONVERT SVG KE IMAGE */
+if(!svg){
+
+alert("Graph tidak ditemukan");
+return;
+
+}
+
+/* CLONE SVG */
+
+let cloneSVG =
+svg.cloneNode(true);
+
+/* FIX SVG */
+
+cloneSVG.setAttribute(
+"xmlns",
+"http://www.w3.org/2000/svg"
+);
+
+cloneSVG.setAttribute(
+"width",
+"1000"
+);
+
+cloneSVG.setAttribute(
+"height",
+"250"
+);
+
+/* FIX PATH */
+
+let path =
+cloneSVG.querySelector("path");
+
+if(path){
+
+path.setAttribute(
+"stroke",
+"#00b7ff"
+);
+
+path.setAttribute(
+"stroke-width",
+"4"
+);
+
+path.setAttribute(
+"fill",
+"none"
+);
+
+}
 
 let svgData =
-new XMLSerializer().serializeToString(svg);
+new XMLSerializer()
+.serializeToString(svg);
 
 let canvas =
 document.createElement("canvas");
@@ -1338,19 +1418,31 @@ type:"image/svg+xml;charset=utf-8"
 let url =
 URL.createObjectURL(svgBlob);
 
-img.onload = function(){
+img.onload = async function(){
 
 ctx.fillStyle = "#ffffff";
-ctx.fillRect(0,0,canvas.width,canvas.height);
 
-ctx.drawImage(img,0,0);
+ctx.fillRect(
+0,
+0,
+canvas.width,
+canvas.height
+);
+
+/* DRAW GRAPH */
+
+ctx.drawImage(
+img,
+0,
+0,
+1000,
+250
+);
 
 URL.revokeObjectURL(url);
 
 let graphImage =
 canvas.toDataURL("image/png");
-
-/* HTML PDF */
 
 let pdfHTML = `
 
@@ -1359,238 +1451,88 @@ padding:30px;
 font-family:Arial;
 background:white;
 color:black;
-width:100%;
 ">
-
-<!-- TITLE -->
 
 <h1 style="
 text-align:center;
-font-size:32px;
-margin-bottom:40px;
-color:#0c1d30;
+margin-bottom:30px;
 ">
 WATER TANK SCADA
 </h1>
 
-<!-- DATE -->
+<p><b>Date :</b> ${dateNow}</p>
+<p><b>Time :</b> ${timeNow}</p>
 
-<div style="
-margin-bottom:8px;
-font-size:16px;
-">
-
-<b>Date Export :</b>
-${dateNow}
-
-</div>
-
-<!-- TIME -->
-
-<div style="
-margin-bottom:30px;
-font-size:16px;
-">
-
-<b>Time Export :</b>
-${timeNow}
-
-</div>
-
-<!-- SUMMARY -->
-
-<h2 style="
-margin-bottom:15px;
-">
+<h2 style="margin-top:30px;">
 SUMMARY
 </h2>
 
 <table style="
 width:100%;
 border-collapse:collapse;
-margin-bottom:35px;
+margin-top:15px;
 ">
 
 <tr>
-
-<th style="
-padding:12px;
-background:#0c1d30;
-color:white;
-border:1px solid #ccc;
-">
+<th style="border:1px solid #ccc;padding:10px;">
 PARAMETER
 </th>
 
-<th style="
-padding:12px;
-background:#0c1d30;
-color:white;
-border:1px solid #ccc;
-">
+<th style="border:1px solid #ccc;padding:10px;">
 VALUE
 </th>
-
 </tr>
 
 <tr>
-
-<td style="
-padding:12px;
-border:1px solid #ccc;
-">
+<td style="border:1px solid #ccc;padding:10px;">
 MAX LEVEL
 </td>
 
-<td style="
-padding:12px;
-border:1px solid #ccc;
-">
+<td style="border:1px solid #ccc;padding:10px;">
 ${level}%
 </td>
-
 </tr>
 
 <tr>
-
-<td style="
-padding:12px;
-border:1px solid #ccc;
-">
+<td style="border:1px solid #ccc;padding:10px;">
 FINAL STATUS
 </td>
 
-<td style="
-padding:12px;
-border:1px solid #ccc;
-">
+<td style="border:1px solid #ccc;padding:10px;">
 ${running ? 'RUNNING' : 'STOPPED/FULL'}
 </td>
-
 </tr>
 
 <tr>
-
-<td style="
-padding:12px;
-border:1px solid #ccc;
-">
+<td style="border:1px solid #ccc;padding:10px;">
 TOTAL DATA
 </td>
 
-<td style="
-padding:12px;
-border:1px solid #ccc;
-">
+<td style="border:1px solid #ccc;padding:10px;">
 ${historyData.length}
 </td>
-
 </tr>
 
 </table>
 
-<!-- HISTORY -->
-
 <h2 style="
-margin-bottom:15px;
-">
-HISTORY DATA
-</h2>
-
-<table style="
-width:100%;
-border-collapse:collapse;
-margin-bottom:40px;
-">
-
-<tr>
-
-<th style="
-padding:12px;
-background:#0c1d30;
-color:white;
-border:1px solid #ccc;
-">
-TIME
-</th>
-
-<th style="
-padding:12px;
-background:#0c1d30;
-color:white;
-border:1px solid #ccc;
-">
-LEVEL
-</th>
-
-<th style="
-padding:12px;
-background:#0c1d30;
-color:white;
-border:1px solid #ccc;
-">
-PUMP
-</th>
-
-</tr>
-
-<tr>
-
-<td style="
-padding:12px;
-border:1px solid #ccc;
-">
-${lastData.time}
-</td>
-
-<td style="
-padding:12px;
-border:1px solid #ccc;
-">
-${lastData.level}%
-</td>
-
-<td style="
-padding:12px;
-border:1px solid #ccc;
-">
-${lastData.pump}
-</td>
-
-</tr>
-
-</table>
-
-<!-- GRAPH -->
-
-<h2 style="
+margin-top:40px;
 margin-bottom:20px;
 ">
 TREND GRAPH
 </h2>
 
-<div style="
-width:100%;
-border:1px solid #ccc;
-padding:10px;
-">
-
 <img
 src="${graphImage}"
 style="
 width:100%;
-height:250px;
-object-fit:contain;
+border:1px solid #ccc;
 "
 />
 
 </div>
 
-</div>
-
 `;
-
-/* ELEMENT */
 
 let element =
 document.createElement("div");
@@ -1598,14 +1540,14 @@ document.createElement("div");
 element.innerHTML =
 pdfHTML;
 
-/* EXPORT */
+document.body.appendChild(element);
 
-html2pdf()
+await html2pdf()
 .set({
 
 margin:0.3,
 
-filename:"WATER_TANK_SCADA.pdf",
+filename:"WATER_PUMP.pdf",
 
 image:{
 type:"jpeg",
@@ -1614,7 +1556,7 @@ quality:1
 
 html2canvas:{
 scale:2,
-backgroundColor:"#ffffff"
+useCORS:true
 },
 
 jsPDF:{
@@ -1627,9 +1569,34 @@ orientation:"portrait"
 .from(element)
 .save();
 
+document.body.removeChild(element);
+
+btn.disabled = false;
+btn.innerHTML = "EXPORT PDF";
+
+};
+
+img.onerror = function(){
+
+alert("Graph gagal diproses");
+
+btn.disabled = false;
+btn.innerHTML = "EXPORT PDF";
+
 };
 
 img.src = url;
+
+}catch(err){
+
+console.log(err);
+
+alert("Export PDF gagal");
+
+btn.disabled = false;
+btn.innerHTML = "EXPORT PDF";
+
+}
 
 }
 
