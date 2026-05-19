@@ -9,6 +9,8 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
 <style>
 
 *{
@@ -1302,14 +1304,15 @@ async function exportPDF(e){
 
 if(e){
 e.preventDefault();
-e.stopPropagation();
 }
 
 let btn =
 document.getElementById("exportBtn");
 
 btn.disabled = true;
-btn.innerHTML = "GENERATING PDF...";
+
+btn.innerHTML =
+"GENERATING PDF...";
 
 try{
 
@@ -1318,13 +1321,23 @@ if(historyData.length === 0){
 alert("Data history kosong");
 
 btn.disabled = false;
-btn.innerHTML = "EXPORT PDF";
+
+btn.innerHTML =
+"EXPORT PDF";
 
 return;
 
 }
 
-let now = new Date();
+/* DATA TERAKHIR */
+
+let lastData =
+historyData[historyData.length - 1];
+
+/* DATE */
+
+let now =
+new Date();
 
 let dateNow =
 now.toLocaleDateString();
@@ -1332,7 +1345,7 @@ now.toLocaleDateString();
 let timeNow =
 now.toLocaleTimeString();
 
-/* AMBIL GRAPH LANGSUNG */
+/* GRAPH */
 
 let graphElement =
 document.querySelector(
@@ -1344,7 +1357,9 @@ if(!graphElement){
 alert("Graph tidak ditemukan");
 
 btn.disabled = false;
-btn.innerHTML = "EXPORT PDF";
+
+btn.innerHTML =
+"EXPORT PDF";
 
 return;
 
@@ -1356,13 +1371,13 @@ let graphCanvas =
 await html2canvas(
 graphElement,
 {
-backgroundColor:"#06111f",
 scale:2,
+backgroundColor:"#06111f",
 useCORS:true
 }
 );
 
-/* IMAGE */
+/* IMAGE GRAPH */
 
 let graphImage =
 graphCanvas.toDataURL(
@@ -1381,26 +1396,44 @@ color:black;
 width:100%;
 ">
 
+<!-- TITLE -->
+
 <h1 style="
 text-align:center;
-margin-bottom:30px;
+font-size:32px;
+margin-bottom:40px;
 color:#0c1d30;
 ">
 WATER TANK SCADA
 </h1>
 
-<p>
-<b>Date :</b>
-${dateNow}
-</p>
+<!-- DATE -->
 
-<p>
-<b>Time :</b>
+<div style="
+margin-bottom:10px;
+font-size:16px;
+">
+
+<b>Date Export :</b>
+${dateNow}
+
+</div>
+
+<!-- TIME -->
+
+<div style="
+margin-bottom:35px;
+font-size:16px;
+">
+
+<b>Time Export :</b>
 ${timeNow}
-</p>
+
+</div>
+
+<!-- SUMMARY -->
 
 <h2 style="
-margin-top:30px;
 margin-bottom:15px;
 ">
 SUMMARY
@@ -1415,19 +1448,19 @@ margin-bottom:35px;
 <tr>
 
 <th style="
-border:1px solid #ccc;
 padding:12px;
 background:#0c1d30;
 color:white;
+border:1px solid #ccc;
 ">
 PARAMETER
 </th>
 
 <th style="
-border:1px solid #ccc;
 padding:12px;
 background:#0c1d30;
 color:white;
+border:1px solid #ccc;
 ">
 VALUE
 </th>
@@ -1437,15 +1470,15 @@ VALUE
 <tr>
 
 <td style="
-border:1px solid #ccc;
 padding:12px;
+border:1px solid #ccc;
 ">
 MAX LEVEL
 </td>
 
 <td style="
-border:1px solid #ccc;
 padding:12px;
+border:1px solid #ccc;
 ">
 ${level}%
 </td>
@@ -1455,15 +1488,15 @@ ${level}%
 <tr>
 
 <td style="
-border:1px solid #ccc;
 padding:12px;
+border:1px solid #ccc;
 ">
-STATUS
+FINAL STATUS
 </td>
 
 <td style="
-border:1px solid #ccc;
 padding:12px;
+border:1px solid #ccc;
 ">
 ${running ? 'RUNNING' : 'STOPPED/FULL'}
 </td>
@@ -1473,15 +1506,15 @@ ${running ? 'RUNNING' : 'STOPPED/FULL'}
 <tr>
 
 <td style="
-border:1px solid #ccc;
 padding:12px;
+border:1px solid #ccc;
 ">
 TOTAL DATA
 </td>
 
 <td style="
-border:1px solid #ccc;
 padding:12px;
+border:1px solid #ccc;
 ">
 ${historyData.length}
 </td>
@@ -1490,19 +1523,101 @@ ${historyData.length}
 
 </table>
 
+<!-- HISTORY -->
+
+<h2 style="
+margin-bottom:15px;
+">
+HISTORY DATA
+</h2>
+
+<table style="
+width:100%;
+border-collapse:collapse;
+margin-bottom:40px;
+">
+
+<tr>
+
+<th style="
+padding:12px;
+background:#0c1d30;
+color:white;
+border:1px solid #ccc;
+">
+TIME
+</th>
+
+<th style="
+padding:12px;
+background:#0c1d30;
+color:white;
+border:1px solid #ccc;
+">
+LEVEL
+</th>
+
+<th style="
+padding:12px;
+background:#0c1d30;
+color:white;
+border:1px solid #ccc;
+">
+PUMP
+</th>
+
+</tr>
+
+<tr>
+
+<td style="
+padding:12px;
+border:1px solid #ccc;
+">
+${lastData.time}
+</td>
+
+<td style="
+padding:12px;
+border:1px solid #ccc;
+">
+${lastData.level}%
+</td>
+
+<td style="
+padding:12px;
+border:1px solid #ccc;
+">
+${lastData.pump}
+</td>
+
+</tr>
+
+</table>
+
+<!-- GRAPH -->
+
 <h2 style="
 margin-bottom:20px;
 ">
 TREND GRAPH
 </h2>
 
+<div style="
+border:1px solid #ccc;
+padding:10px;
+">
+
 <img
 src="${graphImage}"
 style="
 width:100%;
-border:1px solid #ccc;
+height:auto;
+display:block;
 "
 />
+
+</div>
 
 </div>
 
@@ -1520,7 +1635,7 @@ document.body.appendChild(
 element
 );
 
-/* EXPORT */
+/* EXPORT PDF */
 
 await html2pdf()
 .set({
@@ -1528,7 +1643,7 @@ await html2pdf()
 margin:0.3,
 
 filename:
-`SCADA_${dateNow.replace(/\//g,'-')}_${timeNow.replace(/:/g,'-')}.pdf`,
+`SCADA_${Date.now()}.pdf`,
 
 image:{
 type:"jpeg",
@@ -1551,23 +1666,29 @@ orientation:"portrait"
 .from(element)
 .save();
 
-/* HAPUS */
+/* REMOVE */
 
 document.body.removeChild(
 element
 );
 
 btn.disabled = false;
-btn.innerHTML = "EXPORT PDF";
+
+btn.innerHTML =
+"EXPORT PDF";
 
 }catch(err){
 
 console.log(err);
 
-alert("Export PDF gagal");
+alert(
+"Export PDF gagal"
+);
 
 btn.disabled = false;
-btn.innerHTML = "EXPORT PDF";
+
+btn.innerHTML =
+"EXPORT PDF";
 
 }
 
