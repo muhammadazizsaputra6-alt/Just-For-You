@@ -1300,31 +1300,14 @@ document.getElementById("graphPath")
 
 }
 
-async function exportPDF(e){
 
-if(e){
-e.preventDefault();
-}
 
-let btn =
-document.getElementById("exportBtn");
 
-btn.disabled = true;
-
-btn.innerHTML =
-"GENERATING PDF...";
-
-try{
+async function exportPDF(){
 
 if(historyData.length === 0){
 
 alert("Data history kosong");
-
-btn.disabled = false;
-
-btn.innerHTML =
-"EXPORT PDF";
-
 return;
 
 }
@@ -1334,10 +1317,9 @@ return;
 let lastData =
 historyData[historyData.length - 1];
 
-/* DATE */
+/* DATE TIME */
 
-let now =
-new Date();
+let now = new Date();
 
 let dateNow =
 now.toLocaleDateString();
@@ -1345,7 +1327,7 @@ now.toLocaleDateString();
 let timeNow =
 now.toLocaleTimeString();
 
-/* GRAPH */
+/* AMBIL GRAPH ASLI */
 
 let graphElement =
 document.querySelector(
@@ -1355,12 +1337,6 @@ document.querySelector(
 if(!graphElement){
 
 alert("Graph tidak ditemukan");
-
-btn.disabled = false;
-
-btn.innerHTML =
-"EXPORT PDF";
-
 return;
 
 }
@@ -1384,7 +1360,7 @@ graphCanvas.toDataURL(
 "image/png"
 );
 
-/* PDF HTML */
+/* HTML PDF */
 
 let pdfHTML = `
 
@@ -1396,8 +1372,6 @@ color:black;
 width:100%;
 ">
 
-<!-- TITLE -->
-
 <h1 style="
 text-align:center;
 font-size:32px;
@@ -1407,10 +1381,8 @@ color:#0c1d30;
 WATER TANK SCADA
 </h1>
 
-<!-- DATE -->
-
 <div style="
-margin-bottom:10px;
+margin-bottom:8px;
 font-size:16px;
 ">
 
@@ -1419,10 +1391,8 @@ ${dateNow}
 
 </div>
 
-<!-- TIME -->
-
 <div style="
-margin-bottom:35px;
+margin-bottom:30px;
 font-size:16px;
 ">
 
@@ -1430,8 +1400,6 @@ font-size:16px;
 ${timeNow}
 
 </div>
-
-<!-- SUMMARY -->
 
 <h2 style="
 margin-bottom:15px;
@@ -1523,8 +1491,6 @@ ${historyData.length}
 
 </table>
 
-<!-- HISTORY -->
-
 <h2 style="
 margin-bottom:15px;
 ">
@@ -1595,8 +1561,6 @@ ${lastData.pump}
 
 </table>
 
-<!-- GRAPH -->
-
 <h2 style="
 margin-bottom:20px;
 ">
@@ -1604,15 +1568,16 @@ TREND GRAPH
 </h2>
 
 <div style="
+width:100%;
 border:1px solid #ccc;
 padding:10px;
+background:white;
 ">
 
 <img
 src="${graphImage}"
 style="
 width:100%;
-height:auto;
 display:block;
 "
 />
@@ -1643,7 +1608,7 @@ await html2pdf()
 margin:0.3,
 
 filename:
-`SCADA_${Date.now()}.pdf`,
+"WATER_PUMP.pdf",
 
 image:{
 type:"jpeg",
@@ -1652,8 +1617,8 @@ quality:1
 
 html2canvas:{
 scale:2,
-useCORS:true,
-backgroundColor:"#ffffff"
+backgroundColor:"#ffffff",
+useCORS:true
 },
 
 jsPDF:{
@@ -1666,31 +1631,11 @@ orientation:"portrait"
 .from(element)
 .save();
 
-/* REMOVE */
+/* HAPUS ELEMENT */
 
 document.body.removeChild(
 element
 );
-
-btn.disabled = false;
-
-btn.innerHTML =
-"EXPORT PDF";
-
-}catch(err){
-
-console.log(err);
-
-alert(
-"Export PDF gagal"
-);
-
-btn.disabled = false;
-
-btn.innerHTML =
-"EXPORT PDF";
-
-}
 
 }
 
