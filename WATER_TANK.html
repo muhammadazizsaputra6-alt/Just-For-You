@@ -1283,6 +1283,7 @@ document.getElementById("graphPath")
 
 }
 
+
 function exportPDF(){
 
 if(historyData.length === 0){
@@ -1307,57 +1308,15 @@ now.toLocaleDateString();
 let timeNow =
 now.toLocaleTimeString();
 
-
 /* AMBIL SVG GRAPH */
 
 let svg =
-document.querySelector("#historyGraph")
-.cloneNode(true);
-
-svg.setAttribute(
-"xmlns",
-"http://www.w3.org/2000/svg"
-);
-
-svg.setAttribute(
-"width",
-"1000"
-);
-
-svg.setAttribute(
-"height",
-"250"
-);
-
-/* FIX PATH */
-
-let path =
-svg.querySelector("path");
-
-if(path){
-
-path.setAttribute(
-"stroke",
-"#00b7ff"
-);
-
-path.setAttribute(
-"stroke-width",
-"4"
-);
-
-path.setAttribute(
-"fill",
-"none"
-);
-
-}
+document.querySelector("#historyGraph");
 
 /* CONVERT SVG KE IMAGE */
 
 let svgData =
-new XMLSerializer()
-.serializeToString(svg);
+new XMLSerializer().serializeToString(svg);
 
 let canvas =
 document.createElement("canvas");
@@ -1382,21 +1341,9 @@ URL.createObjectURL(svgBlob);
 img.onload = function(){
 
 ctx.fillStyle = "#ffffff";
+ctx.fillRect(0,0,canvas.width,canvas.height);
 
-ctx.fillRect(
-0,
-0,
-canvas.width,
-canvas.height
-);
-
-ctx.drawImage(
-img,
-0,
-0,
-1000,
-250
-);
+ctx.drawImage(img,0,0);
 
 URL.revokeObjectURL(url);
 
@@ -1684,7 +1631,7 @@ orientation:"portrait"
 
 img.src = url;
 
-  }
+}
 
 /* LOGOUT */
 
