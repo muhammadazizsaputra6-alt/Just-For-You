@@ -1670,7 +1670,7 @@ html2pdf()
 margin:0.3,
 
 filename:
-"WATER_PUMP.pdf",
+"WATER_TANK_SCADA.pdf",
 
 image:{
 type:"jpeg",
@@ -1692,13 +1692,13 @@ orientation:"portrait"
 .from(element)
 .save();
 
-};
+}; /* <- ini penutup img.onload */
 
 /* LOAD SVG */
 
 img.src = url;
 
-}
+} /* <- ini penutup exportPDF */
 
 /* LOGOUT */
 
