@@ -47,7 +47,7 @@ padding:35px;
 border-radius:22px;
 border:1px solid #16314f;
 box-shadow:
-0 0 40px rgba(0,183,255,.12);
+0 0 40px rgba(0,183,255,.15);
 }
 
 .box h1{
@@ -92,24 +92,50 @@ background:
 linear-gradient(90deg,#0077ff,#00b7ff);
 }
 
-/* LINK LOGIN */
-
 .loginLinks{
 display:flex;
 justify-content:space-between;
 margin-top:18px;
-font-size:14px;
 }
 
 .loginLinks a{
 color:#8fbfe6;
 text-decoration:none;
-transition:.3s;
+font-size:14px;
 cursor:pointer;
+transition:.3s;
 }
 
 .loginLinks a:hover{
 color:#00b7ff;
+}
+
+/* POPUP */
+
+.popup{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,.7);
+display:none;
+justify-content:center;
+align-items:center;
+z-index:999;
+}
+
+.popupBox{
+width:100%;
+max-width:420px;
+background:#081423;
+padding:30px;
+border-radius:20px;
+border:1px solid #16314f;
+}
+
+.closeBtn{
+background:#ff2d55;
 }
 
 /* SCADA */
@@ -119,8 +145,6 @@ display:none;
 width:100%;
 height:100vh;
 }
-
-/* SIDEBAR */
 
 .sidebar{
 width:230px;
@@ -163,15 +187,11 @@ background:
 linear-gradient(90deg,#0077ff,#00b7ff);
 }
 
-/* MAIN */
-
 .main{
 flex:1;
 padding:15px;
 overflow:auto;
 }
-
-/* TOPBAR */
 
 .topbar{
 background:#081423;
@@ -216,38 +236,29 @@ grid-template-columns:2.2fr 1fr;
 gap:18px;
 }
 
-/* CARD */
+/* TANK */
 
 .tankCard{
 background:
 linear-gradient(180deg,#081423,#06111f);
-
 padding:25px;
 border-radius:24px;
 border:1px solid #16314f;
-min-height:760px;
-overflow:hidden;
 }
-
-/* TANK AREA */
 
 .tankMainArea{
 display:flex;
 justify-content:center;
 align-items:flex-start;
-gap:20px;
+gap:35px;
 margin-top:25px;
-flex-wrap:wrap;
 }
-
-/* SCALE */
 
 .scaleWrapper{
 height:500px;
 display:flex;
 align-items:center;
 margin-right:-15px;
-z-index:100;
 }
 
 .scaleBar{
@@ -262,14 +273,12 @@ right:15px;
 top:0;
 width:4px;
 height:100%;
-
 background:
 linear-gradient(
 180deg,
 #63ff8d,
 #00b7ff
 );
-
 border-radius:20px;
 }
 
@@ -284,8 +293,6 @@ gap:10px;
 }
 
 .scaleItem span{
-font-size:18px;
-color:#ffffff;
 width:55px;
 text-align:right;
 }
@@ -297,21 +304,16 @@ height:2px;
 background:#c5eeff;
 }
 
-/* SYSTEM */
-
 .tankSystem{
 position:relative;
 width:780px;
 height:560px;
 }
 
-/* TANK */
-
 .tankIndustrial{
 position:absolute;
 left:0;
 bottom:50px;
-
 width:440px;
 height:470px;
 
@@ -329,12 +331,7 @@ linear-gradient(
 );
 
 border:5px solid #f3f8ff;
-
 overflow:hidden;
-
-box-shadow:
-inset 0 0 45px rgba(255,255,255,.16),
-0 0 40px rgba(0,183,255,.18);
 }
 
 .tankIndustrial::before{
@@ -343,24 +340,18 @@ position:absolute;
 top:-30px;
 left:50%;
 transform:translateX(-50%);
-
 width:85%;
 height:65px;
-
 border-radius:50%;
-
 background:
 linear-gradient(
 180deg,
 #dbe6f1,
 #7d8b98
 );
-
 border:4px solid #d7e5f2;
 z-index:10;
 }
-
-/* WATER */
 
 .waterFill{
 position:absolute;
@@ -368,7 +359,6 @@ left:0;
 bottom:0;
 width:100%;
 height:0%;
-
 background:
 linear-gradient(
 180deg,
@@ -376,7 +366,6 @@ linear-gradient(
 #2ecfff 35%,
 #0077ff 100%
 );
-
 transition:1s ease;
 }
 
@@ -397,8 +386,6 @@ animation:wave 4s linear infinite;
 100%{transform:translateX(-80px);}
 }
 
-/* TEXT */
-
 .tankOverlay{
 position:absolute;
 top:50%;
@@ -414,10 +401,7 @@ font-size:82px;
 
 .tankOverlay p{
 font-size:28px;
-margin-top:10px;
 }
-
-/* PIPE */
 
 .pipeHorizontal{
 position:absolute;
@@ -449,18 +433,13 @@ linear-gradient(
 border-radius:20px;
 }
 
-/* VALVE */
-
 .valve{
 position:absolute;
 top:38px;
 left:530px;
-
 width:85px;
 height:85px;
-
 border-radius:50%;
-
 background:
 radial-gradient(
 circle,
@@ -469,21 +448,17 @@ circle,
 );
 }
 
-/* LEGS */
-
 .tankLeg{
 position:absolute;
 bottom:0;
 width:40px;
 height:60px;
-
 background:
 linear-gradient(
 180deg,
 #8998a8,
 #33404d
 );
-
 border-radius:8px;
 }
 
@@ -491,7 +466,20 @@ border-radius:8px;
 .leg2{left:180px;}
 .leg3{left:300px;}
 
-/* SIDE DATA */
+.pump3D{
+position:absolute;
+right:0;
+bottom:0;
+width:240px;
+height:180px;
+display:flex;
+justify-content:center;
+align-items:center;
+}
+
+.pumpImage{
+width:100%;
+}
 
 .sideData{
 display:flex;
@@ -507,29 +495,16 @@ linear-gradient(
 #0d1c2f,
 #081423
 );
-
 padding:22px;
 border-radius:22px;
 border:1px solid #16314f;
 }
 
-.dataTop{
-display:flex;
-align-items:center;
-gap:15px;
-}
-
-.icon{
-font-size:40px;
-}
-
 .dataBox h1{
-margin-top:10px;
 font-size:42px;
+margin-top:10px;
 color:#77efff;
 }
-
-/* RIGHT */
 
 .right{
 display:flex;
@@ -538,7 +513,8 @@ gap:18px;
 }
 
 .panel{
-background:linear-gradient(180deg,#0b1a2c,#081423);
+background:
+linear-gradient(180deg,#0b1a2c,#081423);
 padding:20px;
 border-radius:20px;
 border:1px solid #16314f;
@@ -551,17 +527,10 @@ margin:20px 0;
 font-weight:bold;
 }
 
-.modeBtns{
-display:flex;
-gap:12px;
-margin-bottom:20px;
-}
-
 .modeBtn{
 flex:1;
 height:55px;
 font-size:17px;
-transition:.3s;
 }
 
 .modeActive{
@@ -595,8 +564,6 @@ padding:12px 0;
 border-bottom:1px solid #16314f;
 }
 
-/* BOTTOM */
-
 .bottom{
 margin-top:18px;
 display:grid;
@@ -605,7 +572,8 @@ gap:18px;
 }
 
 .graphCard,
-.tableCard{
+.tableCard,
+.historyBox{
 background:#081423;
 padding:20px;
 border-radius:20px;
@@ -649,8 +617,6 @@ border-bottom:1px solid #16314f;
 text-align:left;
 }
 
-/* FOOTER */
-
 .footer{
 margin-top:18px;
 background:#081423;
@@ -660,20 +626,6 @@ border:1px solid #16314f;
 display:flex;
 justify-content:space-around;
 color:#8fbfe6;
-}
-
-/* HISTORY */
-
-.historyBox{
-background:#081423;
-padding:25px;
-border-radius:20px;
-border:1px solid #16314f;
-}
-
-.reportArea{
-display:none;
-margin-top:20px;
 }
 
 .timeFilter{
@@ -691,6 +643,11 @@ linear-gradient(90deg,#0077ff,#00b7ff);
 .exportBtn{
 background:
 linear-gradient(90deg,#00a65a,#00d96f);
+margin-top:20px;
+}
+
+.reportArea{
+display:none;
 }
 
 </style>
@@ -709,7 +666,6 @@ linear-gradient(90deg,#00a65a,#00d96f);
 <p>Water Tank Monitoring & Control</p>
 
 <input type="email" id="email" placeholder="Email">
-
 <input type="password" id="password" placeholder="Password">
 
 <button class="loginBtn" onclick="login()">
@@ -718,17 +674,64 @@ LOGIN
 
 <div class="loginLinks">
 
-<a onclick="forgotPassword()">
+<a onclick="openForgot()">
 Forgot Password?
 </a>
 
-<a onclick="registerAccount()">
+<a onclick="openRegister()">
 Belum punya akun?
 </a>
 
 </div>
 
 </div>
+
+</div>
+
+<!-- REGISTER -->
+
+<div class="popup" id="registerPopup">
+
+<div class="popupBox">
+
+<h2>Register Account</h2>
+
+<input type="email" id="newEmail" placeholder="Email">
+
+<input type="password" id="newPassword" placeholder="Password">
+
+<button class="loginBtn" onclick="registerAccount()">
+DAFTAR
+</button>
+
+<button class="closeBtn" onclick="closePopup()">
+TUTUP
+</button>
+
+</div>
+
+</div>
+
+<!-- FORGOT -->
+
+<div class="popup" id="forgotPopup">
+
+<div class="popupBox">
+
+<h2>Forgot Password</h2>
+
+<input type="email" id="resetEmail" placeholder="Email">
+
+<button class="loginBtn" onclick="resetPassword()">
+RESET PASSWORD
+</button>
+
+<button class="closeBtn" onclick="closePopup()">
+TUTUP
+</button>
+
+</div>
+
 </div>
 
 <!-- SCADA -->
@@ -746,13 +749,13 @@ Belum punya akun?
 
 <ul>
 
-<li class="active" onclick="showDashboard()">
-Dashboard
-</li>
-
-<li onclick="showHistory()">
-History
-</li>
+<li class="active" onclick="showDashboard()">Dashboard</li>
+<li>Monitoring</li>
+<li>Control</li>
+<li>Alarm</li>
+<li>Trend Graph</li>
+<li onclick="showHistory()">History</li>
+<li>Setting</li>
 
 </ul>
 
@@ -760,11 +763,15 @@ History
 
 <div class="main">
 
+<!-- DASHBOARD -->
+
+<div class="dashboardPage" id="dashboardPage">
+
 <div class="topbar">
 
 <div>
 
-<h2>WATER TANK MONITORING</h2>
+<h2>WATER TANK MONITORING & CONTROL SYSTEM</h2>
 
 <p>REAL TIME MONITORING</p>
 
@@ -774,27 +781,17 @@ History
 
 <div id="userEmail"></div>
 
-<a onclick="logout()">
-Logout
-</a>
+<a onclick="logout()">Logout</a>
 
 </div>
 
 </div>
-
-<!-- DASHBOARD -->
-
-<div class="dashboardPage" id="dashboardPage">
 
 <div class="content">
-
-<!-- LEFT -->
 
 <div class="tankCard">
 
 <div class="tankMainArea">
-
-<!-- SCALE -->
 
 <div class="scaleWrapper">
 
@@ -802,31 +799,15 @@ Logout
 
 <div class="scaleLine"></div>
 
-<div class="scaleItem" style="top:-10px;">
-<span>100%</span>
-</div>
-
-<div class="scaleItem" style="top:100px;">
-<span>75%</span>
-</div>
-
-<div class="scaleItem" style="top:210px;">
-<span>50%</span>
-</div>
-
-<div class="scaleItem" style="top:320px;">
-<span>25%</span>
-</div>
-
-<div class="scaleItem" style="bottom:-10px;">
-<span>0%</span>
-</div>
+<div class="scaleItem" style="top:-10px;"><span>100%</span></div>
+<div class="scaleItem" style="top:100px;"><span>75%</span></div>
+<div class="scaleItem" style="top:210px;"><span>50%</span></div>
+<div class="scaleItem" style="top:320px;"><span>25%</span></div>
+<div class="scaleItem" style="bottom:-10px;"><span>0%</span></div>
 
 </div>
 
 </div>
-
-<!-- SYSTEM -->
 
 <div class="tankSystem">
 
@@ -837,7 +818,6 @@ Logout
 <div class="tankOverlay">
 
 <h1 id="levelText">0%</h1>
-
 <p id="cmText">0 cm</p>
 
 </div>
@@ -852,53 +832,34 @@ Logout
 <div class="pipeVertical"></div>
 <div class="valve"></div>
 
+<div class="pump3D">
+
+<img src="pump.png" class="pumpImage">
+
 </div>
 
-<!-- DATA -->
+</div>
 
 <div class="sideData">
 
 <div class="dataBox">
-
-<div class="dataTop">
-
-<div class="icon">💧</div>
-
-<div>
+<div style="font-size:40px;">💧</div>
 <h3>VOLUME</h3>
 <h1>725</h1>
 <p>LITER</p>
 </div>
 
-</div>
-
-</div>
-
 <div class="dataBox">
-
-<div class="dataTop">
-
-<div class="icon">🌡️</div>
-
-<div>
-<h3>TEMP</h3>
-<h1>28°</h1>
+<div style="font-size:40px;">🌡️</div>
+<h3>TEMPERATURE</h3>
+<h1>28.4°</h1>
 <p>CELCIUS</p>
 </div>
 
-</div>
-
-</div>
-
 <div class="dataBox">
-
-<div class="dataTop">
-
-<div class="icon">⚙️</div>
-
-<div>
+<div style="font-size:40px;">⚙️</div>
 <h3>PRESSURE</h3>
-<h1>2.3</h1>
+<h1>2.35</h1>
 <p>BAR</p>
 </div>
 
@@ -907,12 +868,6 @@ Logout
 </div>
 
 </div>
-
-</div>
-
-</div>
-
-<!-- RIGHT -->
 
 <div class="right">
 
@@ -924,19 +879,13 @@ Logout
 ● STOPPED
 </div>
 
-<div class="modeBtns">
+<div style="display:flex;gap:12px;margin-bottom:20px;">
 
-<button
-id="autoBtn"
-class="modeBtn modeActive"
-onclick="setAuto()">
+<button id="autoBtn" class="modeBtn modeActive">
 AUTO
 </button>
 
-<button
-id="manualBtn"
-class="modeBtn modeInactive"
-onclick="setManual()">
+<button id="manualBtn" class="modeBtn modeInactive">
 MANUAL
 </button>
 
@@ -951,7 +900,7 @@ MANUAL
 </button>
 
 <button class="gray" onclick="resetTank()">
-RESET
+RESET ALARM
 </button>
 
 </div>
@@ -1016,9 +965,9 @@ RESET
 
 <div class="footer">
 
-<div>COM3</div>
-<div>9600</div>
-<div>ONLINE</div>
+<div>COM PORT : COM3</div>
+<div>BAUDRATE : 9600</div>
+<div>STATUS : ONLINE</div>
 <div id="clock"></div>
 
 </div>
@@ -1031,29 +980,50 @@ RESET
 
 <div class="historyBox">
 
-<h2>HISTORY</h2>
+<h2>HISTORY REPORT</h2>
+
+<p style="margin-top:10px;color:#8fbfe6;">
+Masukkan rentang waktu monitoring
+</p>
 
 <div class="timeFilter">
 
 <div>
-<label>FROM</label>
+<label>FROM TIME</label>
 <input type="time" id="fromTime">
 </div>
 
 <div>
-<label>TO</label>
+<label>TO TIME</label>
 <input type="time" id="toTime">
 </div>
 
 </div>
 
-<button
-class="generateBtn"
-onclick="generateHistory()">
+<button class="generateBtn" onclick="generateHistory()">
 GENERATE HISTORY
 </button>
 
 <div class="reportArea" id="reportArea">
+
+<h3 style="margin-top:25px;">
+SUMMARY
+</h3>
+
+<table>
+
+<tr>
+<th>PARAMETER</th>
+<th>VALUE</th>
+</tr>
+
+<tbody id="summaryTable"></tbody>
+
+</table>
+
+<h3 style="margin-top:25px;">
+HISTORY DATA
+</h3>
 
 <table>
 
@@ -1067,9 +1037,21 @@ GENERATE HISTORY
 
 </table>
 
-<button
-class="exportBtn"
-onclick="exportPDF()">
+<h3 style="margin-top:25px;">
+TREND GRAPH
+</h3>
+
+<div class="graph">
+
+<svg viewBox="0 0 1000 250">
+
+<path id="historyGraph" d="M0 240"></path>
+
+</svg>
+
+</div>
+
+<button class="exportBtn" onclick="exportPDF()">
 EXPORT PDF
 </button>
 
@@ -1120,11 +1102,23 @@ document.getElementById("email").value;
 let password =
 document.getElementById("password").value;
 
-if(email==="" || password===""){
+let savedEmail =
+localStorage.getItem("accountEmail");
 
+let savedPassword =
+localStorage.getItem("accountPassword");
+
+if(email === "" || password === ""){
 alert("Masukkan email dan password");
 return;
+}
 
+if(
+email !== savedEmail ||
+password !== savedPassword
+){
+alert("Email atau password salah");
+return;
 }
 
 localStorage.setItem(
@@ -1141,10 +1135,97 @@ document.getElementById("userEmail")
 .innerHTML = email;
 
 document.getElementById("loginPage")
-.style.display="none";
+.style.display = "none";
 
 document.getElementById("scadaPage")
-.style.display="flex";
+.style.display = "flex";
+
+}
+
+/* REGISTER */
+
+function openRegister(){
+
+document.getElementById("registerPopup")
+.style.display = "flex";
+
+}
+
+function registerAccount(){
+
+let email =
+document.getElementById("newEmail").value;
+
+let password =
+document.getElementById("newPassword").value;
+
+if(email === "" || password === ""){
+alert("Isi semua data");
+return;
+}
+
+localStorage.setItem(
+"accountEmail",
+email
+);
+
+localStorage.setItem(
+"accountPassword",
+password
+);
+
+alert("Akun berhasil dibuat");
+
+closePopup();
+
+}
+
+/* FORGOT */
+
+function openForgot(){
+
+document.getElementById("forgotPopup")
+.style.display = "flex";
+
+}
+
+function resetPassword(){
+
+let email =
+document.getElementById("resetEmail").value;
+
+let savedEmail =
+localStorage.getItem("accountEmail");
+
+if(email !== savedEmail){
+
+alert("Email tidak ditemukan");
+return;
+
+}
+
+localStorage.setItem(
+"accountPassword",
+"123456"
+);
+
+alert(
+"Password berhasil direset menjadi: 123456"
+);
+
+closePopup();
+
+}
+
+/* CLOSE */
+
+function closePopup(){
+
+document.getElementById("registerPopup")
+.style.display = "none";
+
+document.getElementById("forgotPopup")
+.style.display = "none";
 
 }
 
@@ -1161,28 +1242,10 @@ localStorage.removeItem(
 );
 
 document.getElementById("scadaPage")
-.style.display="none";
+.style.display = "none";
 
 document.getElementById("loginPage")
-.style.display="flex";
-
-}
-
-/* LOGIN LINKS */
-
-function forgotPassword(){
-
-alert(
-"Fitur forgot password belum tersedia"
-);
-
-}
-
-function registerAccount(){
-
-alert(
-"Fitur register account belum tersedia"
-);
+.style.display = "flex";
 
 }
 
@@ -1191,42 +1254,20 @@ alert(
 function showDashboard(){
 
 document.getElementById("dashboardPage")
-.style.display="block";
+.style.display = "block";
 
 document.getElementById("historyPage")
-.style.display="none";
+.style.display = "none";
 
 }
 
 function showHistory(){
 
 document.getElementById("dashboardPage")
-.style.display="none";
+.style.display = "none";
 
 document.getElementById("historyPage")
-.style.display="block";
-
-}
-
-/* MODE */
-
-function setAuto(){
-
-document.getElementById("autoBtn")
-.classList.add("modeActive");
-
-document.getElementById("manualBtn")
-.classList.remove("modeActive");
-
-}
-
-function setManual(){
-
-document.getElementById("manualBtn")
-.classList.add("modeActive");
-
-document.getElementById("autoBtn")
-.classList.remove("modeActive");
+.style.display = "block";
 
 }
 
@@ -1271,6 +1312,9 @@ clearInterval(interval);
 
 running = false;
 
+document.getElementById("statusText")
+.innerHTML = "● FULL";
+
 return;
 
 }
@@ -1310,9 +1354,7 @@ running = false;
 level = 0;
 
 points = [];
-
 xPos = 0;
-
 historyData = [];
 
 document.getElementById("graphPath")
@@ -1386,8 +1428,46 @@ pump:running ? 'ON' : 'OFF'
 
 function generateHistory(){
 
+let from =
+document.getElementById("fromTime").value;
+
+let to =
+document.getElementById("toTime").value;
+
+if(from === "" || to === ""){
+
+alert("Masukkan waktu");
+return;
+
+}
+
 document.getElementById("reportArea")
 .style.display = "block";
+
+document.getElementById("summaryTable")
+.innerHTML = `
+
+<tr>
+<td>FROM TIME</td>
+<td>${from}</td>
+</tr>
+
+<tr>
+<td>TO TIME</td>
+<td>${to}</td>
+</tr>
+
+<tr>
+<td>MAX LEVEL</td>
+<td>${level}%</td>
+</tr>
+
+<tr>
+<td>TOTAL DATA</td>
+<td>${historyData.length}</td>
+</tr>
+
+`;
 
 let rows = "";
 
@@ -1405,6 +1485,13 @@ rows += `
 
 document.getElementById("historyTable")
 .innerHTML = rows;
+
+document.getElementById("historyGraph")
+.setAttribute(
+"d",
+document.getElementById("graphPath")
+.getAttribute("d")
+);
 
 }
 
