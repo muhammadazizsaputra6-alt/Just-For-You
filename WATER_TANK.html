@@ -1,14 +1,12 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WATER TANK SCADA</title>
 
-<title>SCADA WATER TANK</title>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
 
@@ -16,80 +14,86 @@
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family:Arial;
+font-family:'Oswald',sans-serif;
 }
 
 body{
-background:
-radial-gradient(circle at top,#0b4d91 0%,#06111f 35%),
-#06111f;
-color:white;
+background:#020b16;
 overflow:hidden;
+color:white;
 }
 
 /* LOGIN */
 
-.container{
+.loginPage{
 width:100%;
 height:100vh;
 display:flex;
 justify-content:center;
 align-items:center;
-padding:20px;
 background:
-radial-gradient(circle at top,#0b4d91,#06111f 50%);
+radial-gradient(circle at top,#0b4d91 0%,#020b16 45%);
 }
 
-.box{
-width:100%;
-max-width:420px;
-background:#081423;
-padding:35px;
-border-radius:22px;
-border:1px solid #16314f;
-box-shadow:
-0 0 40px rgba(0,183,255,.12);
+.loginBox{
+width:420px;
+background:#07131f;
+border:1px solid #12324f;
+border-radius:25px;
+padding:40px;
+box-shadow:0 0 40px rgba(0,183,255,.2);
 }
 
-.box h1{
+.loginBox h1{
+font-size:42px;
 text-align:center;
+color:#35b8ff;
 margin-bottom:10px;
-color:#00b7ff;
-font-size:38px;
 }
 
-.box p{
+.loginBox p{
 text-align:center;
+color:#87b8dd;
 margin-bottom:25px;
-color:#8fbfe6;
 }
 
-input{
-width:100%;
-padding:15px;
-margin-top:14px;
-background:#0c1d30;
-border:1px solid #16314f;
-border-radius:14px;
-color:white;
-font-size:15px;
+.inputBox{
+margin-bottom:18px;
 }
 
-button{
+.inputBox input{
 width:100%;
 padding:15px;
-margin-top:15px;
-border:none;
-border-radius:14px;
-font-weight:bold;
-cursor:pointer;
+background:#081c2e;
+border:1px solid #173b59;
+border-radius:12px;
 color:white;
-font-size:15px;
+font-size:16px;
 }
 
 .loginBtn{
-background:
-linear-gradient(90deg,#0077ff,#00b7ff);
+width:100%;
+padding:15px;
+border:none;
+border-radius:14px;
+background:linear-gradient(90deg,#0077ff,#00b7ff);
+color:white;
+font-size:18px;
+cursor:pointer;
+margin-top:10px;
+}
+
+.loginBottom{
+margin-top:20px;
+display:flex;
+justify-content:space-between;
+font-size:14px;
+color:#8fbfe6;
+}
+
+.loginBottom a{
+color:#35b8ff;
+text-decoration:none;
 }
 
 /* SCADA */
@@ -103,44 +107,68 @@ height:100vh;
 /* SIDEBAR */
 
 .sidebar{
-width:230px;
-background:#081423;
-border-right:1px solid #16314f;
+width:250px;
+background:#07131f;
+border-right:1px solid #173b59;
 padding:20px;
-overflow:auto;
+display:flex;
+flex-direction:column;
+justify-content:space-between;
+}
+
+.logo{
+display:flex;
+gap:15px;
+align-items:center;
+margin-bottom:25px;
+}
+
+.logoIcon{
+font-size:60px;
+color:#35b8ff;
 }
 
 .logo h1{
-font-size:46px;
-color:#00b7ff;
+font-size:34px;
+line-height:35px;
 }
 
-.logo p{
-margin-bottom:35px;
-letter-spacing:2px;
+.logo span{
+font-size:18px;
+color:#8fbfe6;
 }
 
-.sidebar ul{
+.menu{
 list-style:none;
 }
 
-.sidebar li{
-padding:15px;
+.menu li{
+padding:18px;
 margin-bottom:12px;
-background:#0c1d30;
-border-radius:12px;
-border:1px solid #16314f;
+background:#081c2e;
+border-radius:14px;
+border:1px solid #173b59;
 cursor:pointer;
 transition:.3s;
+font-size:18px;
 }
 
-.sidebar li:hover{
-transform:translateX(5px);
+.menu li:hover{
+background:#0f2e49;
 }
 
-.sidebar .active{
-background:
-linear-gradient(90deg,#0077ff,#00b7ff);
+.active{
+background:linear-gradient(90deg,#0077ff,#00b7ff)!important;
+}
+
+.infoBox{
+background:#081c2e;
+padding:18px;
+border-radius:18px;
+border:1px solid #173b59;
+font-size:14px;
+line-height:30px;
+color:#9ecfff;
 }
 
 /* MAIN */
@@ -154,585 +182,374 @@ overflow:auto;
 /* TOPBAR */
 
 .topbar{
-background:#081423;
-padding:18px;
-border-radius:18px;
-border:1px solid #16314f;
+background:#07131f;
+border:1px solid #173b59;
+border-radius:20px;
+padding:20px;
 display:flex;
 justify-content:space-between;
 align-items:center;
-margin-bottom:18px;
+margin-bottom:15px;
 }
 
-.topbar h2{
-font-size:24px;
+.topLeft h2{
+font-size:34px;
 }
 
-.topbar p{
-color:#00b7ff;
+.topLeft p{
+color:#35b8ff;
+margin-top:5px;
 }
 
-.user{
+.topRight{
+display:flex;
+gap:30px;
+align-items:center;
+}
+
+.timeBox{
+font-size:20px;
 text-align:right;
 }
 
-.user a{
-color:#ff5f5f;
-cursor:pointer;
-text-decoration:none;
+.admin{
+text-align:right;
 }
 
-/* PAGE */
-
-.dashboardPage{
-display:block;
-}
-
-.historyPage{
-display:none;
+.admin p{
+color:#8fbfe6;
 }
 
 /* CONTENT */
 
 .content{
 display:grid;
-grid-template-columns:2.2fr 1fr;
-gap:18px;
+grid-template-columns:2fr 1fr;
+gap:15px;
 }
 
-/* TANK CARD */
+/* LEFT PANEL */
 
-.tankCard{
-background:
-linear-gradient(180deg,#081423,#06111f);
-
-padding:25px;
-border-radius:24px;
-border:1px solid #16314f;
-min-height:760px;
-overflow:hidden;
-
-box-shadow:
-0 0 35px rgba(0,183,255,.12);
+.leftPanel{
+background:#07131f;
+border:1px solid #173b59;
+border-radius:20px;
+padding:20px;
 }
 
-/* MAIN TANK AREA */
-
-.tankMainArea{
+.panelTitle{
 display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:15px;
+}
+
+.panelTitle h3{
+font-size:26px;
+}
+
+.online{
+padding:8px 20px;
+border-radius:10px;
+background:#0e7d29;
+}
+
+/* TANK AREA */
+
+.tankArea{
+display:flex;
+align-items:center;
 justify-content:center;
-align-items:flex-start;
-gap:35px;
-margin-top:25px;
+gap:25px;
+margin-top:20px;
 flex-wrap:wrap;
 }
 
 /* SCALE */
 
-.scaleWrapper{
+.scale{
 height:500px;
-display:flex;
-align-items:center;
-}
-
-.scaleBar{
+width:60px;
 position:relative;
-width:70px;
-height:450px;
 }
 
 .scaleLine{
 position:absolute;
-left:34px;
+right:10px;
 top:0;
-width:5px;
+width:4px;
 height:100%;
-
-background:
-linear-gradient(
-180deg,
-#5fff89,
-#00b7ff
-);
-
+background:#1eff77;
 border-radius:20px;
-
-box-shadow:
-0 0 12px rgba(0,183,255,.7);
 }
 
-.scaleItem{
+.scaleMark{
 position:absolute;
-left:0;
-width:100%;
+right:0;
 display:flex;
 align-items:center;
+gap:8px;
+font-size:20px;
 }
 
-.scaleItem span{
-width:30px;
-font-size:18px;
-color:#d8ecff;
-}
-
-.scaleItem::after{
+.scaleMark::before{
 content:'';
-width:18px;
+width:15px;
 height:2px;
-background:#a9e8ff;
-margin-left:8px;
+background:white;
 }
 
-/* INDUSTRIAL SYSTEM */
+/* TANK */
 
 .tankSystem{
 position:relative;
-width:780px;
+width:520px;
 height:560px;
 }
 
-/* INDUSTRIAL TANK */
-
-.tankIndustrial{
+.tank{
 position:absolute;
-left:0;
-bottom:50px;
-
-width:440px;
-height:470px;
-
-border-radius:
-140px 140px 25px 25px;
-
+bottom:0;
+left:20px;
+width:420px;
+height:500px;
+border-radius:200px 200px 35px 35px;
 background:
 linear-gradient(
 180deg,
-#6f7c89 0%,
-#33404d 45%,
-#1d2833 100%
+#dfe6ed 0%,
+#7f8b96 30%,
+#2f3943 100%
 );
 
-border:5px solid #d6e5f4;
-
+border:6px solid #dce8f3;
 overflow:hidden;
 
 box-shadow:
-inset 0 0 40px rgba(255,255,255,.08),
-0 0 35px rgba(0,183,255,.18);
+inset 0 0 40px rgba(255,255,255,.15),
+0 0 25px rgba(0,183,255,.2);
 }
 
-/* TOP */
-
-.tankIndustrial::before{
+.tank::before{
 content:'';
 position:absolute;
-top:-30px;
+top:-35px;
 left:50%;
 transform:translateX(-50%);
-
 width:85%;
-height:65px;
-
+height:70px;
 border-radius:50%;
-
 background:
-linear-gradient(
-180deg,
-#dbe6f1,
-#7d8b98
-);
-
-border:4px solid #d7e5f2;
-z-index:10;
-}
-
-/* SHINE */
-
-.tankIndustrial::after{
-content:'';
-position:absolute;
-top:0;
-left:35px;
-
-width:50px;
-height:100%;
-
-background:
-linear-gradient(
-180deg,
-rgba(255,255,255,.22),
-transparent
-);
-
-filter:blur(5px);
+linear-gradient(180deg,#ffffff,#98a5b1);
+border:5px solid #dce8f3;
 }
 
 /* WATER */
 
-.waterFill{
+.water{
 position:absolute;
-left:0;
 bottom:0;
 width:100%;
-height:0%;
-
+height:72%;
 background:
 linear-gradient(
 180deg,
-#83f8ff 0%,
-#2ecfff 35%,
-#0077ff 100%
+#56e0ff,
+#0077ff
 );
 
-transition:1s ease;
-
-box-shadow:
-0 0 45px rgba(0,183,255,.7);
+transition:1s;
 }
 
-.waterFill::before{
+.water::before{
 content:'';
 position:absolute;
-
 top:-12px;
 left:-10%;
-
 width:120%;
 height:30px;
-
-background:
-rgba(255,255,255,.35);
-
+background:rgba(255,255,255,.35);
 border-radius:50%;
-
 animation:wave 4s linear infinite;
 }
 
 @keyframes wave{
-
-0%{
-transform:translateX(0);
+0%{transform:translateX(0);}
+100%{transform:translateX(-80px);}
 }
 
-100%{
-transform:translateX(-80px);
-}
+/* LEVEL BOX */
 
-}
-
-/* RAILING */
-
-.railing{
+.levelBox{
 position:absolute;
-top:8px;
-left:60px;
-width:320px;
-height:50px;
-z-index:30;
-}
-
-.railTop{
-position:absolute;
-top:0;
-width:100%;
-height:4px;
-background:#dce8f3;
-}
-
-.railBottom{
-position:absolute;
-top:18px;
-width:100%;
-height:4px;
-background:#dce8f3;
-}
-
-.railPost{
-position:absolute;
-width:4px;
-height:26px;
-background:#dce8f3;
-top:0;
-}
-
-/* LADDER */
-
-.ladder{
-position:absolute;
-left:30px;
-top:70px;
-height:340px;
-width:30px;
-z-index:30;
-}
-
-.ladderSide{
-position:absolute;
-width:4px;
-height:100%;
-background:#d7e5f4;
-}
-
-.ladderSide.right{
-right:0;
-}
-
-.step{
-position:absolute;
-left:0;
-width:100%;
-height:3px;
-background:#d7e5f4;
-}
-
-/* TEXT */
-
-.tankOverlay{
-position:absolute;
-top:50%;
+top:45%;
 left:50%;
 transform:translate(-50%,-50%);
-z-index:50;
+background:rgba(7,19,31,.8);
+padding:30px;
+border-radius:20px;
+width:220px;
 text-align:center;
+z-index:5;
+backdrop-filter:blur(10px);
 }
 
-.tankOverlay h1{
-font-size:82px;
-font-weight:bold;
-text-shadow:
-0 0 20px rgba(255,255,255,.25);
+.levelBox h1{
+font-size:70px;
 }
 
-.tankOverlay p{
-font-size:28px;
-margin-top:10px;
-color:#d7f4ff;
+.levelBox p{
+font-size:30px;
+color:#a6e7ff;
 }
 
 /* PIPE */
 
-.pipeHorizontal{
+.pipeTop{
 position:absolute;
-top:72px;
-left:360px;
-
-width:230px;
+top:70px;
+right:-40px;
+width:170px;
 height:28px;
-
-background:
-linear-gradient(
-180deg,
-#a4b4c5,
-#4f6173
-);
-
+background:linear-gradient(180deg,#dfe6ed,#5e6974);
 border-radius:20px;
-border:2px solid #d5e2ef;
 }
 
-.pipeVertical{
+.pipeSide{
 position:absolute;
-top:72px;
-left:560px;
-
+top:70px;
+right:0;
 width:28px;
-height:330px;
-
-background:
-linear-gradient(
-180deg,
-#a4b4c5,
-#4f6173
-);
-
+height:320px;
+background:linear-gradient(180deg,#dfe6ed,#5e6974);
 border-radius:20px;
-border:2px solid #d5e2ef;
-}
-
-/* VALVE */
-
-.valve{
-position:absolute;
-top:38px;
-left:530px;
-
-width:85px;
-height:85px;
-
-border-radius:50%;
-
-background:
-radial-gradient(
-circle,
-#26c2ff,
-#005eff
-);
-
-border:5px solid #bfe4ff;
-
-box-shadow:
-0 0 25px rgba(0,183,255,.55);
 }
 
 /* PUMP */
 
-.pump3D{
+.pump{
 position:absolute;
-right:0;
+right:-90px;
 bottom:0;
-
-width:250px;
-height:180px;
-
-display:flex;
-justify-content:center;
-align-items:center;
+width:230px;
+filter:drop-shadow(0 0 15px rgba(0,183,255,.5));
 }
 
-.pumpImage{
-width:100%;
-height:auto;
-object-fit:contain;
+/* RIGHT PANEL */
 
-filter:
-drop-shadow(0 0 20px rgba(0,183,255,.55));
-}
-
-/* LEGS */
-
-.tankLeg{
-position:absolute;
-bottom:0;
-width:40px;
-height:60px;
-
-background:
-linear-gradient(
-180deg,
-#8998a8,
-#33404d
-);
-
-border-radius:8px;
-border:2px solid #d6e3ef;
-}
-
-.leg1{
-left:70px;
-}
-
-.leg2{
-left:180px;
-}
-
-.leg3{
-left:300px;
-}
-
-/* SIDE DATA */
-
-.sideData{
+.rightPanel{
 display:flex;
 flex-direction:column;
-gap:18px;
-width:220px;
+gap:15px;
 }
 
-.dataBox{
-background:
-linear-gradient(
-180deg,
-#0d1c2f,
-#081423
-);
-
-padding:22px;
-border-radius:22px;
-border:1px solid #16314f;
-
-box-shadow:
-0 0 20px rgba(0,183,255,.08);
-}
-
-.dataBox h3{
-font-size:18px;
-color:#cde9ff;
-}
-
-.dataBox h1{
-margin-top:15px;
-font-size:44px;
-color:#77efff;
-}
-
-.dataBox p{
-margin-top:6px;
-color:#8fbfe6;
-}
-
-/* RIGHT */
-
-.right{
-display:flex;
-flex-direction:column;
-gap:18px;
-}
-
-.panel{
-background:linear-gradient(180deg,#0b1a2c,#081423);
-padding:20px;
+.card{
+background:#07131f;
+border:1px solid #173b59;
 border-radius:20px;
-border:1px solid #16314f;
+padding:20px;
 }
+
+.card h3{
+font-size:24px;
+margin-bottom:20px;
+}
+
+/* STATUS */
 
 .status{
-font-size:22px;
-color:#8fff88;
-margin:20px 0;
+font-size:26px;
+color:#22ff66;
+margin-bottom:20px;
+}
+
+/* BUTTON */
+
+.btn{
+width:100%;
+padding:16px;
+border:none;
+border-radius:14px;
+color:white;
+font-size:18px;
+cursor:pointer;
+margin-bottom:12px;
 }
 
 .green{
-background:
-linear-gradient(90deg,#29b94d,#8eff91);
+background:linear-gradient(90deg,#0c8d2d,#17d04f);
 }
 
 .red{
-background:
-linear-gradient(90deg,#ff2d55,#ff7696);
+background:linear-gradient(90deg,#c10f2d,#ff2955);
+}
+
+.blue{
+background:linear-gradient(90deg,#0077ff,#00b7ff);
 }
 
 .gray{
-background:#4f5d80;
+background:#39475c;
 }
 
-.data{
+/* DATA */
+
+.dataBox{
 display:flex;
 justify-content:space-between;
 padding:12px 0;
-border-bottom:1px solid #16314f;
+border-bottom:1px solid #173b59;
+font-size:18px;
+}
+
+/* ICON BOX */
+
+.sensorGrid{
+display:grid;
+grid-template-columns:1fr;
+gap:15px;
+margin-top:20px;
+}
+
+.sensor{
+background:#081c2e;
+border:1px solid #173b59;
+border-radius:18px;
+padding:20px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.sensorIcon{
+font-size:42px;
+color:#35b8ff;
+}
+
+.sensor h1{
+font-size:42px;
 }
 
 /* BOTTOM */
 
 .bottom{
-margin-top:18px;
+margin-top:15px;
 display:grid;
 grid-template-columns:1.5fr 1fr;
-gap:18px;
+gap:15px;
 }
 
 .graphCard,
-.tableCard{
-background:#081423;
-padding:20px;
+.historyCard{
+background:#07131f;
+border:1px solid #173b59;
 border-radius:20px;
-border:1px solid #16314f;
+padding:20px;
 }
 
 .graph{
-width:100%;
-height:220px;
-background:#06111f;
+height:260px;
+background:#020b16;
 border-radius:15px;
 margin-top:20px;
 overflow:hidden;
@@ -749,70 +566,41 @@ stroke:#00b7ff;
 stroke-width:4;
 }
 
+/* TABLE */
+
 table{
 width:100%;
 border-collapse:collapse;
 margin-top:20px;
 }
 
-table th{
-background:#0c1d30;
+th{
+background:#081c2e;
 }
 
-table th,
-table td{
+th,td{
 padding:12px;
-border-bottom:1px solid #16314f;
+border-bottom:1px solid #173b59;
 text-align:left;
 }
 
 /* FOOTER */
 
 .footer{
-margin-top:18px;
-background:#081423;
-padding:15px;
+margin-top:15px;
+background:#07131f;
+border:1px solid #173b59;
 border-radius:15px;
-border:1px solid #16314f;
+padding:15px;
 display:flex;
 justify-content:space-around;
+font-size:18px;
 color:#8fbfe6;
-}
-
-/* HISTORY */
-
-.historyBox{
-background:#081423;
-padding:25px;
-border-radius:20px;
-border:1px solid #16314f;
-}
-
-.reportArea{
-display:none;
-margin-top:20px;
-}
-
-.timeFilter{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:15px;
-margin-top:20px;
-}
-
-.generateBtn{
-background:
-linear-gradient(90deg,#0077ff,#00b7ff);
-}
-
-.exportBtn{
-background:
-linear-gradient(90deg,#00a65a,#00d96f);
 }
 
 /* MOBILE */
 
-@media(max-width:900px){
+@media(max-width:1200px){
 
 body{
 overflow:auto;
@@ -825,17 +613,6 @@ height:auto;
 
 .sidebar{
 width:100%;
-display:flex;
-overflow:auto;
-}
-
-.sidebar ul{
-display:flex;
-gap:10px;
-}
-
-.sidebar li{
-min-width:140px;
 }
 
 .content{
@@ -844,32 +621,6 @@ grid-template-columns:1fr;
 
 .bottom{
 grid-template-columns:1fr;
-}
-
-.topbar{
-flex-direction:column;
-gap:10px;
-text-align:center;
-}
-
-.footer{
-flex-direction:column;
-gap:10px;
-text-align:center;
-}
-
-.scaleWrapper{
-display:none;
-}
-
-.tankSystem{
-transform:scale(.68);
-transform-origin:top center;
-height:430px;
-}
-
-.sideData{
-width:100%;
 }
 
 }
@@ -881,22 +632,36 @@ width:100%;
 
 <!-- LOGIN -->
 
-<div class="container" id="loginPage">
+<div class="loginPage" id="loginPage">
 
-<div class="box">
+<div class="loginBox">
 
-<h1>SCADA SYSTEM</h1>
+<h1>SCADA LOGIN</h1>
 
-<p>Water Tank Monitoring & Control</p>
+<p>Water Tank Monitoring System</p>
 
+<div class="inputBox">
 <input type="email" id="email" placeholder="Email">
+</div>
+
+<div class="inputBox">
 <input type="password" id="password" placeholder="Password">
+</div>
 
 <button class="loginBtn" onclick="login()">
 LOGIN
 </button>
 
+<div class="loginBottom">
+
+<a href="#">Forgot Password?</a>
+
+<a href="#">Belum punya akun?</a>
+
 </div>
+
+</div>
+
 </div>
 
 <!-- SCADA -->
@@ -907,24 +672,45 @@ LOGIN
 
 <div class="sidebar">
 
+<div>
+
 <div class="logo">
 
+<div class="logoIcon">💧</div>
+
+<div>
+
 <h1>WATER</h1>
-<p>TANK SCADA</p>
+<span>TANK SCADA</span>
 
 </div>
 
-<ul>
+</div>
 
-<li class="active" onclick="showDashboard()">Dashboard</li>
-<li>Monitoring</li>
-<li>Control</li>
-<li>Alarm</li>
-<li>Trend Graph</li>
-<li onclick="showHistory()">History</li>
-<li>Setting</li>
+<ul class="menu">
+
+<li class="active">DASHBOARD</li>
+<li>MONITORING</li>
+<li>CONTROL</li>
+<li>ALARM</li>
+<li>TREND GRAPH</li>
+<li>HISTORY</li>
+<li>REPORT</li>
+<li>SETTING</li>
+<li onclick="logout()">LOGOUT</li>
 
 </ul>
+
+</div>
+
+<div class="infoBox">
+
+Project : Water Tank System<br>
+Version : 1.0.0<br>
+Status : ONLINE<br>
+Developer : SCADA System
+
+</div>
 
 </div>
 
@@ -936,213 +722,135 @@ LOGIN
 
 <div class="topbar">
 
-<div>
+<div class="topLeft">
 
 <h2>WATER TANK MONITORING & CONTROL SYSTEM</h2>
+
 <p>REAL TIME MONITORING</p>
 
 </div>
 
-<div class="user">
+<div class="topRight">
 
-<div id="userEmail"></div>
+<div class="timeBox">
 
-<a onclick="logout()">
-Logout
-</a>
+<div id="date"></div>
+<div id="clock"></div>
+
+</div>
+
+<div class="admin">
+
+<h3>Administrator</h3>
+<p>Level : Admin</p>
 
 </div>
 
 </div>
 
-<!-- DASHBOARD -->
+</div>
 
-<div class="dashboardPage" id="dashboardPage">
+<!-- CONTENT -->
 
 <div class="content">
 
 <!-- LEFT -->
 
-<div class="tankCard">
+<div class="leftPanel">
 
-<div style="
-display:flex;
-justify-content:space-between;
-align-items:center;
-margin-bottom:20px;
-">
+<div class="panelTitle">
 
-<div>
+<h3>TANK OVERVIEW</h3>
 
-<h3 style="font-size:24px">
-TANK OVERVIEW
-</h3>
-
-<p style="
-color:#7dbdff;
-margin-top:5px;
-">
+<div class="online">
 LEVEL NORMAL
-</p>
+</div>
 
 </div>
 
-<div style="
-background:#0c1d30;
-padding:12px 18px;
-border-radius:12px;
-border:1px solid #16314f;
-">
+<div class="tankArea">
 
-<b>ONLINE</b>
+<!-- SCALE -->
 
-</div>
+<div class="scale">
+
+<div class="scaleLine"></div>
+
+<div class="scaleMark" style="top:0">100%</div>
+<div class="scaleMark" style="top:120px">75%</div>
+<div class="scaleMark" style="top:240px">50%</div>
+<div class="scaleMark" style="top:360px">25%</div>
+<div class="scaleMark" style="bottom:0">0%</div>
 
 </div>
 
 <!-- TANK -->
 
-<div class="tankMainArea">
-
-<!-- SCALE -->
-
-<div class="scaleWrapper">
-
-<div class="scaleBar">
-
-<div class="scaleLine"></div>
-
-<div class="scaleItem" style="top:-10px;">
-<span>100%</span>
-</div>
-
-<div class="scaleItem" style="top:100px;">
-<span>75%</span>
-</div>
-
-<div class="scaleItem" style="top:210px;">
-<span>50%</span>
-</div>
-
-<div class="scaleItem" style="top:320px;">
-<span>25%</span>
-</div>
-
-<div class="scaleItem" style="bottom:-10px;">
-<span>0%</span>
-</div>
-
-</div>
-
-</div>
-
-<!-- SYSTEM -->
-
 <div class="tankSystem">
 
-<div class="tankIndustrial">
+<div class="tank">
 
-<!-- RAIL -->
+<div class="water" id="water"></div>
 
-<div class="railing">
+<div class="levelBox">
 
-<div class="railTop"></div>
-<div class="railBottom"></div>
+LEVEL
 
-<div class="railPost" style="left:0"></div>
-<div class="railPost" style="left:40px"></div>
-<div class="railPost" style="left:80px"></div>
-<div class="railPost" style="left:120px"></div>
-<div class="railPost" style="left:160px"></div>
-<div class="railPost" style="left:200px"></div>
-<div class="railPost" style="left:240px"></div>
-<div class="railPost" style="left:280px"></div>
-<div class="railPost" style="left:320px"></div>
+<h1 id="levelText">72%</h1>
 
-</div>
-
-<!-- LADDER -->
-
-<div class="ladder">
-
-<div class="ladderSide"></div>
-<div class="ladderSide right"></div>
-
-<div class="step" style="top:20px"></div>
-<div class="step" style="top:50px"></div>
-<div class="step" style="top:80px"></div>
-<div class="step" style="top:110px"></div>
-<div class="step" style="top:140px"></div>
-<div class="step" style="top:170px"></div>
-<div class="step" style="top:200px"></div>
-<div class="step" style="top:230px"></div>
-<div class="step" style="top:260px"></div>
-<div class="step" style="top:290px"></div>
-
-</div>
-
-<!-- WATER -->
-
-<div class="waterFill" id="water"></div>
-
-<!-- TEXT -->
-
-<div class="tankOverlay">
-
-<h1 id="levelText">0%</h1>
-<p id="cmText">0 cm</p>
+<p id="cmText">72.5 cm</p>
 
 </div>
 
 </div>
 
-<!-- LEGS -->
+<div class="pipeTop"></div>
+<div class="pipeSide"></div>
 
-<div class="tankLeg leg1"></div>
-<div class="tankLeg leg2"></div>
-<div class="tankLeg leg3"></div>
-
-<!-- PIPE -->
-
-<div class="pipeHorizontal"></div>
-<div class="pipeVertical"></div>
-<div class="valve"></div>
-
-<!-- PUMP -->
-
-<div class="pump3D">
-
-<img src="pump.png" class="pumpImage">
+<img src="pump.png" class="pump">
 
 </div>
 
-</div>
+<!-- SENSOR -->
 
-<!-- SIDE DATA -->
+<div class="sensorGrid">
 
-<div class="sideData">
+<div class="sensor">
 
-<div class="dataBox">
+<div>
 
-<h3>VOLUME</h3>
+<p>VOLUME</p>
 <h1>725</h1>
-<p>LITER</p>
 
 </div>
 
-<div class="dataBox">
+<div class="sensorIcon">🛢</div>
 
-<h3>TEMPERATURE</h3>
+</div>
+
+<div class="sensor">
+
+<div>
+
+<p>TEMPERATURE</p>
 <h1>28.4°</h1>
-<p>CELCIUS</p>
 
 </div>
 
-<div class="dataBox">
+<div class="sensorIcon">🌡</div>
 
-<h3>PRESSURE</h3>
+</div>
+
+<div class="sensor">
+
+<div>
+
+<p>PRESSURE</p>
 <h1>2.35</h1>
-<p>BAR</p>
+
+</div>
+
+<div class="sensorIcon">⏱</div>
 
 </div>
 
@@ -1154,103 +862,61 @@ border:1px solid #16314f;
 
 <!-- RIGHT -->
 
-<div class="right">
+<div class="rightPanel">
 
-<div class="panel">
+<div class="card">
 
-<h3 style="
-margin-bottom:20px;
-font-size:24px;
-">
-PUMP CONTROL
-</h3>
+<h3>PUMP CONTROL</h3>
 
 <div class="status" id="statusText">
-● STOPPED
+● RUNNING
 </div>
 
-<div style="
-display:flex;
-gap:12px;
-margin-bottom:20px;
-">
-
-<button style="
-flex:1;
-background:#0077ff;
-">
+<button class="btn blue">
 AUTO
 </button>
 
-<button style="
-flex:1;
-background:#0c1d30;
-border:1px solid #16314f;
-">
-MANUAL
+<button class="btn green" onclick="startPump()">
+START PUMP
 </button>
 
-</div>
-
-<button class="green" onclick="startPump()" style="
-height:65px;
-font-size:20px;
-margin-bottom:15px;
-">
-▶ START PUMP
+<button class="btn red" onclick="stopPump()">
+STOP PUMP
 </button>
 
-<button class="red" onclick="stopPump()" style="
-height:65px;
-font-size:20px;
-margin-bottom:15px;
-">
-■ STOP PUMP
-</button>
-
-<button class="gray" onclick="resetTank()" style="
-height:60px;
-font-size:18px;
-">
+<button class="btn gray" onclick="resetTank()">
 RESET ALARM
 </button>
 
 </div>
 
-<!-- REALTIME -->
+<div class="card">
 
-<div class="panel">
+<h3>REAL TIME DATA</h3>
 
-<h3 style="
-margin-bottom:20px;
-font-size:24px;
-">
-REAL TIME DATA
-</h3>
-
-<div class="data">
+<div class="dataBox">
 <span>Tank Level</span>
-<b id="dataLevel">0%</b>
+<b id="dataLevel">72%</b>
 </div>
 
-<div class="data">
+<div class="dataBox">
 <span>Volume</span>
 <b>725 Liter</b>
 </div>
 
-<div class="data">
+<div class="dataBox">
 <span>Temperature</span>
 <b>28.4°C</b>
 </div>
 
-<div class="data">
+<div class="dataBox">
 <span>Pressure</span>
 <b>2.35 Bar</b>
 </div>
 
-<div class="data">
+<div class="dataBox">
 <span>Pump Status</span>
-<b id="dataStatus">OFF</b>
+<b id="pumpStatus">RUNNING</b>
 </div>
 
 </div>
@@ -1263,17 +929,17 @@ REAL TIME DATA
 
 <div class="bottom">
 
+<!-- GRAPH -->
+
 <div class="graphCard">
 
-<h3 style="font-size:24px">
-TREND GRAPH
-</h3>
+<h3>TREND GRAPH</h3>
 
 <div class="graph">
 
-<svg viewBox="0 0 1000 250">
+<svg viewBox="0 0 1000 260">
 
-<path id="graphPath" d="M0 240"></path>
+<path id="graphPath" d=""></path>
 
 </svg>
 
@@ -1281,14 +947,29 @@ TREND GRAPH
 
 </div>
 
-<div class="tableCard">
+<!-- HISTORY -->
 
-<h3 style="
-font-size:24px;
-margin-bottom:20px;
+<div class="historyCard">
+
+<div style="
+display:flex;
+justify-content:space-between;
+align-items:center;
 ">
-DATA LOG
-</h3>
+
+<h3>DATA LOG</h3>
+
+<button class="btn blue"
+style="
+width:auto;
+padding:10px 18px;
+margin:0;
+"
+onclick="exportPDF()">
+EXPORT PDF
+</button>
+
+</div>
 
 <table>
 
@@ -1312,108 +993,10 @@ DATA LOG
 
 <div class="footer">
 
-<div>COM PORT : COM3</div>
-<div>BAUDRATE : 9600</div>
-<div>STATUS : ONLINE</div>
-<div id="clock"></div>
-
-</div>
-
-</div>
-
-<!-- HISTORY -->
-
-<div class="historyPage" id="historyPage">
-
-<div class="historyBox">
-
-<h2>HISTORY</h2>
-
-<p style="
-margin-top:10px;
-color:#8fbfe6;
-">
-Masukkan rentang waktu monitoring
-</p>
-
-<div class="timeFilter">
-
-<div>
-
-<label>FROM TIME</label>
-<input type="time" id="fromTime">
-
-</div>
-
-<div>
-
-<label>TO TIME</label>
-<input type="time" id="toTime">
-
-</div>
-
-</div>
-
-<button class="generateBtn" onclick="generateHistory()">
-GENERATE HISTORY
-</button>
-
-<div class="reportArea" id="reportArea">
-
-<h3 style="margin-top:30px">
-SUMMARY
-</h3>
-
-<table>
-
-<tr>
-<th>PARAMETER</th>
-<th>VALUE</th>
-</tr>
-
-<tbody id="summaryTable"></tbody>
-
-</table>
-
-<h3 style="margin-top:30px">
-HISTORY DATA
-</h3>
-
-<table>
-
-<tr>
-<th>TIME</th>
-<th>LEVEL</th>
-<th>PUMP</th>
-</tr>
-
-<tbody id="historyTable"></tbody>
-
-</table>
-
-<h3 style="margin-top:30px">
-TREND GRAPH
-</h3>
-
-<div class="graph">
-
-<svg viewBox="0 0 1000 250">
-
-<path id="historyGraph" d="M0 240"></path>
-
-</svg>
-
-</div>
-
-<button
-class="exportBtn"
-onclick="exportPDF()">
-EXPORT PDF
-</button>
-
-</div>
-
-</div>
+<div>COM3</div>
+<div>BAUDRATE 9600</div>
+<div>STATUS ONLINE</div>
+<div id="footerClock"></div>
 
 </div>
 
@@ -1422,6 +1005,19 @@ EXPORT PDF
 </div>
 
 <script>
+
+/* SESSION */
+
+window.onload = function(){
+
+if(localStorage.getItem("login")=="true"){
+
+document.getElementById("loginPage").style.display="none";
+document.getElementById("scadaPage").style.display="flex";
+
+}
+
+}
 
 /* LOGIN */
 
@@ -1433,21 +1029,15 @@ document.getElementById("email").value;
 let password =
 document.getElementById("password").value;
 
-if(email === "" || password === ""){
+if(email && password){
 
-alert("Masukkan email dan password");
-return;
+localStorage.setItem("login","true");
+
+document.getElementById("loginPage").style.display="none";
+
+document.getElementById("scadaPage").style.display="flex";
 
 }
-
-document.getElementById("userEmail")
-.innerHTML = email;
-
-document.getElementById("loginPage")
-.style.display="none";
-
-document.getElementById("scadaPage")
-.style.display="flex";
 
 }
 
@@ -1455,33 +1045,11 @@ document.getElementById("scadaPage")
 
 function logout(){
 
-document.getElementById("scadaPage")
-.style.display="none";
+localStorage.removeItem("login");
 
-document.getElementById("loginPage")
-.style.display="flex";
+document.getElementById("scadaPage").style.display="none";
 
-}
-
-/* MENU */
-
-function showDashboard(){
-
-document.getElementById("dashboardPage")
-.style.display = "block";
-
-document.getElementById("historyPage")
-.style.display = "none";
-
-}
-
-function showHistory(){
-
-document.getElementById("dashboardPage")
-.style.display = "none";
-
-document.getElementById("historyPage")
-.style.display = "block";
+document.getElementById("loginPage").style.display="flex";
 
 }
 
@@ -1489,58 +1057,107 @@ document.getElementById("historyPage")
 
 setInterval(()=>{
 
+let now = new Date();
+
 document.getElementById("clock")
 .innerHTML =
-new Date().toLocaleTimeString();
+now.toLocaleTimeString();
+
+document.getElementById("footerClock")
+.innerHTML =
+now.toLocaleTimeString();
+
+document.getElementById("date")
+.innerHTML =
+now.toLocaleDateString('id-ID');
 
 },1000);
 
-/* SYSTEM */
+/* TANK */
 
-let level = 0;
-let running = false;
+let level = 72;
+let running = true;
 let interval;
+let x = 0;
 let points = [];
-let xPos = 0;
-let historyData = [];
+
+/* UPDATE */
+
+function updateTank(){
+
+document.getElementById("water")
+.style.height = level + "%";
+
+document.getElementById("levelText")
+.innerHTML = level + "%";
+
+document.getElementById("cmText")
+.innerHTML = level + ".5 cm";
+
+document.getElementById("dataLevel")
+.innerHTML = level + "%";
+
+/* GRAPH */
+
+x += 15;
+
+let y = 240 - (level * 2);
+
+points.push(`${x} ${y}`);
+
+if(points.length > 60){
+points.shift();
+}
+
+let path = "M0 240 L" + points.join(" L");
+
+document.getElementById("graphPath")
+.setAttribute("d",path);
+
+/* HISTORY */
+
+let now = new Date();
+
+let row = `
+<tr>
+<td>${now.toLocaleTimeString()}</td>
+<td>${level}%</td>
+<td>${running ? 'ON':'OFF'}</td>
+</tr>
+`;
+
+document.getElementById("logTable")
+.innerHTML =
+row +
+document.getElementById("logTable").innerHTML;
+
+}
 
 /* START */
 
 function startPump(){
 
-if(running) return;
+clearInterval(interval);
 
 running = true;
 
 document.getElementById("statusText")
 .innerHTML = "● RUNNING";
 
-document.getElementById("dataStatus")
+document.getElementById("pumpStatus")
 .innerHTML = "RUNNING";
 
 interval = setInterval(()=>{
 
-if(level >= 100){
-
-clearInterval(interval);
-
-running = false;
-
-document.getElementById("statusText")
-.innerHTML = "● FULL";
-
-document.getElementById("dataStatus")
-.innerHTML = "FULL";
-
-return;
-
-}
+if(level < 100){
 
 level++;
 
 updateTank();
 
-},120);
+}
+
+},500);
 
 }
 
@@ -1555,7 +1172,7 @@ running = false;
 document.getElementById("statusText")
 .innerHTML = "● STOPPED";
 
-document.getElementById("dataStatus")
+document.getElementById("pumpStatus")
 .innerHTML = "STOPPED";
 
 }
@@ -1571,198 +1188,46 @@ running = false;
 level = 0;
 
 points = [];
-xPos = 0;
-historyData = [];
 
 document.getElementById("graphPath")
-.setAttribute("d","M0 240");
+.setAttribute("d","");
 
 document.getElementById("logTable")
 .innerHTML = "";
-
-document.getElementById("statusText")
-.innerHTML = "● RESET";
-
-document.getElementById("dataStatus")
-.innerHTML = "OFF";
 
 updateTank();
 
 }
 
-/* UPDATE */
+/* PDF */
 
-function updateTank(){
+function exportPDF(){
 
-document.getElementById("water")
-.style.height = level + "%";
-
-document.getElementById("levelText")
-.innerHTML = level + "%";
-
-document.getElementById("cmText")
-.innerHTML = level + " cm";
-
-document.getElementById("dataLevel")
-.innerHTML = level + "%";
-
-xPos += 8;
-
-let randomCurve =
-Math.random() * 8 - 4;
-
-let y =
-240 - (level * 1.8) + randomCurve;
-
-points.push(`${xPos} ${y}`);
-
-let path =
-"M0 240 L" + points.join(" L");
-
-document.getElementById("graphPath")
-.setAttribute("d",path);
-
-let now = new Date();
-
-let time =
-now.toLocaleTimeString();
-
-let row = `
-<tr>
-<td>${time}</td>
-<td>${level}%</td>
-<td>${running ? 'ON' : 'OFF'}</td>
-</tr>
-`;
-
-document.getElementById("logTable")
-.innerHTML =
-row +
-document.getElementById("logTable").innerHTML;
-
-historyData.push({
-
-time:time,
-level:level,
-pump:running ? 'ON' : 'OFF'
-
-});
+window.print();
 
 }
 
-/* HISTORY */
+/* AUTO UPDATE */
 
-function generateHistory(){
+setInterval(()=>{
 
-let from =
-document.getElementById("fromTime").value;
+if(!running){
 
-let to =
-document.getElementById("toTime").value;
+if(level > 0){
 
-if(from === "" || to === ""){
+level--;
 
-alert("Masukkan waktu");
-return;
+updateTank();
 
 }
 
-document.getElementById("reportArea")
-.style.display = "block";
-
-document.getElementById("summaryTable")
-.innerHTML = `
-
-<tr>
-<td>FROM TIME</td>
-<td>${from}</td>
-</tr>
-
-<tr>
-<td>TO TIME</td>
-<td>${to}</td>
-</tr>
-
-<tr>
-<td>MAX LEVEL</td>
-<td>${level}%</td>
-</tr>
-
-<tr>
-<td>TOTAL DATA</td>
-<td>${historyData.length}</td>
-</tr>
-
-`;
-
-let rows = "";
-
-historyData.forEach(data=>{
-
-rows += `
-<tr>
-<td>${data.time}</td>
-<td>${data.level}%</td>
-<td>${data.pump}</td>
-</tr>
-`;
-
-});
-
-document.getElementById("historyTable")
-.innerHTML = rows;
-
-document.getElementById("historyGraph")
-.setAttribute(
-"d",
-document.getElementById("graphPath")
-.getAttribute("d")
-);
-
 }
 
-/* EXPORT PDF */
+},1000);
 
-async function exportPDF(){
+/* INIT */
 
-let element =
-document.getElementById("reportArea");
-
-if(element.style.display === "none"){
-
-alert("Generate history dulu");
-return;
-
-}
-
-await html2pdf()
-.set({
-
-margin:0.3,
-
-filename:
-"WATER_PUMP.pdf",
-
-image:{
-type:"jpeg",
-quality:1
-},
-
-html2canvas:{
-scale:2
-},
-
-jsPDF:{
-unit:"in",
-format:"a4",
-orientation:"portrait"
-}
-
-})
-.from(element)
-.save();
-
-}
+updateTank();
 
 </script>
 
