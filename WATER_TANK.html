@@ -215,7 +215,8 @@ display:none;
 
 .content{
 display:grid;
-grid-template-columns:2fr 1fr;
+grid-template-columns:
+2.2fr 1fr;
 gap:18px;
 }
 
@@ -502,8 +503,167 @@ font-size:50px;
 
 }
 
-  
+.tankSystem{
+position:relative;
+width:700px;
+height:500px;
+margin:auto;
+}
 
+.tankIndustrial{
+width:420px;
+height:460px;
+
+background:
+linear-gradient(
+180deg,
+#66727d,
+#243342
+);
+
+border-radius:160px 160px 50px 50px;
+
+position:absolute;
+
+left:0;
+bottom:0;
+
+overflow:hidden;
+
+border:4px solid #aebed1;
+
+box-shadow:
+0 0 40px rgba(0,183,255,.25);
+}
+
+.waterFill{
+position:absolute;
+
+bottom:0;
+
+width:100%;
+
+height:72%;
+
+background:
+linear-gradient(
+180deg,
+#4fe4ff,
+#0088ff
+);
+
+transition:1s;
+}
+
+.tankOverlay{
+
+position:absolute;
+
+top:50%;
+left:50%;
+
+transform:
+translate(-50%,-50%);
+
+text-align:center;
+
+z-index:10;
+}
+
+.pipeHorizontal{
+
+position:absolute;
+
+top:100px;
+left:390px;
+
+width:160px;
+height:26px;
+
+background:#6f7f90;
+
+border-radius:20px;
+}
+
+.pipeVertical{
+
+position:absolute;
+
+top:100px;
+left:520px;
+
+width:28px;
+height:260px;
+
+background:#6f7f90;
+}
+
+.valve{
+
+position:absolute;
+
+top:70px;
+left:500px;
+
+width:70px;
+height:70px;
+
+background:#0088ff;
+
+border-radius:50%;
+}
+
+.pump3D{
+
+position:absolute;
+
+bottom:0;
+right:40px;
+
+width:180px;
+height:110px;
+
+background:
+linear-gradient(
+90deg,
+#005cff,
+#009dff
+);
+
+border-radius:25px;
+}
+
+ .pump3D{
+
+position:absolute;
+
+bottom:0;
+
+right:40px;
+
+width:220px;
+
+height:140px;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+}
+
+.pumpImage{
+
+width:100%;
+
+height:auto;
+
+object-fit:contain;
+
+filter:
+drop-shadow(0 0 20px rgba(0,183,255,.5));
+}
+  
 </style>
 
 </head>
@@ -728,20 +888,17 @@ font-size:18px;
 
 </div>
 
-<!-- TANK -->
+<!-- INDUSTRIAL TANK -->
 
-<div class="tankBox" style="
-width:420px;
-height:420px;
-border-radius:50% 50% 25% 25%;
-border:10px solid #dce9ff;
-background:#081423;
-box-shadow:0 0 40px rgba(0,183,255,0.3);
-">
+<div class="tankSystem">
 
-<div class="water" id="water"></div>
+<div class="tankIndustrial">
 
-<div class="levelText">
+<div class="tankTop"></div>
+
+<div class="waterFill" id="water"></div>
+
+<div class="tankOverlay">
 
 <h1 id="levelText">0%</h1>
 
@@ -749,6 +906,18 @@ box-shadow:0 0 40px rgba(0,183,255,0.3);
 
 </div>
 
+</div>
+
+<div class="pipeHorizontal"></div>
+
+<div class="valve"></div>
+
+<div class="pipeVertical"></div>
+
+<div class="pump3D">
+  <img src="pump.png" class="pumpImage">
+</div>
+  
 </div>
 
 <!-- DATA -->
