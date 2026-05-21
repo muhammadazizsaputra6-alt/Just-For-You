@@ -639,17 +639,93 @@ History
 
 </div>
 
-<!-- DASHBOARD -->
+
+
+<!-- GANTI BAGIAN <div class="dashboardPage"> YANG LAMA DENGAN INI -->
 
 <div class="dashboardPage" id="dashboardPage">
 
 <div class="content">
 
+<!-- TANK AREA -->
+
 <div class="tankCard">
 
-<h3>TANK OVERVIEW</h3>
+<div style="
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:20px;
+">
 
-<div class="tankBox">
+<div>
+
+<h3 style="font-size:24px">
+TANK OVERVIEW
+</h3>
+
+<p style="
+color:#7dbdff;
+margin-top:5px;
+">
+LEVEL NORMAL
+</p>
+
+</div>
+
+<div style="
+background:#0c1d30;
+padding:12px 18px;
+border-radius:12px;
+border:1px solid #16314f;
+">
+
+<b>ONLINE</b>
+
+</div>
+
+</div>
+
+<!-- TANK -->
+
+<div style="
+display:flex;
+justify-content:center;
+align-items:center;
+gap:40px;
+margin-top:20px;
+flex-wrap:wrap;
+">
+
+<!-- SCALE -->
+
+<div style="
+height:350px;
+display:flex;
+flex-direction:column;
+justify-content:space-between;
+color:#8fbfe6;
+font-size:18px;
+">
+
+<span>100%</span>
+<span>75%</span>
+<span>50%</span>
+<span>25%</span>
+<span>0%</span>
+
+</div>
+
+<!-- TANK -->
+
+<div class="tankBox" style="
+width:420px;
+height:420px;
+border-radius:40px;
+border:10px solid #dce9ff;
+background:#081423;
+box-shadow:0 0 40px rgba(0,183,255,0.3);
+">
 
 <div class="water" id="water"></div>
 
@@ -663,39 +739,157 @@ History
 
 </div>
 
-</div>
+<!-- DATA -->
 
-<div class="right">
+<div style="
+display:flex;
+flex-direction:column;
+gap:18px;
+width:220px;
+">
 
 <div class="panel">
 
-<h3>PUMP CONTROL</h3>
+<h3>VOLUME</h3>
+
+<h1 style="
+margin-top:15px;
+font-size:42px;
+color:#75f0ff;
+">
+725
+</h1>
+
+<p style="color:#8fbfe6">
+LITER
+</p>
+
+</div>
+
+<div class="panel">
+
+<h3>TEMPERATURE</h3>
+
+<h1 style="
+margin-top:15px;
+font-size:38px;
+color:#75f0ff;
+">
+28.4°
+</h1>
+
+</div>
+
+<div class="panel">
+
+<h3>PRESSURE</h3>
+
+<h1 style="
+margin-top:15px;
+font-size:38px;
+color:#75f0ff;
+">
+2.35
+</h1>
+
+<p style="color:#8fbfe6">
+BAR
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- RIGHT -->
+
+<div class="right">
+
+<!-- CONTROL -->
+
+<div class="panel">
+
+<h3 style="
+margin-bottom:20px;
+font-size:24px;
+">
+PUMP CONTROL
+</h3>
 
 <div class="status" id="statusText">
 ● STANDBY
 </div>
 
-<button class="green" onclick="startPump()">
-START PUMP
+<div style="
+display:flex;
+gap:12px;
+margin-bottom:20px;
+">
+
+<button style="
+flex:1;
+background:#0077ff;
+">
+AUTO
 </button>
 
-<button class="red" onclick="stopPump()">
-STOP PUMP
+<button style="
+flex:1;
+background:#0c1d30;
+border:1px solid #16314f;
+">
+MANUAL
 </button>
 
-<button class="gray" onclick="resetTank()">
+</div>
+
+<button class="green" onclick="startPump()" style="
+height:65px;
+font-size:20px;
+margin-bottom:15px;
+">
+▶ START PUMP
+</button>
+
+<button class="red" onclick="stopPump()" style="
+height:65px;
+font-size:20px;
+margin-bottom:15px;
+">
+■ STOP PUMP
+</button>
+
+<button class="gray" onclick="resetTank()" style="
+height:60px;
+font-size:18px;
+">
 RESET ALARM
 </button>
 
 </div>
 
+<!-- REALTIME -->
+
 <div class="panel">
 
-<h3>REAL TIME DATA</h3>
+<h3 style="
+margin-bottom:20px;
+font-size:24px;
+">
+REAL TIME DATA
+</h3>
 
 <div class="data">
 <span>Tank Level</span>
 <b id="dataLevel">0%</b>
+</div>
+
+<div class="data">
+<span>Volume</span>
+<b>725 Liter</b>
 </div>
 
 <div class="data">
@@ -709,21 +903,103 @@ RESET ALARM
 </div>
 
 <div class="data">
-<span>Status</span>
+<span>Pump Status</span>
 <b id="dataStatus">OFF</b>
 </div>
 
 </div>
 
+<!-- ALARM -->
+
+<div class="panel">
+
+<h3 style="
+margin-bottom:20px;
+font-size:24px;
+color:#ff5f5f;
+">
+ALARM STATUS
+</h3>
+
+<div style="
+background:#2b1018;
+padding:15px;
+border-radius:12px;
+margin-bottom:10px;
+border:1px solid #5a1d2f;
+">
+
+<div style="
+display:flex;
+justify-content:space-between;
+">
+
+<span>HIGH LEVEL</span>
+<b style="color:#ff5f5f">
+ACTIVE
+</b>
+
 </div>
 
 </div>
+
+<div style="
+background:#2b1018;
+padding:15px;
+border-radius:12px;
+border:1px solid #5a1d2f;
+">
+
+<div style="
+display:flex;
+justify-content:space-between;
+">
+
+<span>SENSOR ERROR</span>
+<b style="color:#ff5f5f">
+ACTIVE
+</b>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- BOTTOM -->
 
 <div class="bottom">
 
+<!-- GRAPH -->
+
 <div class="graphCard">
 
-<h3>TREND GRAPH</h3>
+<div style="
+display:flex;
+justify-content:space-between;
+align-items:center;
+">
+
+<h3 style="font-size:24px">
+TREND GRAPH
+</h3>
+
+<div style="
+background:#0c1d30;
+padding:10px 18px;
+border-radius:10px;
+border:1px solid #16314f;
+">
+
+1 Hour
+
+</div>
+
+</div>
 
 <div class="graph">
 
@@ -737,16 +1013,25 @@ RESET ALARM
 
 </div>
 
+<!-- TABLE -->
+
 <div class="tableCard">
 
-<h3>DATA LOG</h3>
+<h3 style="
+font-size:24px;
+margin-bottom:20px;
+">
+DATA LOG
+</h3>
 
 <table>
 
 <tr>
+
 <th>TIME</th>
 <th>LEVEL</th>
 <th>PUMP</th>
+
 </tr>
 
 <tbody id="logTable"></tbody>
@@ -757,13 +1042,21 @@ RESET ALARM
 
 </div>
 
+<!-- FOOTER -->
+
 <div class="footer">
 
-<div>COM3</div>
+<div>
+COM PORT : COM3
+</div>
 
-<div>BAUDRATE : 9600</div>
+<div>
+BAUDRATE : 9600
+</div>
 
-<div>STATUS : ONLINE</div>
+<div>
+STATUS : ONLINE
+</div>
 
 <div id="clock"></div>
 
