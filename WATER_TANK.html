@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>WATER TANK SCADA</title>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600&display=swap" rel="stylesheet">
+<title>SCADA WATER TANK</title>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
 <style>
 
@@ -14,86 +15,101 @@
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family:'Oswald',sans-serif;
+font-family:Arial;
 }
 
 body{
-background:#020b16;
-overflow:hidden;
+background:
+radial-gradient(circle at top,#0b4d91 0%,#06111f 35%),
+#06111f;
 color:white;
+overflow:hidden;
 }
 
 /* LOGIN */
 
-.loginPage{
+.container{
 width:100%;
 height:100vh;
 display:flex;
 justify-content:center;
 align-items:center;
+padding:20px;
 background:
-radial-gradient(circle at top,#0b4d91 0%,#020b16 45%);
+radial-gradient(circle at top,#0b4d91,#06111f 50%);
 }
 
-.loginBox{
-width:420px;
-background:#07131f;
-border:1px solid #12324f;
-border-radius:25px;
-padding:40px;
-box-shadow:0 0 40px rgba(0,183,255,.2);
+.box{
+width:100%;
+max-width:420px;
+background:#081423;
+padding:35px;
+border-radius:22px;
+border:1px solid #16314f;
+box-shadow:
+0 0 40px rgba(0,183,255,.12);
 }
 
-.loginBox h1{
-font-size:42px;
+.box h1{
 text-align:center;
-color:#35b8ff;
 margin-bottom:10px;
+color:#00b7ff;
+font-size:38px;
 }
 
-.loginBox p{
+.box p{
 text-align:center;
-color:#87b8dd;
 margin-bottom:25px;
-}
-
-.inputBox{
-margin-bottom:18px;
-}
-
-.inputBox input{
-width:100%;
-padding:15px;
-background:#081c2e;
-border:1px solid #173b59;
-border-radius:12px;
-color:white;
-font-size:16px;
-}
-
-.loginBtn{
-width:100%;
-padding:15px;
-border:none;
-border-radius:14px;
-background:linear-gradient(90deg,#0077ff,#00b7ff);
-color:white;
-font-size:18px;
-cursor:pointer;
-margin-top:10px;
-}
-
-.loginBottom{
-margin-top:20px;
-display:flex;
-justify-content:space-between;
-font-size:14px;
 color:#8fbfe6;
 }
 
-.loginBottom a{
-color:#35b8ff;
+input{
+width:100%;
+padding:15px;
+margin-top:14px;
+background:#0c1d30;
+border:1px solid #16314f;
+border-radius:14px;
+color:white;
+font-size:15px;
+outline:none;
+}
+
+button{
+width:100%;
+padding:15px;
+margin-top:15px;
+border:none;
+border-radius:14px;
+font-weight:bold;
+cursor:pointer;
+color:white;
+font-size:15px;
+}
+
+.loginBtn{
+background:
+linear-gradient(90deg,#0077ff,#00b7ff);
+}
+
+/* LINK LOGIN */
+
+.loginLinks{
+display:flex;
+justify-content:space-between;
+margin-top:18px;
+font-size:14px;
+}
+
+.loginLinks a{
+color:#8fbfe6;
 text-decoration:none;
+transition:.3s;
+cursor:pointer;
+}
+
+.loginLinks a:hover{
+color:#00b7ff;
 }
 
 /* SCADA */
@@ -107,68 +123,44 @@ height:100vh;
 /* SIDEBAR */
 
 .sidebar{
-width:250px;
-background:#07131f;
-border-right:1px solid #173b59;
+width:230px;
+background:#081423;
+border-right:1px solid #16314f;
 padding:20px;
-display:flex;
-flex-direction:column;
-justify-content:space-between;
-}
-
-.logo{
-display:flex;
-gap:15px;
-align-items:center;
-margin-bottom:25px;
-}
-
-.logoIcon{
-font-size:60px;
-color:#35b8ff;
+overflow:auto;
 }
 
 .logo h1{
-font-size:34px;
-line-height:35px;
+font-size:46px;
+color:#00b7ff;
 }
 
-.logo span{
-font-size:18px;
-color:#8fbfe6;
+.logo p{
+margin-bottom:35px;
+letter-spacing:2px;
 }
 
-.menu{
+.sidebar ul{
 list-style:none;
 }
 
-.menu li{
-padding:18px;
+.sidebar li{
+padding:15px;
 margin-bottom:12px;
-background:#081c2e;
-border-radius:14px;
-border:1px solid #173b59;
+background:#0c1d30;
+border-radius:12px;
+border:1px solid #16314f;
 cursor:pointer;
 transition:.3s;
-font-size:18px;
 }
 
-.menu li:hover{
-background:#0f2e49;
+.sidebar li:hover{
+transform:translateX(5px);
 }
 
-.active{
-background:linear-gradient(90deg,#0077ff,#00b7ff)!important;
-}
-
-.infoBox{
-background:#081c2e;
-padding:18px;
-border-radius:18px;
-border:1px solid #173b59;
-font-size:14px;
-line-height:30px;
-color:#9ecfff;
+.sidebar .active{
+background:
+linear-gradient(90deg,#0077ff,#00b7ff);
 }
 
 /* MAIN */
@@ -182,186 +174,213 @@ overflow:auto;
 /* TOPBAR */
 
 .topbar{
-background:#07131f;
-border:1px solid #173b59;
-border-radius:20px;
-padding:20px;
+background:#081423;
+padding:18px;
+border-radius:18px;
+border:1px solid #16314f;
 display:flex;
 justify-content:space-between;
 align-items:center;
-margin-bottom:15px;
+margin-bottom:18px;
 }
 
-.topLeft h2{
-font-size:34px;
+.topbar p{
+color:#00b7ff;
 }
 
-.topLeft p{
-color:#35b8ff;
-margin-top:5px;
-}
-
-.topRight{
-display:flex;
-gap:30px;
-align-items:center;
-}
-
-.timeBox{
-font-size:20px;
+.user{
 text-align:right;
 }
 
-.admin{
-text-align:right;
+.user a{
+color:#ff5f5f;
+cursor:pointer;
+text-decoration:none;
 }
 
-.admin p{
-color:#8fbfe6;
+/* PAGE */
+
+.dashboardPage{
+display:block;
+}
+
+.historyPage{
+display:none;
 }
 
 /* CONTENT */
 
 .content{
 display:grid;
-grid-template-columns:2fr 1fr;
-gap:15px;
+grid-template-columns:2.2fr 1fr;
+gap:18px;
 }
 
-/* LEFT PANEL */
+/* CARD */
 
-.leftPanel{
-background:#07131f;
-border:1px solid #173b59;
-border-radius:20px;
-padding:20px;
-}
+.tankCard{
+background:
+linear-gradient(180deg,#081423,#06111f);
 
-.panelTitle{
-display:flex;
-justify-content:space-between;
-align-items:center;
-margin-bottom:15px;
-}
-
-.panelTitle h3{
-font-size:26px;
-}
-
-.online{
-padding:8px 20px;
-border-radius:10px;
-background:#0e7d29;
+padding:25px;
+border-radius:24px;
+border:1px solid #16314f;
+min-height:760px;
+overflow:hidden;
 }
 
 /* TANK AREA */
 
-.tankArea{
+.tankMainArea{
 display:flex;
-align-items:center;
 justify-content:center;
-gap:25px;
-margin-top:20px;
+align-items:flex-start;
+gap:20px;
+margin-top:25px;
 flex-wrap:wrap;
 }
 
 /* SCALE */
 
-.scale{
+.scaleWrapper{
 height:500px;
-width:60px;
+display:flex;
+align-items:center;
+margin-right:-15px;
+z-index:100;
+}
+
+.scaleBar{
 position:relative;
+width:85px;
+height:470px;
 }
 
 .scaleLine{
 position:absolute;
-right:10px;
+right:15px;
 top:0;
 width:4px;
 height:100%;
-background:#1eff77;
+
+background:
+linear-gradient(
+180deg,
+#63ff8d,
+#00b7ff
+);
+
 border-radius:20px;
 }
 
-.scaleMark{
+.scaleItem{
 position:absolute;
 right:0;
+width:100%;
 display:flex;
 align-items:center;
-gap:8px;
-font-size:20px;
+justify-content:flex-end;
+gap:10px;
 }
 
-.scaleMark::before{
+.scaleItem span{
+font-size:18px;
+color:#ffffff;
+width:55px;
+text-align:right;
+}
+
+.scaleItem::after{
 content:'';
-width:15px;
+width:20px;
 height:2px;
-background:white;
+background:#c5eeff;
+}
+
+/* SYSTEM */
+
+.tankSystem{
+position:relative;
+width:780px;
+height:560px;
 }
 
 /* TANK */
 
-.tankSystem{
-position:relative;
-width:520px;
-height:560px;
-}
-
-.tank{
+.tankIndustrial{
 position:absolute;
-bottom:0;
-left:20px;
-width:420px;
-height:500px;
-border-radius:200px 200px 35px 35px;
+left:0;
+bottom:50px;
+
+width:440px;
+height:470px;
+
+border-radius:
+140px 140px 25px 25px;
+
 background:
 linear-gradient(
 180deg,
-#dfe6ed 0%,
-#7f8b96 30%,
-#2f3943 100%
+#eef3f8 0%,
+#a8b3bf 20%,
+#586574 50%,
+#313c48 75%,
+#1d2833 100%
 );
 
-border:6px solid #dce8f3;
+border:5px solid #f3f8ff;
+
 overflow:hidden;
 
 box-shadow:
-inset 0 0 40px rgba(255,255,255,.15),
-0 0 25px rgba(0,183,255,.2);
+inset 0 0 45px rgba(255,255,255,.16),
+0 0 40px rgba(0,183,255,.18);
 }
 
-.tank::before{
+.tankIndustrial::before{
 content:'';
 position:absolute;
-top:-35px;
+top:-30px;
 left:50%;
 transform:translateX(-50%);
+
 width:85%;
-height:70px;
+height:65px;
+
 border-radius:50%;
+
 background:
-linear-gradient(180deg,#ffffff,#98a5b1);
-border:5px solid #dce8f3;
+linear-gradient(
+180deg,
+#dbe6f1,
+#7d8b98
+);
+
+border:4px solid #d7e5f2;
+z-index:10;
 }
 
 /* WATER */
 
-.water{
+.waterFill{
 position:absolute;
+left:0;
 bottom:0;
 width:100%;
-height:72%;
+height:0%;
+
 background:
 linear-gradient(
 180deg,
-#56e0ff,
-#0077ff
+#83f8ff 0%,
+#2ecfff 35%,
+#0077ff 100%
 );
 
-transition:1s;
+transition:1s ease;
 }
 
-.water::before{
+.waterFill::before{
 content:'';
 position:absolute;
 top:-12px;
@@ -378,178 +397,225 @@ animation:wave 4s linear infinite;
 100%{transform:translateX(-80px);}
 }
 
-/* LEVEL BOX */
+/* TEXT */
 
-.levelBox{
+.tankOverlay{
 position:absolute;
-top:45%;
+top:50%;
 left:50%;
 transform:translate(-50%,-50%);
-background:rgba(7,19,31,.8);
-padding:30px;
-border-radius:20px;
-width:220px;
+z-index:50;
 text-align:center;
-z-index:5;
-backdrop-filter:blur(10px);
 }
 
-.levelBox h1{
-font-size:70px;
+.tankOverlay h1{
+font-size:82px;
 }
 
-.levelBox p{
-font-size:30px;
-color:#a6e7ff;
+.tankOverlay p{
+font-size:28px;
+margin-top:10px;
 }
 
 /* PIPE */
 
-.pipeTop{
+.pipeHorizontal{
 position:absolute;
-top:70px;
-right:-40px;
-width:170px;
-height:28px;
-background:linear-gradient(180deg,#dfe6ed,#5e6974);
-border-radius:20px;
-}
-
-.pipeSide{
-position:absolute;
-top:70px;
-right:0;
-width:28px;
-height:320px;
-background:linear-gradient(180deg,#dfe6ed,#5e6974);
-border-radius:20px;
-}
-
-/* PUMP */
-
-.pump{
-position:absolute;
-right:-90px;
-bottom:0;
+top:72px;
+left:360px;
 width:230px;
-filter:drop-shadow(0 0 15px rgba(0,183,255,.5));
+height:28px;
+background:
+linear-gradient(
+180deg,
+#a4b4c5,
+#4f6173
+);
+border-radius:20px;
 }
 
-/* RIGHT PANEL */
+.pipeVertical{
+position:absolute;
+top:72px;
+left:560px;
+width:28px;
+height:330px;
+background:
+linear-gradient(
+180deg,
+#a4b4c5,
+#4f6173
+);
+border-radius:20px;
+}
 
-.rightPanel{
+/* VALVE */
+
+.valve{
+position:absolute;
+top:38px;
+left:530px;
+
+width:85px;
+height:85px;
+
+border-radius:50%;
+
+background:
+radial-gradient(
+circle,
+#26c2ff,
+#005eff
+);
+}
+
+/* LEGS */
+
+.tankLeg{
+position:absolute;
+bottom:0;
+width:40px;
+height:60px;
+
+background:
+linear-gradient(
+180deg,
+#8998a8,
+#33404d
+);
+
+border-radius:8px;
+}
+
+.leg1{left:70px;}
+.leg2{left:180px;}
+.leg3{left:300px;}
+
+/* SIDE DATA */
+
+.sideData{
 display:flex;
 flex-direction:column;
+gap:18px;
+width:220px;
+}
+
+.dataBox{
+background:
+linear-gradient(
+180deg,
+#0d1c2f,
+#081423
+);
+
+padding:22px;
+border-radius:22px;
+border:1px solid #16314f;
+}
+
+.dataTop{
+display:flex;
+align-items:center;
 gap:15px;
 }
 
-.card{
-background:#07131f;
-border:1px solid #173b59;
-border-radius:20px;
+.icon{
+font-size:40px;
+}
+
+.dataBox h1{
+margin-top:10px;
+font-size:42px;
+color:#77efff;
+}
+
+/* RIGHT */
+
+.right{
+display:flex;
+flex-direction:column;
+gap:18px;
+}
+
+.panel{
+background:linear-gradient(180deg,#0b1a2c,#081423);
 padding:20px;
+border-radius:20px;
+border:1px solid #16314f;
 }
-
-.card h3{
-font-size:24px;
-margin-bottom:20px;
-}
-
-/* STATUS */
 
 .status{
-font-size:26px;
-color:#22ff66;
+font-size:22px;
+color:#8fff88;
+margin:20px 0;
+font-weight:bold;
+}
+
+.modeBtns{
+display:flex;
+gap:12px;
 margin-bottom:20px;
 }
 
-/* BUTTON */
+.modeBtn{
+flex:1;
+height:55px;
+font-size:17px;
+transition:.3s;
+}
 
-.btn{
-width:100%;
-padding:16px;
-border:none;
-border-radius:14px;
-color:white;
-font-size:18px;
-cursor:pointer;
-margin-bottom:12px;
+.modeActive{
+background:
+linear-gradient(90deg,#0077ff,#00b7ff);
+}
+
+.modeInactive{
+background:#0c1d30;
+border:1px solid #16314f;
 }
 
 .green{
-background:linear-gradient(90deg,#0c8d2d,#17d04f);
+background:
+linear-gradient(90deg,#29b94d,#8eff91);
 }
 
 .red{
-background:linear-gradient(90deg,#c10f2d,#ff2955);
-}
-
-.blue{
-background:linear-gradient(90deg,#0077ff,#00b7ff);
+background:
+linear-gradient(90deg,#ff2d55,#ff7696);
 }
 
 .gray{
-background:#39475c;
+background:#4f5d80;
 }
 
-/* DATA */
-
-.dataBox{
+.data{
 display:flex;
 justify-content:space-between;
 padding:12px 0;
-border-bottom:1px solid #173b59;
-font-size:18px;
-}
-
-/* ICON BOX */
-
-.sensorGrid{
-display:grid;
-grid-template-columns:1fr;
-gap:15px;
-margin-top:20px;
-}
-
-.sensor{
-background:#081c2e;
-border:1px solid #173b59;
-border-radius:18px;
-padding:20px;
-display:flex;
-justify-content:space-between;
-align-items:center;
-}
-
-.sensorIcon{
-font-size:42px;
-color:#35b8ff;
-}
-
-.sensor h1{
-font-size:42px;
+border-bottom:1px solid #16314f;
 }
 
 /* BOTTOM */
 
 .bottom{
-margin-top:15px;
+margin-top:18px;
 display:grid;
 grid-template-columns:1.5fr 1fr;
-gap:15px;
+gap:18px;
 }
 
 .graphCard,
-.historyCard{
-background:#07131f;
-border:1px solid #173b59;
-border-radius:20px;
+.tableCard{
+background:#081423;
 padding:20px;
+border-radius:20px;
+border:1px solid #16314f;
 }
 
 .graph{
-height:260px;
-background:#020b16;
+width:100%;
+height:220px;
+background:#06111f;
 border-radius:15px;
 margin-top:20px;
 overflow:hidden;
@@ -566,63 +632,65 @@ stroke:#00b7ff;
 stroke-width:4;
 }
 
-/* TABLE */
-
 table{
 width:100%;
 border-collapse:collapse;
 margin-top:20px;
 }
 
-th{
-background:#081c2e;
+table th{
+background:#0c1d30;
 }
 
-th,td{
+table th,
+table td{
 padding:12px;
-border-bottom:1px solid #173b59;
+border-bottom:1px solid #16314f;
 text-align:left;
 }
 
 /* FOOTER */
 
 .footer{
-margin-top:15px;
-background:#07131f;
-border:1px solid #173b59;
-border-radius:15px;
+margin-top:18px;
+background:#081423;
 padding:15px;
+border-radius:15px;
+border:1px solid #16314f;
 display:flex;
 justify-content:space-around;
-font-size:18px;
 color:#8fbfe6;
 }
 
-/* MOBILE */
+/* HISTORY */
 
-@media(max-width:1200px){
-
-body{
-overflow:auto;
+.historyBox{
+background:#081423;
+padding:25px;
+border-radius:20px;
+border:1px solid #16314f;
 }
 
-.scada{
-flex-direction:column;
-height:auto;
+.reportArea{
+display:none;
+margin-top:20px;
 }
 
-.sidebar{
-width:100%;
+.timeFilter{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:15px;
+margin-top:20px;
 }
 
-.content{
-grid-template-columns:1fr;
+.generateBtn{
+background:
+linear-gradient(90deg,#0077ff,#00b7ff);
 }
 
-.bottom{
-grid-template-columns:1fr;
-}
-
+.exportBtn{
+background:
+linear-gradient(90deg,#00a65a,#00d96f);
 }
 
 </style>
@@ -632,225 +700,209 @@ grid-template-columns:1fr;
 
 <!-- LOGIN -->
 
-<div class="loginPage" id="loginPage">
+<div class="container" id="loginPage">
 
-<div class="loginBox">
+<div class="box">
 
-<h1>SCADA LOGIN</h1>
+<h1>SCADA SYSTEM</h1>
 
-<p>Water Tank Monitoring System</p>
+<p>Water Tank Monitoring & Control</p>
 
-<div class="inputBox">
 <input type="email" id="email" placeholder="Email">
-</div>
 
-<div class="inputBox">
 <input type="password" id="password" placeholder="Password">
-</div>
 
 <button class="loginBtn" onclick="login()">
 LOGIN
 </button>
 
-<div class="loginBottom">
+<div class="loginLinks">
 
-<a href="#">Forgot Password?</a>
+<a onclick="forgotPassword()">
+Forgot Password?
+</a>
 
-<a href="#">Belum punya akun?</a>
+<a onclick="registerAccount()">
+Belum punya akun?
+</a>
 
 </div>
 
 </div>
-
 </div>
 
 <!-- SCADA -->
 
 <div class="scada" id="scadaPage">
 
-<!-- SIDEBAR -->
-
 <div class="sidebar">
-
-<div>
 
 <div class="logo">
 
-<div class="logoIcon">💧</div>
-
-<div>
-
 <h1>WATER</h1>
-<span>TANK SCADA</span>
+<p>TANK SCADA</p>
 
 </div>
 
-</div>
+<ul>
 
-<ul class="menu">
+<li class="active" onclick="showDashboard()">
+Dashboard
+</li>
 
-<li class="active">DASHBOARD</li>
-<li>MONITORING</li>
-<li>CONTROL</li>
-<li>ALARM</li>
-<li>TREND GRAPH</li>
-<li>HISTORY</li>
-<li>REPORT</li>
-<li>SETTING</li>
-<li onclick="logout()">LOGOUT</li>
+<li onclick="showHistory()">
+History
+</li>
 
 </ul>
 
 </div>
 
-<div class="infoBox">
-
-Project : Water Tank System<br>
-Version : 1.0.0<br>
-Status : ONLINE<br>
-Developer : SCADA System
-
-</div>
-
-</div>
-
-<!-- MAIN -->
-
 <div class="main">
-
-<!-- TOPBAR -->
 
 <div class="topbar">
 
-<div class="topLeft">
+<div>
 
-<h2>WATER TANK MONITORING & CONTROL SYSTEM</h2>
+<h2>WATER TANK MONITORING</h2>
 
 <p>REAL TIME MONITORING</p>
 
 </div>
 
-<div class="topRight">
+<div class="user">
 
-<div class="timeBox">
+<div id="userEmail"></div>
 
-<div id="date"></div>
-<div id="clock"></div>
-
-</div>
-
-<div class="admin">
-
-<h3>Administrator</h3>
-<p>Level : Admin</p>
+<a onclick="logout()">
+Logout
+</a>
 
 </div>
 
 </div>
 
-</div>
+<!-- DASHBOARD -->
 
-<!-- CONTENT -->
+<div class="dashboardPage" id="dashboardPage">
 
 <div class="content">
 
 <!-- LEFT -->
 
-<div class="leftPanel">
+<div class="tankCard">
 
-<div class="panelTitle">
-
-<h3>TANK OVERVIEW</h3>
-
-<div class="online">
-LEVEL NORMAL
-</div>
-
-</div>
-
-<div class="tankArea">
+<div class="tankMainArea">
 
 <!-- SCALE -->
 
-<div class="scale">
+<div class="scaleWrapper">
+
+<div class="scaleBar">
 
 <div class="scaleLine"></div>
 
-<div class="scaleMark" style="top:0">100%</div>
-<div class="scaleMark" style="top:120px">75%</div>
-<div class="scaleMark" style="top:240px">50%</div>
-<div class="scaleMark" style="top:360px">25%</div>
-<div class="scaleMark" style="bottom:0">0%</div>
+<div class="scaleItem" style="top:-10px;">
+<span>100%</span>
+</div>
+
+<div class="scaleItem" style="top:100px;">
+<span>75%</span>
+</div>
+
+<div class="scaleItem" style="top:210px;">
+<span>50%</span>
+</div>
+
+<div class="scaleItem" style="top:320px;">
+<span>25%</span>
+</div>
+
+<div class="scaleItem" style="bottom:-10px;">
+<span>0%</span>
+</div>
 
 </div>
 
-<!-- TANK -->
+</div>
+
+<!-- SYSTEM -->
 
 <div class="tankSystem">
 
-<div class="tank">
+<div class="tankIndustrial">
 
-<div class="water" id="water"></div>
+<div class="waterFill" id="water"></div>
 
-<div class="levelBox">
+<div class="tankOverlay">
 
-LEVEL
+<h1 id="levelText">0%</h1>
 
-<h1 id="levelText">72%</h1>
-
-<p id="cmText">72.5 cm</p>
+<p id="cmText">0 cm</p>
 
 </div>
 
 </div>
 
-<div class="pipeTop"></div>
-<div class="pipeSide"></div>
+<div class="tankLeg leg1"></div>
+<div class="tankLeg leg2"></div>
+<div class="tankLeg leg3"></div>
 
-<img src="pump.png" class="pump">
+<div class="pipeHorizontal"></div>
+<div class="pipeVertical"></div>
+<div class="valve"></div>
 
 </div>
 
-<!-- SENSOR -->
+<!-- DATA -->
 
-<div class="sensorGrid">
+<div class="sideData">
 
-<div class="sensor">
+<div class="dataBox">
+
+<div class="dataTop">
+
+<div class="icon">💧</div>
 
 <div>
-
-<p>VOLUME</p>
+<h3>VOLUME</h3>
 <h1>725</h1>
+<p>LITER</p>
+</div>
 
 </div>
 
-<div class="sensorIcon">🛢</div>
-
 </div>
 
-<div class="sensor">
+<div class="dataBox">
+
+<div class="dataTop">
+
+<div class="icon">🌡️</div>
 
 <div>
-
-<p>TEMPERATURE</p>
-<h1>28.4°</h1>
+<h3>TEMP</h3>
+<h1>28°</h1>
+<p>CELCIUS</p>
+</div>
 
 </div>
 
-<div class="sensorIcon">🌡</div>
-
 </div>
 
-<div class="sensor">
+<div class="dataBox">
+
+<div class="dataTop">
+
+<div class="icon">⚙️</div>
 
 <div>
-
-<p>PRESSURE</p>
-<h1>2.35</h1>
-
+<h3>PRESSURE</h3>
+<h1>2.3</h1>
+<p>BAR</p>
 </div>
 
-<div class="sensorIcon">⏱</div>
+</div>
 
 </div>
 
@@ -862,61 +914,60 @@ LEVEL
 
 <!-- RIGHT -->
 
-<div class="rightPanel">
+<div class="right">
 
-<div class="card">
+<div class="panel">
 
 <h3>PUMP CONTROL</h3>
 
 <div class="status" id="statusText">
-● RUNNING
+● STOPPED
 </div>
 
-<button class="btn blue">
+<div class="modeBtns">
+
+<button
+id="autoBtn"
+class="modeBtn modeActive"
+onclick="setAuto()">
 AUTO
 </button>
 
-<button class="btn green" onclick="startPump()">
-START PUMP
-</button>
-
-<button class="btn red" onclick="stopPump()">
-STOP PUMP
-</button>
-
-<button class="btn gray" onclick="resetTank()">
-RESET ALARM
+<button
+id="manualBtn"
+class="modeBtn modeInactive"
+onclick="setManual()">
+MANUAL
 </button>
 
 </div>
 
-<div class="card">
+<button class="green" onclick="startPump()">
+▶ START PUMP
+</button>
+
+<button class="red" onclick="stopPump()">
+■ STOP PUMP
+</button>
+
+<button class="gray" onclick="resetTank()">
+RESET
+</button>
+
+</div>
+
+<div class="panel">
 
 <h3>REAL TIME DATA</h3>
 
-<div class="dataBox">
+<div class="data">
 <span>Tank Level</span>
-<b id="dataLevel">72%</b>
+<b id="dataLevel">0%</b>
 </div>
 
-<div class="dataBox">
-<span>Volume</span>
-<b>725 Liter</b>
-</div>
-
-<div class="dataBox">
-<span>Temperature</span>
-<b>28.4°C</b>
-</div>
-
-<div class="dataBox">
-<span>Pressure</span>
-<b>2.35 Bar</b>
-</div>
-
-<div class="dataBox">
+<div class="data">
 <span>Pump Status</span>
-<b id="pumpStatus">RUNNING</b>
+<b id="dataStatus">OFF</b>
 </div>
 
 </div>
@@ -924,12 +975,8 @@ RESET ALARM
 </div>
 
 </div>
-
-<!-- BOTTOM -->
 
 <div class="bottom">
-
-<!-- GRAPH -->
 
 <div class="graphCard">
 
@@ -937,9 +984,9 @@ RESET ALARM
 
 <div class="graph">
 
-<svg viewBox="0 0 1000 260">
+<svg viewBox="0 0 1000 250">
 
-<path id="graphPath" d=""></path>
+<path id="graphPath" d="M0 240"></path>
 
 </svg>
 
@@ -947,38 +994,16 @@ RESET ALARM
 
 </div>
 
-<!-- HISTORY -->
-
-<div class="historyCard">
-
-<div style="
-display:flex;
-justify-content:space-between;
-align-items:center;
-">
+<div class="tableCard">
 
 <h3>DATA LOG</h3>
-
-<button class="btn blue"
-style="
-width:auto;
-padding:10px 18px;
-margin:0;
-"
-onclick="exportPDF()">
-EXPORT PDF
-</button>
-
-</div>
 
 <table>
 
 <tr>
-
 <th>TIME</th>
 <th>LEVEL</th>
 <th>PUMP</th>
-
 </tr>
 
 <tbody id="logTable"></tbody>
@@ -989,14 +1014,68 @@ EXPORT PDF
 
 </div>
 
-<!-- FOOTER -->
-
 <div class="footer">
 
 <div>COM3</div>
-<div>BAUDRATE 9600</div>
-<div>STATUS ONLINE</div>
-<div id="footerClock"></div>
+<div>9600</div>
+<div>ONLINE</div>
+<div id="clock"></div>
+
+</div>
+
+</div>
+
+<!-- HISTORY -->
+
+<div class="historyPage" id="historyPage">
+
+<div class="historyBox">
+
+<h2>HISTORY</h2>
+
+<div class="timeFilter">
+
+<div>
+<label>FROM</label>
+<input type="time" id="fromTime">
+</div>
+
+<div>
+<label>TO</label>
+<input type="time" id="toTime">
+</div>
+
+</div>
+
+<button
+class="generateBtn"
+onclick="generateHistory()">
+GENERATE HISTORY
+</button>
+
+<div class="reportArea" id="reportArea">
+
+<table>
+
+<tr>
+<th>TIME</th>
+<th>LEVEL</th>
+<th>PUMP</th>
+</tr>
+
+<tbody id="historyTable"></tbody>
+
+</table>
+
+<button
+class="exportBtn"
+onclick="exportPDF()">
+EXPORT PDF
+</button>
+
+</div>
+
+</div>
 
 </div>
 
@@ -1006,14 +1085,26 @@ EXPORT PDF
 
 <script>
 
-/* SESSION */
+/* AUTO LOGIN */
 
 window.onload = function(){
 
-if(localStorage.getItem("login")=="true"){
+let savedLogin =
+localStorage.getItem("scadaLogin");
 
-document.getElementById("loginPage").style.display="none";
-document.getElementById("scadaPage").style.display="flex";
+let savedEmail =
+localStorage.getItem("scadaEmail");
+
+if(savedLogin === "true"){
+
+document.getElementById("loginPage")
+.style.display = "none";
+
+document.getElementById("scadaPage")
+.style.display = "flex";
+
+document.getElementById("userEmail")
+.innerHTML = savedEmail;
 
 }
 
@@ -1029,15 +1120,31 @@ document.getElementById("email").value;
 let password =
 document.getElementById("password").value;
 
-if(email && password){
+if(email==="" || password===""){
 
-localStorage.setItem("login","true");
-
-document.getElementById("loginPage").style.display="none";
-
-document.getElementById("scadaPage").style.display="flex";
+alert("Masukkan email dan password");
+return;
 
 }
+
+localStorage.setItem(
+"scadaLogin",
+"true"
+);
+
+localStorage.setItem(
+"scadaEmail",
+email
+);
+
+document.getElementById("userEmail")
+.innerHTML = email;
+
+document.getElementById("loginPage")
+.style.display="none";
+
+document.getElementById("scadaPage")
+.style.display="flex";
 
 }
 
@@ -1045,11 +1152,81 @@ document.getElementById("scadaPage").style.display="flex";
 
 function logout(){
 
-localStorage.removeItem("login");
+localStorage.removeItem(
+"scadaLogin"
+);
 
-document.getElementById("scadaPage").style.display="none";
+localStorage.removeItem(
+"scadaEmail"
+);
 
-document.getElementById("loginPage").style.display="flex";
+document.getElementById("scadaPage")
+.style.display="none";
+
+document.getElementById("loginPage")
+.style.display="flex";
+
+}
+
+/* LOGIN LINKS */
+
+function forgotPassword(){
+
+alert(
+"Fitur forgot password belum tersedia"
+);
+
+}
+
+function registerAccount(){
+
+alert(
+"Fitur register account belum tersedia"
+);
+
+}
+
+/* PAGE */
+
+function showDashboard(){
+
+document.getElementById("dashboardPage")
+.style.display="block";
+
+document.getElementById("historyPage")
+.style.display="none";
+
+}
+
+function showHistory(){
+
+document.getElementById("dashboardPage")
+.style.display="none";
+
+document.getElementById("historyPage")
+.style.display="block";
+
+}
+
+/* MODE */
+
+function setAuto(){
+
+document.getElementById("autoBtn")
+.classList.add("modeActive");
+
+document.getElementById("manualBtn")
+.classList.remove("modeActive");
+
+}
+
+function setManual(){
+
+document.getElementById("manualBtn")
+.classList.add("modeActive");
+
+document.getElementById("autoBtn")
+.classList.remove("modeActive");
 
 }
 
@@ -1057,107 +1234,52 @@ document.getElementById("loginPage").style.display="flex";
 
 setInterval(()=>{
 
-let now = new Date();
-
 document.getElementById("clock")
 .innerHTML =
-now.toLocaleTimeString();
-
-document.getElementById("footerClock")
-.innerHTML =
-now.toLocaleTimeString();
-
-document.getElementById("date")
-.innerHTML =
-now.toLocaleDateString('id-ID');
+new Date().toLocaleTimeString();
 
 },1000);
 
-/* TANK */
+/* SYSTEM */
 
-let level = 72;
-let running = true;
+let level = 0;
+let running = false;
 let interval;
-let x = 0;
 let points = [];
-
-/* UPDATE */
-
-function updateTank(){
-
-document.getElementById("water")
-.style.height = level + "%";
-
-document.getElementById("levelText")
-.innerHTML = level + "%";
-
-document.getElementById("cmText")
-.innerHTML = level + ".5 cm";
-
-document.getElementById("dataLevel")
-.innerHTML = level + "%";
-
-/* GRAPH */
-
-x += 15;
-
-let y = 240 - (level * 2);
-
-points.push(`${x} ${y}`);
-
-if(points.length > 60){
-points.shift();
-}
-
-let path = "M0 240 L" + points.join(" L");
-
-document.getElementById("graphPath")
-.setAttribute("d",path);
-
-/* HISTORY */
-
-let now = new Date();
-
-let row = `
-<tr>
-<td>${now.toLocaleTimeString()}</td>
-<td>${level}%</td>
-<td>${running ? 'ON':'OFF'}</td>
-</tr>
-`;
-
-document.getElementById("logTable")
-.innerHTML =
-row +
-document.getElementById("logTable").innerHTML;
-
-}
+let xPos = 0;
+let historyData = [];
 
 /* START */
 
 function startPump(){
 
-clearInterval(interval);
+if(running) return;
 
 running = true;
 
 document.getElementById("statusText")
 .innerHTML = "● RUNNING";
 
-document.getElementById("pumpStatus")
+document.getElementById("dataStatus")
 .innerHTML = "RUNNING";
 
 interval = setInterval(()=>{
 
-if(level < 100){
+if(level >= 100){
+
+clearInterval(interval);
+
+running = false;
+
+return;
+
+}
 
 level++;
 
 updateTank();
 
-}
-
-},500);
+},120);
 
 }
 
@@ -1172,7 +1294,7 @@ running = false;
 document.getElementById("statusText")
 .innerHTML = "● STOPPED";
 
-document.getElementById("pumpStatus")
+document.getElementById("dataStatus")
 .innerHTML = "STOPPED";
 
 }
@@ -1189,8 +1311,12 @@ level = 0;
 
 points = [];
 
+xPos = 0;
+
+historyData = [];
+
 document.getElementById("graphPath")
-.setAttribute("d","");
+.setAttribute("d","M0 240");
 
 document.getElementById("logTable")
 .innerHTML = "";
@@ -1199,35 +1325,124 @@ updateTank();
 
 }
 
-/* PDF */
+/* UPDATE */
 
-function exportPDF(){
+function updateTank(){
 
-window.print();
+document.getElementById("water")
+.style.height = level + "%";
+
+document.getElementById("levelText")
+.innerHTML = level + "%";
+
+document.getElementById("cmText")
+.innerHTML = level + " cm";
+
+document.getElementById("dataLevel")
+.innerHTML = level + "%";
+
+xPos += 8;
+
+let y =
+240 - (level * 1.8);
+
+points.push(`${xPos} ${y}`);
+
+let path =
+"M0 240 L" + points.join(" L");
+
+document.getElementById("graphPath")
+.setAttribute("d",path);
+
+let now = new Date();
+
+let time =
+now.toLocaleTimeString();
+
+let row = `
+<tr>
+<td>${time}</td>
+<td>${level}%</td>
+<td>${running ? 'ON' : 'OFF'}</td>
+</tr>
+`;
+
+document.getElementById("logTable")
+.innerHTML =
+row +
+document.getElementById("logTable").innerHTML;
+
+historyData.push({
+
+time:time,
+level:level,
+pump:running ? 'ON' : 'OFF'
+
+});
 
 }
 
-/* AUTO UPDATE */
+/* HISTORY */
 
-setInterval(()=>{
+function generateHistory(){
 
-if(!running){
+document.getElementById("reportArea")
+.style.display = "block";
 
-if(level > 0){
+let rows = "";
 
-level--;
+historyData.forEach(data=>{
 
-updateTank();
+rows += `
+<tr>
+<td>${data.time}</td>
+<td>${data.level}%</td>
+<td>${data.pump}</td>
+</tr>
+`;
+
+});
+
+document.getElementById("historyTable")
+.innerHTML = rows;
 
 }
 
+/* EXPORT PDF */
+
+async function exportPDF(){
+
+let element =
+document.getElementById("reportArea");
+
+await html2pdf()
+.set({
+
+margin:0.3,
+
+filename:
+"WATER_TANK.pdf",
+
+image:{
+type:"jpeg",
+quality:1
+},
+
+html2canvas:{
+scale:2
+},
+
+jsPDF:{
+unit:"in",
+format:"a4",
+orientation:"portrait"
 }
 
-},1000);
+})
+.from(element)
+.save();
 
-/* INIT */
-
-updateTank();
+}
 
 </script>
 
