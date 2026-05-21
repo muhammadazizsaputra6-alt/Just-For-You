@@ -905,13 +905,76 @@ RESET ALARM
 
 </div>
 
+<!-- GANTI PANEL REAL TIME DATA LAMA DENGAN INI -->
+
 <div class="panel">
 
-<h3>REAL TIME DATA</h3>
+<h3 style="
+margin-bottom:20px;
+font-size:24px;
+">
+ALARM STATUS
+</h3>
+
+<div class="data">
+<span>High Level Alarm</span>
+<b id="highAlarm" style="color:#8fff88;">
+NORMAL
+</b>
+</div>
+
+<div class="data">
+<span>Low Level Alarm</span>
+<b id="lowAlarm" style="color:#8fff88;">
+NORMAL
+</b>
+</div>
+
+<div class="data">
+<span>Pump Alarm</span>
+<b id="pumpAlarm" style="color:#8fff88;">
+NORMAL
+</b>
+</div>
+
+<div class="data">
+<span>System Status</span>
+<b id="systemAlarm" style="color:#8fff88;">
+ONLINE
+</b>
+</div>
+
+</div>
+
+<!-- REAL TIME DATA -->
+
+<div class="panel">
+
+<h3 style="
+margin-bottom:20px;
+font-size:24px;
+">
+REAL TIME DATA
+</h3>
 
 <div class="data">
 <span>Tank Level</span>
 <b id="dataLevel">0%</b>
+</div>
+
+<div class="data">
+<span>Volume</span>
+<b id="dataVolume">725 Liter</b>
+</div>
+
+<div class="data">
+<span>Temperature</span>
+<b id="dataTemp">28.4°C</b>
+</div>
+
+<div class="data">
+<span>Pressure</span>
+<b id="dataPressure">2.35 Bar</b>
 </div>
 
 <div class="data">
@@ -1421,6 +1484,79 @@ level:level,
 pump:running ? 'ON' : 'OFF'
 
 });
+
+/* ALARM STATUS */
+
+if(level >= 90){
+
+document.getElementById("highAlarm")
+.innerHTML = "HIGH LEVEL";
+
+document.getElementById("highAlarm")
+.style.color = "#ff5f5f";
+
+}else{
+
+document.getElementById("highAlarm")
+.innerHTML = "NORMAL";
+
+document.getElementById("highAlarm")
+.style.color = "#8fff88";
+
+}
+
+if(level <= 10){
+
+document.getElementById("lowAlarm")
+.innerHTML = "LOW LEVEL";
+
+document.getElementById("lowAlarm")
+.style.color = "#ffd35f";
+
+}else{
+
+document.getElementById("lowAlarm")
+.innerHTML = "NORMAL";
+
+document.getElementById("lowAlarm")
+.style.color = "#8fff88";
+
+}
+
+if(running){
+
+document.getElementById("pumpAlarm")
+.innerHTML = "RUNNING";
+
+document.getElementById("pumpAlarm")
+.style.color = "#00b7ff";
+
+}else{
+
+document.getElementById("pumpAlarm")
+.innerHTML = "STOPPED";
+
+document.getElementById("pumpAlarm")
+.style.color = "#ff5f5f";
+
+}
+
+document.getElementById("systemAlarm")
+.innerHTML = "ONLINE";
+
+document.getElementById("systemAlarm")
+.style.color = "#8fff88";
+
+/* REALTIME DATA */
+
+document.getElementById("dataVolume")
+.innerHTML = (level * 7.25).toFixed(0) + " Liter";
+
+document.getElementById("dataTemp")
+.innerHTML = (28 + (level/100)).toFixed(1) + "°C";
+
+document.getElementById("dataPressure")
+.innerHTML = (1 + (level/50)).toFixed(2) + " Bar";
 
 }
 
