@@ -21,7 +21,9 @@ font-family:Arial;
 }
 
 body{
-background:#06111f;
+background:
+radial-gradient(circle at top,#0b4d91 0%,#06111f 35%),
+#06111f;
 color:white;
 overflow:hidden;
 }
@@ -118,7 +120,7 @@ color:#55efc4;
 /* SCADA */
 
 .scada{
-display:none;
+display:flex;
 width:100%;
 height:100vh;
 }
@@ -220,11 +222,12 @@ gap:18px;
 /* TANK */
 
 .tankCard{
-background:#081423;
-padding:20px;
-border-radius:20px;
+background:linear-gradient(180deg,#081423,#06111f);
+padding:25px;
+border-radius:24px;
 border:1px solid #16314f;
-height:500px;
+height:650px;
+box-shadow:0 0 30px rgba(0,183,255,0.15);
 }
 
 .tankBox{
@@ -244,8 +247,16 @@ position:absolute;
 bottom:0;
 width:100%;
 height:0%;
-background:linear-gradient(#75f0ff,#008cff);
-transition:1s linear;
+background:
+linear-gradient(
+180deg,
+#8df5ff,
+#00b7ff,
+#0066ff
+);
+transition:height 1s ease;
+box-shadow:
+0 0 30px rgba(0,183,255,0.6);
 }
 
 .water::before{
@@ -299,10 +310,11 @@ gap:18px;
 }
 
 .panel{
-background:#081423;
+background:linear-gradient(180deg,#0b1a2c,#081423);
 padding:20px;
 border-radius:20px;
 border:1px solid #16314f;
+box-shadow:0 0 20px rgba(0,183,255,0.08);
 }
 
 .status{
@@ -721,7 +733,7 @@ font-size:18px;
 <div class="tankBox" style="
 width:420px;
 height:420px;
-border-radius:40px;
+border-radius:50% 50% 25% 25%;
 border:10px solid #dce9ff;
 background:#081423;
 box-shadow:0 0 40px rgba(0,183,255,0.3);
