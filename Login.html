@@ -898,36 +898,6 @@ const aiButton = document.querySelector(".inputAi button");
 
 const chatBox = document.querySelector(".chatBox");
 
-    /* SAVE CHAT */
-
-function saveChat(){
-
-    const currentUser = localStorage.getItem("userEmail");
-
-    localStorage.setItem(
-        "chat_" + currentUser,
-        chatBox.innerHTML
-    );
-
-}
-
-/* LOAD CHAT */
-
-function loadChat(){
-
-    const currentUser = localStorage.getItem("userEmail");
-
-    const savedChat =
-    localStorage.getItem("chat_" + currentUser);
-
-    if(savedChat){
-
-        chatBox.innerHTML = savedChat;
-
-    }
-
-}
-
 /* API KEY */
 
 const API_KEY = "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";
@@ -978,7 +948,7 @@ async function sendMessage(){
     userMessage.innerHTML = text;
 
     chatBox.appendChild(userMessage);
-    saveChat();
+    
 
     aiInput.value = "";
 
@@ -1053,7 +1023,7 @@ async function sendMessage(){
         }
 
         chatBox.appendChild(aiMessage);
-        saveChat();
+        
 
         chatBox.scrollTop = chatBox.scrollHeight;
 
