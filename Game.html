@@ -3,43 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CT GAME TOPUP - Specialist MLBB & FF</title>
+    <title>GS-STORE - Dashboard Top Up</title>
     
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <!-- SwiperJS CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
         :root {
-            --bg-dark-blue: #0a1128;
-            --bg-card: #101f42;
-            --bg-input: #1b2e5a;
-            --primary-blue: #0076ff;
-            --accent-orange: #ff6b00;
-            --accent-red: #ff3b30;
+            --bg-main: #06152d;
+            --bg-header: #0747a6;
+            --bg-card: #0c1f44;
+            --bg-input: #112958;
+            --accent-blue: #0076ff;
             --text-light: #f1f5f9;
         }
 
         body {
             font-family: 'Poppins', sans-serif;
-            background-color: var(--bg-dark-blue);
+            background-color: var(--bg-main);
             color: var(--text-light);
             font-size: 0.9rem;
         }
 
-        /* Top Header Navbar */
-        .top-nav {
-            background-color: #0c1a30;
-            border-bottom: 2px solid #142a52;
-        }
+        /* Nav & Header */
         .main-header {
-            background-color: #0747a6;
+            background-color: var(--bg-header);
             padding: 12px 0;
+            border-bottom: 2px solid #053377;
         }
         .btn-reseller {
             background-color: #e02424;
@@ -50,21 +44,15 @@
             padding: 6px 16px;
         }
 
-        /* Hero Banner */
-        .swiper {
+        /* Banner */
+        .promo-banner {
             width: 100%;
             border-radius: 12px;
-            overflow: hidden;
             margin-bottom: 25px;
-        }
-        .swiper-slide img {
-            width: 100%;
-            height: auto;
-            max-height: 280px;
-            object-fit: cover;
+            border: 1px solid #142a52;
         }
 
-        /* Card Elements */
+        /* Component Box */
         .section-box {
             background-color: var(--bg-card);
             border: 1px solid #142a52;
@@ -73,55 +61,42 @@
             margin-bottom: 20px;
         }
 
-        .game-grid-card {
+        /* Game Card */
+        .game-card {
             background-color: var(--bg-card);
             border: 1px solid #142a52;
             border-radius: 12px;
             overflow: hidden;
-            transition: all 0.2s ease-in-out;
+            transition: all 0.2s;
             cursor: pointer;
             text-align: center;
         }
-        .game-grid-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--primary-blue);
+        .game-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--accent-blue);
         }
-        .game-grid-card img {
+        .game-card img {
             width: 100%;
-            height: 120px;
+            height: 140px;
             object-fit: cover;
         }
 
-        /* Step Badge */
-        .step-badge {
-            background-color: var(--primary-blue);
-            color: white;
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            margin-right: 10px;
-        }
-
-        /* Form Inputs */
-        .form-control-custom {
+        /* Form Custom styling */
+        .form-custom {
             background-color: var(--bg-input);
             border: 1px solid #243f7a;
             color: white;
             padding: 12px;
             border-radius: 8px;
         }
-        .form-control-custom:focus {
+        .form-custom:focus {
             background-color: var(--bg-input);
-            border-color: var(--primary-blue);
+            border-color: var(--accent-blue);
             color: white;
             box-shadow: none;
         }
 
-        /* Item Grid & Selection Box */
+        /* Item Grid Locked States */
         .item-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
@@ -135,17 +110,16 @@
             padding: 15px 10px;
             cursor: pointer;
             transition: all 0.2s;
-            text-align: left;
-            position: relative;
+            opacity: 0.5; /* Terkunci secara visual sebelum ID diisi */
+            pointer-events: none; /* Blokir klik secara sistem */
         }
-        .item-box:hover, .item-box.active {
-            border-color: var(--primary-blue);
+        .item-box.unlocked {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .item-box:hover {
+            border-color: var(--accent-blue);
             background-color: #102d6b;
-        }
-        .item-box .diamond-icon {
-            color: #00d2ff;
-            font-size: 1.1rem;
-            margin-bottom: 5px;
         }
         .item-box .item-name {
             font-weight: 600;
@@ -158,150 +132,112 @@
             font-weight: bold;
         }
 
-        /* QRIS Image Cropping Style */
-        .qris-crop-container {
-            background-color: #fff;
-            padding: 15px;
-            border-radius: 12px;
-            display: inline-block;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-            margin: 15px 0;
-            overflow: hidden;
+        /* White Winpay/Speedcash Gateway Style */
+        .white-payment-gate {
+            background-color: #ffffff;
+            color: #333333;
+            border-radius: 0px;
+            padding: 25px 15px;
         }
-        /* Memotong gambar QRIS Aziz Shop agar terfokus pada bagian QR Code saja */
-        .qris-cropped-img {
-            width: 250px;
-            height: 250px;
-            object-fit: cover;
-            object-position: 50% 55%; /* Memosisikan fokus tepat di tengah gambar QR */
-            border-radius: 6px;
+        .pay-method-row {
+            border: 1px solid #e2e8f0;
+            padding: 15px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        /* Responsive Utilities */
-        @media (max-width: 576px) {
-            .item-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            .game-grid-card img {
-                height: 100px;
-            }
+        /* Cropping Area QRIS */
+        .qris-frame {
+            background-color: white;
+            padding: 10px;
+            border: 1px solid #ddd;
+            display: inline-block;
+        }
+        .qris-img-crop {
+            width: 240px;
+            height: 240px;
+            object-fit: cover;
+            object-position: 50% 55%;
+        }
+
+        @media(max-width: 576px) {
+            .item-grid { grid-template-columns: repeat(2, 1fr); }
         }
     </style>
 </head>
 <body>
 
-    <!-- Header Atas (Mirip Referensi Gambar) -->
-    <header>
-        <div class="top-nav py-2 px-3">
-            <div class="container d-flex justify-content-between align-items-center">
-                <div class="d-flex gap-3 small text-muted">
-                    <span><i class="fa-solid fa-headset me-1"></i> Support 24/7</span>
-                </div>
-                <div class="small d-flex align-items-center gap-2">
-                    <span class="text-warning"><i class="fa-solid fa-coins me-1"></i>0 Points</span>
-                    <button class="btn-reseller text-uppercase">Daftar Reseller</button>
-                </div>
-            </div>
-        </div>
-        <div class="main-header px-3">
-            <div class="container d-flex justify-content-between align-items-center">
-                <h4 class="m-0 fw-bold text-white d-flex align-items-center gap-2">
-                    <i class="fa-solid fa-gamepad text-warning"></i> GS-STORE
-                </h4>
-                <div class="d-flex gap-3 align-items-center">
-                    <button class="btn btn-outline-light btn-sm" onclick="showSection('home')">Home</button>
-                    <a href="#" class="text-white text-decoration-none small"><i class="fa-solid fa-user me-1"></i> Masuk</a>
-                </div>
+    <!-- Main Header -->
+    <header class="main-header px-3">
+        <div class="container d-flex justify-content-between align-items-center">
+            <h4 class="m-0 fw-bold text-white d-flex align-items-center gap-2" style="cursor:pointer;" onclick="showPage('dashboard')">
+                <i class="fa-solid fa-gamepad text-warning"></i> GS-STORE
+            </h4>
+            <div class="d-flex gap-2 align-items-center">
+                <button class="btn btn-sm btn-light" onclick="showPage('dashboard')">Dashboard</button>
+                <button class="btn-reseller text-uppercase btn-sm">Daftar Reseller</button>
             </div>
         </div>
     </header>
 
     <div class="container my-4">
-        
-        <!-- ==================== HALAMAN 1: BERANDA ==================== -->
-        <section id="sec-home">
-            <!-- Promo Slider -->
-            <div class="swiper mySwiper">
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide">
-                        <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=1200" alt="Promo Banner 1">
-                    </div>
-                </div>
-            </div>
 
-            <h5 class="fw-bold mb-3"><i class="fa-solid fa-fire text-danger me-2"></i>Game Terpopuler</h5>
+        <!-- ==================== 1. DASHBOARD UTAMA ==================== -->
+        <section id="page-dashboard">
+            <!-- Promo Image Static Banner -->
+            <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=1200" class="img-fluid promo-banner" alt="Promo Banner">
+            
+            <h5 class="fw-bold mb-3 text-warning"><i class="fa-solid fa-fire me-2"></i>🔥 Game Populer</h5>
             <div class="row g-3">
-                <!-- Card Mobile Legends -->
+                <!-- Game MLBB -->
                 <div class="col-6 col-md-3">
-                    <div class="game-grid-card" onclick="openOrderPage('ml')">
+                    <div class="game-card" onclick="openGameOrder('ml')">
                         <img src="https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?q=80&w=400" alt="MLBB">
-                        <div class="p-2">
-                            <span class="fw-bold text-white d-block" style="font-size: 0.85rem;">Mobile Legends</span>
-                            <span class="text-muted" style="font-size: 0.75rem;">Top Up Instant</span>
-                        </div>
+                        <div class="p-2 fw-bold text-white" style="font-size:0.85rem;">MLBB</div>
                     </div>
                 </div>
-                <!-- Card Free Fire -->
+                <!-- Game FF -->
                 <div class="col-6 col-md-3">
-                    <div class="game-grid-card" onclick="openOrderPage('ff')">
+                    <div class="game-card" onclick="openGameOrder('ff')">
                         <img src="https://images.unsplash.com/photo-1552820728-8b83bb6b773f?q=80&w=400" alt="Free Fire">
-                        <div class="p-2">
-                            <span class="fw-bold text-white d-block" style="font-size: 0.85rem;">Free Fire</span>
-                            <span class="text-muted" style="font-size: 0.75rem;">Top Up Instant</span>
-                        </div>
+                        <div class="p-2 fw-bold text-white" style="font-size:0.85rem;">FF</div>
                     </div>
                 </div>
             </div>
         </section>
 
 
-        <!-- ==================== HALAMAN 2: DETAIL ORDER ==================== -->
-        <section id="sec-order" class="d-none">
-            <button class="btn btn-sm btn-outline-secondary mb-3 text-white" onclick="showSection('home')">
-                <i class="fa-solid fa-chevron-left me-1"></i> Kembali ke Beranda
-            </button>
-            
+        <!-- ==================== 2. HALAMAN INPUT ID & PILIH DM ==================== -->
+        <section id="page-order" class="d-none">
             <div class="row">
-                <!-- Info Game Kiri -->
-                <div class="col-lg-4 mb-3">
-                    <div class="section-box text-center">
-                        <img id="game-detail-img" src="" class="img-fluid rounded mb-3" style="max-height: 150px; object-fit: cover; width: 100%;">
-                        <h4 id="game-detail-title" class="fw-bold text-white"></h4>
-                        <p class="text-muted small">Masukkan Data Akun dengan benar. Kesalahan input di luar tanggung jawab kami.</p>
-                    </div>
-                </div>
-
-                <!-- Input Data & Pilihan Kanan -->
-                <div class="col-lg-8">
-                    <!-- Step 1: Input ID -->
+                <div class="col-lg-8 mx-auto">
+                    <!-- Step 1 Form Input -->
                     <div class="section-box">
-                        <h6 class="fw-bold"><span class="step-badge">1</span> ID Pengguna</h6>
+                        <h6 class="fw-bold text-warning" id="order-game-title"></h6>
+                        <hr class="border-secondary">
+                        
                         <div class="row g-2 mt-2">
                             <div class="col-12 col-md-6">
-                                <input type="text" id="user-id-input" class="form-control form-control-custom" placeholder="Masukkan ID Pengguna">
+                                <label class="small text-muted d-block mb-1">ID Pengguna</label>
+                                <input type="text" id="input-user-id" class="form-control form-custom" placeholder="Masukkan ID Pengguna" oninput="validateIdInput()">
                             </div>
-                            <div class="col-12 col-md-6" id="zone-id-container">
-                                <input type="text" id="zone-id-input" class="form-control form-control-custom" placeholder="Masukkan ID Zona">
+                            <!-- Hanya tampil jika MLBB -->
+                            <div class="col-12 col-md-6" id="box-zone-id">
+                                <label class="small text-muted d-block mb-1">ID Zona</label>
+                                <input type="text" id="input-zone-id" class="form-control form-custom" placeholder="Masukkan ID Zona" oninput="validateIdInput()">
                             </div>
                         </div>
+                        <small class="text-info d-block mt-2">*Isi ID terlebih dahulu untuk membuka kunci pilihan Diamond</small>
                     </div>
 
-                    <!-- Step 2: Pilih Nominal -->
+                    <!-- Step 2 Grid Diamond (Locked by Default) -->
                     <div class="section-box">
-                        <h6 class="fw-bold"><span class="step-badge">2</span> Pilih Nominal Top Up</h6>
-                        <div class="item-grid" id="nominal-grid-container">
-                            <!-- JS akan merender nominal di sini -->
-                        </div>
-                    </div>
-
-                    <!-- Step 3: Nomor Whatsapp Konfirmasi -->
-                    <div class="section-box">
-                        <h6 class="fw-bold"><span class="step-badge">3</span> Informasi Kontak</h6>
-                        <div class="mt-3">
-                            <input type="number" id="whatsapp-input" class="form-control form-control-custom" placeholder="Masukkan No. WhatsApp Aktif (e.g., 0812xxxxxxxx)">
-                            <button class="btn btn-primary w-100 fw-bold py-3 mt-3 rounded-3" onclick="goToCheckout()">
-                                Beli Sekarang <i class="fa-solid fa-arrow-right ms-1"></i>
-                            </button>
+                        <h6 class="fw-bold"><span class="badge bg-primary me-2">2</span> Pilih Nominal Top Up</h6>
+                        <div class="item-grid" id="nominal-render-area">
+                            <!-- Items auto-render via JS -->
                         </div>
                     </div>
                 </div>
@@ -309,64 +245,70 @@
         </section>
 
 
-        <!-- ==================== HALAMAN 3: RINCIAN TRANSAKSI (CHECKOUT) ==================== -->
-        <section id="sec-checkout" class="d-none">
+        <!-- ==================== 3. DETAIL TRANSAKSI (INVOICE AWAL) ==================== -->
+        <section id="page-detail-transaksi" class="d-none">
             <div class="row justify-content-center">
-                <div class="col-md-6">
+                <div class="col-md-7">
                     <div class="section-box">
-                        <h5 class="fw-bold text-center mb-4"><i class="fa-solid fa-receipt text-primary me-2"></i>Rincian Transaksi</h5>
+                        <div class="small mb-3 text-muted" style="cursor:pointer;" onclick="showPage('order')"><i class="fa-solid fa-arrow-left me-1"></i> Kembali</div>
+                        <h5 class="fw-bold mb-4 text-white"><i class="fa-solid fa-file-invoice me-2 text-primary"></i>Detail Transaksi</h5>
                         
-                        <div class="mb-3 border-bottom border-secondary pb-3">
-                            <div class="d-flex justify-content-between mb-2">
-                                <span class="text-muted">Game</span>
-                                <span class="fw-bold" id="chk-game"></span>
-                            </div>
-                            <div class="d-flex justify-content-between mb-2">
-                                <span class="text-muted">ID Pelanggan</span>
-                                <span class="text-warning fw-bold" id="chk-id"></span>
-                            </div>
-                            <div class="d-flex justify-content-between">
-                                <span class="text-muted">Item Layanan</span>
-                                <span class="text-info fw-bold" id="chk-item"></span>
-                            </div>
+                        <div class="bg-black bg-opacity-20 p-3 rounded mb-3">
+                            <h6 class="fw-bold text-warning mb-2">Data Produk</h6>
+                            <div class="d-flex justify-content-between small mb-1"><span class="text-muted">Item Layanan</span><span id="dtx-item" class="fw-bold"></span></div>
                         </div>
 
-                        <div class="mb-3 border-bottom border-secondary pb-3">
-                            <div class="d-flex justify-content-between mb-2">
-                                <span class="text-muted">Harga Item</span>
-                                <span id="chk-price"></span>
-                            </div>
-                            <div class="d-flex justify-content-between mb-2">
-                                <span class="text-muted">Biaya Admin</span>
-                                <span class="text-success">Rp1.000</span>
-                            </div>
-                            <div class="d-flex justify-content-between fw-bold text-white fs-5">
-                                <span>Total Pembayaran</span>
-                                <span class="text-warning" id="chk-total"></span>
-                            </div>
+                        <div class="bg-black bg-opacity-20 p-3 rounded mb-3">
+                            <h6 class="fw-bold text-warning mb-2">Informasi Pelanggan</h6>
+                            <div class="d-flex justify-content-between small mb-1"><span class="text-muted">ID Pengguna</span><span id="dtx-userid" class="fw-bold"></span></div>
+                            <div class="d-flex justify-content-between small mb-1" id="dtx-row-zone"><span class="text-muted">ID Server/Zona</span><span id="dtx-zoneid" class="fw-bold"></span></div>
                         </div>
 
-                        <!-- Pilih Metode Bayar (Hanya QRIS Aziz Shop) -->
-                        <div class="bg-dark p-3 rounded-3 mb-4 border border-info">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="d-flex align-items-center gap-2">
-                                    <i class="fa-solid fa-qrcode text-info fa-lg"></i>
-                                    <div>
-                                        <div class="fw-bold small text-white">QRIS Aziz Shop</div>
-                                        <div class="text-muted" style="font-size: 0.75rem;">Diproses Otomatis</div>
-                                    </div>
+                        <div class="bg-black bg-opacity-20 p-3 rounded mb-4">
+                            <h6 class="fw-bold text-warning mb-2">Detail Pembayaran</h6>
+                            <div class="d-flex justify-content-between small mb-1"><span class="text-muted">Harga</span><span id="dtx-price"></span></div>
+                            <div class="d-flex justify-content-between small mb-1"><span class="text-muted">Biaya Admin</span><span>Rp 1.000</span></div>
+                            <hr class="border-secondary">
+                            <div class="d-flex justify-content-between fw-bold text-white fs-5"><span>Total Pembayaran</span><span id="dtx-total" class="text-warning"></span></div>
+                        </div>
+
+                        <button class="btn btn-danger w-100 fw-bold py-2" onclick="showPage('pilih-metode')">Pilih Metode Pembayaran</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ==================== 4. SELEKSI GATEWAY PEMBAYARAN (WINPAY STYLE) ==================== -->
+        <section id="page-pilih-metode" class="d-none">
+            <div class="row justify-content-center">
+                <div class="col-md-6 shadow">
+                    <div class="white-payment-gate">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <span class="fw-bold text-dark fs-5">Pilih Metode Pembayaran</span>
+                            <span class="fw-bold text-primary fs-5" id="gate-total-header"></span>
+                        </div>
+
+                        <!-- Baris Pilihan QRIS -->
+                        <div class="pay-method-row" onclick="processToQrisFinal()">
+                            <div class="d-flex align-items-center gap-3">
+                                <i class="fa-solid fa-qrcode fa-2x text-dark"></i>
+                                <div>
+                                    <div class="fw-bold text-dark m-0" style="font-size: 0.95rem;">QRIS</div>
                                 </div>
-                                <span class="badge bg-primary text-uppercase">Aktif</span>
                             </div>
+                            <span class="badge bg-secondary text-uppercase" style="font-size:0.65rem;">QRIS</span>
                         </div>
 
-                        <div class="row g-2">
-                            <div class="col-6">
-                                <button class="btn btn-outline-secondary w-100 text-white" onclick="showSection('order')">Batal</button>
+                        <!-- Baris dummy E-Wallet -->
+                        <div class="pay-method-row opacity-50" onclick="alert('Metode ini sedang maintenance, harap gunakan QRIS.')">
+                            <div class="d-flex align-items-center gap-3">
+                                <i class="fa-solid fa-wallet fa-2x text-secondary"></i>
+                                <div>
+                                    <div class="fw-bold text-muted m-0" style="font-size: 0.95rem;">E-Wallet (OVO, DANA)</div>
+                                </div>
                             </div>
-                            <div class="col-6">
-                                <button class="btn btn-success w-100 fw-bold" onclick="goToInvoice()">Bayar Sekarang</button>
-                            </div>
+                            <i class="fa-solid fa-chevron-right text-muted"></i>
                         </div>
                     </div>
                 </div>
@@ -374,36 +316,38 @@
         </section>
 
 
-        <!-- ==================== HALAMAN 4: STRUK INVOICE PEMBAYARAN ==================== -->
-        <section id="sec-invoice" class="d-none">
+        <!-- ==================== 5. STRUK QRIS FINAL + COUNTDOWN + WHATSAPP ==================== -->
+        <section id="page-qris-final" class="d-none">
             <div class="row justify-content-center">
                 <div class="col-md-6 text-center">
-                    <div class="section-box border border-info">
+                    <!-- Tampilan struk putih bersih mirip Speedcash/Winpay -->
+                    <div class="bg-white text-dark p-4 rounded shadow border">
                         
-                        <h5 class="fw-bold text-info">Selesaikan Pembayaran Sebelum</h5>
+                        <div class="mb-2 text-muted small">Total Tagihan</div>
+                        <h2 class="fw-bold text-dark mb-4" id="qris-final-price"></h2>
                         
-                        <!-- Timer Mundur Digital -->
-                        <div class="fs-2 fw-bold text-warning my-2" id="invoice-timer">00:29:59</div>
-                        <p class="text-muted small">Batas akhir pembayaran: <span id="invoice-deadline-date" class="fw-bold"></span></p>
-
-                        <!-- Box Gambar QRIS Hasil Potongan (Menggunakan QRIS Aziz Shop milikmu) -->
-                        <div class="qris-crop-container">
-                            <!-- Link menggunakan asset yang kamu kirim, difokuskan memotong bagian tengah kode QR saja -->
-                            <img src="https://i.postimg.cc/85z1fdrq/1000119949.jpg" class="qris-cropped-img" alt="QRIS Aziz Shop">
+                        <div class="border-top border-bottom py-3 my-3">
+                            <div class="small text-muted mb-1">Selesaikan pembayaran sebelum</div>
+                            <!-- Timer digital running -->
+                            <div class="fs-2 fw-bold text-warning" id="qris-countdown">30:00</div>
+                            <div class="small text-secondary" id="qris-deadline-string"></div>
                         </div>
-                        
+
+                        <!-- Wadah QR Code Hasil Potongan Mandiri -->
                         <div class="my-3">
-                            <h3 class="fw-bold text-warning" id="inv-total-final"></h3>
-                            <p class="text-muted xsmall">Sudah termasuk biaya admin</p>
+                            <div class="qris-frame">
+                                <img src="https://i.postimg.cc/85z1fdrq/1000119949.jpg" class="qris-img-crop" alt="QRIS Vendor">
+                            </div>
                         </div>
 
-                        <div class="alert alert-warning text-start small mb-3">
-                            <i class="fa-solid fa-circle-info me-2 text-warning"></i>
-                            Silakan unduh atau tangkap layar (screenshot) kode QR di atas, lalu bayar menggunakan e-wallet/m-banking favoritmu.
+                        <div class="alert alert-light border text-start small text-muted my-3">
+                            <i class="fa-solid fa-circle-info me-2 text-primary"></i>
+                            Screenshots QRIS di atas lalu scan menggunakan aplikasi Bank atau E-Wallet pilihan Anda.
                         </div>
 
-                        <button class="btn btn-success w-100 fw-bold py-3 shadow" id="btn-konfirmasi-wa">
-                            <i class="fa-brands fa-whatsapp me-2 fa-lg"></i>SAYA SUDAH BAYAR (Kirim Ke Admin)
+                        <!-- Kirim via WA -->
+                        <button class="btn btn-success w-100 fw-bold py-3 mt-2" id="btn-trigger-wa">
+                            <i class="fa-brands fa-whatsapp me-2 fa-lg"></i>KONFIRMASI VIA WHATSAPP
                         </button>
                     </div>
                 </div>
@@ -412,204 +356,188 @@
 
     </div>
 
-    <!-- Script JS Dependencies -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-
     <script>
-        // Database Pricelist Game Berdasarkan Foto List yang Disediakan
-        const gameDB = {
+        // Data master pricelist internal dari foto tokomu
+        const masterPricelist = {
             ml: {
                 title: "Mobile Legends: Bang Bang",
-                img: "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?q=80&w=400",
                 hasZone: true,
                 items: [
                     { name: "5 Diamonds", price: 1500 },
                     { name: "3 Diamonds", price: 3200 },
-                    { name: "12 Diamonds (11+1 Bonus)", price: 4900 },
-                    { name: "19 Diamonds (17+2 Bonus)", price: 6600 },
-                    { name: "296 Diamonds (256+40 Bonus)", price: 87000 },
-                    { name: "28 Diamonds (25+3 Bonus)", price: 8300 },
-                    { name: "44 Diamonds (40+4 Bonus)", price: 10000 },
-                    { name: "59 Diamonds (53+6 Bonus)", price: 11700 },
-                    { name: "85 Diamonds (77+8 Bonus)", price: 13400 },
-                    { name: "170 Diamonds (154+16 Bonus)", price: 15100 },
-                    { name: "240 Diamonds (217+23 Bonus)", price: 16800 },
-                    { name: "408 Diamonds (367+41 Bonus)", price: 18500 },
-                    { name: "568 Diamonds (503+65 Bonus)", price: 20200 },
-                    { name: "875 Diamonds (774+101 Bonus)", price: 21900 },
-                    { name: "2010 Diamonds (1708+302 Bonus)", price: 23600 },
-                    { name: "4830 Diamonds (4103+727 Bonus)", price: 25300 }
+                    { name: "12 Diamonds (11+1)", price: 4900 },
+                    { name: "19 Diamonds (17+2)", price: 6600 },
+                    { name: "28 Diamonds (25+3)", price: 8300 },
+                    { name: "44 Diamonds (40+4)", price: 10000 },
+                    { name: "59 Diamonds (53+6)", price: 11700 },
+                    { name: "85 Diamonds (77+8)", price: 13400 }
                 ]
             },
             ff: {
                 title: "Garena Free Fire",
-                img: "https://images.unsplash.com/photo-1552820728-8b83bb6b773f?q=80&w=400",
                 hasZone: false,
                 items: [
-                    { name: "12 Diamonds", price: 2500 },
-                    { name: "355 Diamonds", price: 49045 },
                     { name: "5 Diamonds", price: 1401 },
+                    { name: "12 Diamonds", price: 2500 },
                     { name: "50 Diamonds", price: 7707 },
                     { name: "70 Diamonds", price: 9509 },
                     { name: "140 Diamonds", price: 18518 },
-                    { name: "720 Diamonds", price: 90590 },
-                    { name: "1450 Diamonds", price: 180680 },
-                    { name: "2180 Diamonds", price: 270770 },
-                    { name: "3640 Diamonds", price: 450950 },
-                    { name: "7290 Diamonds", price: 901401 },
-                    { name: "36500 Diamonds", price: 4505005 },
-                    { name: "73100 Diamonds", price: 9009509 }
+                    { name: "355 Diamonds", price: 49045 },
+                    { name: "720 Diamonds", price: 90590 }
                 ]
             }
         };
 
-        let selectedGameKey = null;
-        let selectedItemIndex = null;
-        let countdownInterval = null;
+        let currentActiveGame = null;
+        let selectedProductData = null;
+        let timerRunner = null;
 
-        // Inisialisasi Swiper Slider
-        new Swiper(".mySwiper", {
-            loop: true,
-            autoplay: { delay: 4000 }
-        });
-
-        // Navigasi Section Sederhana
-        function showSection(sectionId) {
-            document.querySelectorAll('section').forEach(sec => sec.classList.add('d-none'));
-            document.getElementById(`sec-${sectionId}`).classList.remove('d-none');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+        // Navigasi Halaman Sekali Tampil (Bukan tumpuk kebawah)
+        function showPage(pageId) {
+            document.querySelectorAll('section').forEach(element => element.classList.add('d-none'));
+            document.getElementById(`page-${pageId}`).classList.remove('d-none');
+            window.scrollTo({top: 0, behavior: 'smooth'});
         }
 
-        // Buka Halaman Order Sesuai Game
-        function openOrderPage(gameKey) {
-            selectedGameKey = gameKey;
-            selectedItemIndex = null;
-            const gameData = gameDB[gameKey];
+        // Jalankan Halaman Order Game
+        function openGameOrder(gameKey) {
+            currentActiveGame = gameKey;
+            const gameData = masterPricelist[gameKey];
 
-            // Render detail game & input form
-            document.getElementById('game-detail-img').src = gameData.img;
-            document.getElementById('game-detail-title').innerText = gameData.title;
-            document.getElementById('zone-id-container').style.display = gameData.hasZone ? 'block' : 'none';
-            
-            // Bersihkan inputan form
-            document.getElementById('user-id-input').value = '';
-            document.getElementById('zone-id-input').value = '';
-            document.getElementById('whatsapp-input').value = '';
+            document.getElementById('order-game-title').innerText = `Top Up ${gameData.title}`;
+            document.getElementById('input-user-id').value = '';
+            document.getElementById('input-zone-id').value = '';
 
-            // Render list nominal
-            const container = document.getElementById('nominal-grid-container');
-            container.innerHTML = '';
+            // Tampilkan zone id hanya jika gamenya MLBB
+            if(gameData.hasZone) {
+                document.getElementById('box-zone-id').style.display = 'block';
+            } else {
+                document.getElementById('box-zone-id').style.display = 'none';
+            }
+
+            // Render isi daftar diamond
+            const gridContainer = document.getElementById('nominal-render-area');
+            gridContainer.innerHTML = '';
             gameData.items.forEach((item, index) => {
-                container.innerHTML += `
-                    <div class="item-box" id="item-${index}" onclick="selectItem(${index})">
-                        <div class="diamond-icon"><i class="fa-solid fa-gem"></i></div>
-                        <div class="item-name">${item.name}</div>
+                gridContainer.innerHTML += `
+                    <div class="item-box btn-box-dm" id="dm-box-${index}" onclick="clickDiamondItem(${index})">
+                        <div class="item-name text-white mb-1"><i class="fa-solid fa-gem text-info me-1"></i>${item.name}</div>
                         <div class="item-price">Rp ${item.price.toLocaleString('id-ID')}</div>
                     </div>
                 `;
             });
 
-            showSection('order');
+            validateIdInput(); // Lock diawal
+            showPage('order');
         }
 
-        // Pilih Nominal Item
-        function selectItem(index) {
-            document.querySelectorAll('.item-box').forEach(box => box.classList.remove('active'));
-            document.getElementById(`item-${index}`).classList.add('active');
-            selectedItemIndex = index;
-        }
-
-        // Beralih Ke Halaman Rincian Transaksi
-        function goToCheckout() {
-            const userId = document.getElementById('user-id-input').value;
-            const zoneId = document.getElementById('zone-id-input').value;
-            const waNum = document.getElementById('whatsapp-input').value;
-
-            if (!userId) return alert("Harap masukkan ID Pengguna Anda.");
-            if (gameDB[selectedGameKey].hasZone && !zoneId) return alert("Harap masukkan ID Zona Anda.");
-            if (selectedItemIndex === null) return alert("Pilih nominal top up terlebih dahulu.");
-            if (!waNum) return alert("Masukkan nomor WhatsApp yang aktif untuk keperluan konfirmasi.");
-
-            const item = gameDB[selectedGameKey].items[selectedItemIndex];
-            const targetIdStr = gameDB[selectedGameKey].hasZone ? `${userId} (${zoneId})` : userId;
-
-            // Render data ke invoice rincian
-            document.getElementById('chk-game').innerText = gameDB[selectedGameKey].title;
-            document.getElementById('chk-id').innerText = targetIdStr;
-            document.getElementById('chk-item').innerText = item.name;
-            document.getElementById('chk-price').innerText = `Rp ${item.price.toLocaleString('id-ID')}`;
+        // Cek validasi pengisian ID secara real-time
+        function validateIdInput() {
+            const userId = document.getElementById('input-user-id').value.trim();
+            const zoneId = document.getElementById('input-zone-id').value.trim();
+            const gameData = masterPricelist[currentActiveGame];
             
-            // Total = Harga Item + Admin 1.000
-            const totalBayar = item.price + 1000;
-            document.getElementById('chk-total').innerText = `Rp ${totalBayar.toLocaleString('id-ID')}`;
+            let isValid = false;
+            if (gameData.hasZone) {
+                if(userId !== '' && zoneId !== '') isValid = true;
+            } else {
+                if(userId !== '') isValid = true;
+            }
 
-            showSection('checkout');
+            // Buka atau kunci item box berdasarkan isi inputan
+            document.querySelectorAll('.btn-box-dm').forEach(box => {
+                if(isValid) {
+                    box.classList.add('unlocked');
+                } else {
+                    box.classList.remove('unlocked');
+                }
+            });
         }
 
-        // Beralih Ke Halaman Struk & Pembayaran Akhir
-        function goToInvoice() {
-            const item = gameDB[selectedGameKey].items[selectedItemIndex];
-            const totalBayar = item.price + 1000;
-            const formattedTotal = `Rp ${totalBayar.toLocaleString('id-ID')}`;
+        // Aksi ketika diamond diklik setelah unlock
+        function clickDiamondItem(index) {
+            const selectedItem = masterPricelist[currentActiveGame].items[index];
+            selectedProductData = selectedItem;
+
+            const uID = document.getElementById('input-user-id').value;
+            const zID = document.getElementById('input-zone-id').value;
+
+            // Masukkan data ke Halaman Detail Transaksi
+            document.getElementById('dtx-item').innerText = `${masterPricelist[currentActiveGame].title} - ${selectedItem.name}`;
+            document.getElementById('dtx-userid').innerText = uID;
+
+            if(masterPricelist[currentActiveGame].hasZone) {
+                document.getElementById('dtx-row-zone').style.display = 'flex';
+                document.getElementById('dtx-zoneid').innerText = zID;
+            } else {
+                document.getElementById('dtx-row-zone').style.display = 'none';
+            }
+
+            document.getElementById('dtx-price').innerText = `Rp ${selectedItem.price.toLocaleString('id-ID')}`;
             
-            document.getElementById('inv-total-final').innerText = formattedTotal;
+            const totalFinal = selectedItem.price + 1000;
+            const finalString = `Rp ${totalFinal.toLocaleString('id-ID')}`;
+            
+            document.getElementById('dtx-total').innerText = finalString;
+            document.getElementById('gate-total-header').innerText = finalString;
+            document.getElementById('qris-final-price').innerText = finalString;
 
-            // Atur Waktu Mundur 30 Menit
-            startTimer(30 * 60);
+            showPage('detail-transaksi');
+        }
 
-            // Set Tanggal Batas Akhir
-            const deadline = new Date();
-            deadline.setMinutes(deadline.getMinutes() + 30);
-            const options = { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' };
-            document.getElementById('invoice-deadline-date').innerText = deadline.toLocaleDateString('id-ID', options);
+        // Proses dari Pilihan QRIS masuk ke halaman Pembayaran Struk Utama
+        function processToQrisFinal() {
+            showPage('qris-final');
+            runQrisCountdown(30 * 60); // 30 Menit hitung mundur
 
-            // Menghubungkan Tombol Konfirmasi Pembayaran ke WhatsApp Admin
-            const targetIdStr = gameDB[selectedGameKey].hasZone 
-                ? `${document.getElementById('user-id-input').value} (${document.getElementById('zone-id-input').value})` 
-                : document.getElementById('user-id-input').value;
+            const d = new Date();
+            d.setMinutes(d.getMinutes() + 30);
+            document.getElementById('qris-deadline-string').innerText = d.toLocaleDateString('id-ID', {
+                weekday: 'long', day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit'
+            });
 
-            const textWA = 
-                `*🔥 KONFIRMASI PEMBAYARAN - CT GAME TOPUP 🔥*\n` +
-                `-----------------------------------------\n` +
-                `Halo Admin, saya sudah melunasi tagihan menggunakan QRIS.\n\n` +
-                `🎮 *Game* : ${gameDB[selectedGameKey].title}\n` +
-                `🎯 *ID Target* : ${targetIdStr}\n` +
-                `💎 *Paket Item* : ${item.name}\n` +
-                `💰 *Total Bayar* : ${formattedTotal}\n` +
-                `📱 *No. WhatsApp* : ${document.getElementById('whatsapp-input').value}\n` +
-                `-----------------------------------------\n` +
-                `*Status Pembayaran* : SELESAI / SUDAH TRANSFER ✅\n` +
-                `_Mohon kirimkan diamond pesanan saya sesegera mungkin!_`;
+            // Atur pesan WhatsApp otomatis saat tombol di klik
+            const uID = document.getElementById('input-user-id').value;
+            const zID = document.getElementById('input-zone-id').value;
+            const targetIdLabel = masterPricelist[currentActiveGame].hasZone ? `${uID} (Zone: ${zID})` : uID;
+            const finalTotal = selectedProductData.price + 1000;
 
-            document.getElementById('btn-konfirmasi-wa').onclick = function() {
-                // Silakan ganti nomor "6287724699161" di bawah ini dengan nomor Admin WA aktif tokomu
-                window.open(`https://wa.me/6287724699161?text=${encodeURIComponent(textWA)}`, '_blank');
+            const waTemplateMessage = 
+                `*DETAIL TRANSAKSI TOP UP - GS STORE*\n` +
+                `-------------------------------------\n` +
+                `Game: ${masterPricelist[currentActiveGame].title}\n` +
+                `ID Target: ${targetIdLabel}\n` +
+                `Layanan: ${selectedProductData.name}\n` +
+                `Total Bayar: Rp ${finalTotal.toLocaleString('id-ID')}\n` +
+                `Status: *Sudah Transfer / Dibayar via QRIS*\n` +
+                `-------------------------------------\n` +
+                `Mohon segera diproses ya bos! Terima kasih.`;
+
+            document.getElementById('btn-trigger-wa').onclick = function() {
+                window.open(`https://wa.me/6287724699161?text=${encodeURIComponent(waTemplateMessage)}`, '_blank');
             };
-
-            showSection('invoice');
         }
 
-        // Timer Function
-        function startTimer(duration) {
-            clearInterval(countdownInterval);
-            let timer = duration, minutes, seconds;
-            const timerEl = document.getElementById('invoice-timer');
+        // Perhitungan Waktu Mundur Digital
+        function runQrisCountdown(secondsAmount) {
+            clearInterval(timerRunner);
+            let timeRemaining = secondsAmount;
+            const display = document.getElementById('qris-countdown');
 
-            countdownInterval = setInterval(() => {
-                minutes = parseInt(timer / 60, 10);
-                seconds = parseInt(timer % 60, 10);
+            timerRunner = setInterval(() => {
+                let minutes = Math.floor(timeRemaining / 60);
+                let seconds = timeRemaining % 60;
 
                 minutes = minutes < 10 ? "0" + minutes : minutes;
                 seconds = seconds < 10 ? "0" + seconds : seconds;
 
-                timerEl.textContent = `00:${minutes}:${seconds}`;
+                display.textContent = `${minutes}:${seconds}`;
 
-                if (--timer < 0) {
-                    clearInterval(countdownInterval);
-                    timerEl.textContent = "EXPIRED";
-                    alert("Waktu pembayaran telah habis, silakan lakukan pemesanan ulang.");
-                    showSection('home');
+                if (--timeRemaining < 0) {
+                    clearInterval(timerRunner);
+                    display.textContent = "EXPIRED";
+                    alert("Waktu transfer QRIS Anda telah kedaluwarsa!");
+                    showPage('dashboard');
                 }
             }, 1000);
         }
