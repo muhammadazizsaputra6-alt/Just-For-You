@@ -268,7 +268,7 @@
             gap: 12px;
         }
 
-        .input-group-vertical input {
+        .input-group-vertical input, .input-group-vertical select {
             width: 100%;
             padding: 14px 16px;
             background-color: var(--bg-color);
@@ -280,7 +280,12 @@
             transition: border-color 0.3s;
         }
 
-        .input-group-vertical input:focus {
+        .input-group-vertical select option {
+            background-color: var(--card-color);
+            color: white;
+        }
+
+        .input-group-vertical input:focus, .input-group-vertical select:focus {
             border-color: var(--primary-color);
         }
 
@@ -458,6 +463,12 @@
                     </div>
                     <h3>Valorant</h3>
                 </div>
+                <div class="game-card" onclick="selectGame('genshin')">
+                    <div class="game-icon">
+                        <img src="https://raw.githubusercontent.com/muhammadazizsaputra6-alt/Just-For-You/main/genshinimpact_tile%20(1).jpg" alt="Genshin Impact">
+                    </div>
+                    <h3>Genshin Impact</h3>
+                </div>
             </div>
         </div>
 
@@ -474,6 +485,13 @@
                 <div class="input-group-vertical">
                     <input type="text" id="user-id" placeholder="Masukkan User ID" required>
                     <input type="number" id="zone-id" placeholder="Masukkan Zone ID" required>
+                    <select id="server-id" style="display: none;">
+                        <option value="" disabled selected>Pilih Server</option>
+                        <option value="Asia">Asia</option>
+                        <option value="America">America</option>
+                        <option value="Europe">Europe</option>
+                        <option value="TW, HK, MO">TW, HK, MO</option>
+                    </select>
                 </div>
             </div>
 
@@ -624,6 +642,26 @@
             { name: '11000 VP', price: 1101000 }
         ];
 
+        // Data List Genshin Impact (Harga di foto + 1.600)
+        const genshinProducts = [
+            { type: 'divider', name: '🔥 Bestseller' },
+            { name: 'Blessing of the Welkin Moon', price: 74573, prefix: '🌙 ' },
+            { type: 'divider', name: '💎 Chronal Nexus' },
+            { name: '60 Chronal Nexus', price: 16465 },
+            { name: '300 Chronal Nexus', price: 74573 },
+            { name: '980 Chronal Nexus', price: 231330 },
+            { name: '1.980 Chronal Nexus', price: 442141 },
+            { name: '3.280 Chronal Nexus', price: 735834 },
+            { name: '6.480 Chronal Nexus', price: 1469168 },
+            { type: 'divider', name: '💎 Genesis Crystals' },
+            { name: '60 Genesis Crystals', price: 16465 },
+            { name: '330 Genesis Crystals', price: 74573 },
+            { name: '1090 Genesis Crystals', price: 231330 },
+            { name: '2240 Genesis Crystals', price: 442141 },
+            { name: '3880 Genesis Crystals', price: 735834 },
+            { name: '8080 Genesis Crystals', price: 1469168 }
+        ];
+
         let selectedGameType = ''; 
         let transaction = {
             userId: '',
@@ -658,10 +696,12 @@
             
             document.getElementById('user-id').value = '';
             document.getElementById('zone-id').value = '';
+            document.getElementById('server-id').selectedIndex = 0;
             transaction.item = '';
             transaction.price = 0;
 
             const zoneInput = document.getElementById('zone-id');
+            const serverInput = document.getElementById('server-id');
             const formTitle = document.getElementById('form-account-title');
             const userInput = document.getElementById('user-id');
 
@@ -671,6 +711,7 @@
                 userInput.type = "number";
                 zoneInput.style.display = "block"; 
                 zoneInput.required = true;
+                serverInput.style.display = "none";
                 renderProducts(mlProducts);
             } else if (gameType === 'ff') {
                 formTitle.innerText = "Masukkan User ID";
@@ -678,6 +719,7 @@
                 userInput.type = "number";
                 zoneInput.style.display = "none"; 
                 zoneInput.required = false;
+                serverInput.style.display = "none";
                 renderProducts(ffProducts);
             } else if (gameType === 'vlr') {
                 formTitle.innerText = "Masukkan ID Root Anda";
@@ -685,7 +727,16 @@
                 userInput.type = "text";
                 zoneInput.style.display = "none";
                 zoneInput.required = false;
+                serverInput.style.display = "none";
                 renderProducts(vlrProducts);
+            } else if (gameType === 'genshin') {
+                formTitle.innerText = "Masukkan UID & Pilih Server";
+                userInput.placeholder = "Masukkan UID Genshin";
+                userInput.type = "number";
+                zoneInput.style.display = "none";
+                zoneInput.required = false;
+                serverInput.style.display = "block";
+                renderProducts(genshinProducts);
             }
 
             goToPage('page-form');
@@ -729,10 +780,13 @@
         function proceedToDetail() {
             const userIdInput = document.getElementById('user-id').value;
             const zoneIdInput = document.getElementById('zone-id').value;
+            const serverIdInput = document.getElementById('server-id').value;
 
             if (!userIdInput) {
                 if (selectedGameType === 'vlr') {
                     alert('Tolong masukkan ID Root Anda!');
+                } else if (selectedGameType === 'genshin') {
+                    alert('Tolong masukkan UID Genshin Anda!');
                 } else {
                     alert('Tolong masukkan User ID Anda!');
                 }
@@ -744,13 +798,25 @@
                 return;
             }
 
+            if (selectedGameType === 'genshin' && !serverIdInput) {
+                alert('Tolong pilih Server Genshin Anda!');
+                return;
+            }
+
             if (!transaction.item) {
-                alert('Silakan pilih nominal Diamond / VP terlebih dahulu!');
+                alert('Silakan pilih nominal produk terlebih dahulu!');
                 return;
             }
 
             transaction.userId = userIdInput;
-            transaction.zoneId = (selectedGameType === 'mlbb') ? zoneIdInput : '';
+            
+            if (selectedGameType === 'mlbb') {
+                transaction.zoneId = zoneIdInput;
+            } else if (selectedGameType === 'genshin') {
+                transaction.zoneId = serverIdInput; // server disimpan di zoneId untuk kemudahan
+            } else {
+                transaction.zoneId = '';
+            }
 
             const gameLabel = document.getElementById('detail-game');
             const labelIdType = document.getElementById('label-id-type');
@@ -768,6 +834,10 @@
                 gameLabel.innerText = "Valorant";
                 labelIdType.innerText = "ID Root";
                 detailId.innerText = transaction.userId;
+            } else if (selectedGameType === 'genshin') {
+                gameLabel.innerText = "Genshin Impact";
+                labelIdType.innerText = "UID & Server";
+                detailId.innerText = `${transaction.userId} (${transaction.zoneId})`;
             }
 
             document.getElementById('detail-dm').innerText = transaction.item;
@@ -828,6 +898,20 @@ Terima kasih sudah menghubungi kami. 🙏
 Untuk melakukan top up, silakan isi format berikut:
 
 🆔 ID Root : ${transaction.userId}
+💎 Nominal : ${transaction.item}
+
+💳 Pembayaran: ${transaction.paymentMethod}
+
+⚡ Estimasi proses 1–10 menit setelah pembayaran berhasil dikonfirmasi.`;
+            } else if (selectedGameType === 'genshin') {
+                message = `🔥 Selamat Datang di CT GAME TOPUP 🔥
+
+Terima kasih sudah menghubungi kami. 🙏
+
+Untuk melakukan top up, silakan isi format berikut:
+
+🆔 UID : ${transaction.userId}
+🌐 Server: ${transaction.zoneId}
 💎 Nominal : ${transaction.item}
 
 💳 Pembayaran: ${transaction.paymentMethod}
