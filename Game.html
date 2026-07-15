@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CT GAME TOPUP - Solusi Top Up Cepat & Terpercaya</title>
-    <!-- Google Fonts & FontAwesome -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -428,7 +427,6 @@
 
     <div class="container">
 
-        <!-- ==================== PAGE 1: DASHBOARD ==================== -->
         <div id="page-dashboard" class="page active">
             <div class="promo-banner">
                 <h2>PROMO BULAN INI!</h2>
@@ -442,58 +440,55 @@
 
             <h3 class="section-title">Pilih Game Terpopuler</h3>
             <div class="game-grid">
-                <!-- Mobile Legends -->
                 <div class="game-card" onclick="selectGame('mlbb')">
                     <div class="game-icon">
-                        <!-- Direct link gambar Miya yang sudah valid dan fix -->
                         <img src="https://raw.githubusercontent.com/muhammadazizsaputra6-alt/Just-For-You/main/78d66ff1ab1bd23f7fd6d9cdb93854881cb8f0b69e8a301faaf4f4eab058d19e_600.jpeg" alt="Mobile Legends">
                     </div>
                     <h3>Mobile Legends</h3>
                 </div>
-                <!-- Free Fire -->
                 <div class="game-card" onclick="selectGame('ff')">
                     <div class="game-icon">
-                        <!-- DI SINI: Direct link raw GitHub untuk file unnamed.webp milikmu -->
                         <img src="https://raw.githubusercontent.com/muhammadazizsaputra6-alt/Just-For-You/main/unnamed.webp" alt="Free Fire">
                     </div>
                     <h3>Free Fire</h3>
                 </div>
+                <div class="game-card" onclick="selectGame('vlr')">
+                    <div class="game-icon">
+                        <img src="https://raw.githubusercontent.com/muhammadazizsaputra6-alt/Just-For-You/main/valorant_tile.jpg" alt="Valorant">
+                    </div>
+                    <h3>Valorant</h3>
+                </div>
             </div>
         </div>
 
-        <!-- ==================== PAGE 2: FORM & NOMINAL ==================== -->
         <div id="page-form" class="page">
             <button class="btn-back" onclick="goToPage('page-dashboard')">
                 <i class="fa-solid fa-arrow-left"></i> Kembali ke Beranda
             </button>
 
-            <!-- INPUT DATA AKUN -->
             <div class="step-box">
                 <div class="step-title">
                     <div class="step-number">1</div>
                     <span id="form-account-title">Masukkan Data Akun Anda</span>
                 </div>
                 <div class="input-group-vertical">
-                    <input type="number" id="user-id" placeholder="Masukkan User ID" required>
+                    <input type="text" id="user-id" placeholder="Masukkan User ID" required>
                     <input type="number" id="zone-id" placeholder="Masukkan Zone ID" required>
                 </div>
             </div>
 
-            <!-- NOMINAL PRODUK -->
             <div class="step-box">
                 <div class="step-title">
                     <div class="step-number">2</div>
                     <span>Pilih Nominal Diamond / Produk</span>
                 </div>
                 <div class="diamond-grid" id="product-container">
-                    <!-- List Diamond Game Di-render via JS -->
-                </div>
+                    </div>
             </div>
 
             <button class="btn-primary" onclick="proceedToDetail()">Lanjut ke Transaksi</button>
         </div>
 
-        <!-- ==================== PAGE 3: DETAIL TRANSAKSI ==================== -->
         <div id="page-detail" class="page">
             <button class="btn-back" onclick="goToPage('page-form')">
                 <i class="fa-solid fa-arrow-left"></i> Edit Pesanan
@@ -528,7 +523,6 @@
             </div>
         </div>
 
-        <!-- ==================== PAGE 4: METODE PEMBAYARAN ==================== -->
         <div id="page-payment" class="page">
             <button class="btn-back" onclick="goToPage('page-detail')">
                 <i class="fa-solid fa-arrow-left"></i> Kembali ke Detail
@@ -620,6 +614,16 @@
             { name: '73100 Diamonds', price: 9010000 }
         ];
 
+        // Data List Valorant (Harga di foto + 2.000)
+        const vlrProducts = [
+            { name: '475 VP', price: 58000 },
+            { name: '1000 VP', price: 114000 },
+            { name: '2050 VP', price: 226000 },
+            { name: '3650 VP', price: 391000 },
+            { name: '5350 VP', price: 561000 },
+            { name: '11000 VP', price: 1101000 }
+        ];
+
         let selectedGameType = ''; 
         let transaction = {
             userId: '',
@@ -659,17 +663,29 @@
 
             const zoneInput = document.getElementById('zone-id');
             const formTitle = document.getElementById('form-account-title');
+            const userInput = document.getElementById('user-id');
 
             if (gameType === 'mlbb') {
                 formTitle.innerText = "Masukkan User ID & Zone ID";
+                userInput.placeholder = "Masukkan User ID";
+                userInput.type = "number";
                 zoneInput.style.display = "block"; 
                 zoneInput.required = true;
                 renderProducts(mlProducts);
             } else if (gameType === 'ff') {
                 formTitle.innerText = "Masukkan User ID";
+                userInput.placeholder = "Masukkan User ID";
+                userInput.type = "number";
                 zoneInput.style.display = "none"; 
                 zoneInput.required = false;
                 renderProducts(ffProducts);
+            } else if (gameType === 'vlr') {
+                formTitle.innerText = "Masukkan ID Root Anda";
+                userInput.placeholder = "Contoh: Westbourne#SEA";
+                userInput.type = "text";
+                zoneInput.style.display = "none";
+                zoneInput.required = false;
+                renderProducts(vlrProducts);
             }
 
             goToPage('page-form');
@@ -715,7 +731,11 @@
             const zoneIdInput = document.getElementById('zone-id').value;
 
             if (!userIdInput) {
-                alert('Tolong masukkan User ID Anda!');
+                if (selectedGameType === 'vlr') {
+                    alert('Tolong masukkan ID Root Anda!');
+                } else {
+                    alert('Tolong masukkan User ID Anda!');
+                }
                 return;
             }
 
@@ -725,7 +745,7 @@
             }
 
             if (!transaction.item) {
-                alert('Silakan pilih nominal Diamond terlebih dahulu!');
+                alert('Silakan pilih nominal Diamond / VP terlebih dahulu!');
                 return;
             }
 
@@ -740,9 +760,13 @@
                 gameLabel.innerText = "Mobile Legends: Bang Bang";
                 labelIdType.innerText = "ID & Zona";
                 detailId.innerText = `${transaction.userId} (${transaction.zoneId})`;
-            } else {
+            } else if (selectedGameType === 'ff') {
                 gameLabel.innerText = "Free Fire";
                 labelIdType.innerText = "ID Pengguna";
+                detailId.innerText = transaction.userId;
+            } else if (selectedGameType === 'vlr') {
+                gameLabel.innerText = "Valorant";
+                labelIdType.innerText = "ID Root";
                 detailId.innerText = transaction.userId;
             }
 
@@ -791,6 +815,19 @@ Terima kasih sudah menghubungi kami. 🙏
 Untuk melakukan top up, silakan isi format berikut:
 
 🆔 ID Pengguna : ${transaction.userId}
+💎 Nominal : ${transaction.item}
+
+💳 Pembayaran: ${transaction.paymentMethod}
+
+⚡ Estimasi proses 1–10 menit setelah pembayaran berhasil dikonfirmasi.`;
+            } else if (selectedGameType === 'vlr') {
+                message = `🔥 Selamat Datang di CT GAME TOPUP 🔥
+
+Terima kasih sudah menghubungi kami. 🙏
+
+Untuk melakukan top up, silakan isi format berikut:
+
+🆔 ID Root : ${transaction.userId}
 💎 Nominal : ${transaction.item}
 
 💳 Pembayaran: ${transaction.paymentMethod}
