@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CT GAME TOPUP - Solusi Top Up Cepat & Terpercaya</title>
+    <!-- Google Fonts & FontAwesome -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -250,7 +251,7 @@
             font-size: 12px;
         }
 
-        /* FORM INPUT DIGANTI MENJADI ATAS BAWAH (VERTICAL FLEX) */
+        /* FORM INPUT VERTIKAL */
         .input-group-vertical {
             display: flex;
             flex-direction: column;
@@ -416,6 +417,7 @@
 
     <div class="container">
 
+        <!-- ==================== PAGE 1: DASHBOARD ==================== -->
         <div id="page-dashboard" class="page active">
             <div class="promo-banner">
                 <h2>PROMO BULAN INI!</h2>
@@ -424,129 +426,62 @@
 
             <div class="search-box">
                 <i class="fa-solid fa-magnifying-glass"></i>
-                <input type="text" placeholder="Cari game favoritmu...">
+                <input type="text" placeholder="Cari game favoritmu..." onkeyup="filterGames(this.value)">
             </div>
 
             <h3 class="section-title">Pilih Game Terpopuler</h3>
             <div class="game-grid">
-                <div class="game-card" onclick="goToPage('page-form')">
+                <!-- Mobile Legends -->
+                <div class="game-card" onclick="selectGame('mlbb')">
                     <div class="game-icon">
                         <i class="fa-solid fa-gamepad"></i>
                     </div>
                     <h3>Mobile Legends</h3>
                 </div>
-                <div class="game-card" onclick="alert('Game ini dalam tahap pengembangan, silakan pilih Mobile Legends dulu ya!')">
-                    <div class="game-icon" style="color: var(--text-muted);">
+                <!-- Free Fire -->
+                <div class="game-card" onclick="selectGame('ff')">
+                    <div class="game-icon">
                         <i class="fa-solid fa-gun"></i>
                     </div>
-                    <h3 style="color: var(--text-muted);">Free Fire</h3>
+                    <h3>Free Fire</h3>
                 </div>
             </div>
         </div>
 
+        <!-- ==================== PAGE 2: FORM & NOMINAL ==================== -->
         <div id="page-form" class="page">
             <button class="btn-back" onclick="goToPage('page-dashboard')">
                 <i class="fa-solid fa-arrow-left"></i> Kembali ke Beranda
             </button>
 
+            <!-- INPUT DATA AKUN (DINAMIS SENSITIF GAME) -->
             <div class="step-box">
                 <div class="step-title">
                     <div class="step-number">1</div>
-                    <span>Masukkan Data Akun Anda</span>
+                    <span id="form-account-title">Masukkan Data Akun Anda</span>
                 </div>
                 <div class="input-group-vertical">
                     <input type="number" id="user-id" placeholder="Masukkan User ID" required>
+                    <!-- Input Zone ID ini akan disembunyikan otomatis jika memilih Free Fire -->
                     <input type="number" id="zone-id" placeholder="Masukkan Zone ID" required>
                 </div>
             </div>
 
+            <!-- NOMINAL PRODUK (DIISI OTOMATIS LEWAT JS SESUAI GAME YANG DIPILIH) -->
             <div class="step-box">
                 <div class="step-title">
                     <div class="step-number">2</div>
                     <span>Pilih Nominal Diamond / Produk</span>
                 </div>
-                <div class="diamond-grid">
-                    <div class="diamond-card" onclick="selectDiamond('5 Diamonds', 1800, this)">
-                        <span class="dm-val">5 Diamonds</span>
-                        <span class="dm-price">Rp 1.800</span>
-                    </div>
-                    <div class="diamond-card" onclick="selectDiamond('12 Diamonds', 5200, this)">
-                        <span class="dm-val">12 Diamonds</span>
-                        <span class="dm-price">Rp 5.200</span>
-                    </div>
-                    <div class="diamond-card" onclick="selectDiamond('19 Diamonds', 6900, this)">
-                        <span class="dm-val">19 Diamonds</span>
-                        <span class="dm-price">Rp 6.900</span>
-                    </div>
-                    <div class="diamond-card" onclick="selectDiamond('28 Diamonds', 8600, this)">
-                        <span class="dm-val">28 Diamonds</span>
-                        <span class="dm-price">Rp 8.600</span>
-                    </div>
-                    <div class="diamond-card" onclick="selectDiamond('44 Diamonds', 12500, this)">
-                        <span class="dm-val">44 Diamonds</span>
-                        <span class="dm-price">Rp 12.500</span>
-                    </div>
-                    <div class="diamond-card" onclick="selectDiamond('59 Diamonds', 17000, this)">
-                        <span class="dm-val">59 Diamonds</span>
-                        <span class="dm-price">Rp 17.000</span>
-                    </div>
-                    <div class="diamond-card" onclick="selectDiamond('85 Diamonds', 23000, this)">
-                        <span class="dm-val">85 Diamonds</span>
-                        <span class="dm-price">Rp 23.000</span>
-                    </div>
-                    <div class="diamond-card" onclick="selectDiamond('170 Diamonds', 45000, this)">
-                        <span class="dm-val">170 Diamonds</span>
-                        <span class="dm-price">Rp 45.000</span>
-                    </div>
-                    <div class="diamond-card" onclick="selectDiamond('240 Diamonds', 62800, this)">
-                        <span class="dm-val">240 Diamonds</span>
-                        <span class="dm-price">Rp 62.800</span>
-                    </div>
-                    <div class="diamond-card" onclick="selectDiamond('296 Diamonds ⭐', 88000, this)">
-                        <span class="dm-val">296 Diamonds ⭐</span>
-                        <span class="dm-price">Rp 88.000</span>
-                    </div>
-                    <div class="diamond-card" onclick="selectDiamond('408 Diamonds', 1051500, this)">
-                        <span class="dm-val">408 Diamonds</span>
-                        <span class="dm-price">Rp 1.051.500</span>
-                    </div>
-                    <div class="diamond-card" onclick="selectDiamond('568 Diamonds', 143800, this)">
-                        <span class="dm-val">568 Diamonds</span>
-                        <span class="dm-price">Rp 143.800</span>
-                    </div>
-                    <div class="diamond-card" onclick="selectDiamond('875 Diamonds', 220000, this)">
-                        <span class="dm-val">875 Diamonds</span>
-                        <span class="dm-price">Rp 220.000</span>
-                    </div>
-                    <div class="diamond-card" onclick="selectDiamond('2010 Diamonds', 476900, this)">
-                        <span class="dm-val">2010 Diamonds</span>
-                        <span class="dm-price">Rp 476.900</span>
-                    </div>
-                    <div class="diamond-card" onclick="selectDiamond('4830 Diamonds', 1142500, this)">
-                        <span class="dm-val">4830 Diamonds</span>
-                        <span class="dm-price">Rp 1.142.500</span>
-                    </div>
-
-                    <div class="divider">🎁 Produk Lainnya</div>
-
-                    <div class="diamond-card" onclick="selectDiamond('Twilight Pass', 153000, this)">
-                        <span class="dm-val">⭐ Twilight Pass</span>
-                        <span class="dm-price">Rp 153.000</span>
-                    </div>
-                    <div class="diamond-card" onclick="selectDiamond('Weekly Diamond Pass', 28800, this)">
-                        <span class="dm-val">💎 Weekly Pass</span>
-                        <span class="dm-price">Rp 28.800</span>
-                    </div>
-                    <div class="diamond-card" onclick="selectDiamond('Weekly Elite Pack', 16100, this)">
-                        <span class="dm-val">🎁 Weekly Elite Pack</span>
-                        <span class="dm-price">Rp 16.100</span>
-                    </div>
+                <div class="diamond-grid" id="product-container">
+                    <!-- List Diamond Game Akan Di-render di Sini -->
                 </div>
             </div>
 
             <button class="btn-primary" onclick="proceedToDetail()">Lanjut ke Transaksi</button>
         </div>
 
+        <!-- ==================== PAGE 3: DETAIL TRANSAKSI ==================== -->
         <div id="page-detail" class="page">
             <button class="btn-back" onclick="goToPage('page-form')">
                 <i class="fa-solid fa-arrow-left"></i> Edit Pesanan
@@ -561,10 +496,11 @@
                 <table class="detail-table">
                     <tr>
                         <td>Game</td>
-                        <td>Mobile Legends: Bang Bang</td>
+                        <td id="detail-game">-</td>
                     </tr>
-                    <tr>
-                        <td>ID & Zona</td>
+                    <tr id="row-id-label">
+                        <!-- Baris ini dinamis (ID & Zona / ID Pengguna saja) -->
+                        <td id="label-id-type">ID Pengguna</td>
                         <td id="detail-id">-</td>
                     </tr>
                     <tr>
@@ -581,6 +517,7 @@
             </div>
         </div>
 
+        <!-- ==================== PAGE 4: METODE PEMBAYARAN ==================== -->
         <div id="page-payment" class="page">
             <button class="btn-back" onclick="goToPage('page-detail')">
                 <i class="fa-solid fa-arrow-left"></i> Kembali ke Detail
@@ -632,6 +569,48 @@
     </div>
 
     <script>
+        // Data List Mobile Legends
+        const mlProducts = [
+            { name: '5 Diamonds', price: 1800 },
+            { name: '12 Diamonds', price: 5200 },
+            { name: '19 Diamonds', price: 6900 },
+            { name: '28 Diamonds', price: 8600 },
+            { name: '44 Diamonds', price: 12500 },
+            { name: '59 Diamonds', price: 17000 },
+            { name: '85 Diamonds', price: 23000 },
+            { name: '170 Diamonds', price: 45000 },
+            { name: '240 Diamonds', price: 62800 },
+            { name: '296 Diamonds ⭐', price: 88000 },
+            { name: '408 Diamonds', price: 1051500 },
+            { name: '568 Diamonds', price: 143800 },
+            { name: '875 Diamonds', price: 220000 },
+            { name: '2010 Diamonds', price: 476900 },
+            { name: '4830 Diamonds', price: 1142500 },
+            { type: 'divider', name: '🎁 Produk Lainnya' },
+            { name: 'Twilight Pass', price: 153000, prefix: '⭐ ' },
+            { name: 'Weekly Diamond Pass', price: 28800, prefix: '💎 ' },
+            { name: 'Weekly Elite Pack', price: 16100, prefix: '🎁 ' }
+        ];
+
+        // Data List Free Fire
+        const ffProducts = [
+            { name: '5 Diamonds', price: 1500 },
+            { name: '12 Diamonds', price: 2500, prefix: '⭐ ' },
+            { name: '50 Diamonds', price: 8500 },
+            { name: '70 Diamonds', price: 10500 },
+            { name: '140 Diamonds', price: 19500 },
+            { name: '355 Diamonds', price: 49500, prefix: '⭐ ' },
+            { name: '720 Diamonds', price: 95000 },
+            { name: '1450 Diamonds', price: 183000 },
+            { name: '2180 Diamonds', price: 273000 },
+            { name: '3640 Diamonds', price: 454500 },
+            { name: '7290 Diamonds', price: 904000 },
+            { name: '36500 Diamonds', price: 4510000 },
+            { name: '73100 Diamonds', price: 9010000 }
+        ];
+
+        // State data transaksi aktif
+        let selectedGameType = ''; // 'mlbb' atau 'ff'
         let transaction = {
             userId: '',
             zoneId: '',
@@ -648,34 +627,120 @@
             window.scrollTo(0,0);
         }
 
-        function selectDiamond(itemName, itemPrice, element) {
-            const cards = document.querySelectorAll('.diamond-card');
-            cards.forEach(card => card.classList.remove('selected'));
+        // Fungsi Filter Game di Dashboard
+        function filterGames(keyword) {
+            const cards = document.querySelectorAll('.game-card');
+            cards.forEach(card => {
+                const title = card.querySelector('h3').innerText.toLowerCase();
+                if (title.includes(keyword.toLowerCase())) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
 
-            element.classList.add('selected');
+        // Jalankan saat Game dipilih
+        function selectGame(gameType) {
+            selectedGameType = gameType;
+            
+            // Reset state input form sebelumnya
+            document.getElementById('user-id').value = '';
+            document.getElementById('zone-id').value = '';
+            transaction.item = '';
+            transaction.price = 0;
 
-            transaction.item = itemName;
-            transaction.price = itemPrice;
+            const zoneInput = document.getElementById('zone-id');
+            const formTitle = document.getElementById('form-account-title');
+
+            if (gameType === 'mlbb') {
+                formTitle.innerText = "Masukkan User ID & Zone ID";
+                zoneInput.style.display = "block"; // Tampilkan zone ID
+                zoneInput.required = true;
+                renderProducts(mlProducts);
+            } else if (gameType === 'ff') {
+                formTitle.innerText = "Masukkan User ID";
+                zoneInput.style.display = "none"; // Sembunyikan zone ID
+                zoneInput.required = false;
+                renderProducts(ffProducts);
+            }
+
+            goToPage('page-form');
+        }
+
+        // Render nominal berdasarkan list game terpilih
+        function renderProducts(productList) {
+            const container = document.getElementById('product-container');
+            container.innerHTML = '';
+
+            productList.forEach(prod => {
+                if (prod.type === 'divider') {
+                    const div = document.createElement('div');
+                    div.className = 'divider';
+                    div.innerText = prod.name;
+                    container.appendChild(div);
+                } else {
+                    const card = document.createElement('div');
+                    card.className = 'diamond-card';
+                    
+                    const prefix = prod.prefix || '';
+                    const formatPrice = "Rp " + prod.price.toLocaleString('id-ID');
+
+                    card.onclick = function() {
+                        const cards = document.querySelectorAll('.diamond-card');
+                        cards.forEach(c => c.classList.remove('selected'));
+                        card.classList.add('selected');
+                        
+                        transaction.item = prefix + prod.name;
+                        transaction.price = prod.price;
+                    };
+
+                    card.innerHTML = `
+                        <span class="dm-val">${prefix}${prod.name}</span>
+                        <span class="dm-price">${formatPrice}</span>
+                    `;
+                    container.appendChild(card);
+                }
+            });
         }
 
         function proceedToDetail() {
             const userIdInput = document.getElementById('user-id').value;
             const zoneIdInput = document.getElementById('zone-id').value;
 
-            if(!userIdInput || !zoneIdInput) {
-                alert('Tolong masukkan User ID dan Zone ID Anda!');
+            if (!userIdInput) {
+                alert('Tolong masukkan User ID Anda!');
                 return;
             }
 
-            if(!transaction.item) {
+            if (selectedGameType === 'mlbb' && !zoneIdInput) {
+                alert('Tolong masukkan Zone ID Anda!');
+                return;
+            }
+
+            if (!transaction.item) {
                 alert('Silakan pilih nominal Diamond terlebih dahulu!');
                 return;
             }
 
             transaction.userId = userIdInput;
-            transaction.zoneId = zoneIdInput;
+            transaction.zoneId = (selectedGameType === 'mlbb') ? zoneIdInput : '';
 
-            document.getElementById('detail-id').innerText = `${transaction.userId} (${transaction.zoneId})`;
+            // Update UI Halaman Detail Transaksi secara dinamis
+            const gameLabel = document.getElementById('detail-game');
+            const labelIdType = document.getElementById('label-id-type');
+            const detailId = document.getElementById('detail-id');
+
+            if (selectedGameType === 'mlbb') {
+                gameLabel.innerText = "Mobile Legends: Bang Bang";
+                labelIdType.innerText = "ID & Zona";
+                detailId.innerText = `${transaction.userId} (${transaction.zoneId})`;
+            } else {
+                gameLabel.innerText = "Free Fire";
+                labelIdType.innerText = "ID Pengguna";
+                detailId.innerText = transaction.userId;
+            }
+
             document.getElementById('detail-dm').innerText = transaction.item;
             document.getElementById('detail-price').innerText = "Rp " + transaction.price.toLocaleString('id-ID');
 
@@ -691,14 +756,17 @@
         }
 
         function finishTransaction() {
-            if(!transaction.paymentMethod) {
+            if (!transaction.paymentMethod) {
                 alert('Silakan pilih metode pembayaran Anda terlebih dahulu!');
                 return;
             }
 
             const adminWA = "6287724699161";
+            let message = "";
 
-            const message = `🔥 Selamat Datang di CT GAME TOPUP 🔥
+            // Format Pesan dinamis berdasarkan game yang dipilih
+            if (selectedGameType === 'mlbb') {
+                message = `🔥 Selamat Datang di CT GAME TOPUP 🔥
 
 Terima kasih sudah menghubungi kami. 🙏
 
@@ -711,6 +779,20 @@ Untuk melakukan top up, silakan isi format berikut:
 💳 Pembayaran: ${transaction.paymentMethod}
 
 ⚡ Estimasi proses 1–10 menit setelah pembayaran berhasil dikonfirmasi.`;
+            } else if (selectedGameType === 'ff') {
+                message = `🔥 Selamat Datang di CT GAME TOPUP 🔥
+
+Terima kasih sudah menghubungi kami. 🙏
+
+Untuk melakukan top up, silakan isi format berikut:
+
+🆔 ID Pengguna : ${transaction.userId}
+💎 Nominal : ${transaction.item}
+
+💳 Pembayaran: ${transaction.paymentMethod}
+
+⚡ Estimasi proses 1–10 menit setelah pembayaran berhasil dikonfirmasi.`;
+            }
 
             const encodedMessage = encodeURIComponent(message);
             const waLink = `https://api.whatsapp.com/send?phone=${adminWA}&text=${encodedMessage}`;
