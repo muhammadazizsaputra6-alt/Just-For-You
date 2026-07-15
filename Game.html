@@ -201,7 +201,6 @@
             box-shadow: 0 4px 15px rgba(0, 229, 255, 0.1);
         }
 
-        /* MODIFIKASI UNTUK GAMBAR LOGO GAME */
         .game-icon {
             width: 65px;
             height: 65px;
@@ -432,6 +431,7 @@
 
     <div class="container">
 
+        <!-- ==================== PAGE 1: DASHBOARD ==================== -->
         <div id="page-dashboard" class="page active">
             <div class="promo-banner">
                 <h2>PROMO BULAN INI!</h2>
@@ -445,33 +445,45 @@
 
             <h3 class="section-title">Pilih Game Terpopuler</h3>
             <div class="game-grid">
+                <!-- Mobile Legends -->
                 <div class="game-card" onclick="selectGame('mlbb')">
                     <div class="game-icon">
                         <img src="https://raw.githubusercontent.com/muhammadazizsaputra6-alt/Just-For-You/main/78d66ff1ab1bd23f7fd6d9cdb93854881cb8f0b69e8a301faaf4f4eab058d19e_600.jpeg" alt="Mobile Legends">
                     </div>
                     <h3>Mobile Legends</h3>
                 </div>
+                <!-- Free Fire -->
                 <div class="game-card" onclick="selectGame('ff')">
                     <div class="game-icon">
                         <img src="https://raw.githubusercontent.com/muhammadazizsaputra6-alt/Just-For-You/main/unnamed.webp" alt="Free Fire">
                     </div>
                     <h3>Free Fire</h3>
                 </div>
+                <!-- Valorant -->
                 <div class="game-card" onclick="selectGame('vlr')">
                     <div class="game-icon">
                         <img src="https://raw.githubusercontent.com/muhammadazizsaputra6-alt/Just-For-You/main/valorant_tile.jpg" alt="Valorant">
                     </div>
                     <h3>Valorant</h3>
                 </div>
+                <!-- Genshin Impact -->
                 <div class="game-card" onclick="selectGame('genshin')">
                     <div class="game-icon">
                         <img src="https://raw.githubusercontent.com/muhammadazizsaputra6-alt/Just-For-You/main/genshinimpact_tile%20(1).jpg" alt="Genshin Impact">
                     </div>
                     <h3>Genshin Impact</h3>
                 </div>
+                <!-- Point Blank -->
+                <div class="game-card" onclick="selectGame('pb')">
+                    <div class="game-icon">
+                        <img src="https://raw.githubusercontent.com/muhammadazizsaputra6-alt/Just-For-You/main/PointBlank_ID_tile.jpg" alt="Point Blank">
+                    </div>
+                    <h3>Point Blank</h3>
+                </div>
             </div>
         </div>
 
+        <!-- ==================== PAGE 2: NOMINAL & ID ==================== -->
         <div id="page-form" class="page">
             <button class="btn-back" onclick="goToPage('page-dashboard')">
                 <i class="fa-solid fa-arrow-left"></i> Kembali ke Beranda
@@ -483,8 +495,9 @@
                     <span id="form-account-title">Masukkan Data Akun Anda</span>
                 </div>
                 <div class="input-group-vertical">
+                    <!-- Semua input ID bertipe 'text' agar keyboard HP biasa (bisa huruf) muncul, bukan numpad saja -->
                     <input type="text" id="user-id" placeholder="Masukkan User ID" required>
-                    <input type="number" id="zone-id" placeholder="Masukkan Zone ID" required>
+                    <input type="text" id="zone-id" placeholder="Masukkan Zone ID" required>
                     <select id="server-id" style="display: none;">
                         <option value="" disabled selected>Pilih Server</option>
                         <option value="Asia">Asia</option>
@@ -507,6 +520,7 @@
             <button class="btn-primary" onclick="proceedToDetail()">Lanjut ke Transaksi</button>
         </div>
 
+        <!-- ==================== PAGE 3: TRANSACTION DETAILS ==================== -->
         <div id="page-detail" class="page">
             <button class="btn-back" onclick="goToPage('page-form')">
                 <i class="fa-solid fa-arrow-left"></i> Edit Pesanan
@@ -541,6 +555,7 @@
             </div>
         </div>
 
+        <!-- ==================== PAGE 4: METODE PEMBAYARAN ==================== -->
         <div id="page-payment" class="page">
             <button class="btn-back" onclick="goToPage('page-detail')">
                 <i class="fa-solid fa-arrow-left"></i> Kembali ke Detail
@@ -662,6 +677,21 @@
             { name: '8080 Genesis Crystals', price: 1469168 }
         ];
 
+        // Data List Point Blank (Harga di foto + 1.700)
+        const pbProducts = [
+            { type: 'divider', name: '🔥 Bestseller' },
+            { name: '1200 PB CASH', price: 11610, prefix: '🛡️ ' },
+            { name: '12000 PB CASH', price: 100799, prefix: '🛡️ ' },
+            { type: 'divider', name: '🛡️ Semua Nominal' },
+            { name: '1200 PB CASH', price: 11610 },
+            { name: '2400 PB CASH', price: 21520 },
+            { name: '6000 PB CASH', price: 51250 },
+            { name: '12000 PB CASH', price: 100799 },
+            { name: '24000 PB CASH', price: 199898 },
+            { name: '36000 PB CASH', price: 298997 },
+            { name: '60000 PB CASH', price: 497195 }
+        ];
+
         let selectedGameType = ''; 
         let transaction = {
             userId: '',
@@ -708,35 +738,34 @@
             if (gameType === 'mlbb') {
                 formTitle.innerText = "Masukkan User ID & Zone ID";
                 userInput.placeholder = "Masukkan User ID";
-                userInput.type = "number";
                 zoneInput.style.display = "block"; 
-                zoneInput.required = true;
+                zoneInput.placeholder = "Masukkan Zone ID";
                 serverInput.style.display = "none";
                 renderProducts(mlProducts);
             } else if (gameType === 'ff') {
-                formTitle.innerText = "Masukkan User ID";
-                userInput.placeholder = "Masukkan User ID";
-                userInput.type = "number";
+                formTitle.innerText = "Masukkan ID Pengguna";
+                userInput.placeholder = "Masukkan ID Pengguna";
                 zoneInput.style.display = "none"; 
-                zoneInput.required = false;
                 serverInput.style.display = "none";
                 renderProducts(ffProducts);
             } else if (gameType === 'vlr') {
                 formTitle.innerText = "Masukkan ID Root Anda";
                 userInput.placeholder = "Contoh: Westbourne#SEA";
-                userInput.type = "text";
                 zoneInput.style.display = "none";
-                zoneInput.required = false;
                 serverInput.style.display = "none";
                 renderProducts(vlrProducts);
             } else if (gameType === 'genshin') {
                 formTitle.innerText = "Masukkan UID & Pilih Server";
                 userInput.placeholder = "Masukkan UID Genshin";
-                userInput.type = "number";
                 zoneInput.style.display = "none";
-                zoneInput.required = false;
                 serverInput.style.display = "block";
                 renderProducts(genshinProducts);
+            } else if (gameType === 'pb') {
+                formTitle.innerText = "Masukkan ID Zepetto Anda";
+                userInput.placeholder = "Masukkan ID Zepetto";
+                zoneInput.style.display = "none";
+                serverInput.style.display = "none";
+                renderProducts(pbProducts);
             }
 
             goToPage('page-form');
@@ -787,6 +816,8 @@
                     alert('Tolong masukkan ID Root Anda!');
                 } else if (selectedGameType === 'genshin') {
                     alert('Tolong masukkan UID Genshin Anda!');
+                } else if (selectedGameType === 'pb') {
+                    alert('Tolong masukkan ID Zepetto Anda!');
                 } else {
                     alert('Tolong masukkan User ID Anda!');
                 }
@@ -813,7 +844,7 @@
             if (selectedGameType === 'mlbb') {
                 transaction.zoneId = zoneIdInput;
             } else if (selectedGameType === 'genshin') {
-                transaction.zoneId = serverIdInput; // server disimpan di zoneId untuk kemudahan
+                transaction.zoneId = serverIdInput; 
             } else {
                 transaction.zoneId = '';
             }
@@ -838,6 +869,10 @@
                 gameLabel.innerText = "Genshin Impact";
                 labelIdType.innerText = "UID & Server";
                 detailId.innerText = `${transaction.userId} (${transaction.zoneId})`;
+            } else if (selectedGameType === 'pb') {
+                gameLabel.innerText = "Point Blank";
+                labelIdType.innerText = "ID Zepetto";
+                detailId.innerText = transaction.userId;
             }
 
             document.getElementById('detail-dm').innerText = transaction.item;
@@ -912,6 +947,19 @@ Untuk melakukan top up, silakan isi format berikut:
 
 🆔 UID : ${transaction.userId}
 🌐 Server: ${transaction.zoneId}
+💎 Nominal : ${transaction.item}
+
+💳 Pembayaran: ${transaction.paymentMethod}
+
+⚡ Estimasi proses 1–10 menit setelah pembayaran berhasil dikonfirmasi.`;
+            } else if (selectedGameType === 'pb') {
+                message = `🔥 Selamat Datang di CT GAME TOPUP 🔥
+
+Terima kasih sudah menghubungi kami. 🙏
+
+Untuk melakukan top up, silakan isi format berikut:
+
+🆔 ID Pengguna : ${transaction.userId}
 💎 Nominal : ${transaction.item}
 
 💳 Pembayaran: ${transaction.paymentMethod}
