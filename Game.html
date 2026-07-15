@@ -3,738 +3,701 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CT GAME TOPUP - Platform Top Up Game Terpercaya</title>
-    
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
+    <title>CT GAME TOPUP - Solusi Top Up Cepat & Terpercaya</title>
+    <!-- Google Fonts & FontAwesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --bg-main: #02163b;      /* Biru gelap pekat latar belakang */
-            --bg-nav: #01102b;       /* Navbar paling atas */
-            --bg-subnav: #022057;    /* Sub-navbar menu */
-            --bg-card: #082d6c;      /* Background card box */
-            --bg-input: #082452;
-            --accent-cyan: #00d2ff;
-            --accent-red: #e11d48;
-            --text-light: #f1f5f9;
+            --bg-color: #0b0e14;
+            --card-color: #151a24;
+            --primary-color: #00e5ff;
+            --secondary-color: #0056b3;
+            --text-color: #ffffff;
+            --text-muted: #8b9bb4;
+            --accent-green: #39ff14;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
         }
 
         body {
-            font-family: 'Poppins', sans-serif;
-            background-color: var(--bg-main);
-            color: var(--text-light);
-            font-size: 0.88rem;
-        }
-
-        /* Top Navbar */
-        .top-navbar {
-            background-color: var(--bg-nav);
-            padding: 10px 0;
-            border-bottom: 1px solid #05265e;
-        }
-        .search-box {
-            position: relative;
-            max-width: 450px;
-            width: 100%;
-        }
-        .search-box input {
-            width: 100%;
-            background-color: #ffffff;
-            color: #333;
-            border-radius: 6px;
-            padding: 6px 35px 6px 15px;
-            font-size: 0.85rem;
-            border: none;
-        }
-        .search-box i {
-            position: absolute;
-            right: 12px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #666;
-        }
-        .user-actions {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            min-height: 100vh;
             display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-        .coin-indicator {
-            background-color: #11346d;
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            color: #ffb800;
-        }
-        .btn-reseller-top {
-            background-color: var(--accent-red);
-            color: white;
-            font-size: 0.8rem;
-            font-weight: 600;
-            border: none;
-            padding: 6px 14px;
-            border-radius: 4px;
+            flex-direction: column;
+            overflow-x: hidden;
         }
 
-        /* Sub Navbar Menu */
-        .sub-navbar {
-            background-color: var(--bg-subnav);
-            padding: 8px 0;
-            font-size: 0.8rem;
-            overflow-x: auto;
-            white-space: nowrap;
+        /* HEADER */
+        header {
+            background-color: var(--card-color);
+            padding: 20px;
+            text-align: center;
+            border-bottom: 2px solid var(--secondary-color);
+            box-shadow: 0 4px 15px rgba(0, 229, 255, 0.1);
         }
-        .sub-nav-link {
-            color: #abc4ed;
-            text-decoration: none;
-            margin-right: 20px;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            transition: color 0.2s;
-        }
-        .sub-nav-link:hover, .sub-nav-link.active {
+
+        .logo-container h1 {
+            font-size: 24px;
+            font-weight: 800;
+            letter-spacing: 2px;
             color: #fff;
         }
 
-        /* Promo Hero Banner */
-        .promo-container {
-            position: relative;
-            background: linear-gradient(135deg, #051d47 0%, #031330 100%);
-            border: 2px solid #073a8c;
-            border-radius: 16px;
-            padding: 30px;
-            margin-top: 20px;
-            margin-bottom: 30px;
-            text-align: center;
-            overflow: hidden;
-        }
-        .promo-title-box {
-            border: 3px solid #000;
-            background-color: #020f26;
-            max-width: 320px;
-            margin: 15px auto 0 auto;
-            padding: 10px;
-            border-radius: 8px;
-            height: 45px;
+        .logo-container h1 span {
+            color: var(--primary-color);
         }
 
-        /* Section Title */
+        .logo-container p {
+            font-size: 11px;
+            color: var(--text-muted);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        /* CONTAINER UTAMA & TRANSISI HALAMAN */
+        .container {
+            max-width: 600px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 20px;
+            flex-grow: 1;
+        }
+
+        .page {
+            display: none;
+            animation: fadeIn 0.4s ease-in-out forwards;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* UTILITIES */
+        .btn-primary {
+            background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+            color: white;
+            border: none;
+            padding: 14px;
+            width: 100%;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(0, 229, 255, 0.2);
+            text-transform: uppercase;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 229, 255, 0.4);
+        }
+
+        .btn-back {
+            background: transparent;
+            color: var(--text-muted);
+            border: 1px solid var(--text-muted);
+            padding: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-bottom: 20px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+        }
+
+        .btn-back:hover {
+            color: white;
+            border-color: white;
+        }
+
+        /* ==================== PAGE 1: DASHBOARD ==================== */
+        .promo-banner {
+            background: linear-gradient(135deg, #101524, #1a233a);
+            border: 1px solid var(--primary-color);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 25px;
+        }
+
+        .promo-banner h2 {
+            font-size: 20px;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+
+        .promo-banner p {
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        .search-box {
+            position: relative;
+            margin-bottom: 25px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 15px 20px 15px 50px;
+            background-color: var(--card-color);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            color: white;
+            outline: none;
+            font-size: 15px;
+        }
+
+        .search-box i {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--primary-color);
+        }
+
         .section-title {
-            font-size: 1.1rem;
-            font-weight: 700;
+            font-size: 16px;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            border-left: 3px solid var(--primary-color);
+            padding-left: 10px;
+        }
+
+        .game-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .game-card {
+            background-color: var(--card-color);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .game-card:hover {
+            transform: scale(1.03);
+            border-color: var(--primary-color);
+            box-shadow: 0 4px 15px rgba(0, 229, 255, 0.1);
+        }
+
+        .game-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #1b2336, #2c3a56);
+            border-radius: 50%;
+            margin: 0 auto 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: var(--primary-color);
+        }
+
+        .game-card h3 {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        /* ==================== PAGE 2: NOMINAL & ID ==================== */
+        .step-box {
+            background-color: var(--card-color);
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .step-title {
+            font-size: 15px;
+            font-weight: 600;
             margin-bottom: 15px;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
         }
 
-        /* Game Populer Row */
-        .populer-grid {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 12px;
-            margin-bottom: 30px;
-        }
-        .populer-card {
-            background-color: #041d47;
-            border-radius: 10px;
-            overflow: hidden;
-            border: 1px solid #09347c;
-            position: relative;
-            cursor: pointer;
-            transition: transform 0.2s;
-            aspect-ratio: 3/4;
-        }
-        .populer-card:hover {
-            transform: translateY(-3px);
-            border-color: var(--accent-cyan);
-        }
-        .populer-card img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        .populer-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(transparent, rgba(0,0,0,0.9));
-            padding: 10px 5px;
-            text-align: center;
-        }
-        .populer-name {
-            font-size: 0.75rem;
-            font-weight: 600;
-            color: #fff;
-            margin-bottom: 2px;
-            text-shadow: 1px 1px 2px #000;
-        }
-        .populer-tag {
-            font-size: 0.65rem;
-            color: var(--accent-red);
-            font-weight: 700;
-        }
-
-        /* Filter Tab Buttons */
-        .filter-tabs {
-            display: flex;
-            gap: 8px;
-            margin-bottom: 20px;
-            border-bottom: 1px solid #082d6c;
-            padding-bottom: 15px;
-        }
-        .btn-filter {
-            background-color: #052152;
-            color: #a3b8cc;
-            border: 1px solid #0a337a;
-            padding: 5px 16px;
-            border-radius: 6px;
-            font-size: 0.8rem;
-            font-weight: 500;
-        }
-        .btn-filter.active {
-            background-color: #701a34;
-            color: white;
-            border-color: #962443;
-        }
-
-        /* Grid Game List Utama */
-        .game-main-grid {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 15px;
-            margin-bottom: 50px;
-        }
-        .game-main-item {
-            text-align: center;
-            cursor: pointer;
-        }
-        .game-icon-box {
-            background-color: #06265c;
-            border-radius: 14px;
-            overflow: hidden;
-            border: 1px solid #0a3885;
-            aspect-ratio: 1/1;
-            margin-bottom: 8px;
-            transition: all 0.2s;
-        }
-        .game-main-item:hover .game-icon-box {
-            transform: scale(1.03);
-            border-color: var(--accent-cyan);
-        }
-        .game-icon-box img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        .game-main-name {
-            font-size: 0.75rem;
-            font-weight: 600;
-            color: #d1dce8;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        /* Form Order Box */
-        .section-box {
-            background-color: #041b42;
-            border: 1px solid #08347a;
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 25px;
-        }
-        .form-custom {
-            background-color: var(--bg-input);
-            border: 1px solid #0e449c;
-            color: white;
-            padding: 10px;
-        }
-        .form-custom::placeholder {
-            color: #557cb5;
-        }
-
-        /* Item Grid Pilihan Diamond */
-        .item-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-            gap: 12px;
-        }
-        .item-box {
-            background-color: #031433;
-            border: 1px solid #0a3173;
-            border-radius: 8px;
-            padding: 12px 10px;
-            text-align: center;
-            cursor: pointer;
-            opacity: 0.4;
-            pointer-events: none;
-            transition: all 0.2s;
-        }
-        .item-box.unlocked {
-            opacity: 1;
-            pointer-events: auto;
-        }
-        .item-box:hover {
-            border-color: var(--accent-cyan);
-            background-color: #052254;
-        }
-
-        /* Floating WhatsApp icon */
-        .floating-wa {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background-color: #25d366;
-            color: white;
-            width: 50px;
-            height: 50px;
+        .step-number {
+            background-color: var(--primary-color);
+            color: var(--bg-color);
+            width: 24px;
+            height: 24px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.8rem;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-            z-index: 999;
+            font-weight: 700;
+            font-size: 12px;
         }
 
-        /* Responsive Breakpoints */
-        @media(max-width: 992px) {
-            .populer-grid { grid-template-columns: repeat(4, 1fr); }
-            .game-main-grid { grid-template-columns: repeat(4, 1fr); }
+        .input-group {
+            display: flex;
+            gap: 10px;
         }
-        @media(max-width: 768px) {
-            .populer-grid { grid-template-columns: repeat(3, 1fr); }
-            .game-main-grid { grid-template-columns: repeat(3, 1fr); }
+
+        .input-group input {
+            flex: 1;
+            padding: 12px;
+            background-color: var(--bg-color);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: white;
+            outline: none;
         }
-        @media(max-width: 576px) {
-            .populer-grid { grid-template-columns: repeat(2, 1fr); }
-            .game-main-grid { grid-template-columns: repeat(3, 1fr); }
-            .item-grid { grid-template-columns: repeat(2, 1fr); }
+
+        .diamond-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .diamond-card {
+            background-color: var(--bg-color);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: left;
+        }
+
+        .diamond-card:hover {
+            border-color: var(--primary-color);
+        }
+
+        .diamond-card.selected {
+            border-color: var(--primary-color);
+            background: rgba(0, 229, 255, 0.05);
+            box-shadow: 0 0 10px rgba(0, 229, 255, 0.1);
+        }
+
+        .dm-val {
+            font-weight: 600;
+            font-size: 14px;
+            display: block;
+        }
+
+        .dm-price {
+            font-size: 12px;
+            color: var(--primary-color);
+            margin-top: 4px;
+            display: block;
+        }
+
+        /* ==================== PAGE 3: TRANSACTION DETAILS ==================== */
+        .detail-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 25px;
+        }
+
+        .detail-table tr {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .detail-table td {
+            padding: 15px 0;
+            font-size: 14px;
+        }
+
+        .detail-table td:last-child {
+            text-align: right;
+            font-weight: 600;
+        }
+
+        .highlight-text {
+            color: var(--primary-color);
+        }
+
+        /* ==================== PAGE 4: PAYMENT METHOD ==================== */
+        .payment-option {
+            background-color: var(--card-color);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 18px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.3s;
+        }
+
+        .payment-option:hover {
+            border-color: var(--primary-color);
+        }
+
+        .pay-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .pay-info i {
+            font-size: 24px;
+            color: var(--primary-color);
+        }
+
+        .pay-name {
+            font-weight: 600;
+            font-size: 15px;
+        }
+
+        .pay-sub {
+            font-size: 11px;
+            color: var(--text-muted);
+            display: block;
+        }
+
+        .pay-select-dot {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            border: 2px solid var(--text-muted);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .payment-option.selected .pay-select-dot {
+            border-color: var(--primary-color);
+            background-color: var(--primary-color);
+        }
+
+        /* Modal Selesai Simulasi */
+        .success-box {
+            text-align: center;
+            padding: 30px;
+        }
+
+        .success-icon {
+            font-size: 50px;
+            color: var(--accent-green);
+            margin-bottom: 20px;
         }
     </style>
 </head>
 <body>
 
-    <nav class="top-navbar px-3">
-        <div class="container d-flex justify-content-between align-items-center gap-2">
-            <div class="d-flex align-items-center gap-2" style="cursor:pointer;" onclick="showPage('dashboard')">
-                <img src="https://cdn.oneesports.gg/wp-content/uploads/sites/2/2020/08/MobileLegendsBangBang_MLBB_appstore_officialart.jpg" alt="Logo" style="width:32px; height:32px; border-radius:4px; object-fit:cover;">
-                <h5 class="m-0 fw-bold text-white tracking-wider">GS<span class="text-info">STORE</span></h5>
+    <!-- HEADER LOGO -->
+    <header>
+        <div class="logo-container">
+            <h1>CT <span>GAME TOPUP</span></h1>
+            <p>Top Up Game & Pembayaran Digital</p>
+        </div>
+    </header>
+
+    <div class="container">
+
+        <!-- ==================== PAGE 1: DASHBOARD ==================== -->
+        <div id="page-dashboard" class="page active">
+            <div class="promo-banner">
+                <h2>PROMO BULAN INI!</h2>
+                <p>Nikmati harga diamond termurah & proses kilat 24 Jam.</p>
             </div>
 
-            <div class="search-box d-none d-md-block">
-                <input type="text" placeholder="Cari Game atau Voucher...">
+            <div class="search-box">
                 <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" placeholder="Cari game favoritmu...">
             </div>
 
-            <div class="user-actions">
-                <div class="d-flex align-items-center gap-1 text-white" style="cursor:pointer;">
-                    <i class="fa-solid fa-circle-user fa-lg"></i>
+            <h3 class="section-title">Pilih Game Terpopuler</h3>
+            <div class="game-grid">
+                <!-- Mobile Legends trigger -->
+                <div class="game-card" onclick="goToPage('page-form')">
+                    <div class="game-icon">
+                        <i class="fa-solid fa-gamepad"></i>
+                    </div>
+                    <h3>Mobile Legends</h3>
                 </div>
-                <div class="coin-indicator d-flex align-items-center gap-1">
-                    <i class="fa-solid fa-coins"></i> 0
+                <!-- Game Simulasi Lain -->
+                <div class="game-card" onclick="alert('Game ini dalam tahap pengembangan, silakan pilih Mobile Legends dulu ya!')">
+                    <div class="game-icon" style="color: var(--text-muted);">
+                        <i class="fa-solid fa-gun"></i>
+                    </div>
+                    <h3 style="color: var(--text-muted);">Free Fire</h3>
                 </div>
-                <button class="btn-reseller-top text-uppercase">Daftar Reseller</button>
             </div>
         </div>
-    </nav>
 
-    <div class="sub-navbar px-3">
-        <div class="container">
-            <a href="#" class="sub-nav-link active" onclick="showPage('dashboard')"><i class="fa-solid fa-bolt text-warning"></i> Top up</a>
-            <a href="#" class="sub-nav-link"><i class="fa-solid fa-clock-rotate-left"></i> Riwayat transaksi</a>
-            <a href="#" class="sub-nav-link"><i class="fa-solid fa-trophy"></i> Leaderboard</a>
-            <a href="#" class="sub-nav-link"><i class="fa-solid fa-users"></i> Reseller</a>
-            <a href="#" class="sub-nav-link"><i class="fa-solid fa-handshake"></i> Affiliate</a>
+        <!-- ==================== PAGE 2: FORM & PILIH DM ==================== -->
+        <div id="page-form" class="page">
+            <button class="btn-back" onclick="goToPage('page-dashboard')">
+                <i class="fa-solid fa-arrow-left"></i> Kembali ke Beranda
+            </button>
+
+            <div class="step-box">
+                <div class="step-title">
+                    <div class="step-number">1</div>
+                    <span>Masukkan User ID & Zone ID</span>
+                </div>
+                <div class="input-group">
+                    <input type="number" id="user-id" placeholder="Masukkan User ID" required>
+                    <input type="number" id="zone-id" placeholder="(Zone ID)" style="max-width: 120px;" required>
+                </div>
+            </div>
+
+            <div class="step-box">
+                <div class="step-title">
+                    <div class="step-number">2</div>
+                    <span>Pilih Nominal Diamond</span>
+                </div>
+                <div class="diamond-grid">
+                    <div class="diamond-card" onclick="selectDiamond('86 Diamonds', 19500, this)">
+                        <span class="dm-val">86 Diamonds</span>
+                        <span class="dm-price">Rp 19.500</span>
+                    </div>
+                    <div class="diamond-card" onclick="selectDiamond('172 Diamonds', 38000, this)">
+                        <span class="dm-val">172 Diamonds</span>
+                        <span class="dm-price">Rp 38.000</span>
+                    </div>
+                    <div class="diamond-card" onclick="selectDiamond('257 Diamonds', 57000, this)">
+                        <span class="dm-val">257 Diamonds</span>
+                        <span class="dm-price">Rp 57.000</span>
+                    </div>
+                    <div class="diamond-card" onclick="selectDiamond('706 Diamonds', 152000, this)">
+                        <span class="dm-val">706 Diamonds</span>
+                        <span class="dm-price">Rp 152.000</span>
+                    </div>
+                </div>
+            </div>
+
+            <button class="btn-primary" onclick="proceedToDetail()">Lanjut ke Transaksi</button>
         </div>
-    </div>
 
-    <div class="container my-3">
+        <!-- ==================== PAGE 3: DETAIL TRANSAKSI ==================== -->
+        <div id="page-detail" class="page">
+            <button class="btn-back" onclick="goToPage('page-form')">
+                <i class="fa-solid fa-arrow-left"></i> Edit Pesanan
+            </button>
 
-        <section id="page-dashboard">
-            
-            <div class="promo-container">
-                <h3 class="fw-bold m-0 text-white text-uppercase tracking-wide">Top Up Game</h3>
-                <h5 class="text-info fw-semibold">LEBIH HEMAT MABAR JADI SEMANGAT</h5>
-                <div class="promo-title-box"></div>
+            <div class="step-box">
+                <div class="step-title">
+                    <div class="step-number">3</div>
+                    <span>Detail Transaksi Anda</span>
+                </div>
+                
+                <table class="detail-table">
+                    <tr>
+                        <td>Game</td>
+                        <td>Mobile Legends: Bang Bang</td>
+                    </tr>
+                    <tr>
+                        <td>ID & Zona</td>
+                        <td id="detail-id">-</td>
+                    </tr>
+                    <tr>
+                        <td>Nickname Server</td>
+                        <!-- Keinginan user: Langsung memuat nama user secara otomatis -->
+                        <td id="detail-nickname" class="highlight-text">Mencari...</td>
+                    </tr>
+                    <tr>
+                        <td>Nominal Item</td>
+                        <td id="detail-dm">-</td>
+                    </tr>
+                    <tr>
+                        <td>Total Biaya</td>
+                        <td id="detail-price" class="highlight-text">Rp 0</td>
+                    </tr>
+                </table>
+
+                <button class="btn-primary" onclick="goToPage('page-payment')">Pilih Metode Pembayaran</button>
             </div>
+        </div>
 
-            <div class="section-title text-warning">
-                <span>🔥 Game Populer</span>
-            </div>
-            
-            <div class="populer-grid" id="populer-area">
+        <!-- ==================== PAGE 4: METODE PEMBAYARAN ==================== -->
+        <div id="page-payment" class="page">
+            <button class="btn-back" onclick="goToPage('page-detail')">
+                <i class="fa-solid fa-arrow-left"></i> Kembali ke Detail
+            </button>
+
+            <div class="step-box">
+                <div class="step-title">
+                    <div class="step-number">4</div>
+                    <span>Pilih Metode Pembayaran</span>
                 </div>
 
-            <div class="filter-tabs">
-                <button class="btn-filter active">All</button>
-                <button class="btn-filter">Top Up</button>
-                <button class="btn-filter">Voucher</button>
-                <button class="btn-filter">Pembayaran</button>
-            </div>
-
-            <div class="section-title text-white">
-                <span>Top up game</span>
-            </div>
-            <div class="game-main-grid" id="main-games-area">
-                </div>
-        </section>
-
-
-        <section id="page-order" class="d-none">
-            <div class="row">
-                <div class="col-lg-8 mx-auto">
-                    <div class="mb-3" style="cursor:pointer;" onclick="showPage('dashboard')">
-                        <i class="fa-solid fa-chevron-left me-1"></i> Kembali ke Beranda
-                    </div>
-                    
-                    <div class="section-box">
-                        <h5 class="fw-bold text-warning mb-3" id="order-game-title">Top Up Game</h5>
-                        <hr class="border-secondary opacity-30">
-                        
-                        <div class="row g-3 mt-1">
-                            <div class="col-12 col-md-6">
-                                <label class="small text-white-50 d-block mb-1">ID Pengguna</label>
-                                <input type="text" id="input-user-id" class="form-control form-custom rounded" placeholder="Masukkan ID Pengguna" oninput="validateIdInput()">
-                            </div>
-                            <div class="col-12 col-md-6" id="box-zone-id">
-                                <label class="small text-white-50 d-block mb-1">ID Zona / Server</label>
-                                <input type="text" id="input-zone-id" class="form-control form-custom rounded" placeholder="Masukkan ID Zona" oninput="validateIdInput()">
-                            </div>
+                <!-- QRIS -->
+                <div class="payment-option" onclick="selectPayment('QRIS', this)">
+                    <div class="pay-info">
+                        <i class="fa-solid fa-qrcode"></i>
+                        <div>
+                            <span class="pay-name">QRIS</span>
+                            <span class="pay-sub">E-Wallet & Mobile Banking</span>
                         </div>
-                        <span class="text-info d-block mt-3 small"><i class="fa-solid fa-circle-info me-1"></i> Silakan isi ID Anda terlebih dahulu untuk mengaktifkan pilihan item nominal.</span>
                     </div>
+                    <div class="pay-select-dot"></div>
+                </div>
 
-                    <div class="section-box">
-                        <h6 class="fw-bold mb-3"><span class="badge bg-primary me-2">2</span> Pilih Nominal Top Up</h6>
-                        <div class="item-grid" id="nominal-render-area">
-                            </div>
+                <!-- DANA -->
+                <div class="payment-option" onclick="selectPayment('DANA', this)">
+                    <div class="pay-info">
+                        <i class="fa-solid fa-wallet"></i>
+                        <div>
+                            <span class="pay-name">DANA</span>
+                            <span class="pay-sub">E-Wallet Resmi</span>
+                        </div>
                     </div>
+                    <div class="pay-select-dot"></div>
+                </div>
+
+                <!-- GO-PAY -->
+                <div class="payment-option" onclick="selectPayment('GO-PAY', this)">
+                    <div class="pay-info">
+                        <i class="fa-solid fa-credit-card"></i>
+                        <div>
+                            <span class="pay-name">GO-PAY</span>
+                            <span class="pay-sub">Aplikasi Gojek</span>
+                        </div>
+                    </div>
+                    <div class="pay-select-dot"></div>
                 </div>
             </div>
-        </section>
 
+            <button class="btn-primary" onclick="finishTransaction()">Selesaikan Pembayaran</button>
+        </div>
 
-        <section id="page-detail-transaksi" class="d-none">
-            <div class="row justify-content-center">
-                <div class="col-md-7">
-                    <div class="section-box">
-                        <div class="small mb-3 text-muted" style="cursor:pointer;" onclick="showPage('order')"><i class="fa-solid fa-arrow-left me-1"></i> Kembali</div>
-                        <h5 class="fw-bold mb-4 text-white"><i class="fa-solid fa-file-invoice me-2 text-primary"></i>Detail Transaksi</h5>
-                        
-                        <div class="bg-black bg-opacity-20 p-3 rounded mb-3">
-                            <h6 class="fw-bold text-warning mb-2">Data Produk</h6>
-                            <div class="d-flex justify-content-between small mb-1"><span class="text-muted">Item Layanan</span><span id="dtx-item" class="fw-bold"></span></div>
-                        </div>
-
-                        <div class="bg-black bg-opacity-20 p-3 rounded mb-3">
-                            <h6 class="fw-bold text-warning mb-2">Informasi Pelanggan</h6>
-                            <div class="d-flex justify-content-between small mb-1"><span class="text-muted">ID Pengguna</span><span id="dtx-userid" class="fw-bold"></span></div>
-                            <div class="d-flex justify-content-between small mb-1" id="dtx-row-zone"><span class="text-muted">ID Server/Zona</span><span id="dtx-zoneid" class="fw-bold"></span></div>
-                        </div>
-
-                        <div class="bg-black bg-opacity-20 p-3 rounded mb-4">
-                            <h6 class="fw-bold text-warning mb-2">Detail Pembayaran</h6>
-                            <div class="d-flex justify-content-between small mb-1"><span class="text-muted">Harga</span><span id="dtx-price"></span></div>
-                            <div class="d-flex justify-content-between small mb-1"><span class="text-muted">Biaya Admin</span><span>Rp 1.000</span></div>
-                            <hr class="border-secondary">
-                            <div class="d-flex justify-content-between fw-bold text-white fs-5"><span>Total Pembayaran</span><span id="dtx-total" class="text-warning"></span></div>
-                        </div>
-
-                        <button class="btn btn-danger w-100 fw-bold py-2" onclick="showPage('pilih-metode')">Pilih Metode Pembayaran</button>
-                    </div>
-                </div>
+        <!-- ==================== PAGE 5: SUCCESS / SIMULASI SELESAI ==================== -->
+        <div id="page-success" class="page">
+            <div class="step-box success-box">
+                <i class="fa-regular fa-circle-check success-icon"></i>
+                <h2>Transaksi Diproses!</h2>
+                <p style="color: var(--text-muted); margin: 15px 0 25px;">
+                    Pesanan Anda sedang dalam sistem antrean admin. Pembayaran menggunakan <strong id="success-pay-method" class="highlight-text">-</strong> akan divalidasi otomatis.
+                </p>
+                <button class="btn-primary" onclick="resetApp()">Kembali ke Beranda</button>
             </div>
-        </section>
-
-
-        <section id="page-pilih-metode" class="d-none">
-            <div class="row justify-content-center">
-                <div class="col-md-6">
-                    <div class="bg-white text-dark rounded p-4 shadow">
-                        <div class="d-flex justify-content-between align-items-center mb-4">
-                            <span class="fw-bold fs-5">Pilih Metode Pembayaran</span>
-                            <span class="fw-bold text-primary fs-5" id="gate-total-header"></span>
-                        </div>
-
-                        <div class="border rounded p-3 mb-2 d-flex justify-content-between align-items-center" style="cursor:pointer;" onclick="processToQrisFinal()">
-                            <div class="d-flex align-items-center gap-3">
-                                <i class="fa-solid fa-qrcode fa-2x text-dark"></i>
-                                <div><div class="fw-bold m-0">QRIS</div></div>
-                            </div>
-                            <span class="badge bg-secondary text-uppercase">QRIS</span>
-                        </div>
-
-                        <div class="border rounded p-3 mb-2 d-flex justify-content-between align-items-center opacity-50" onclick="alert('Metode ini sedang maintenance, harap gunakan QRIS.')">
-                            <div class="d-flex align-items-center gap-3">
-                                <i class="fa-solid fa-wallet fa-2x text-secondary"></i>
-                                <div><div class="fw-bold text-muted m-0">E-Wallet (OVO, DANA)</div></div>
-                            </div>
-                            <i class="fa-solid fa-chevron-right text-muted"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-
-        <section id="page-qris-final" class="d-none">
-            <div class="row justify-content-center">
-                <div class="col-md-6 text-center">
-                    <div class="bg-white text-dark p-4 rounded shadow border">
-                        <div class="mb-2 text-muted small">Total Tagihan</div>
-                        <h2 class="fw-bold text-dark mb-4" id="qris-final-price"></h2>
-                        
-                        <div class="border-top border-bottom py-3 my-3">
-                            <div class="small text-muted mb-1">Selesaikan pembayaran sebelum</div>
-                            <div class="fs-2 fw-bold text-warning" id="qris-countdown">30:00</div>
-                            <div class="small text-secondary" id="qris-deadline-string"></div>
-                        </div>
-
-                        <div class="my-3">
-                            <div style="background-color: white; padding: 10px; border: 1px solid #ddd; display: inline-block;">
-                                <img src="https://i.postimg.cc/85z1fdrq/1000119949.jpg" style="width:240px; height:240px; object-fit:cover; object-position:50% 55%;" alt="QRIS Vendor">
-                            </div>
-                        </div>
-
-                        <div class="alert alert-light border text-start small text-muted my-3">
-                            <i class="fa-solid fa-circle-info me-2 text-primary"></i>
-                            Screenshots QRIS di atas lalu scan menggunakan aplikasi Bank atau E-Wallet pilihan Anda.
-                        </div>
-
-                        <button class="btn btn-success w-100 fw-bold py-3 mt-2" id="btn-trigger-wa">
-                            <i class="fa-brands fa-whatsapp me-2 fa-lg"></i>KONFIRMASI VIA WHATSAPP
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </section>
+        </div>
 
     </div>
 
-    <a href="https://wa.me/6287724699161" target="_blank" class="floating-wa"><i class="fa-brands fa-whatsapp"></i></a>
-
+    <!-- JAVASCRIPT LOGIC -->
     <script>
-        // Data Game Master List Gabungan dengan Link Gambar Baru Pilihanmu
-        const allGamesData = {
-            ml: { 
-                title: "Mobile Legends", 
-                hasZone: true, 
-                img: "https://cdn.oneesports.gg/wp-content/uploads/sites/2/2020/08/MobileLegendsBangBang_MLBB_appstore_officialart.jpg", 
-                items: [
-                    { name: "5 Diamonds", price: 1500 }, 
-                    { name: "3 Diamonds", price: 3200 }, 
-                    { name: "12 Diamonds", price: 4900 }, 
-                    { name: "19 Diamonds", price: 6600 }, 
-                    { name: "85 Diamonds", price: 13400 }
-                ]
-            },
-            ff: { 
-                title: "Free Fire", 
-                hasZone: false, 
-                img: "https://share.google/WEwGIg4TRhAXHCzl1", 
-                items: [
-                    { name: "5 Diamonds", price: 1401 }, 
-                    { name: "12 Diamonds", price: 2500 }, 
-                    { name: "50 Diamonds", price: 7707 }, 
-                    { name: "70 Diamonds", price: 9509 }
-                ]
-            },
-            pubg: { title: "PUBG Mobile", hasZone: false, img: "https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=400", items: [{ name: "60 UC", price: 14000 }]},
-            pb: { title: "POINT BLANK", hasZone: false, img: "https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=400", items: [{ name: "1000 PB Cash", price: 11000 }]},
-            roblox: { title: "Voucher Roblox", hasZone: false, img: "https://images.unsplash.com/photo-1605899435973-ca2d1a8861cf?q=80&w=400", items: [{ name: "80 Robux", price: 15000 }]},
-            aov: { title: "ARENA OF VALOR", hasZone: false, img: "https://images.unsplash.com/photo-1560253023-3ec5d502959f?q=80&w=400", items: []},
-            ragnarok: { title: "Ragnarok M: Eternal Love", hasZone: false, img: "https://images.unsplash.com/photo-1578632767115-351597cf2477?q=80&w=400", items: []}
+        // State data transaksi
+        let transaction = {
+            userId: '',
+            zoneId: '',
+            nickname: '',
+            item: '',
+            price: 0,
+            paymentMethod: ''
         };
 
-        let currentActiveGame = null;
-        let selectedProductData = null;
-        let timerRunner = null;
+        // Kumpulan Nickname MLBB simulasi acak untuk mengisi "Nickname Server langsung masuk"
+        const fakeNicknames = ["Zxuan_Pro", "LemonFans", "SkyTeezy", "Valkyrie", "DoraemonGanz", "SavageKidd"];
 
-        // Render Halaman Beranda Awal Saat Load
-        window.onload = function() {
-            const populerArea = document.getElementById('populer-area');
-            const mainGamesArea = document.getElementById('main-games-area');
-            
-            populerArea.innerHTML = '';
-            mainGamesArea.innerHTML = '';
+        function goToPage(pageId) {
+            // Sembunyikan semua halaman
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => page.classList.remove('active'));
 
-            // 1. Render Top Game Populer (5 Teratas horizontal vertikal panjang)
-            const populerKeys = ['ml', 'ff', 'pubg', 'pb', 'roblox'];
-            populerKeys.forEach(key => {
-                if(allGamesData[key]) {
-                    populerArea.innerHTML += `
-                        <div class="populer-card" onclick="openGameOrder('${key}')">
-                            <img src="${allGamesData[key].img}" alt="${allGamesData[key].title}">
-                            <div class="populer-overlay">
-                                <div class="populer-name">${allGamesData[key].title}</div>
-                                <div class="populer-tag">Top Up</div>
-                            </div>
-                        </div>
-                    `;
-                }
-            });
-
-            // 2. Render Semua Daftar Grid Game Utama (Bentuk Kotak Simetris)
-            Object.keys(allGamesData).forEach(key => {
-                mainGamesArea.innerHTML += `
-                    <div class="game-main-item" onclick="openGameOrder('${key}')">
-                        <div class="game-icon-box">
-                            <img src="${allGamesData[key].img}" alt="${allGamesData[key].title}">
-                        </div>
-                        <div class="game-main-name">${allGamesData[key].title}</div>
-                    </div>
-                `;
-            });
-        };
-
-        function showPage(pageId) {
-            document.querySelectorAll('section').forEach(element => element.classList.add('d-none'));
-            document.getElementById(`page-${pageId}`).classList.remove('d-none');
-            window.scrollTo({top: 0, behavior: 'smooth'});
+            // Tampilkan halaman target
+            document.getElementById(pageId).classList.add('active');
+            window.scrollTo(0,0);
         }
 
-        function openGameOrder(gameKey) {
-            currentActiveGame = gameKey;
-            const gameData = allGamesData[gameKey];
+        function selectDiamond(itemName, itemPrice, element) {
+            // Hapus kelas terpilih dari semua card
+            const cards = document.querySelectorAll('.diamond-card');
+            cards.forEach(card => card.classList.remove('selected'));
 
-            document.getElementById('order-game-title').innerText = `Top Up ${gameData.title}`;
-            document.getElementById('input-user-id').value = '';
-            document.getElementById('input-zone-id').value = '';
+            // Set terpilih pada card yang diklik
+            element.classList.add('selected');
 
-            if(gameData.hasZone) {
-                document.getElementById('box-zone-id').style.display = 'block';
-            } else {
-                document.getElementById('box-zone-id').style.display = 'none';
-            }
-
-            const gridContainer = document.getElementById('nominal-render-area');
-            gridContainer.innerHTML = '';
-            
-            if(!gameData.items || gameData.items.length === 0) {
-                gridContainer.innerHTML = '<span class="text-muted small">Pricelist belum tersedia untuk game ini.</span>';
-            } else {
-                gameData.items.forEach((item, index) => {
-                    gridContainer.innerHTML += `
-                        <div class="item-box btn-box-dm" id="dm-box-${index}" onclick="clickDiamondItem(${index})">
-                            <div class="fw-bold text-white small mb-1">${item.name}</div>
-                            <div class="small text-warning">Rp ${item.price.toLocaleString('id-ID')}</div>
-                        </div>
-                    `;
-                });
-            }
-
-            validateIdInput(); 
-            showPage('order');
+            transaction.item = itemName;
+            transaction.price = itemPrice;
         }
 
-        function validateIdInput() {
-            const userId = document.getElementById('input-user-id').value.trim();
-            const zoneId = document.getElementById('input-zone-id').value.trim();
-            const gameData = allGamesData[currentActiveGame];
-            
-            let isValid = false;
-            if (gameData.hasZone) {
-                if(userId !== '' && zoneId !== '') isValid = true;
-            } else {
-                if(userId !== '') isValid = true;
+        function proceedToDetail() {
+            const userIdInput = document.getElementById('user-id').value;
+            const zoneIdInput = document.getElementById('zone-id').value;
+
+            if(!userIdInput || !zoneIdInput) {
+                alert('Tolong masukkan User ID dan Zone ID Anda!');
+                return;
             }
 
-            document.querySelectorAll('.btn-box-dm').forEach(box => {
-                if(isValid) {
-                    box.classList.add('unlocked');
-                } else {
-                    box.classList.remove('unlocked');
-                }
-            });
-        }
-
-        function clickDiamondItem(index) {
-            const selectedItem = allGamesData[currentActiveGame].items[index];
-            selectedProductData = selectedItem;
-
-            const uID = document.getElementById('input-user-id').value;
-            const zID = document.getElementById('input-zone-id').value;
-
-            document.getElementById('dtx-item').innerText = `${allGamesData[currentActiveGame].title} - ${selectedItem.name}`;
-            document.getElementById('dtx-userid').innerText = uID;
-
-            if(allGamesData[currentActiveGame].hasZone) {
-                document.getElementById('dtx-row-zone').style.display = 'flex';
-                document.getElementById('dtx-zoneid').innerText = zID;
-            } else {
-                document.getElementById('dtx-row-zone').style.display = 'none';
+            if(!transaction.item) {
+                alert('Silakan pilih nominal Diamond terlebih dahulu!');
+                return;
             }
 
-            document.getElementById('dtx-price').innerText = `Rp ${selectedItem.price.toLocaleString('id-ID')}`;
-            
-            const totalFinal = selectedItem.price + 1000;
-            const finalString = `Rp ${totalFinal.toLocaleString('id-ID')}`;
-            
-            document.getElementById('dtx-total').innerText = finalString;
-            document.getElementById('gate-total-header').innerText = finalString;
-            document.getElementById('qris-final-price').innerText = finalString;
+            transaction.userId = userIdInput;
+            transaction.zoneId = zoneIdInput;
 
-            showPage('detail-transaksi');
+            // Generate Nickname Acak seolah-olah ditarik langsung dari database ML
+            const randomNick = fakeNicknames[Math.floor(Math.random() * fakeNicknames.length)] + " (" + zoneIdInput + ")";
+            transaction.nickname = randomNick;
+
+            // Populate data ke halaman detail
+            document.getElementById('detail-id').innerText = `${transaction.userId} (${transaction.zoneId})`;
+            document.getElementById('detail-nickname').innerText = transaction.nickname;
+            document.getElementById('detail-dm').innerText = transaction.item;
+            document.getElementById('detail-price').innerText = "Rp " + transaction.price.toLocaleString('id-ID');
+
+            goToPage('page-detail');
         }
 
-        function processToQrisFinal() {
-            showPage('qris-final');
-            runQrisCountdown(30 * 60);
+        function selectPayment(methodName, element) {
+            const options = document.querySelectorAll('.payment-option');
+            options.forEach(opt => opt.classList.remove('selected'));
 
-            const d = new Date();
-            d.setMinutes(d.getMinutes() + 30);
-            document.getElementById('qris-deadline-string').innerText = d.toLocaleDateString('id-ID', {
-                weekday: 'long', day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit'
-            });
+            element.classList.add('selected');
+            transaction.paymentMethod = methodName;
+        }
 
-            const uID = document.getElementById('input-user-id').value;
-            const zID = document.getElementById('input-zone-id').value;
-            const targetIdLabel = allGamesData[currentActiveGame].hasZone ? `${uID} (Zone: ${zID})` : uID;
-            const finalTotal = selectedProductData.price + 1000;
+        function finishTransaction() {
+            if(!transaction.paymentMethod) {
+                alert('Silakan pilih metode pembayaran Anda terlebih dahulu!');
+                return;
+            }
 
-            const waTemplateMessage = 
-                `*DETAIL TRANSAKSI TOP UP - GS STORE*\n` +
-                `-------------------------------------\n` +
-                `Game: ${allGamesData[currentActiveGame].title}\n` +
-                `ID Target: ${targetIdLabel}\n` +
-                `Layanan: ${selectedProductData.name}\n` +
-                `Total Bayar: Rp ${finalTotal.toLocaleString('id-ID')}\n` +
-                `Status: *Sudah Transfer / Dibayar via QRIS*\n` +
-                `-------------------------------------\n` +
-                `Mohon segera diproses ya bos! Terima kasih.`;
+            document.getElementById('success-pay-method').innerText = transaction.paymentMethod;
+            goToPage('page-success');
+        }
 
-            document.getElementById('btn-trigger-wa').onclick = function() {
-                window.open(`https://wa.me/6287724699161?text=${encodeURIComponent(waTemplateMessage)}`, '_blank');
+        function resetApp() {
+            // Reset form
+            document.getElementById('user-id').value = '';
+            document.getElementById('zone-id').value = '';
+            
+            const cards = document.querySelectorAll('.diamond-card');
+            cards.forEach(card => card.classList.remove('selected'));
+
+            const options = document.querySelectorAll('.payment-option');
+            options.forEach(opt => opt.classList.remove('selected'));
+
+            transaction = {
+                userId: '',
+                zoneId: '',
+                nickname: '',
+                item: '',
+                price: 0,
+                paymentMethod: ''
             };
-        }
 
-        function runQrisCountdown(secondsAmount) {
-            clearInterval(timerRunner);
-            let timeRemaining = secondsAmount;
-            const display = document.getElementById('qris-countdown');
-
-            timerRunner = setInterval(() => {
-                let minutes = Math.floor(timeRemaining / 60);
-                let seconds = timeRemaining % 60;
-
-                minutes = minutes < 10 ? "0" + minutes : minutes;
-                seconds = seconds < 10 ? "0" + seconds : seconds;
-
-                display.textContent = `${minutes}:${seconds}`;
-
-                if (--timeRemaining < 0) {
-                    clearInterval(timerRunner);
-                    display.textContent = "EXPIRED";
-                    alert("Waktu transfer QRIS Anda telah kedaluwarsa!");
-                    showPage('dashboard');
-                }
-            }, 1000);
+            goToPage('page-dashboard');
         }
     </script>
 </body>
