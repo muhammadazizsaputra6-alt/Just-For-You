@@ -250,19 +250,27 @@
             font-size: 12px;
         }
 
-        .input-group {
+        /* FORM INPUT DIGANTI MENJADI ATAS BAWAH (VERTICAL FLEX) */
+        .input-group-vertical {
             display: flex;
-            gap: 10px;
+            flex-direction: column;
+            gap: 12px;
         }
 
-        .input-group input {
-            flex: 1;
-            padding: 12px;
+        .input-group-vertical input {
+            width: 100%;
+            padding: 14px 16px;
             background-color: var(--bg-color);
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 8px;
             color: white;
             outline: none;
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+
+        .input-group-vertical input:focus {
+            border-color: var(--primary-color);
         }
 
         .diamond-grid {
@@ -302,6 +310,18 @@
             color: var(--primary-color);
             margin-top: 4px;
             display: block;
+        }
+
+        .divider {
+            grid-column: span 2;
+            border-top: 1px dashed rgba(255, 255, 255, 0.1);
+            margin: 15px 0 5px 0;
+            padding-top: 15px;
+            font-size: 13px;
+            color: var(--primary-color);
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
         }
 
         /* ==================== PAGE 3: TRANSACTION DETAILS ==================== */
@@ -432,35 +452,94 @@
             <div class="step-box">
                 <div class="step-title">
                     <div class="step-number">1</div>
-                    <span>Masukkan User ID & Zone ID</span>
+                    <span>Masukkan Data Akun Anda</span>
                 </div>
-                <div class="input-group">
+                <div class="input-group-vertical">
                     <input type="number" id="user-id" placeholder="Masukkan User ID" required>
-                    <input type="number" id="zone-id" placeholder="(Zone ID)" style="max-width: 120px;" required>
+                    <input type="number" id="zone-id" placeholder="Masukkan Zone ID" required>
                 </div>
             </div>
 
             <div class="step-box">
                 <div class="step-title">
                     <div class="step-number">2</div>
-                    <span>Pilih Nominal Diamond</span>
+                    <span>Pilih Nominal Diamond / Produk</span>
                 </div>
                 <div class="diamond-grid">
-                    <div class="diamond-card" onclick="selectDiamond('86 Diamonds', 19500, this)">
-                        <span class="dm-val">86 Diamonds</span>
-                        <span class="dm-price">Rp 19.500</span>
+                    <div class="diamond-card" onclick="selectDiamond('5 Diamonds', 1800, this)">
+                        <span class="dm-val">5 Diamonds</span>
+                        <span class="dm-price">Rp 1.800</span>
                     </div>
-                    <div class="diamond-card" onclick="selectDiamond('172 Diamonds', 38000, this)">
-                        <span class="dm-val">172 Diamonds</span>
-                        <span class="dm-price">Rp 38.000</span>
+                    <div class="diamond-card" onclick="selectDiamond('12 Diamonds', 5200, this)">
+                        <span class="dm-val">12 Diamonds</span>
+                        <span class="dm-price">Rp 5.200</span>
                     </div>
-                    <div class="diamond-card" onclick="selectDiamond('257 Diamonds', 57000, this)">
-                        <span class="dm-val">257 Diamonds</span>
-                        <span class="dm-price">Rp 57.000</span>
+                    <div class="diamond-card" onclick="selectDiamond('19 Diamonds', 6900, this)">
+                        <span class="dm-val">19 Diamonds</span>
+                        <span class="dm-price">Rp 6.900</span>
                     </div>
-                    <div class="diamond-card" onclick="selectDiamond('706 Diamonds', 152000, this)">
-                        <span class="dm-val">706 Diamonds</span>
-                        <span class="dm-price">Rp 152.000</span>
+                    <div class="diamond-card" onclick="selectDiamond('28 Diamonds', 8600, this)">
+                        <span class="dm-val">28 Diamonds</span>
+                        <span class="dm-price">Rp 8.600</span>
+                    </div>
+                    <div class="diamond-card" onclick="selectDiamond('44 Diamonds', 12500, this)">
+                        <span class="dm-val">44 Diamonds</span>
+                        <span class="dm-price">Rp 12.500</span>
+                    </div>
+                    <div class="diamond-card" onclick="selectDiamond('59 Diamonds', 17000, this)">
+                        <span class="dm-val">59 Diamonds</span>
+                        <span class="dm-price">Rp 17.000</span>
+                    </div>
+                    <div class="diamond-card" onclick="selectDiamond('85 Diamonds', 23000, this)">
+                        <span class="dm-val">85 Diamonds</span>
+                        <span class="dm-price">Rp 23.000</span>
+                    </div>
+                    <div class="diamond-card" onclick="selectDiamond('170 Diamonds', 45000, this)">
+                        <span class="dm-val">170 Diamonds</span>
+                        <span class="dm-price">Rp 45.000</span>
+                    </div>
+                    <div class="diamond-card" onclick="selectDiamond('240 Diamonds', 62800, this)">
+                        <span class="dm-val">240 Diamonds</span>
+                        <span class="dm-price">Rp 62.800</span>
+                    </div>
+                    <div class="diamond-card" onclick="selectDiamond('296 Diamonds ⭐', 88000, this)">
+                        <span class="dm-val">296 Diamonds ⭐</span>
+                        <span class="dm-price">Rp 88.000</span>
+                    </div>
+                    <div class="diamond-card" onclick="selectDiamond('408 Diamonds', 1051500, this)">
+                        <span class="dm-val">408 Diamonds</span>
+                        <span class="dm-price">Rp 1.051.500</span>
+                    </div>
+                    <div class="diamond-card" onclick="selectDiamond('568 Diamonds', 143800, this)">
+                        <span class="dm-val">568 Diamonds</span>
+                        <span class="dm-price">Rp 143.800</span>
+                    </div>
+                    <div class="diamond-card" onclick="selectDiamond('875 Diamonds', 220000, this)">
+                        <span class="dm-val">875 Diamonds</span>
+                        <span class="dm-price">Rp 220.000</span>
+                    </div>
+                    <div class="diamond-card" onclick="selectDiamond('2010 Diamonds', 476900, this)">
+                        <span class="dm-val">2010 Diamonds</span>
+                        <span class="dm-price">Rp 476.900</span>
+                    </div>
+                    <div class="diamond-card" onclick="selectDiamond('4830 Diamonds', 1142500, this)">
+                        <span class="dm-val">4830 Diamonds</span>
+                        <span class="dm-price">Rp 1.142.500</span>
+                    </div>
+
+                    <div class="divider">🎁 Produk Lainnya</div>
+
+                    <div class="diamond-card" onclick="selectDiamond('Twilight Pass', 153000, this)">
+                        <span class="dm-val">⭐ Twilight Pass</span>
+                        <span class="dm-price">Rp 153.000</span>
+                    </div>
+                    <div class="diamond-card" onclick="selectDiamond('Weekly Diamond Pass', 28800, this)">
+                        <span class="dm-val">💎 Weekly Pass</span>
+                        <span class="dm-price">Rp 28.800</span>
+                    </div>
+                    <div class="diamond-card" onclick="selectDiamond('Weekly Elite Pack', 16100, this)">
+                        <span class="dm-val">🎁 Weekly Elite Pack</span>
+                        <span class="dm-price">Rp 16.100</span>
                     </div>
                 </div>
             </div>
@@ -553,7 +632,6 @@
     </div>
 
     <script>
-        // State data transaksi
         let transaction = {
             userId: '',
             zoneId: '',
@@ -597,7 +675,6 @@
             transaction.userId = userIdInput;
             transaction.zoneId = zoneIdInput;
 
-            // Memasukkan data ke halaman detail tanpa nickname
             document.getElementById('detail-id').innerText = `${transaction.userId} (${transaction.zoneId})`;
             document.getElementById('detail-dm').innerText = transaction.item;
             document.getElementById('detail-price').innerText = "Rp " + transaction.price.toLocaleString('id-ID');
@@ -619,10 +696,8 @@
                 return;
             }
 
-            // Target nomor WhatsApp yang diminta (087724699161)
             const adminWA = "6287724699161";
 
-            // Format Pesan WhatsApp Sesuai Request
             const message = `🔥 Selamat Datang di CT GAME TOPUP 🔥
 
 Terima kasih sudah menghubungi kami. 🙏
@@ -637,11 +712,9 @@ Untuk melakukan top up, silakan isi format berikut:
 
 ⚡ Estimasi proses 1–10 menit setelah pembayaran berhasil dikonfirmasi.`;
 
-            // Encoding string pesan agar aman dibaca web browser
             const encodedMessage = encodeURIComponent(message);
             const waLink = `https://api.whatsapp.com/send?phone=${adminWA}&text=${encodedMessage}`;
 
-            // Langsung alihkan user ke WhatsApp admin
             window.open(waLink, '_blank');
         }
     </script>
