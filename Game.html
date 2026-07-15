@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CT GAME TOPUP - Solusi Top Up Cepat & Terpercaya</title>
-    <!-- Google Fonts & FontAwesome -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -384,23 +383,10 @@
             border-color: var(--primary-color);
             background-color: var(--primary-color);
         }
-
-        /* Modal Selesai Simulasi */
-        .success-box {
-            text-align: center;
-            padding: 30px;
-        }
-
-        .success-icon {
-            font-size: 50px;
-            color: var(--accent-green);
-            margin-bottom: 20px;
-        }
     </style>
 </head>
 <body>
 
-    <!-- HEADER LOGO -->
     <header>
         <div class="logo-container">
             <h1>CT <span>GAME TOPUP</span></h1>
@@ -410,7 +396,6 @@
 
     <div class="container">
 
-        <!-- ==================== PAGE 1: DASHBOARD ==================== -->
         <div id="page-dashboard" class="page active">
             <div class="promo-banner">
                 <h2>PROMO BULAN INI!</h2>
@@ -424,14 +409,12 @@
 
             <h3 class="section-title">Pilih Game Terpopuler</h3>
             <div class="game-grid">
-                <!-- Mobile Legends trigger -->
                 <div class="game-card" onclick="goToPage('page-form')">
                     <div class="game-icon">
                         <i class="fa-solid fa-gamepad"></i>
                     </div>
                     <h3>Mobile Legends</h3>
                 </div>
-                <!-- Game Simulasi Lain -->
                 <div class="game-card" onclick="alert('Game ini dalam tahap pengembangan, silakan pilih Mobile Legends dulu ya!')">
                     <div class="game-icon" style="color: var(--text-muted);">
                         <i class="fa-solid fa-gun"></i>
@@ -441,7 +424,6 @@
             </div>
         </div>
 
-        <!-- ==================== PAGE 2: FORM & PILIH DM ==================== -->
         <div id="page-form" class="page">
             <button class="btn-back" onclick="goToPage('page-dashboard')">
                 <i class="fa-solid fa-arrow-left"></i> Kembali ke Beranda
@@ -486,7 +468,6 @@
             <button class="btn-primary" onclick="proceedToDetail()">Lanjut ke Transaksi</button>
         </div>
 
-        <!-- ==================== PAGE 3: DETAIL TRANSAKSI ==================== -->
         <div id="page-detail" class="page">
             <button class="btn-back" onclick="goToPage('page-form')">
                 <i class="fa-solid fa-arrow-left"></i> Edit Pesanan
@@ -508,11 +489,6 @@
                         <td id="detail-id">-</td>
                     </tr>
                     <tr>
-                        <td>Nickname Server</td>
-                        <!-- Keinginan user: Langsung memuat nama user secara otomatis -->
-                        <td id="detail-nickname" class="highlight-text">Mencari...</td>
-                    </tr>
-                    <tr>
                         <td>Nominal Item</td>
                         <td id="detail-dm">-</td>
                     </tr>
@@ -526,7 +502,6 @@
             </div>
         </div>
 
-        <!-- ==================== PAGE 4: METODE PEMBAYARAN ==================== -->
         <div id="page-payment" class="page">
             <button class="btn-back" onclick="goToPage('page-detail')">
                 <i class="fa-solid fa-arrow-left"></i> Kembali ke Detail
@@ -538,7 +513,6 @@
                     <span>Pilih Metode Pembayaran</span>
                 </div>
 
-                <!-- QRIS -->
                 <div class="payment-option" onclick="selectPayment('QRIS', this)">
                     <div class="pay-info">
                         <i class="fa-solid fa-qrcode"></i>
@@ -550,7 +524,6 @@
                     <div class="pay-select-dot"></div>
                 </div>
 
-                <!-- DANA -->
                 <div class="payment-option" onclick="selectPayment('DANA', this)">
                     <div class="pay-info">
                         <i class="fa-solid fa-wallet"></i>
@@ -562,7 +535,6 @@
                     <div class="pay-select-dot"></div>
                 </div>
 
-                <!-- GO-PAY -->
                 <div class="payment-option" onclick="selectPayment('GO-PAY', this)">
                     <div class="pay-info">
                         <i class="fa-solid fa-credit-card"></i>
@@ -578,51 +550,30 @@
             <button class="btn-primary" onclick="finishTransaction()">Selesaikan Pembayaran</button>
         </div>
 
-        <!-- ==================== PAGE 5: SUCCESS / SIMULASI SELESAI ==================== -->
-        <div id="page-success" class="page">
-            <div class="step-box success-box">
-                <i class="fa-regular fa-circle-check success-icon"></i>
-                <h2>Transaksi Diproses!</h2>
-                <p style="color: var(--text-muted); margin: 15px 0 25px;">
-                    Pesanan Anda sedang dalam sistem antrean admin. Pembayaran menggunakan <strong id="success-pay-method" class="highlight-text">-</strong> akan divalidasi otomatis.
-                </p>
-                <button class="btn-primary" onclick="resetApp()">Kembali ke Beranda</button>
-            </div>
-        </div>
-
     </div>
 
-    <!-- JAVASCRIPT LOGIC -->
     <script>
         // State data transaksi
         let transaction = {
             userId: '',
             zoneId: '',
-            nickname: '',
             item: '',
             price: 0,
             paymentMethod: ''
         };
 
-        // Kumpulan Nickname MLBB simulasi acak untuk mengisi "Nickname Server langsung masuk"
-        const fakeNicknames = ["Zxuan_Pro", "LemonFans", "SkyTeezy", "Valkyrie", "DoraemonGanz", "SavageKidd"];
-
         function goToPage(pageId) {
-            // Sembunyikan semua halaman
             const pages = document.querySelectorAll('.page');
             pages.forEach(page => page.classList.remove('active'));
 
-            // Tampilkan halaman target
             document.getElementById(pageId).classList.add('active');
             window.scrollTo(0,0);
         }
 
         function selectDiamond(itemName, itemPrice, element) {
-            // Hapus kelas terpilih dari semua card
             const cards = document.querySelectorAll('.diamond-card');
             cards.forEach(card => card.classList.remove('selected'));
 
-            // Set terpilih pada card yang diklik
             element.classList.add('selected');
 
             transaction.item = itemName;
@@ -646,13 +597,8 @@
             transaction.userId = userIdInput;
             transaction.zoneId = zoneIdInput;
 
-            // Generate Nickname Acak seolah-olah ditarik langsung dari database ML
-            const randomNick = fakeNicknames[Math.floor(Math.random() * fakeNicknames.length)] + " (" + zoneIdInput + ")";
-            transaction.nickname = randomNick;
-
-            // Populate data ke halaman detail
+            // Memasukkan data ke halaman detail tanpa nickname
             document.getElementById('detail-id').innerText = `${transaction.userId} (${transaction.zoneId})`;
-            document.getElementById('detail-nickname').innerText = transaction.nickname;
             document.getElementById('detail-dm').innerText = transaction.item;
             document.getElementById('detail-price').innerText = "Rp " + transaction.price.toLocaleString('id-ID');
 
@@ -673,31 +619,30 @@
                 return;
             }
 
-            document.getElementById('success-pay-method').innerText = transaction.paymentMethod;
-            goToPage('page-success');
-        }
+            // Target nomor WhatsApp yang diminta (087724699161)
+            const adminWA = "6287724699161";
 
-        function resetApp() {
-            // Reset form
-            document.getElementById('user-id').value = '';
-            document.getElementById('zone-id').value = '';
-            
-            const cards = document.querySelectorAll('.diamond-card');
-            cards.forEach(card => card.classList.remove('selected'));
+            // Format Pesan WhatsApp Sesuai Request
+            const message = `🔥 Selamat Datang di CT GAME TOPUP 🔥
 
-            const options = document.querySelectorAll('.payment-option');
-            options.forEach(opt => opt.classList.remove('selected'));
+Terima kasih sudah menghubungi kami. 🙏
 
-            transaction = {
-                userId: '',
-                zoneId: '',
-                nickname: '',
-                item: '',
-                price: 0,
-                paymentMethod: ''
-            };
+Untuk melakukan top up, silakan isi format berikut:
 
-            goToPage('page-dashboard');
+🆔 ID Pengguna : ${transaction.userId}
+🌐 Zona ID: ${transaction.zoneId}
+💎 Nominal : ${transaction.item}
+
+💳 Pembayaran: ${transaction.paymentMethod}
+
+⚡ Estimasi proses 1–10 menit setelah pembayaran berhasil dikonfirmasi.`;
+
+            // Encoding string pesan agar aman dibaca web browser
+            const encodedMessage = encodeURIComponent(message);
+            const waLink = `https://api.whatsapp.com/send?phone=${adminWA}&text=${encodedMessage}`;
+
+            // Langsung alihkan user ke WhatsApp admin
+            window.open(waLink, '_blank');
         }
     </script>
 </body>
