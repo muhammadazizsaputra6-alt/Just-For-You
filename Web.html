@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portofolio Profesional - Muhammad Aziz Saputra</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts Inter & Fira Code -->
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        mono: ['"Fira Code"', 'monospace'],
+                    },
+                    colors: {
+                        brand: {
+                            dark: '#0a0f1d',
+                            card: '#131b2e',
+                            accent: '#00f2fe',
+                            secondary: '#4facfe',
+                            futsal: '#10b981'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #0a0f1d;
+            color: #f8fafc;
+            overflow-x: hidden;
+        }
+        .glow-effect {
+            box-shadow: 0 0 25px rgba(0, 242, 254, 0.25);
+        }
+        .glow-futsal {
+            box-shadow: 0 0 25px rgba(16, 185, 129, 0.25);
+        }
+        /* Custom smooth scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0a0f1d;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1e293b;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #334155;
+        }
+    </style>
+</head>
+<body class="bg-brand-dark text-slate-100 min-h-screen relative selection:bg-cyan-500 selection:text-black">
+
+    <!-- WELCOME GATE OVERLAY (Harus diklik dulu sesuai permintaan) -->
+    <div id="welcome-gate" class="fixed inset-0 z-50 bg-brand-dark/95 backdrop-blur-xl flex flex-col items-center justify-center p-6 text-center transition-all duration-700">
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,242,254,0.1)_0,transparent_70%)] pointer-events-none"></div>
+        <div class="max-w-xl w-full bg-brand-card/80 border border-slate-700/60 p-8 md:p-10 rounded-3xl glow-effect relative overflow-hidden">
+            <div class="absolute -top-24 -right-24 w-48 h-48 bg-cyan-500/10 rounded-full blur-3xl"></div>
+            <div class="absolute -bottom-24 -left-24 w-48 h-48 bg-emerald-500/10 rounded-full blur-3xl"></div>
+            
+            <div class="w-20 h-20 mx-auto mb-6 rounded-2xl bg-gradient-to-tr from-cyan-500 to-emerald-400 flex items-center justify-center text-brand-dark text-3xl font-bold shadow-lg shadow-cyan-500/30 animate-pulse">
+                <i class="fa-solid fa-code"></i>
+            </div>
+            
+            <div class="inline-block px-4 py-1.5 mb-4 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-xs font-mono tracking-widest uppercase">
+                UAS & Tugas Mandiri Project
+            </div>
+            
+            <h1 class="text-3xl md:text-4xl font-extrabold mb-3 tracking-tight">
+                Muhammad Aziz Saputra
+            </h1>
+            <p class="text-slate-400 text-sm md:text-base mb-8 leading-relaxed">
+                Selamat datang di portofolio kreatif saya. Perpaduan antara ketelitian seorang <span class="text-cyan-400 font-semibold">Programmer</span> dan semangat juang di lapangan <span class="text-emerald-400 font-semibold">Futsal</span>.
+            </p>
+            
+            <button onclick="enterPortfolio()" class="w-full py-4 px-6 rounded-xl bg-gradient-to-r from-cyan-500 to-emerald-400 text-brand-dark font-extrabold text-base tracking-wide hover:opacity-95 transform hover:-translate-y-0.5 transition-all duration-300 shadow-xl shadow-cyan-500/20 flex items-center justify-center space-x-3 group cursor-pointer">
+                <span>KLIK DISINI UNTUK MASUK & BUKA CERITA</span>
+                <i class="fa-solid fa-arrow-right group-hover:translate-x-1.5 transition-transform duration-300"></i>
+            </button>
+            <p class="text-xs text-slate-500 mt-4 font-mono">Tap atau klik tombol di atas untuk mengaktifkan pengalaman interaktif.</p>
+        </div>
+    </div>
+
+    <!-- MAIN NAVBAR -->
+    <nav id="main-nav" class="fixed top-0 left-0 right-0 z-40 bg-brand-dark/80 backdrop-blur-md border-b border-slate-800 transition-all duration-500 opacity-0 pointer-events-none translate-y-[-20px]">
+        <div class="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-500 to-emerald-400 flex items-center justify-center text-brand-dark font-black text-lg">
+                    MA
+                </div>
+                <div>
+                    <span class="font-bold text-base md:text-lg tracking-tight block">Aziz Saputra</span>
+                    <span class="text-xs text-cyan-400 font-mono">Developer & Futsal Player</span>
+                </div>
+            </div>
+            <div class="hidden md:flex items-center space-x-8 text-sm font-medium text-slate-300">
+                <a href="#hero" class="hover:text-cyan-400 transition-colors">Beranda</a>
+                <a href="#story" class="hover:text-cyan-400 transition-colors">Story Perjalanan</a>
+                <a href="#gallery" class="hover:text-cyan-400 transition-colors">Galeri Foto</a>
+                <a href="#video" class="hover:text-cyan-400 transition-colors">Video Showcase</a>
+            </div>
+            <div class="flex items-center">
+                <a href="#story" class="px-4 py-2 rounded-lg bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-sm font-semibold hover:bg-cyan-500/20 transition-all">
+                    Jelajahi Cerita
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- MAIN CONTAINER -->
+    <main id="main-content" class="opacity-0 transition-opacity duration-1000">
+
+        <!-- HERO SECTION -->
+        <section id="hero" class="min-h-screen pt-32 pb-20 flex items-center relative px-6">
+            <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-gradient-to-tr from-cyan-500/10 to-emerald-500/10 rounded-full blur-[120px] pointer-events-none"></div>
+            
+            <div class="max-w-6xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
+                <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                    <div class="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-slate-800/80 border border-slate-700 text-xs font-mono text-cyan-400">
+                        <i class="fa-solid fa-terminal animate-pulse"></i>
+                        <span>System.Init("Muhammad Aziz Saputra");</span>
+                    </div>
+                    
+                    <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight leading-tight">
+                        Mengukir Kode, <br/>
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-teal-300 to-emerald-400">Mencetak Gol Kemenangan!</span>
+                    </h1>
+                    
+                    <p class="text-slate-400 text-base md:text-lg max-w-xl mx-auto lg:mx-0 leading-relaxed">
+                        Halo! Saya <strong class="text-slate-200">Muhammad Aziz Saputra</strong>. Di balik layar monitor, saya merancang baris demi baris logika pemrograman yang rapi. Di atas lapangan futsal, saya mengatur strategi tajam untuk merebut kemenangan. Kreativitas dan disiplin adalah kunci utama saya.
+                    </p>
+                    
+                    <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-4">
+                        <a href="#story" class="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-cyan-500 text-brand-dark font-bold hover:bg-cyan-400 transition-all shadow-lg shadow-cyan-500/25 flex items-center justify-center space-x-2">
+                            <i class="fa-solid fa-book-open"></i>
+                            <span>Baca Story Perjalanan</span>
+                        </a>
+                        <a href="#gallery" class="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-700 font-semibold transition-all flex items-center justify-center space-x-2">
+                            <i class="fa-solid fa-images text-emerald-400"></i>
+                            <span>Lihat Galeri Foto</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-5 flex justify-center">
+                    <div class="relative w-full max-w-sm">
+                        <div class="absolute -inset-1 bg-gradient-to-r from-cyan-500 to-emerald-500 rounded-3xl blur-xl opacity-30 animate-pulse"></div>
+                        <div class="relative bg-brand-card border border-slate-700 p-6 rounded-3xl space-y-6 shadow-2xl">
+                            <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+                                <div class="flex space-x-2">
+                                    <div class="w-3 h-3 rounded-full bg-rose-500"></div>
+                                    <div class="w-3 h-3 rounded-full bg-amber-500"></div>
+                                    <div class="w-3 h-3 rounded-full bg-emerald-500"></div>
+                                </div>
+                                <span class="text-xs font-mono text-slate-500">aziz_profile.js</span>
+                            </div>
+                            
+                            <div class="space-y-3 font-mono text-xs md:text-sm">
+                                <p class="text-slate-400"><span class="text-purple-400">const</span> <span class="text-cyan-300">aziz</span> = {</p>
+                                <p class="pl-4 text-slate-300">name: <span class="text-emerald-300">'Muhammad Aziz Saputra'</span>,</p>
+                                <p class="pl-4 text-slate-300">status: <span class="text-emerald-300">'Professional Student'</span>,</p>
+                                <p class="pl-4 text-slate-300">skills: [<span class="text-emerald-300">'Coding'</span>, <span class="text-emerald-300">'Problem Solving'</span>],</p>
+                                <p class="pl-4 text-slate-300">hobbies: [<span class="text-emerald-300">'Futsal'</span>, <span class="text-emerald-300">'Anime'</span>, <span class="text-emerald-300">'Web Dev'</span>],</p>
+                                <p class="pl-4 text-slate-300">motto: <span class="text-emerald-300">'Never give up on code & goal!'</span></p>
+                                <p class="text-slate-400">};</p>
+                            </div>
+                            
+                            <div class="pt-2 flex items-center justify-between border-t border-slate-800 text-xs text-slate-400">
+                                <span class="flex items-center space-x-1.5">
+                                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+                                    <span>Ready for UAS Task</span>
+                                </span>
+                                <span class="font-mono text-cyan-400">v2.0.26</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- STORY SECTION -->
+        <section id="story" class="py-24 bg-slate-900/40 border-y border-slate-800/80 relative">
+            <div class="max-w-5xl mx-auto px-6">
+                <div class="text-center max-w-2xl mx-auto mb-16">
+                    <span class="text-cyan-400 text-xs font-mono tracking-wider uppercase bg-cyan-500/10 px-3 py-1 rounded-full border border-cyan-500/20">
+                        Story Perjalanan Hidup
+                    </span>
+                    <h2 class="text-3xl md:text-4xl font-extrabold mt-4 mb-3">Dua Dunia, Satu Tujuan</h2>
+                    <p class="text-slate-400 text-sm md:text-base">Kisah perjalanan Muhammad Aziz Saputra menyeimbangkan dunia logika pemrograman digital dan ketangkasan fisik di lapangan futsal.</p>
+                </div>
+
+                <div class="space-y-12 relative before:absolute before:inset-0 before:left-4 md:before:left-1/2 before:w-0.5 before:bg-slate-800">
+                    
+                    <!-- Story Item 1 -->
+                    <div class="relative flex flex-col md:flex-row items-center">
+                        <div class="md:w-1/2 md:pr-12 w-full pl-10 md:pl-0 text-left md:text-right">
+                            <div class="bg-brand-card p-6 md:p-8 rounded-3xl border border-slate-700/60 shadow-xl relative group hover:border-cyan-500/50 transition-all">
+                                <span class="inline-block px-3 py-1 mb-3 rounded-full bg-cyan-500/10 text-cyan-400 text-xs font-mono font-semibold">Bab 01 • Awal Mula</span>
+                                <h3 class="text-xl font-bold text-white mb-2">Titik Awal Ketertarikan Teknologi</h3>
+                                <p class="text-slate-400 text-sm leading-relaxed">
+                                    Perjalanan dimulai dari rasa penasaran yang tinggi terhadap bagaimana sebuah halaman web dan aplikasi bekerja. Dari situlah Aziz mulai mendalami dunia pemrograman, belajar mengetik baris kode pertama, dan jatuh cinta pada estetika problem-solving.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="absolute left-4 md:left-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-cyan-500 text-brand-dark flex items-center justify-center font-bold text-xs shadow-lg z-10">
+                            <i class="fa-solid fa-code"></i>
+                        </div>
+                        <div class="md:w-1/2 md:pl-12 w-full hidden md:block"></div>
+                    </div>
+
+                    <!-- Story Item 2 -->
+                    <div class="relative flex flex-col md:flex-row items-center">
+                        <div class="md:w-1/2 md:pr-12 w-full hidden md:block"></div>
+                        <div class="absolute left-4 md:left-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-emerald-500 text-brand-dark flex items-center justify-center font-bold text-xs shadow-lg z-10">
+                            <i class="fa-solid fa-futbol"></i>
+                        </div>
+                        <div class="md:w-1/2 md:pl-12 w-full pl-10 md:pl-0 text-left">
+                            <div class="bg-brand-card p-6 md:p-8 rounded-3xl border border-slate-700/60 shadow-xl relative group hover:border-emerald-500/50 transition-all">
+                                <span class="inline-block px-3 py-1 mb-3 rounded-full bg-emerald-500/10 text-emerald-400 text-xs font-mono font-semibold">Bab 02 • Sisi Sportif</span>
+                                <h3 class="text-xl font-bold text-white mb-2">Lapangan Futsal & Kerja Tim</h3>
+                                <p class="text-slate-400 text-sm leading-relaxed">
+                                    Di luar jam kuliah dan ngoding, hobi futsal menempa mental Aziz menjadi pribadi yang pantang menyerah. Disiplin taktis di lapangan hijau mengajarkan bahwa keberhasilan besar selalu lahir dari koordinasi tim yang solid.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Story Item 3 -->
+                    <div class="relative flex flex-col md:flex-row items-center">
+                        <div class="md:w-1/2 md:pr-12 w-full pl-10 md:pl-0 text-left md:text-right">
+                            <div class="bg-brand-card p-6 md:p-8 rounded-3xl border border-slate-700/60 shadow-xl relative group hover:border-cyan-500/50 transition-all">
+                                <span class="inline-block px-3 py-1 mb-3 rounded-full bg-purple-500/10 text-purple-400 text-xs font-mono font-semibold">Bab 03 • Inspirasi Kreatif</span>
+                                <h3 class="text-xl font-bold text-white mb-2">Kombinasi Real & Anime Vibes</h3>
+                                <p class="text-slate-400 text-sm leading-relaxed">
+                                    Terinspirasi dari dunia anime yang penuh imajinasi dan cerita kepahlawanan, Aziz mengaplikasikannya dalam mendesain website yang interaktif, dinamis, futuristik, dan tidak membosankan untuk dilihat.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="absolute left-4 md:left-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-purple-500 text-white flex items-center justify-center font-bold text-xs shadow-lg z-10">
+                            <i class="fa-solid fa-wand-magic-sparkles"></i>
+                        </div>
+                        <div class="md:w-1/2 md:pl-12 w-full hidden md:block"></div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- GALLERY SECTION -->
+        <section id="gallery" class="py-24 relative">
+            <div class="max-w-6xl mx-auto px-6">
+                <div class="text-center max-w-2xl mx-auto mb-16">
+                    <span class="text-emerald-400 text-xs font-mono tracking-wider uppercase bg-emerald-500/10 px-3 py-1 rounded-full border border-emerald-500/20">
+                        Galeri Eksklusif
+                    </span>
+                    <h2 class="text-3xl md:text-4xl font-extrabold mt-4 mb-3">Versi Real & Anime Terbaik</h2>
+                    <p class="text-slate-400 text-sm md:text-base">Koleksi momen terbaik Muhammad Aziz Saputra yang merepresentasikan hobi futsal, aktivitas pemrograman, dan gaya anime.</p>
+                </div>
+
+                <!-- Filter Buttons -->
+                <div class="flex justify-center items-center space-x-3 mb-10">
+                    <button onclick="filterGallery('all')" id="btn-all" class="px-5 py-2 rounded-xl bg-cyan-500 text-brand-dark font-bold text-sm transition-all shadow-md cursor-pointer">Semua</button>
+                    <button onclick="filterGallery('real')" id="btn-real" class="px-5 py-2 rounded-xl bg-slate-800 text-slate-300 font-bold text-sm hover:bg-slate-700 transition-all cursor-pointer">Versi Real</button>
+                    <button onclick="filterGallery('anime')" id="btn-anime" class="px-5 py-2 rounded-xl bg-slate-800 text-slate-300 font-bold text-sm hover:bg-slate-700 transition-all cursor-pointer">Versi Anime</button>
+                </div>
+
+                <!-- Gallery Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="gallery-grid">
+                    
+                    <!-- Card 1: Real - Futsal -->
+                    <div class="gallery-item real group bg-brand-card rounded-3xl border border-slate-700/60 overflow-hidden shadow-xl hover:border-cyan-500/50 transition-all duration-300">
+                        <div class="relative h-64 overflow-hidden bg-slate-800">
+                            <img src="https://images.unsplash.com/photo-1517649763962-0c6232660102?auto=format&fit=crop&w=800&q=80" alt="Futsal Match" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://placehold.co/600x400/131b2e/00f2fe?text=Futsal+Real+Action'">
+                            <div class="absolute top-4 left-4">
+                                <span class="px-3 py-1 rounded-full bg-emerald-500 text-brand-dark text-xs font-bold uppercase tracking-wider shadow">Real • Futsal</span>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-lg font-bold text-white mb-2">Aksi Cepat di Lapangan Futsal</h3>
+                            <p class="text-slate-400 text-sm">Momen saat memimpin strategi tim dan mencetak gol penentu kemenangan dalam pertandingan sengit.</p>
+                        </div>
+                    </div>
+
+                    <!-- Card 2: Real - Coding -->
+                    <div class="gallery-item real group bg-brand-card rounded-3xl border border-slate-700/60 overflow-hidden shadow-xl hover:border-cyan-500/50 transition-all duration-300">
+                        <div class="relative h-64 overflow-hidden bg-slate-800">
+                            <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=800&q=80" alt="Coding Session" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://placehold.co/600x400/131b2e/00f2fe?text=Coding+Real+Session'">
+                            <div class="absolute top-4 left-4">
+                                <span class="px-3 py-1 rounded-full bg-cyan-500 text-brand-dark text-xs font-bold uppercase tracking-wider shadow">Real • Programmer</span>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-lg font-bold text-white mb-2">Sesi Pemrograman & Web Dev</h3>
+                            <p class="text-slate-400 text-sm">Fokus membangun aplikasi dan website profesional menggunakan VS Code dengan standar industri tinggi.</p>
+                        </div>
+                    </div>
+
+                    <!-- Card 3: Real - Team & Campus -->
+                    <div class="gallery-item real group bg-brand-card rounded-3xl border border-slate-700/60 overflow-hidden shadow-xl hover:border-cyan-500/50 transition-all duration-300">
+                        <div class="relative h-64 overflow-hidden bg-slate-800">
+                            <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80" alt="Team Work" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://placehold.co/600x400/131b2e/00f2fe?text=Teamwork+UAS'">
+                            <div class="absolute top-4 left-4">
+                                <span class="px-3 py-1 rounded-full bg-purple-500 text-white text-xs font-bold uppercase tracking-wider shadow">Real • Tim UAS</span>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-lg font-bold text-white mb-2">Kolaborasi Tugas Mandiri & UAS</h3>
+                            <p class="text-slate-400 text-sm">Diskusi kelompok dan pengerjaan tugas bersama teman-teman kampus dengan hasil karya terbaik.</p>
+                        </div>
+                    </div>
+
+                    <!-- Card 4: Anime - Futsal Striker -->
+                    <div class="gallery-item anime group bg-brand-card rounded-3xl border border-slate-700/60 overflow-hidden shadow-xl hover:border-emerald-500/50 transition-all duration-300">
+                        <div class="relative h-64 overflow-hidden bg-slate-800">
+                            <img src="https://images.unsplash.com/photo-1579952363873-27f3bade9f55?auto=format&fit=crop&w=800&q=80" alt="Anime Soccer" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://placehold.co/600x400/131b2e/10b981?text=Anime+Futsal+Style'">
+                            <div class="absolute top-4 left-4">
+                                <span class="px-3 py-1 rounded-full bg-emerald-400 text-brand-dark text-xs font-bold uppercase tracking-wider shadow">Anime • Striker Vibe</span>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-lg font-bold text-white mb-2">Gaya Anime Striker Legendaris</h3>
+                            <p class="text-slate-400 text-sm">Visualisasi semangat pemain futsal dalam balutan estetika anime sport yang penuh energi dan determinasi.</p>
+                        </div>
+                    </div>
+
+                    <!-- Card 5: Anime - Cyber Hacker -->
+                    <div class="gallery-item anime group bg-brand-card rounded-3xl border border-slate-700/60 overflow-hidden shadow-xl hover:border-cyan-500/50 transition-all duration-300">
+                        <div class="relative h-64 overflow-hidden bg-slate-800">
+                            <img src="https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=800&q=80" alt="Cyber Anime" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://placehold.co/600x400/131b2e/00f2fe?text=Anime+Cyber+Developer'">
+                            <div class="absolute top-4 left-4">
+                                <span class="px-3 py-1 rounded-full bg-cyan-400 text-brand-dark text-xs font-bold uppercase tracking-wider shadow">Anime • Cyber Dev</span>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-lg font-bold text-white mb-2">Cyberpunk Code Master</h3>
+                            <p class="text-slate-400 text-sm">Gambaran karakter programmer di masa depan yang menyelesaikan berbagai baris kode rumit dengan kilat.</p>
+                        </div>
+                    </div>
+
+                    <!-- Card 6: Anime - Champion Vibe -->
+                    <div class="gallery-item anime group bg-brand-card rounded-3xl border border-slate-700/60 overflow-hidden shadow-xl hover:border-purple-500/50 transition-all duration-300">
+                        <div class="relative h-64 overflow-hidden bg-slate-800">
+                            <img src="https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=800&q=80" alt="Anime Champion" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://placehold.co/600x400/131b2e/a855f7?text=Anime+Champion+Vibe'">
+                            <div class="absolute top-4 left-4">
+                                <span class="px-3 py-1 rounded-full bg-purple-400 text-brand-dark text-xs font-bold uppercase tracking-wider shadow">Anime • Champion</span>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-lg font-bold text-white mb-2">Puncak Kemenangan Juara</h3>
+                            <p class="text-slate-400 text-sm">Simbol pencapaian target UAS dan kesuksesan dalam setiap kompetisi futsal maupun akademik.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- VIDEO SECTION -->
+        <section id="video" class="py-24 bg-slate-900/40 border-t border-slate-800/80">
+            <div class="max-w-5xl mx-auto px-6">
+                <div class="text-center max-w-2xl mx-auto mb-16">
+                    <span class="text-cyan-400 text-xs font-mono tracking-wider uppercase bg-cyan-500/10 px-3 py-1 rounded-full border border-cyan-500/20">
+                        Video Showcase
+                    </span>
+                    <h2 class="text-3xl md:text-4xl font-extrabold mt-4 mb-3">Karya Video Pribadi & Kelompok</h2>
+                    <p class="text-slate-400 text-sm md:text-base">Dokumentasi video kegiatan kuliah, project mandiri, serta cuplikan aksi seru di lapangan futsal.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    
+                    <!-- Video Card 1 -->
+                    <div class="bg-brand-card p-6 rounded-3xl border border-slate-700/60 shadow-xl space-y-4">
+                        <div class="relative w-full aspect-video rounded-2xl overflow-hidden bg-slate-800 flex items-center justify-center">
+                            <iframe class="w-full h-full" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Video Project Mandiri" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                        <div>
+                            <span class="inline-block px-3 py-1 mb-2 rounded-full bg-cyan-500/10 text-cyan-400 text-xs font-mono font-semibold">Tugas Mandiri</span>
+                            <h3 class="text-lg font-bold text-white mb-1">Project Pembuatan Website Profesional</h3>
+                            <p class="text-slate-400 text-sm">Video dokumentasi proses perancangan website dari awal coding di VS Code hingga deploy.</p>
+                        </div>
+                    </div>
+
+                    <!-- Video Card 2 -->
+                    <div class="bg-brand-card p-6 rounded-3xl border border-slate-700/60 shadow-xl space-y-4">
+                        <div class="relative w-full aspect-video rounded-2xl overflow-hidden bg-slate-800 flex items-center justify-center">
+                            <iframe class="w-full h-full" src="https://www.youtube.com/embed/3JZ_D3ELwOQ" title="Video Kelompok UAS" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                        <div>
+                            <span class="inline-block px-3 py-1 mb-2 rounded-full bg-emerald-500/10 text-emerald-400 text-xs font-mono font-semibold">Tugas Kelompok UAS</span>
+                            <h3 class="text-lg font-bold text-white mb-1">Highlight Pertandingan & Presentasi Tim</h3>
+                            <p class="text-slate-400 text-sm">Kompilasi video kebersamaan kelompok dalam menyelesaikan tugas besar akhir semester.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer class="py-12 border-t border-slate-800 text-center text-slate-500 text-sm">
+            <div class="max-w-6xl mx-auto px-6 space-y-4">
+                <div class="flex items-center justify-center space-x-6 text-xl">
+                    <a href="#" class="hover:text-cyan-400 transition-colors"><i class="fa-brands fa-github"></i></a>
+                    <a href="#" class="hover:text-cyan-400 transition-colors"><i class="fa-brands fa-linkedin"></i></a>
+                    <a href="#" class="hover:text-emerald-400 transition-colors"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" class="hover:text-cyan-400 transition-colors"><i class="fa-brands fa-discord"></i></a>
+                </div>
+                <p>&copy; 2026 Muhammad Aziz Saputra. Dibuat dengan penuh kreativitas untuk Ujian UAS & Tugas Mandiri.</p>
+            </div>
+        </footer>
+
+    </main>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        function enterPortfolio() {
+            const gate = document.getElementById('welcome-gate');
+            const nav = document.getElementById('main-nav');
+            const content = document.getElementById('main-content');
+
+            gate.style.opacity = '0';
+            gate.style.transform = 'scale(1.05)';
+            setTimeout(() => {
+                gate.style.display = 'none';
+            }, 700);
+
+            nav.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-[-20px]');
+            content.classList.remove('opacity-0');
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function filterGallery(category) {
+            const items = document.querySelectorAll('.gallery-item');
+            const btnAll = document.getElementById('btn-all');
+            const btnReal = document.getElementById('btn-real');
+            const btnAnime = document.getElementById('btn-anime');
+
+            [btnAll, btnReal, btnAnime].forEach(btn => {
+                btn.className = "px-5 py-2 rounded-xl bg-slate-800 text-slate-300 font-bold text-sm hover:bg-slate-700 transition-all cursor-pointer";
+            });
+
+            if(category === 'all') {
+                btnAll.className = "px-5 py-2 rounded-xl bg-cyan-500 text-brand-dark font-bold text-sm transition-all shadow-md cursor-pointer";
+            } else if(category === 'real') {
+                btnReal.className = "px-5 py-2 rounded-xl bg-cyan-500 text-brand-dark font-bold text-sm transition-all shadow-md cursor-pointer";
+            } else if(category === 'anime') {
+                btnAnime.className = "px-5 py-2 rounded-xl bg-cyan-500 text-brand-dark font-bold text-sm transition-all shadow-md cursor-pointer";
+            }
+
+            items.forEach(item => {
+                if(category === 'all' || item.classList.contains(category)) {
+                    item.style.display = 'block';
+                    setTimeout(() => { item.style.opacity = '1'; item.style.transform = 'scale(1)'; }, 50);
+                } else {
+                    item.style.opacity = '0';
+                    item.style.transform = 'scale(0.95)';
+                    setTimeout(() => { item.style.display = 'none'; }, 300);
+                }
+            });
+        }
+    </script>
+</body>
+</html>
